@@ -8,24 +8,26 @@ Regras gerais:
 - Pixel art sem suavização, no tamanho exato indicado (o jogo amplia sozinho).
 - Adão e Eva sempre com roupas de folhas. Lúcifer escuro, mas sem dar medo.
 - Deus nunca aparece como pessoa (veja a pergunta pendente no README).
-- Para conferir no jogo: na tela de abertura, toque em qualquer lugar e veja a tela **Artes do jogo**. Cada imagem mostra se ainda é *provisória* ou já é *arte final*.
+- Imagens grandes feitas por inteligência artificial (fundo de uma cor só) podem ser recortadas com `tools/spritetool.swift`. Para conferir no jogo: na tela de abertura, toque em qualquer lugar e veja a tela **Artes do jogo**. Cada imagem mostra se ainda é *provisória* ou já é *arte final*.
 
 
 ## Personagens (andando)
 
 | Arquivo | O que é | Tamanho |
 |---|---|---|
-| `assets/characters/peregrino_sheet.png` | Peregrino (andando) | 96×128 px |
-| `assets/characters/miguel_sheet.png` | Arcanjo Miguel (andando) | 96×128 px |
-| `assets/characters/gabriel_sheet.png` | Arcanjo Gabriel (andando) | 96×128 px |
-| `assets/characters/adao_sheet.png` | Adão (andando) | 96×128 px |
-| `assets/characters/eva_sheet.png` | Eva (andando) | 96×128 px |
-| `assets/characters/abel_sheet.png` | Abel (andando) | 96×128 px |
-| `assets/characters/noe_sheet.png` | Noé (andando) | 96×128 px |
-| `assets/characters/lucifer_sheet.png` | Lúcifer (andando) | 96×128 px |
-| `assets/characters/serpente_sheet.png` | Serpente (andando) | 96×128 px |
-| `assets/characters/caim_sheet.png` | Caim (andando) | 96×128 px |
-| `assets/characters/querubim_sheet.png` | Querubim (andando) | 96×128 px |
+| `assets/characters/peregrino_sheet.png` | Peregrino | 128×128 px |
+| `assets/characters/miguel_sheet.png` | Arcanjo Miguel | 96×128 px |
+| `assets/characters/gabriel_sheet.png` | Arcanjo Gabriel | 96×128 px |
+| `assets/characters/adao_sheet.png` | Adão | 96×128 px |
+| `assets/characters/eva_sheet.png` | Eva | 96×128 px |
+| `assets/characters/abel_sheet.png` | Abel | 128×128 px |
+| `assets/characters/noe_sheet.png` | Noé | 128×128 px |
+| `assets/characters/lucifer_sheet.png` | Lúcifer | 128×128 px |
+| `assets/characters/serpente_sheet.png` | Serpente | 96×32 px |
+| `assets/characters/caim_sheet.png` | Caim | 128×128 px |
+| `assets/characters/querubim_sheet.png` | Querubim | 96×128 px |
+| `assets/characters/anjos_fieis_sheet.png` | Anjos fiéis (4 variações) | 128×32 px |
+| `assets/characters/anjos_caidos_sheet.png` | Anjos que seguiram Lúcifer (4 variações) | 128×32 px |
 
 ## Retratos
 
@@ -122,7 +124,7 @@ Regras gerais:
 
 ## Formatos
 
-- **sheet**: Folha de personagem: 3 colunas (passos) × 4 linhas (baixo, esquerda, direita, cima), cada quadro 32×32
+- **sheet**: Folha de personagem: 3 ou 4 colunas (passos) × 4 linhas (baixo, esquerda, direita, cima), cada quadro 32×32. Personagens parados (serpente, grupos de anjos) têm uma linha só
 - **portrait**: Retrato 64×64
 - **tiles**: Folha de peças do mapa: 8×8 peças de 32×32 (256×256). A peça 0 é a do canto superior esquerdo, contando para a direita
 - **map**: Opcional. Mapa inteiro já desenhado; se existir, substitui o chão feito de peças. Tamanho = largura do mapa em peças × 32

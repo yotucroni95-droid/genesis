@@ -32,7 +32,8 @@ function text(ctx, str, x, y, size, color, align = 'center') {
   ctx.fillText(str, x, y);
 }
 
-// Sprite sheet: 3 walking frames (columns) x 4 directions (rows: down, left, right, up).
+// Sprite sheet: walking frames (columns) x 4 directions (rows: down, left, right, up).
+// Real sheets may have 3 or 4 columns; the manifest's `anim` says which to play.
 function sheet(a) {
   const f = a.frame || 32;
   const { c, ctx } = canvas(f * 3, f * 4);

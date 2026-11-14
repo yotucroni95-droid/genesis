@@ -43,9 +43,11 @@ export function createTitleScene(game) {
       const { width: w, height: hgt } = display;
       stars.render(ctx, w, hgt);
       // Peregrino walking in place on the horizon (shows the sprite sheet works).
-      const sheet = game.assets.image('sheet.peregrino');
+      const entry = game.assets.entry('sheet.peregrino');
+      const sheet = entry && entry.image;
       if (sheet) {
-        const frame = [0, 1, 2, 1][Math.floor(t * 6) % 4];
+        const walk = (entry.anim && entry.anim.walk) || [0, 1, 2, 1];
+        const frame = walk[Math.floor(t * 6) % walk.length];
         const x = Math.floor(w / 2 - 16);
         // Lying down there is little height, so the walker goes higher.
         const y = Math.floor(hgt * (w > hgt ? 0.4 : 0.62));
