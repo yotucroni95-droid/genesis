@@ -24,7 +24,7 @@ Depois abra http://localhost:8080 no navegador. No computador, dá para andar co
 | `src/engine/` | O ritmo do jogo (60 quadros por segundo), a tela e a troca de telas |
 | `src/input/` | O joystick e o teclado |
 | `src/world/` | O mapa, a câmera, a colisão, o jogador e as paradas |
-| `src/scenes/` | As telas: abertura, login, escolha de personagem, mapa, história, desafio, álbum e painel do líder |
+| `src/scenes/` | As telas: abertura, apelido, escolha de personagem, mapa, história, desafio e álbum |
 | `src/challenges/` | Os 4 desafios, cada um num arquivo separado |
 | `src/ui/` | As peças de interface |
 | `src/save/` | O salvamento automático no celular |
@@ -58,6 +58,6 @@ O código do jogo não muda.
 4. Uma parada com história e um desafio
 5. Os outros três desafios
 6. Álbum, medalhas e níveis
-7. Painel do líder
+7. ~~Painel do líder~~ (retirado: sem servidor, cada um vê o próprio álbum)
 8. Conteúdo dos capítulos 0 a 4
 9. Acabamento e testes no celular
