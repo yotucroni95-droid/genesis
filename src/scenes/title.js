@@ -47,7 +47,8 @@ export function createTitleScene(game) {
       if (sheet) {
         const frame = [0, 1, 2, 1][Math.floor(t * 6) % 4];
         const x = Math.floor(w / 2 - 16);
-        const y = Math.floor(hgt * 0.62);
+        // Lying down there is little height, so the walker goes higher.
+        const y = Math.floor(hgt * (w > hgt ? 0.4 : 0.62));
         ctx.drawImage(sheet, frame * 32, 0, 32, 32, x, y, 32, 32);
       }
     },

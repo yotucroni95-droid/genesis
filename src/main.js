@@ -36,7 +36,7 @@ async function boot() {
     label.textContent = `Carregando… ${pct}%`;
   };
 
-  const display = new Display(document.getElementById('screen'), { targetWidth: CONFIG.viewWidth });
+  const display = new Display(document.getElementById('screen'), { targetShortSide: CONFIG.viewShortSide });
   const assets = new Assets();
   const game = { config: CONFIG, display, assets, scenes: null };
   game.scenes = new SceneManager(game, document.getElementById('ui'));

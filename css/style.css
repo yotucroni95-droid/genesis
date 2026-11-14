@@ -36,11 +36,10 @@ html, body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* A área do jogo é sempre uma coluna em pé, mesmo no computador. */
+/* A área do jogo ocupa a tela toda, com o celular deitado ou em pé. */
 #game {
   position: relative;
   width: 100%;
-  max-width: 480px;
   height: 100vh;
   height: 100dvh;
   margin: 0 auto;
@@ -111,31 +110,6 @@ img.pixel, canvas.pixel {
   background: linear-gradient(90deg, var(--gold-deep), var(--gold));
   box-shadow: 0 0 12px rgba(255, 211, 110, .6);
   transition: width .15s linear;
-}
-
-/* ---------- Aviso para girar o celular ---------- */
-.rotate {
-  display: none;
-  position: absolute;
-  inset: 0;
-  z-index: 50;
-  background: var(--bg);
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  text-align: center;
-  font-size: 18px;
-}
-.rotate__phone {
-  width: 40px; height: 68px;
-  border: 3px solid var(--gold);
-  border-radius: 8px;
-  animation: rotate-hint 1.8s ease-in-out infinite;
-}
-@keyframes rotate-hint { 0%, 30% { transform: rotate(90deg); } 70%, 100% { transform: rotate(0deg); } }
-@media (orientation: landscape) and (max-height: 520px) {
-  .rotate { display: flex; }
 }
 
 /* ---------- Botões ---------- */
@@ -216,6 +190,14 @@ img.pixel, canvas.pixel {
   gap: 14px;
 }
 .title__tools { display: flex; gap: 10px; }
+
+/* Celular deitado: pouca altura, então tudo fica mais compacto. */
+@media (orientation: landscape) and (max-height: 600px) {
+  .title { padding-top: calc(var(--safe-top) + 4vh); }
+  .title__name { font-size: clamp(44px, 14vh, 72px); }
+  .title__start { margin-top: 30vh; }
+  .title__footer { flex-direction: row; justify-content: space-between; width: 100%; align-items: flex-end; }
+}
 
 /* Assinatura discreta da Órbita */
 .signature {

@@ -7,7 +7,8 @@ export const CONFIG = {
   supabaseUrl: '',      // filled in Phase 2
   supabaseAnonKey: '',  // filled in Phase 2
   emailDomain: 'genesis.local',
-  // Logical width of the game view in pixels (~8 tiles of 32 px).
-  viewWidth: 256,
+  // Logical size of the screen's shorter side (~8 tiles of 32 px).
+  // Works with the phone upright or lying down.
+  viewShortSide: 256,
   tileSize: 32,
 };

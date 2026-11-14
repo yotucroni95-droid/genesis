@@ -3,10 +3,12 @@
 // pixels that are scaled by a whole number so pixel art never blurs.
 
 export class Display {
-  constructor(canvas, { targetWidth = 256 } = {}) {
+  constructor(canvas, { targetShortSide = 256 } = {}) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d', { alpha: false });
-    this.targetWidth = targetWidth; // ~8 tiles of 32 px across
+    // The SHORTER side of the screen shows ~8 tiles of 32 px, so the game
+    // looks the same size with the phone upright or lying down.
+    this.targetShortSide = targetShortSide;
     this.scale = 1;
     this.width = 0;  // logical pixels
     this.height = 0;
@@ -27,7 +29,7 @@ export class Display {
     if (this.canvas.width !== pxW) this.canvas.width = pxW;
     if (this.canvas.height !== pxH) this.canvas.height = pxH;
     this.dpr = dpr;
-    this.scale = Math.max(1, Math.floor(pxW / this.targetWidth));
+    this.scale = Math.max(1, Math.floor(Math.min(pxW, pxH) / this.targetShortSide));
     this.width = Math.ceil(pxW / this.scale);
     this.height = Math.ceil(pxH / this.scale);
     // Changing the canvas size resets context state.

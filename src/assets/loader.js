@@ -66,6 +66,9 @@ export class Assets {
       tick();
     });
 
+    // Reserve slots in manifest order so lists (e.g. the gallery) keep that order.
+    for (const asset of list) this.entries.set(asset.id, null);
+
     const imageJobs = list.map(async (asset) => {
       const fullSrc = base + asset.src;
       const img = await loadImage(fullSrc);
