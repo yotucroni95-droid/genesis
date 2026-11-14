@@ -36,7 +36,7 @@ export function createWorldScene(game) {
       map = new TileMap(json, game.assets);
       const spawnX = (map.spawn.x + 0.5) * map.tileW;
       const spawnY = (map.spawn.y + 1) * map.tileH - 4;
-      player = new Player(game.assets, params.characterId || 'peregrino', spawnX, spawnY);
+      player = new Player(game.assets, params.characterId || game.save.state.avatarId || 'peregrino', spawnX, spawnY);
       ambient = new Ambient(map);
       firstFrame = true;
 

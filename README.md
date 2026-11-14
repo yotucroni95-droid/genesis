@@ -3,7 +3,7 @@
 Jogo de navegador para celular, que funciona com o aparelho deitado ou em pé, que convida o grupo de jovens a ler o livro de Gênesis. Feito pela Órbita Virtual.
 
 - Não precisa instalar: abre direto no navegador do celular.
-- Página estática hospedada no GitHub Pages. O login e o salvamento usam o Supabase (a partir da Fase 2).
+- Página estática hospedada no GitHub Pages. Não tem login nem servidor: cada jogador escolhe um apelido e o progresso fica guardado no próprio celular (localStorage).
 - Código em JavaScript puro, com módulos, Canvas 2D e CSS. Não há etapa de compilação.
 
 ## Como abrir no computador
@@ -27,11 +27,10 @@ Depois abra http://localhost:8080 no navegador. No computador, dá para andar co
 | `src/scenes/` | As telas: abertura, login, escolha de personagem, mapa, história, desafio, álbum e painel do líder |
 | `src/challenges/` | Os 4 desafios, cada um num arquivo separado |
 | `src/ui/` | As peças de interface |
-| `src/save/` | O login, o salvamento automático e a fila de envio quando não há internet |
+| `src/save/` | O salvamento automático no celular |
 | `src/assets/` | A lista de imagens, o carregamento e os retângulos provisórios |
 | `content/` | O conteúdo do jogo: personagens, capítulos, mapas e medalhas, todos em JSON |
 | `assets/` | As artes. A lista completa está em [ASSETS.md](ASSETS.md) |
-| `supabase/migrations/` | O arquivo que cria as tabelas (Fase 2) |
 
 ## Mapas
 
@@ -47,13 +46,14 @@ O código do jogo não muda.
 
 ## Segurança
 
-- Nenhum segredo fica neste repositório. A única chave no jogo é a chave pública (*anon*) do Supabase, que foi feita para ser pública.
-- A proteção dos dados vem das regras de acesso do banco (Row Level Security), no arquivo de `supabase/migrations/`.
+- Nenhum segredo fica neste repositório, e o jogo não envia dados de ninguém para fora do celular.
+- O apelido é limpo antes de ser salvo: só letras sem acento, números e `_`, de 3 a 16 caracteres.
+- Se o jogador limpar os dados do navegador ou trocar de celular, o progresso começa de novo.
 
 ## Fases
 
 1. Esqueleto, lista de artes e retângulos provisórios ✅
-2. Banco de dados no Supabase, login e salvamento automático
+2. Apelido e salvamento automático no celular ✅ (sem login, por decisão do líder)
 3. Mapa, joystick e colisão ✅ (com água, fogo, borboletas e brilhos animados)
 4. Uma parada com história e um desafio
 5. Os outros três desafios

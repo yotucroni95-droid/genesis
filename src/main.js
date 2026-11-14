@@ -10,6 +10,8 @@ import { createCreditsScene } from './scenes/credits.js';
 import { createGalleryScene } from './scenes/gallery.js';
 import { createExploreScene } from './scenes/explore.js';
 import { createWorldScene } from './scenes/world-map.js';
+import { createNicknameScene } from './scenes/nickname.js';
+import { SaveManager } from './save/save-manager.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -19,7 +21,7 @@ function blockBrowserGestures() {
   document.addEventListener('gesturestart', stop, { passive: false });
   document.addEventListener('dblclick', stop, { passive: false });
   document.addEventListener('touchmove', (e) => {
-    if (!e.target.closest || !e.target.closest('.screen__body')) e.preventDefault();
+    if (!e.target.closest || !e.target.closest('.screen__body, input')) e.preventDefault();
   }, { passive: false });
   document.addEventListener('contextmenu', stop);
 }
@@ -40,7 +42,7 @@ async function boot() {
 
   const display = new Display(document.getElementById('screen'), { targetShortSide: CONFIG.viewShortSide });
   const assets = new Assets();
-  const game = { config: CONFIG, display, assets, scenes: null };
+  const game = { config: CONFIG, display, assets, save: new SaveManager(), scenes: null };
   game.scenes = new SceneManager(game, document.getElementById('ui'));
 
   try {
@@ -60,6 +62,7 @@ async function boot() {
   game.scenes.register('gallery', createGalleryScene);
   game.scenes.register('explore', createExploreScene);
   game.scenes.register('world', createWorldScene);
+  game.scenes.register('nickname', createNicknameScene);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),
