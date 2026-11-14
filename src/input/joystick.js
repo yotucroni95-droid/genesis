@@ -36,13 +36,15 @@ export class Joystick {
     e.preventDefault();
     this.pointerId = e.pointerId;
     const zr = this.zone.getBoundingClientRect();
-    // centre the base under the thumb, but keep it fully inside the zone
+    // centre the base exactly under the thumb; only keep it from leaving the screen
     const r = this.radius + 14;
-    const cx = Math.min(zr.right - r, Math.max(zr.left + r, e.clientX));
-    const cy = Math.min(zr.bottom - r, Math.max(zr.top + r, e.clientY));
+    const cx = Math.min(window.innerWidth - r, Math.max(zr.left + r, e.clientX));
+    const cy = Math.min(zr.bottom - r, Math.max(r, e.clientY));
     this.center = { x: cx, y: cy };
-    this.base.style.left = `${cx - zr.left}px`;
-    this.base.style.top = `${cy - zr.top}px`;
+    // The base is positioned inside the whole joystick layer, not the touch zone.
+    const er = this.el.getBoundingClientRect();
+    this.base.style.left = `${cx - er.left}px`;
+    this.base.style.top = `${cy - er.top}px`;
     this.base.style.bottom = 'auto';
     this.el.classList.add('is-active');
     this.update(e.clientX, e.clientY);
