@@ -12,7 +12,7 @@ export class Player {
     this.dir = DIR.down;
     this.moving = false;
     this.animTime = 0;
-    this.box = { w: 14, h: 8 }; // feet hitbox
+    this.box = { w: 18, h: 10 }; // feet hitbox
     this.setCharacter(characterId);
   }
 
@@ -47,8 +47,9 @@ export class Player {
     const f = sheet.frame || 32;
     const row = Math.min(this.dir, (sheet.rows || 4) - 1);
     // soft shadow so the character sits on the ground
+    const sw = Math.round(f * 0.4);
     ctx.fillStyle = 'rgba(0,0,0,.22)';
-    ctx.fillRect(Math.round(this.x - 6), Math.round(this.y - 2), 12, 3);
+    ctx.fillRect(Math.round(this.x - sw / 2), Math.round(this.y - 2), sw, 3);
     ctx.drawImage(sheet.image, frame * f, row * f, f, f, Math.round(this.x - f / 2), Math.round(this.y - f + 1), f, f);
   }
 }

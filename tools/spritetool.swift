@@ -170,5 +170,40 @@ case "cut":
     out.px[o] = UInt8(rs/as_); out.px[o+1] = UInt8(gs/as_); out.px[o+2] = UInt8(bs/as_); out.px[o+3] = UInt8(min(255, as_/n*255))
   } }
   save(out, a[3])
+case "classify":
+  // per-tile colour class fractions, for a first guess of where one can walk
+  // classes: P path/paving, G grass, W water/sky, D dark, R rock/grey, B brown/wood, S white, Y gold, O other
+  let img = load(a[2]); let ts = Int(a[3])!
+  let cols = img.w / ts, rows = img.h / ts
+  let names = Array("PGWDRBSYO")
+  var lines: [String] = []
+  for ty in 0..<rows { var row: [String] = []
+    for tx in 0..<cols {
+      var cnt = [Int](repeating: 0, count: 9)
+      for y in (ty*ts)..<((ty+1)*ts) { for x in (tx*ts)..<((tx+1)*ts) {
+        let i = (y*img.w+x)*4; let r = Double(img.px[i])/255, g = Double(img.px[i+1])/255, b = Double(img.px[i+2])/255
+        let mx = max(r,g,b), mn = min(r,g,b), v = mx, s = mx == 0 ? 0 : (mx-mn)/mx
+        var h = 0.0
+        if mx != mn { if mx == r { h = 60 * ((g-b)/(mx-mn)).truncatingRemainder(dividingBy: 6) } else if mx == g { h = 60 * ((b-r)/(mx-mn) + 2) } else { h = 60 * ((r-g)/(mx-mn) + 4) } }
+        if h < 0 { h += 360 }
+        var c = 8
+        if v < 0.25 { c = 3 }
+        else if s < 0.13 && v > 0.82 { c = 6 }
+        else if b > 0.45 && b > r + 0.15 && b >= g - 0.02 && s > 0.3 { c = 2 }
+        else if s < 0.2 { c = 4 }
+        else if h >= 18 && h < 48 && s < 0.32 && v > 0.7 { c = 0 }
+        else if h >= 20 && h < 52 && s >= 0.3 && s < 0.88 && v > 0.74 { c = 0 }
+        else if h >= 65 && h < 170 && v > 0.42 { c = 1 }
+        else if h >= 65 && h < 170 { c = 3 }
+        else if h >= 10 && h < 45 && s >= 0.4 && v <= 0.68 { c = 5 }
+        else if h >= 40 && h < 65 && s > 0.45 && v > 0.65 { c = 7 }
+        cnt[c] += 1
+      } }
+      let tot = Double(ts*ts)
+      row.append(names.enumerated().map { "\($0.element)\(Int((Double(cnt[$0.offset])/tot*100).rounded()))" }.joined(separator: ","))
+    }
+    lines.append(row.joined(separator: " "))
+  }
+  print(lines.joined(separator: "\n"))
 default: print("unknown command")
 }

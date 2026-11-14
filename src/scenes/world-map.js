@@ -39,6 +39,7 @@ export function createWorldScene(game) {
       player = new Player(game.assets, params.characterId || game.save.state.avatarId || 'peregrino', spawnX, spawnY);
       ambient = new Ambient(map);
       firstFrame = true;
+      if (DEBUG) window.__world = { map, player, camera }; // only with ?debug=1, for testing
 
       charButton = h('button', {
         class: 'hud__char',

@@ -15,19 +15,19 @@ Regras gerais:
 
 | Arquivo | O que é | Tamanho |
 |---|---|---|
-| `assets/characters/peregrino_sheet.png` | Peregrino | 128×128 px |
-| `assets/characters/miguel_sheet.png` | Arcanjo Miguel | 96×128 px |
-| `assets/characters/gabriel_sheet.png` | Arcanjo Gabriel | 96×128 px |
-| `assets/characters/adao_sheet.png` | Adão | 96×128 px |
-| `assets/characters/eva_sheet.png` | Eva | 96×128 px |
-| `assets/characters/abel_sheet.png` | Abel | 128×128 px |
-| `assets/characters/noe_sheet.png` | Noé | 128×128 px |
-| `assets/characters/lucifer_sheet.png` | Lúcifer | 128×128 px |
-| `assets/characters/serpente_sheet.png` | Serpente | 96×32 px |
-| `assets/characters/caim_sheet.png` | Caim | 128×128 px |
+| `assets/characters/peregrino_sheet.png` | Peregrino | 192×192 px |
+| `assets/characters/miguel_sheet.png` | Arcanjo Miguel | 144×192 px |
+| `assets/characters/gabriel_sheet.png` | Arcanjo Gabriel | 144×192 px |
+| `assets/characters/adao_sheet.png` | Adão | 144×192 px |
+| `assets/characters/eva_sheet.png` | Eva | 144×192 px |
+| `assets/characters/abel_sheet.png` | Abel | 192×192 px |
+| `assets/characters/noe_sheet.png` | Noé | 192×192 px |
+| `assets/characters/lucifer_sheet.png` | Lúcifer | 192×192 px |
+| `assets/characters/serpente_sheet.png` | Serpente | 144×48 px |
+| `assets/characters/caim_sheet.png` | Caim | 192×192 px |
 | `assets/characters/querubim_sheet.png` | Querubim | 96×128 px |
-| `assets/characters/anjos_fieis_sheet.png` | Anjos fiéis (4 variações) | 128×32 px |
-| `assets/characters/anjos_caidos_sheet.png` | Anjos que seguiram Lúcifer (4 variações) | 128×32 px |
+| `assets/characters/anjos_fieis_sheet.png` | Anjos fiéis (4 variações) | 192×48 px |
+| `assets/characters/anjos_caidos_sheet.png` | Anjos que seguiram Lúcifer (4 variações) | 192×48 px |
 
 ## Retratos
 
@@ -124,7 +124,7 @@ Regras gerais:
 
 ## Formatos
 
-- **sheet**: Folha de personagem: 3 ou 4 colunas (passos) × 4 linhas (baixo, esquerda, direita, cima), cada quadro 32×32. Personagens parados (serpente, grupos de anjos) têm uma linha só
+- **sheet**: Folha de personagem: 3 ou 4 colunas (passos) × 4 linhas (baixo, esquerda, direita, cima), cada quadro 48×48 (o tamanho do quadro fica no `frame` do manifest). Personagens parados (serpente, grupos de anjos) têm uma linha só
 - **portrait**: Retrato 64×64
 - **tiles**: Folha de peças do mapa: 8×8 peças de 32×32 (256×256). A peça 0 é a do canto superior esquerdo, contando para a direita
 - **map**: Mapa inteiro já desenhado, visto de cima, em JPG (fica leve no celular). 960×640 = 30 × 20 peças de 32 px. Onde dá para andar fica marcado em `content/maps/*.json` (camada `collision`)

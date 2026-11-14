@@ -22,6 +22,65 @@ export class TileMap {
     const collision = this.layers.collision;
     this.solid = collision ? collision.data : new Array(this.cols * this.rows).fill(0);
     this.triggers = (this.layers.triggers && this.layers.triggers.objects) || [];
+    this.bridges = ext.bridges || [];
+    this.waterCell = 4;
+    this.waterMask = null;
+    if (this.background && ext.waterSolid !== false) this.waterMask = this.buildWaterMask();
+  }
+
+  /**
+   * Fine collision for water, read from the painted map itself: every 4x4 px
+   * cell that is blue water is solid, except where a bridge was marked.
+   */
+  buildWaterMask() {
+    const c = this.waterCell;
+    const W = Math.floor(this.pixelW / c);
+    const H = Math.floor(this.pixelH / c);
+    const canvas = document.createElement('canvas');
+    canvas.width = W;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(this.background, 0, 0, W, H);
+    let px;
+    try { px = ctx.getImageData(0, 0, W, H).data; } catch { return null; }
+    let mask = new Uint8Array(W * H);
+    for (let i = 0; i < W * H; i++) {
+      const r = px[i * 4], g = px[i * 4 + 1], b = px[i * 4 + 2];
+      if (b > 100 && b > r + 40 && b >= g - 12) mask[i] = 1;
+    }
+    // fill small holes (water lilies, ripples) so they are not stepping stones
+    for (let pass = 0; pass < 2; pass++) {
+      const next = mask.slice();
+      for (let y = 1; y < H - 1; y++) {
+        for (let x = 1; x < W - 1; x++) {
+          if (mask[y * W + x]) continue;
+          let n = 0;
+          for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) n += mask[(y + dy) * W + x + dx];
+          if (n >= 5) next[y * W + x] = 1;
+        }
+      }
+      mask = next;
+    }
+    for (const [bx, by, bw, bh] of this.bridges) {
+      for (let y = Math.floor(by / c); y < Math.ceil((by + bh) / c); y++) {
+        for (let x = Math.floor(bx / c); x < Math.ceil((bx + bw) / c); x++) {
+          if (x >= 0 && y >= 0 && x < W && y < H) mask[y * W + x] = 0;
+        }
+      }
+    }
+    this.waterW = W;
+    this.waterH = H;
+    return mask;
+  }
+
+  isWaterAt(px, py) {
+    if (!this.waterMask) return false;
+    const x = Math.floor(px / this.waterCell);
+    const y = Math.floor(py / this.waterCell);
+    if (x < 0 || y < 0 || x >= this.waterW || y >= this.waterH) return true;
+    return this.waterMask[y * this.waterW + x] === 1;
   }
 
   isSolidTile(tx, ty) {
@@ -62,6 +121,16 @@ export class TileMap {
   }
 
   drawDebug(ctx) {
+    if (this.waterMask) {
+      ctx.fillStyle = 'rgba(0,120,255,.45)';
+      for (let y = 0; y < this.waterH; y++) {
+        for (let x = 0; x < this.waterW; x++) {
+          if (this.waterMask[y * this.waterW + x]) ctx.fillRect(x * this.waterCell, y * this.waterCell, this.waterCell, this.waterCell);
+        }
+      }
+      ctx.fillStyle = 'rgba(255,220,0,.35)';
+      for (const [bx, by, bw, bh] of this.bridges) ctx.fillRect(bx, by, bw, bh);
+    }
     ctx.fillStyle = 'rgba(255,0,60,.35)';
     for (let ty = 0; ty < this.rows; ty++) {
       for (let tx = 0; tx < this.cols; tx++) {

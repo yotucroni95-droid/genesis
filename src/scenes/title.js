@@ -51,15 +51,20 @@ export function createTitleScene(game) {
         const walk = (entry.anim && entry.anim.walk) || [0, 1, 2, 1];
         const frame = walk[Math.floor(t * 6) % walk.length];
         // Centre the walker in the empty stage box between the logo and the "tap" text.
-        let x = Math.floor(w / 2 - 16);
-        let y = Math.floor(hgt * 0.5 - 16);
+        const f = entry.frame || 32;
+        let size = f * 2; // twice as big when there is room (whole numbers keep pixels crisp)
+        let x = Math.floor(w / 2 - size / 2);
+        let y = Math.floor(hgt * 0.5 - size / 2);
         if (stage) {
           const r = stage.getBoundingClientRect();
+          const top = display.toLogical(r.left, r.top);
+          const bottom = display.toLogical(r.left, r.bottom);
+          if (bottom.y - top.y < size + 8) size = f; // phone lying down: little height
           const c = display.toLogical(r.left + r.width / 2, r.top + r.height / 2);
-          x = Math.floor(c.x - 16);
-          y = Math.floor(c.y - 16);
+          x = Math.floor(c.x - size / 2);
+          y = Math.floor(c.y - size / 2);
         }
-        ctx.drawImage(sheet, frame * 32, 0, 32, 32, x, y, 32, 32);
+        ctx.drawImage(sheet, frame * f, 0, f, f, x, y, size, size);
       }
     },
   };

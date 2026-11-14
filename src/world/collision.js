@@ -1,5 +1,6 @@
-// Axis-aligned box against the tile grid. Moves one axis at a time so the
-// player slides along walls instead of sticking to them.
+// Axis-aligned box against the map: the tile grid (walls, trees, houses)
+// plus the fine water mask. Moves one axis at a time so the player slides
+// along walls instead of sticking to them.
 
 export function boxHitsMap(map, x, y, w, h) {
   const tx0 = Math.floor(x / map.tileW);
@@ -11,27 +12,36 @@ export function boxHitsMap(map, x, y, w, h) {
       if (map.isSolidTile(tx, ty)) return true;
     }
   }
+  if (map.waterMask) {
+    const c = map.waterCell;
+    for (let py = Math.floor(y / c) * c; py < y + h; py += c) {
+      for (let px = Math.floor(x / c) * c; px < x + w; px += c) {
+        if (map.isWaterAt(px, py)) return true;
+      }
+    }
+  }
   return false;
+}
+
+/** Moves as far as possible along one axis, never into anything solid. */
+function moveAxis(map, x, y, w, h, d, horizontal) {
+  if (!d) return horizontal ? x : y;
+  const pos = horizontal ? x : y;
+  const hits = (p) => (horizontal ? boxHitsMap(map, p, y, w, h) : boxHitsMap(map, x, p, w, h));
+  if (!hits(pos + d)) return pos + d;
+  // blocked: creep forward in half-pixel steps up to the obstacle
+  const sign = Math.sign(d);
+  let best = pos;
+  for (let s = 0.5; s < Math.abs(d); s += 0.5) {
+    if (hits(pos + sign * s)) break;
+    best = pos + sign * s;
+  }
+  return best;
 }
 
 /** box = {x, y, w, h} (top-left). Returns the moved box position. */
 export function moveBox(map, box, dx, dy) {
-  let { x, y } = box;
-  const { w, h } = box;
-  if (dx) {
-    const nx = x + dx;
-    if (!boxHitsMap(map, nx, y, w, h)) x = nx;
-    else if (dx > 0) x = Math.floor((nx + w) / map.tileW) * map.tileW - w - 0.001;
-    else x = (Math.floor(nx / map.tileW) + 1) * map.tileW + 0.001;
-    // corner help: if still blocked a hair, nudge around small corners
-    if (boxHitsMap(map, x, y, w, h)) x = box.x;
-  }
-  if (dy) {
-    const ny = y + dy;
-    if (!boxHitsMap(map, x, ny, w, h)) y = ny;
-    else if (dy > 0) y = Math.floor((ny + h) / map.tileH) * map.tileH - h - 0.001;
-    else y = (Math.floor(ny / map.tileH) + 1) * map.tileH + 0.001;
-    if (boxHitsMap(map, x, y, w, h)) y = box.y;
-  }
+  const x = moveAxis(map, box.x, box.y, box.w, box.h, dx, true);
+  const y = moveAxis(map, x, box.y, box.w, box.h, dy, false);
   return { x, y };
 }
