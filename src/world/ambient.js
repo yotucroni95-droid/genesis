@@ -102,6 +102,57 @@ export class Ambient {
     this.water = cfg.water ? buildWater(map.background, cfg.water) : null;
     this.glows = (cfg.glows || []).map((g) => ({ strength: 0.5, ...g, seed: Math.random() * 100 }));
     this.systems = (cfg.particles || []).map((p) => this.makeSystem(p));
+    this.critters = this.buildCritters(cfg.critters || []);
+  }
+
+  /** Cuts each painted animal out of the map so it can breathe, graze or twitch. */
+  buildCritters(list) {
+    const bg = this.map.background;
+    if (!bg || !list.length) return [];
+    return list.map((c) => {
+      const cut = document.createElement('canvas');
+      cut.width = c.w;
+      cut.height = c.h;
+      const ctx = cut.getContext('2d');
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(bg, c.x, c.y, c.w, c.h, 0, 0, c.w, c.h);
+      return { ...c, cut, seed: Math.random() * 100 };
+    });
+  }
+
+  drawCritters(ctx, cam) {
+    const t = this.time;
+    for (const c of this.critters) {
+      if (c.x + c.w < cam.x || c.x > cam.x + cam.w || c.y + c.h < cam.y || c.y > cam.y + cam.h) continue;
+      let sx = 1, sy = 1, skew = 0, dy = 0;
+      const k = t + c.seed;
+      switch (c.mode) {
+        case 'graze': // breathing plus a slow lean, like lowering the head to eat
+          sy = 1 + 0.045 * (0.5 + 0.5 * Math.sin(k * 2));
+          skew = 0.15 * Math.sin(k * 0.7) * Math.max(0, Math.sin(k * 0.35));
+          break;
+        case 'twitch': { // small quick hops of excitement every couple of seconds
+          const p = k % 2.4;
+          sy = p < 0.35 ? 1 + 0.14 * Math.sin((p / 0.35) * Math.PI) : 1 + 0.02 * Math.sin(k * 3);
+          sx = p < 0.35 ? 1 - 0.04 * Math.sin((p / 0.35) * Math.PI) : 1;
+          break;
+        }
+        case 'bird': { // quick flutter now and then
+          const p = k % 3;
+          sy = p < 0.6 ? 1 + 0.08 * Math.abs(Math.sin(p * 18)) : 1;
+          dy = p < 0.6 ? -1 : 0;
+          break;
+        }
+        default: // breathe
+          sy = 1 + 0.055 * (0.5 + 0.5 * Math.sin(k * 1.8));
+          break;
+      }
+      ctx.save();
+      ctx.translate(c.x + c.w / 2, c.y + c.h + dy);
+      ctx.transform(sx, 0, skew, sy, 0, 0);
+      ctx.drawImage(c.cut, -c.w / 2, -c.h);
+      ctx.restore();
+    }
   }
 
   makeSystem(p) {
@@ -228,6 +279,7 @@ export class Ambient {
       const h = Math.min(this.water.H - y0, Math.ceil(cam.h / 2) + 2);
       if (w > 0 && h > 0) ctx.drawImage(f, x0, y0, w, h, x0 * 2, y0 * 2, w * 2, h * 2);
     }
+    if (this.critters.length) this.drawCritters(ctx, cam);
     if (this.glows.length) {
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
