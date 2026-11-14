@@ -5,6 +5,7 @@ import { Starfield } from './starfield.js';
 export function createTitleScene(game) {
   const stars = new Starfield();
   let t = 0;
+  let stage = null; // empty DOM box where the walking Peregrino is drawn
 
   return {
     enter(_params, ui) {
@@ -21,6 +22,7 @@ export function createTitleScene(game) {
             logo,
             h('div', { class: 'title__verse', text: 'Gênesis 1:1' }),
           ),
+          (stage = h('div', { class: 'title__stage', 'aria-hidden': 'true' })),
           h('div', { class: 'title__start' },
             h('div', { class: 'title__tap', text: 'Toque para começar' }),
           ),
@@ -48,9 +50,15 @@ export function createTitleScene(game) {
       if (sheet) {
         const walk = (entry.anim && entry.anim.walk) || [0, 1, 2, 1];
         const frame = walk[Math.floor(t * 6) % walk.length];
-        const x = Math.floor(w / 2 - 16);
-        // Lying down there is little height, so the walker goes higher.
-        const y = Math.floor(hgt * (w > hgt ? 0.4 : 0.62));
+        // Centre the walker in the empty stage box between the logo and the "tap" text.
+        let x = Math.floor(w / 2 - 16);
+        let y = Math.floor(hgt * 0.5 - 16);
+        if (stage) {
+          const r = stage.getBoundingClientRect();
+          const c = display.toLogical(r.left + r.width / 2, r.top + r.height / 2);
+          x = Math.floor(c.x - 16);
+          y = Math.floor(c.y - 16);
+        }
         ctx.drawImage(sheet, frame * 32, 0, 32, 32, x, y, 32, 32);
       }
     },

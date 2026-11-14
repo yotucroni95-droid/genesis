@@ -134,7 +134,8 @@ img.pixel, canvas.pixel {
   box-shadow: inset 0 0 0 2px var(--panel-edge);
 }
 .btn--ghost:active { box-shadow: inset 0 0 0 2px var(--cyan); }
-.btn--icon { padding: 0; width: 48px; font-size: 22px; }
+.btn--icon { padding: 0; width: 48px; font-size: 22px; display: inline-grid; place-items: center; }
+.btn__icon { width: 32px; height: 32px; }
 
 /* ---------- Tela de abertura ---------- */
 .title {
@@ -155,7 +156,7 @@ img.pixel, canvas.pixel {
   gap: 10px;
   animation: float 5s ease-in-out infinite;
 }
-.title__logo img { width: min(300px, 80vw); height: auto; }
+.title__logo img { width: min(360px, 84vw); max-height: 34vh; object-fit: contain; height: auto; filter: drop-shadow(0 6px 18px rgba(0,0,0,.5)); }
 .title__name {
   font-size: clamp(54px, 17vw, 84px);
   font-weight: 700;
@@ -172,7 +173,9 @@ img.pixel, canvas.pixel {
   color: var(--ink-dim);
   letter-spacing: .5px;
 }
+.title__stage { flex: 1; min-height: 40px; width: 100%; }
 .title__start {
+  margin-bottom: 6vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -195,7 +198,7 @@ img.pixel, canvas.pixel {
 @media (orientation: landscape) and (max-height: 600px) {
   .title { padding-top: calc(var(--safe-top) + 4vh); }
   .title__name { font-size: clamp(44px, 14vh, 72px); }
-  .title__start { margin-top: 30vh; }
+  .title__start { margin-bottom: 2vh; }
   .title__footer { flex-direction: row; justify-content: space-between; width: 100%; align-items: flex-end; }
 }
 

@@ -2,6 +2,7 @@
 // it is still a placeholder or already the final art.
 
 import { h } from '../ui/dom.js';
+import { iconButton } from '../ui/icon-button.js';
 import { Starfield } from './starfield.js';
 
 export function createGalleryScene(game) {
@@ -38,7 +39,7 @@ export function createGalleryScene(game) {
       ui.appendChild(
         h('section', { class: 'screen' },
           h('header', { class: 'screen__head' },
-            h('button', { class: 'btn btn--ghost btn--icon', 'aria-label': 'Voltar', onClick: () => game.scenes.go('title'), text: '←' }),
+            iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go('title'), '←'),
             h('h1', { text: 'Artes do jogo' }),
           ),
           body,

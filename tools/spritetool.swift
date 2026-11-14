@@ -137,5 +137,38 @@ case "portrait":
   var out = Img(w: size, h: size, px: [UInt8](repeating: 0, count: size*size*4))
   blit(src, [Bool](repeating: true, count: img.w*img.h), r, Double(size)/Double(r.w), into: &out, 0, 0)
   save(out, a[3])
+case "bbox":
+  // tight box of non-background pixels inside a region (ignores thin noise)
+  let img = load(a[2]); let r = R(x: Int(a[3])!, y: Int(a[4])!, w: Int(a[5])!, h: Int(a[6])!)
+  let bg = rgb(a[7]); let tol = Double(a[8])!
+  var rows = [Int](repeating: 0, count: r.h), cols = [Int](repeating: 0, count: r.w)
+  for y in r.y..<(r.y+r.h) { for x in r.x..<(r.x+r.w) where dist(img, x, y, bg) > tol { rows[y-r.y] += 1; cols[x-r.x] += 1 } }
+  let ys = rows.indices.filter { rows[$0] > 3 }, xs = cols.indices.filter { cols[$0] > 3 }
+  print("\(r.x + xs.first!),\(r.y + ys.first!),\(xs.last! - xs.first! + 1),\(ys.last! - ys.first! + 1)")
+case "cut":
+  // crop a rect, optionally turn the background transparent (soft edge keeps glows), resize
+  let img = load(a[2]); let r = R(x: Int(a[4])!, y: Int(a[5])!, w: Int(a[6])!, h: Int(a[7])!)
+  let ow = Int(a[8])!, oh = Int(a[9])!
+  let keyed = a.count > 12; let bg = keyed ? rgb(a[10]) : (0,0,0); let tol = keyed ? Double(a[11])! : 0; let soft = keyed ? Double(a[12])! : 1
+  var out = Img(w: ow, h: oh, px: [UInt8](repeating: 0, count: ow*oh*4))
+  let sx = Double(r.w) / Double(ow), sy = Double(r.h) / Double(oh)
+  // optional CLIP="x,y,w,h": source pixels outside it count as transparent
+  let clip: R? = ProcessInfo.processInfo.environment["CLIP"].map { let c = $0.split(separator: ",").map { Int($0)! }; return R(x: c[0], y: c[1], w: c[2], h: c[3]) }
+  for oy in 0..<oh { for ox in 0..<ow {
+    var rs = 0.0, gs = 0.0, bs = 0.0, as_ = 0.0, n = 0.0
+    var yy = Int(Double(oy) * sy); while Double(yy) < Double(oy + 1) * sy { var xx = Int(Double(ox) * sx); while Double(xx) < Double(ox + 1) * sx {
+      let X = r.x + xx, Y = r.y + yy
+      let inClip = clip.map { X >= $0.x && Y >= $0.y && X < $0.x + $0.w && Y < $0.y + $0.h } ?? true
+      if inClip, X >= 0, Y >= 0, X < img.w, Y < img.h {
+        let i = (Y*img.w+X)*4
+        let al = keyed ? max(0, min(1, (dist(img, X, Y, bg) - tol) / soft)) : 1
+        rs += Double(img.px[i]) * al; gs += Double(img.px[i+1]) * al; bs += Double(img.px[i+2]) * al; as_ += al
+      }
+      n += 1; xx += 1 }; yy += 1 }
+    guard as_ > 0 else { continue }
+    let o = (oy*ow+ox)*4
+    out.px[o] = UInt8(rs/as_); out.px[o+1] = UInt8(gs/as_); out.px[o+2] = UInt8(bs/as_); out.px[o+3] = UInt8(min(255, as_/n*255))
+  } }
+  save(out, a[3])
 default: print("unknown command")
 }
