@@ -1,6 +1,6 @@
 # Gênesis
 
-Jogo de navegador para celular, que funciona com o aparelho deitado ou em pé, que convida o grupo de jovens a ler o livro de Gênesis. Feito pela Órbita Virtual.
+Jogo de navegador para celular, jogado **com o aparelho deitado**, que convida o grupo de jovens a ler o livro de Gênesis. Feito pela Órbita Virtual.
 
 - Não precisa instalar: abre direto no navegador do celular.
 - Página estática hospedada no GitHub Pages. Não tem login nem servidor: cada jogador escolhe um apelido e o progresso fica guardado no próprio celular (localStorage).

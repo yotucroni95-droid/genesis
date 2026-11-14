@@ -2,6 +2,21 @@ import { h } from '../ui/dom.js';
 import { signature } from '../ui/signature.js';
 import { Starfield } from './starfield.js';
 
+/**
+ * On phones that allow it (most Android), open full screen and lock the
+ * screen lying down. Where it is not allowed (iPhone), the "turn your phone"
+ * notice does the job instead.
+ */
+function goLandscapeFullscreen() {
+  if (!matchMedia('(pointer: coarse)').matches) return; // computers: leave as is
+  const el = document.documentElement;
+  const req = el.requestFullscreen || el.webkitRequestFullscreen;
+  if (!req || document.fullscreenElement) return;
+  Promise.resolve(req.call(el, { navigationUI: 'hide' }))
+    .then(() => screen.orientation && screen.orientation.lock && screen.orientation.lock('landscape'))
+    .catch(() => {});
+}
+
 export function createTitleScene(game) {
   const stars = new Starfield();
   let t = 0;
@@ -14,7 +29,10 @@ export function createTitleScene(game) {
         ? h('img', { class: 'pixel', src: game.assets.url('logo.genesis'), alt: 'Gênesis' })
         : h('div', { class: 'title__name', text: 'Gênesis' });
 
-      const start = () => game.scenes.go(game.save.hasNick ? 'explore' : 'nickname');
+      const start = () => {
+        goLandscapeFullscreen();
+        game.scenes.go(game.save.hasNick ? 'explore' : 'nickname');
+      };
 
       ui.appendChild(
         h('section', { class: 'title', onClick: start },
