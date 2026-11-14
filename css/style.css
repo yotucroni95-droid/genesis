@@ -595,3 +595,39 @@ input, textarea { -webkit-user-select: text; user-select: text; touch-action: ma
 .reward__face { border-radius: 10px; background: #0b1030; }
 
 [hidden] { display: none !important; }
+
+/* ---------- Jogo da memória ---------- */
+.memory { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.memory__info { font-size: 14px; color: var(--ink-dim); }
+.memory__board { display: grid; gap: 8px; justify-content: center; }
+.card { aspect-ratio: 3 / 4; padding: 0; border: 0; background: none; perspective: 600px; cursor: pointer; touch-action: manipulation; }
+.card__inner { position: relative; width: 100%; height: 100%; transition: transform .35s ease; transform-style: preserve-3d; }
+.card.is-up .card__inner { transform: rotateY(180deg); }
+.card__face { position: absolute; inset: 0; border-radius: 10px; overflow: hidden; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.card__back { background: #4a1f12; display: grid; place-items: center; }
+.card__back img { width: 100%; height: 100%; object-fit: cover; }
+.card__front { transform: rotateY(180deg); background: linear-gradient(180deg, #fbf1d8, #efdcae); border: 3px solid var(--gold-deep); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 6px; }
+.card__front img { width: 78%; aspect-ratio: 1; object-fit: contain; border-radius: 8px; background: #0b1030; }
+.card__front span { font-size: 11px; color: #5a3108; text-align: center; line-height: 1.1; }
+.card.is-found .card__front { border-color: var(--ok); box-shadow: 0 0 14px rgba(124,240,166,.6); }
+
+/* ---------- Jogo da velha ---------- */
+.ttt { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.ttt__status { font-size: 16px; color: var(--gold); }
+.ttt__board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: min(62vh, 300px, 90vw); aspect-ratio: 1; }
+.ttt__cell { border: 2px solid var(--panel-edge); border-radius: 12px; background: var(--panel); display: grid; place-items: center; cursor: pointer; touch-action: manipulation; min-height: 44px; padding: 0; }
+.ttt__cell img { width: 70%; height: 70%; }
+.ttt__cell.is-line { border-color: var(--gold); box-shadow: 0 0 16px rgba(255,211,110,.6); }
+.ttt__light { font-size: clamp(32px, 9vh, 64px); line-height: 1; color: var(--gold); text-shadow: 0 0 14px rgba(255,211,110,.8); }
+.ttt__shadow { width: 58%; height: 58%; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #6a4a9b, #1b0f33 70%); box-shadow: 0 0 10px rgba(106,74,155,.6); }
+
+/* ---------- Quebra-cabeça ---------- */
+.puzzle { display: flex; gap: 16px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
+.puzzle__side { display: flex; flex-direction: column; gap: 8px; max-width: 220px; }
+.puzzle__peek { width: 100%; border-radius: 8px; border: 2px solid var(--gold); }
+.puzzle__board { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); gap: 3px; touch-action: none; }
+.puzzle__board.is-done { gap: 0; transition: gap .4s ease; }
+.piece { background-size: 300% 300%; background-repeat: no-repeat; image-rendering: pixelated; border-radius: 4px; outline: 2px solid rgba(255,255,255,.08); cursor: grab; touch-action: none; transition: transform .12s ease; }
+.piece.is-selected { outline: 3px solid var(--gold); transform: scale(.94); }
+.piece.is-right { outline-color: rgba(124,240,166,.35); }
+.puzzle__final { width: min(320px, 60vw); border-radius: 10px; border: 3px solid var(--gold); }

@@ -24,7 +24,15 @@ export function createChallengeScene(game) {
         h('div', { class: 'screen__body' }, area),
       ));
 
-      const result = await getChallenge(stop.challenge.type).start(stop.challenge.config || {}, { root: area, assets: game.assets, verse: stop.verse });
+      // Do not wait here: the scene must finish entering so buttons (like
+      // "Voltar") keep working while the challenge is being played.
+      getChallenge(stop.challenge.type)
+        .start(stop.challenge.config || {}, { root: area, assets: game.assets, verse: stop.verse })
+        .then((result) => this.finish(result, { chapter, stop, area, back }));
+    },
+
+    finish(result, { chapter, stop, area, back }) {
+      if (game.scenes.currentName !== 'challenge') return; // player already left
       if (!result.success) { back(); return; }
 
       const wasDone = game.save.isStopDone(stop.id);

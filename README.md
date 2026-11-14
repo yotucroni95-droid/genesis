@@ -62,7 +62,7 @@ O código do jogo não muda.
 2. Apelido e salvamento automático no celular ✅ (sem login, por decisão do líder)
 3. Mapa, joystick e colisão ✅ (com água, fogo, borboletas e brilhos animados)
 4. Paradas com história, quiz, recompensas e o Capítulo 0 completo ✅
-5. Os outros três desafios
+5. Os outros três desafios: memória, jogo da velha e quebra-cabeça ✅
 6. Álbum, medalhas e níveis
 7. ~~Painel do líder~~ (retirado: sem servidor, cada um vê o próprio álbum)
 8. Conteúdo dos capítulos 0 a 4
