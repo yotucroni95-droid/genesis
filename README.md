@@ -36,6 +36,12 @@ Depois abra http://localhost:8080 no navegador. No computador, dá para andar co
 
 Cada mapa é um arquivo em `content/maps/` no formato do Tiled, com as camadas `ground`, `objects`, `collision` (1 = parede) e `triggers`. Em `genesis` ficam o nome, a imagem de fundo, o ponto de partida e as animações do lugar (`ambient`): água, brilhos, fogo, borboletas, pólen, poeira, folhas, fumaça, faíscas, nuvens e pássaros.
 
+## Capítulos e desafios
+
+Cada capítulo é um arquivo em `content/chapters/` com o mapa, os personagens que libera, a medalha, os personagens que aparecem no mapa (`npcs`) e as paradas. Cada parada tem posição (em peças do mapa), título, texto da história (`story`, com quem fala), versículo, desafio (`challenge.type` + `config`) e recompensas.
+
+Todo desafio fica em `src/challenges/` e segue a mesma regra: `start(config, env)` devolve uma promessa com `{ success, score }`.
+
 ## Como acrescentar um livro novo (por exemplo, Êxodo)
 
 1. Coloque um arquivo de capítulo em `content/chapters/` e acrescente-o em `content/chapters/index.json`.
@@ -55,7 +61,7 @@ O código do jogo não muda.
 1. Esqueleto, lista de artes e retângulos provisórios ✅
 2. Apelido e salvamento automático no celular ✅ (sem login, por decisão do líder)
 3. Mapa, joystick e colisão ✅ (com água, fogo, borboletas e brilhos animados)
-4. Uma parada com história e um desafio
+4. Paradas com história, quiz, recompensas e o Capítulo 0 completo ✅
 5. Os outros três desafios
 6. Álbum, medalhas e níveis
 7. ~~Painel do líder~~ (retirado: sem servidor, cada um vê o próprio álbum)

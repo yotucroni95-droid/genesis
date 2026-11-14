@@ -1,0 +1,103 @@
+{
+  "id": "cap0",
+  "number": 0,
+  "title": "O Conflito no Céu",
+  "map": "ceu",
+  "intro": "Antes de existir o mundo, havia o céu. Ande pelo palácio e encontre os três pontos de luz.",
+  "unlocks": ["miguel", "gabriel"],
+  "medal": "capitulo_0",
+  "npcs": [
+    { "sheet": "gabriel", "x": 12, "y": 4, "dir": 0 },
+    { "sheet": "miguel", "x": 18, "y": 4, "dir": 0 },
+    { "sheet": "lucifer", "x": 3, "y": 12, "dir": 2 },
+    { "sheet": "anjos_fieis", "x": 25, "y": 11, "variant": 0 },
+    { "sheet": "anjos_fieis", "x": 27, "y": 12, "variant": 3 },
+    { "sheet": "anjos_caidos", "x": 1, "y": 7, "variant": 1 },
+    { "sheet": "anjos_caidos", "x": 4, "y": 7, "variant": 2 }
+  ],
+  "stops": [
+    {
+      "id": "cap0_s1",
+      "title": "O anjo de luz",
+      "x": 15,
+      "y": 10,
+      "verse": "Ezequiel 28:12-15",
+      "story": [
+        { "speaker": "narrador", "text": "Antes de o mundo existir, Deus criou os anjos para viverem com Ele no céu, cheio de luz e de alegria." },
+        { "speaker": "narrador", "text": "Entre eles havia um querubim muito especial, chamado Lúcifer. Seu nome quer dizer \"aquele que traz a luz\"." },
+        { "speaker": "narrador", "text": "A Bíblia o descreve cheio de sabedoria e perfeito em beleza. Ele era perfeito em seus caminhos desde o dia em que foi criado..." },
+        { "speaker": "narrador", "text": "...até que se achou maldade nele. Leia Ezequiel 28:12-15 e descubra como tudo começou." }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 2,
+          "questions": [
+            {
+              "q": "Quem criou os anjos?",
+              "options": ["Deus", "Lúcifer", "Os próprios anjos"],
+              "answer": 0,
+              "explain": "Tudo o que existe, no céu e na terra, foi criado por Deus, inclusive os anjos.",
+              "verse": "Colossenses 1:16"
+            },
+            {
+              "q": "Como Lúcifer era quando foi criado?",
+              "options": ["Mau desde o começo", "Cheio de sabedoria e perfeito em beleza", "Igual a Deus"],
+              "answer": 1,
+              "explain": "Deus não criou nada mau. Lúcifer foi criado perfeito, sábio e muito bonito.",
+              "verse": "Ezequiel 28:12"
+            },
+            {
+              "q": "O que aconteceu com Lúcifer depois?",
+              "options": ["Ele virou um ser humano", "Ele criou outro mundo", "Achou-se maldade nele"],
+              "answer": 2,
+              "explain": "Mesmo sendo perfeito, ele escolheu o mal. O pecado começou por uma escolha dele.",
+              "verse": "Ezequiel 28:15"
+            }
+          ]
+        }
+      },
+      "rewards": { "xp": 50 }
+    },
+    {
+      "id": "cap0_s2",
+      "title": "O orgulho de Lúcifer",
+      "x": 5,
+      "y": 11,
+      "verse": "Isaías 14:12-14",
+      "story": [
+        { "speaker": "narrador", "text": "Com o tempo, Lúcifer começou a olhar só para a própria beleza e a querer o lugar que pertence somente a Deus." },
+        { "speaker": "lucifer", "text": "Subirei acima das estrelas de Deus. Serei semelhante ao Altíssimo!" },
+        { "speaker": "narrador", "text": "O orgulho tomou conta do coração dele. E ele começou a espalhar dúvidas entre os outros anjos." },
+        { "speaker": "narrador", "text": "Parte dos anjos acreditou nele e o seguiu. Mas muitos anjos continuaram fiéis a Deus." }
+      ],
+      "challenge": {
+        "type": "memory",
+        "config": {
+          "pairs": ["anjos_fieis", "anjos_caidos", "miguel", "gabriel"],
+          "cardImages": "portrait"
+        }
+      },
+      "rewards": { "xp": 50 }
+    },
+    {
+      "id": "cap0_s3",
+      "title": "A batalha no céu",
+      "x": 15,
+      "y": 4,
+      "verse": "Apocalipse 12:7-9",
+      "story": [
+        { "speaker": "narrador", "text": "Então houve uma batalha no céu." },
+        { "speaker": "miguel", "text": "Quem é como Deus? Ninguém! Anjos fiéis, fiquem firmes!" },
+        { "speaker": "narrador", "text": "Miguel e os seus anjos lutaram contra o dragão, a antiga serpente. Ele não venceu, e não houve mais lugar para ele no céu." },
+        { "speaker": "narrador", "text": "Lúcifer, agora chamado Satanás, foi lançado para a terra, e os seus anjos com ele." },
+        { "speaker": "gabriel", "text": "Eu sou Gabriel e estou na presença de Deus. Ele continua no controle, e o amor dEle vai vencer no final." }
+      ],
+      "challenge": {
+        "type": "tictactoe",
+        "config": { "difficulty": 0.25, "playerMark": "luz", "aiMark": "sombra" }
+      },
+      "rewards": { "xp": 80 }
+    }
+  ]
+}

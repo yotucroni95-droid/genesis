@@ -10,6 +10,7 @@ function emptySave() {
     nick: '',
     avatarId: 'peregrino',
     level: 1,
+    xp: 0,
     progress: {},      // stopId -> { completedAt, score }
     unlocked: { peregrino: now }, // characterId -> unlockedAt
     achievements: {},  // achievementId -> earnedAt
@@ -106,6 +107,11 @@ export class SaveManager {
     this.state.achievements[achievementId] = new Date().toISOString();
     this.write();
     return true;
+  }
+
+  addXp(amount) {
+    this.state.xp = (this.state.xp || 0) + amount;
+    this.write();
   }
 
   setLevel(level) {

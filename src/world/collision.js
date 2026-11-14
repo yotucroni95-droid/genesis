@@ -12,6 +12,11 @@ export function boxHitsMap(map, x, y, w, h) {
       if (map.isSolidTile(tx, ty)) return true;
     }
   }
+  if (map.extraSolids) {
+    for (const r of map.extraSolids) {
+      if (x < r.x + r.w && x + w > r.x && y < r.y + r.h && y + h > r.y) return true;
+    }
+  }
   if (map.waterMask) {
     const c = map.waterCell;
     for (let py = Math.floor(y / c) * c; py < y + h; py += c) {

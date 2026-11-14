@@ -11,6 +11,8 @@ import { createGalleryScene } from './scenes/gallery.js';
 import { createExploreScene } from './scenes/explore.js';
 import { createWorldScene } from './scenes/world-map.js';
 import { createNicknameScene } from './scenes/nickname.js';
+import { createStoryScene } from './scenes/story.js';
+import { createChallengeScene } from './scenes/challenge.js';
 import { SaveManager } from './save/save-manager.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
@@ -63,6 +65,8 @@ async function boot() {
   game.scenes.register('explore', createExploreScene);
   game.scenes.register('world', createWorldScene);
   game.scenes.register('nickname', createNicknameScene);
+  game.scenes.register('story', createStoryScene);
+  game.scenes.register('challenge', createChallengeScene);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),
