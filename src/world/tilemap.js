@@ -15,6 +15,7 @@ export class TileMap {
 
     const ext = json.genesis || {};
     this.name = ext.name || '';
+    this.id = (ext.background || '').replace('map.', '');
     this.background = ext.background ? assets.image(ext.background) : null;
     this.tileset = ext.tileset ? assets.entry(ext.tileset) : null;
     this.spawn = ext.spawn || { x: 1, y: 1 };

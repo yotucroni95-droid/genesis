@@ -40,6 +40,20 @@ export function createExploreScene(game) {
           ),
         );
       });
+      const st = save.state;
+      const totalStops = loaded.filter(Boolean).reduce((n, c) => n + c.stops.length, 0);
+      const doneStops = Object.keys(st.progress).length;
+      const medals = Object.keys(st.achievements).length;
+      const chars = Object.keys(st.unlocked).length;
+      const profile = h('div', { class: 'profile' },
+        h('div', { class: 'profile__lvl' }, h('small', { text: 'Nível' }), h('b', { text: String(st.level) })),
+        h('div', { class: 'profile__xp' },
+          h('div', { class: 'profile__xpline' }, h('img', { class: 'pixel', src: game.assets.url('icon.estrela'), alt: '' }), h('span', { text: `${st.xp || 0} de experiência · ${doneStops} de ${totalStops} paradas` })),
+          h('div', { class: 'bar' }, h('div', { class: 'bar__fill', style: { width: `${totalStops ? Math.round((doneStops / totalStops) * 100) : 0}%` } })),
+        ),
+        h('button', { class: 'profile__btn', onClick: () => game.scenes.go('album') }, h('img', { class: 'pixel', src: game.assets.url('icon.album'), alt: '' }), h('span', { text: `Álbum ${chars}` })),
+        h('button', { class: 'profile__btn', onClick: () => game.scenes.go('medals') }, h('img', { class: 'pixel', src: game.assets.url('icon.medalha'), alt: '' }), h('span', { text: `Medalhas ${medals}` })),
+      );
       ui.appendChild(
         h('section', { class: 'screen' },
           h('header', { class: 'screen__head' },
@@ -52,6 +66,7 @@ export function createExploreScene(game) {
             ),
           ),
           h('div', { class: 'screen__body' },
+            profile,
             grid,
             h('div', { style: { marginTop: '18px', display: 'flex', justifyContent: 'center' } },
               h('button', { class: 'btn btn--ghost', onClick: () => game.scenes.go('gallery'), text: 'Artes do jogo' }),

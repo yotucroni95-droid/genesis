@@ -63,7 +63,7 @@ O código do jogo não muda.
 3. Mapa, joystick e colisão ✅ (com água, fogo, borboletas e brilhos animados)
 4. Paradas com história, quiz, recompensas e o Capítulo 0 completo ✅
 5. Os outros três desafios: memória, jogo da velha e quebra-cabeça ✅
-6. Álbum, medalhas e níveis
+6. Álbum, medalhas, níveis e escolha de personagem ✅
 7. ~~Painel do líder~~ (retirado: sem servidor, cada um vê o próprio álbum)
 8. Conteúdo dos capítulos 0 a 4
 9. Acabamento e testes no celular

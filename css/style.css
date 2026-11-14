@@ -631,3 +631,55 @@ input, textarea { -webkit-user-select: text; user-select: text; touch-action: ma
 .piece.is-selected { outline: 3px solid var(--gold); transform: scale(.94); }
 .piece.is-right { outline-color: rgba(124,240,166,.35); }
 .puzzle__final { width: min(320px, 60vw); border-radius: 10px; border: 3px solid var(--gold); }
+
+/* ---------- Perfil na Jornada ---------- */
+.profile { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; padding: 10px 12px; border: 2px solid var(--panel-edge); border-radius: 14px; background: var(--panel); }
+.profile__lvl { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 58px; height: 58px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #ffe39a, var(--gold-deep)); color: #2a1600; box-shadow: 0 0 14px rgba(255,211,110,.5); }
+.profile__lvl small { font-size: 10px; }
+.profile__lvl b { font-size: 24px; line-height: 1; }
+.profile__xp { flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 6px; }
+.profile__xpline { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-dim); }
+.profile__xpline img { width: 22px; height: 22px; }
+.profile .bar { width: 100%; }
+.profile__btn { display: inline-flex; align-items: center; gap: 6px; min-height: 48px; padding: 0 14px; border: 2px solid var(--panel-edge); border-radius: 12px; background: rgba(255,255,255,.05); color: var(--ink); font: 600 15px var(--font); cursor: pointer; touch-action: manipulation; }
+.profile__btn:active { border-color: var(--gold); }
+.profile__btn img { width: 30px; height: 30px; }
+.head-count { margin-left: auto; font-size: 14px; color: var(--ink-dim); }
+
+/* ---------- Cartas de personagem (álbum) ---------- */
+.album { display: grid; grid-template-columns: repeat(auto-fill, minmax(118px, 1fr)); gap: 12px; }
+.cc { position: relative; aspect-ratio: 96 / 124; padding: 10% 8% 8%; border: 0; border-radius: 12px; background: linear-gradient(180deg, #fbf1d8, #efdcae); color: #2b1a08; display: flex; flex-direction: column; align-items: center; gap: 3px; cursor: pointer; touch-action: manipulation; overflow: hidden; font-family: var(--font); }
+.cc__frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cc__art { position: relative; flex: 0 0 auto; width: 74%; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: #0b1030; }
+.cc__face { width: 100%; height: 100%; display: block; }
+.cc.is-locked { background: linear-gradient(180deg, #2a2f55, #141838); color: var(--ink-dim); }
+.cc.is-locked .cc__face { filter: brightness(0); opacity: .9; }
+.cc__q { position: absolute; inset: 0; display: grid; place-items: center; font-size: 42px; font-weight: 700; color: var(--gold); text-shadow: 0 0 10px rgba(255,211,110,.6); }
+.cc__name { position: relative; font-size: 13px; font-weight: 700; text-align: center; line-height: 1.1; }
+.cc__virtue { position: relative; font-size: 11px; color: #8a3b0a; }
+.cc.is-locked .cc__virtue { color: var(--ink-dim); }
+.cc__verse { position: relative; font-size: 10px; color: #6b3a10; }
+.cc.is-selected { box-shadow: 0 0 0 3px var(--ok), 0 0 18px rgba(124,240,166,.6); }
+
+/* ---------- Janela (detalhe da carta) ---------- */
+.modal { position: absolute; inset: 0; z-index: 20; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(5,7,26,.85); }
+.modal__box { width: min(640px, 100%); max-height: 100%; overflow-y: auto; padding: 16px; border: 2px solid var(--gold); border-radius: 16px; background: var(--bg-2); }
+.album-detail { display: flex; gap: 16px; align-items: center; }
+.album-detail .cc { width: 150px; height: 194px; flex: 0 0 auto; cursor: default; }
+.album-detail .cc__art { width: 84px; height: 84px; }
+.album-detail__text { display: flex; flex-direction: column; gap: 8px; }
+.album-detail__text h2 { margin: 0; color: var(--gold); }
+.album-detail__text p { margin: 0; font-family: system-ui, sans-serif; line-height: 1.4; }
+.album-detail__virtue { color: var(--cyan); font-family: var(--font) !important; }
+.album-detail__buttons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.verse--dark { color: var(--gold); background: rgba(255,211,110,.12); }
+
+/* ---------- Medalhas ---------- */
+.medals { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.medal { display: flex; align-items: center; gap: 12px; padding: 10px; border: 2px solid var(--panel-edge); border-radius: 14px; background: var(--panel); }
+.medal img { width: 64px; height: 64px; filter: grayscale(1) brightness(.5); }
+.medal strong { display: block; color: var(--ink-dim); }
+.medal p { margin: 4px 0 0; font-size: 13px; color: var(--ink-dim); font-family: system-ui, sans-serif; }
+.medal.is-earned { border-color: var(--gold); }
+.medal.is-earned img { filter: none; }
+.medal.is-earned strong { color: var(--gold); }

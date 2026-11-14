@@ -13,6 +13,9 @@ import { createWorldScene } from './scenes/world-map.js';
 import { createNicknameScene } from './scenes/nickname.js';
 import { createStoryScene } from './scenes/story.js';
 import { createChallengeScene } from './scenes/challenge.js';
+import { createAlbumScene } from './scenes/album.js';
+import { createMedalsScene } from './scenes/medals.js';
+import { createAvatarScene } from './scenes/avatar.js';
 import { SaveManager } from './save/save-manager.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
@@ -67,6 +70,9 @@ async function boot() {
   game.scenes.register('nickname', createNicknameScene);
   game.scenes.register('story', createStoryScene);
   game.scenes.register('challenge', createChallengeScene);
+  game.scenes.register('album', createAlbumScene);
+  game.scenes.register('medals', createMedalsScene);
+  game.scenes.register('avatar', createAvatarScene);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),

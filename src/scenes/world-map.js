@@ -32,17 +32,10 @@ export function createWorldScene(game) {
     charButton.querySelector('img').src = game.assets.url(`portrait.${player.characterId}`);
   }
 
-  function nextAvatar() {
-    const data = game.assets.json('characters.json');
-    const ids = data.characters.filter((c) => c.playable && game.save.isUnlocked(c.id)).map((c) => c.id);
-    if (ids.length < 2) {
-      toast('Complete capítulos para liberar novos personagens!');
-      return;
-    }
-    const next = ids[(ids.indexOf(player.characterId) + 1) % ids.length];
-    player.setCharacter(next);
-    game.save.setAvatar(next);
-    refreshCharButton();
+  function chooseAvatar() {
+    if (leaving) return;
+    leaving = true;
+    game.scenes.go('avatar', { backScene: 'world', back: { chapterId: chapter && chapter.id, mapId: map && map.id, at: { x: player.x, y: player.y } } });
   }
 
   function enterStop() {
@@ -74,7 +67,7 @@ export function createWorldScene(game) {
       firstFrame = true;
       if (DEBUG) window.__world = { map, player, camera, stops }; // only with ?debug=1, for testing
 
-      charButton = h('button', { class: 'hud__char', 'aria-label': 'Trocar personagem', title: 'Trocar personagem', onClick: nextAvatar },
+      charButton = h('button', { class: 'hud__char', 'aria-label': 'Trocar personagem', title: 'Trocar personagem', onClick: chooseAvatar },
         h('img', { class: 'pixel', alt: '' }));
       const title = chapter ? `Capítulo ${chapter.number} · ${chapter.title}` : map.name;
       ui.appendChild(h('div', { class: 'hud' },

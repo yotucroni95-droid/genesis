@@ -6,8 +6,10 @@
       "playable": true,
       "base": true,
       "color": "#4f8cff",
-      "virtue": "",
-      "passage": ""
+      "virtue": "Curiosidade",
+      "passage": "Salmos 119:105",
+      "description": "Um jovem viajante que atravessa o tempo para conhecer o princípio de tudo.",
+      "unlockedIn": null
     },
     {
       "id": "miguel",
@@ -15,8 +17,10 @@
       "playable": true,
       "base": false,
       "color": "#e8c04a",
-      "virtue": "",
-      "passage": ""
+      "virtue": "Coragem",
+      "passage": "Apocalipse 12:7-9",
+      "description": "Seu nome quer dizer \"Quem é como Deus?\". Lidera os anjos fiéis na batalha contra o mal.",
+      "unlockedIn": 0
     },
     {
       "id": "gabriel",
@@ -24,8 +28,10 @@
       "playable": true,
       "base": false,
       "color": "#9fd8ff",
-      "virtue": "",
-      "passage": ""
+      "virtue": "Fidelidade",
+      "passage": "Lucas 1:19",
+      "description": "O mensageiro que está na presença de Deus e leva as Suas notícias aos homens.",
+      "unlockedIn": 0
     },
     {
       "id": "adao",
@@ -33,8 +39,10 @@
       "playable": true,
       "base": false,
       "color": "#5fb35a",
-      "virtue": "",
-      "passage": ""
+      "virtue": "Cuidado",
+      "passage": "Gênesis 2:15",
+      "description": "O primeiro homem, formado do pó da terra para cuidar do jardim de Deus.",
+      "unlockedIn": 1
     },
     {
       "id": "eva",
@@ -42,8 +50,10 @@
       "playable": true,
       "base": false,
       "color": "#7fd07a",
-      "virtue": "",
-      "passage": ""
+      "virtue": "Esperança",
+      "passage": "Gênesis 3:20",
+      "description": "A primeira mulher, mãe de todos os viventes, que ouviu a primeira promessa de salvação.",
+      "unlockedIn": 1
     },
     {
       "id": "abel",
@@ -51,8 +61,10 @@
       "playable": true,
       "base": false,
       "color": "#d9a066",
-      "virtue": "",
-      "passage": ""
+      "virtue": "Fé",
+      "passage": "Hebreus 11:4",
+      "description": "Pastor de ovelhas que ofereceu a Deus o melhor que tinha, com fé.",
+      "unlockedIn": 3
     },
     {
       "id": "noe",
@@ -60,44 +72,38 @@
       "playable": true,
       "base": false,
       "color": "#b08cdb",
-      "virtue": "",
-      "passage": ""
+      "virtue": "Obediência",
+      "passage": "Gênesis 6:22",
+      "description": "Andava com Deus e fez tudo exatamente como Ele mandou, mesmo quando ninguém acreditava.",
+      "unlockedIn": 4
     },
     {
       "id": "lucifer",
       "name": "Lúcifer",
       "playable": false,
       "base": false,
-      "color": "#4a3a6b",
-      "virtue": "",
-      "passage": ""
+      "color": "#4a3a6b"
     },
     {
       "id": "serpente",
       "name": "Serpente",
       "playable": false,
       "base": false,
-      "color": "#3f7f4f",
-      "virtue": "",
-      "passage": ""
+      "color": "#3f7f4f"
     },
     {
       "id": "caim",
       "name": "Caim",
       "playable": false,
       "base": false,
-      "color": "#8a5a3a",
-      "virtue": "",
-      "passage": ""
+      "color": "#8a5a3a"
     },
     {
       "id": "querubim",
       "name": "Querubim",
       "playable": false,
       "base": false,
-      "color": "#f3e9b5",
-      "virtue": "",
-      "passage": ""
+      "color": "#f3e9b5"
     }
   ]
 }
