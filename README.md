@@ -14,7 +14,7 @@ O jogo precisa ser aberto por um servidor (abrir o `index.html` com dois cliques
 python3 -m http.server 8080
 ```
 
-Depois abra http://localhost:8080 no navegador. No computador, dá para andar com WASD ou com as setas (a partir da Fase 3).
+Depois abra http://localhost:8080 no navegador. No computador, dá para andar com WASD ou com as setas. Para ver onde o personagem bate, abra com `?debug=1` no fim do endereço.
 
 ## Como as pastas estão organizadas
 
@@ -33,6 +33,10 @@ Depois abra http://localhost:8080 no navegador. No computador, dá para andar co
 | `assets/` | As artes. A lista completa está em [ASSETS.md](ASSETS.md) |
 | `supabase/migrations/` | O arquivo que cria as tabelas (Fase 2) |
 
+## Mapas
+
+Cada mapa é um arquivo em `content/maps/` no formato do Tiled, com as camadas `ground`, `objects`, `collision` (1 = parede) e `triggers`. Em `genesis` ficam o nome, a imagem de fundo, o ponto de partida e as animações do lugar (`ambient`): água, brilhos, fogo, borboletas, pólen, poeira, folhas, fumaça, faíscas, nuvens e pássaros.
+
 ## Como acrescentar um livro novo (por exemplo, Êxodo)
 
 1. Coloque um arquivo de capítulo em `content/chapters/` e acrescente-o em `content/chapters/index.json`.
@@ -50,7 +54,7 @@ O código do jogo não muda.
 
 1. Esqueleto, lista de artes e retângulos provisórios ✅
 2. Banco de dados no Supabase, login e salvamento automático
-3. Mapa, joystick e colisão
+3. Mapa, joystick e colisão ✅ (com água, fogo, borboletas e brilhos animados)
 4. Uma parada com história e um desafio
 5. Os outros três desafios
 6. Álbum, medalhas e níveis

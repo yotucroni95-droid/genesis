@@ -520,48 +520,53 @@
   },
   {
    "id": "map.ceu",
-   "src": "maps/ceu.png",
+   "src": "maps/ceu.jpg",
    "kind": "map",
-   "optional": true,
    "color": "#2a2f7a",
    "label": "Céu",
-   "group": "Mapas desenhados (opcional)"
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640
   },
   {
    "id": "map.eden",
-   "src": "maps/eden.png",
+   "src": "maps/eden.jpg",
    "kind": "map",
-   "optional": true,
    "color": "#2f7a3a",
    "label": "Éden",
-   "group": "Mapas desenhados (opcional)"
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640
   },
   {
    "id": "map.fora_eden",
-   "src": "maps/fora_eden.png",
+   "src": "maps/fora_eden.jpg",
    "kind": "map",
-   "optional": true,
    "color": "#7a5a2f",
    "label": "Fora do Éden",
-   "group": "Mapas desenhados (opcional)"
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640
   },
   {
    "id": "map.campos",
-   "src": "maps/campos.png",
+   "src": "maps/campos.jpg",
    "kind": "map",
-   "optional": true,
    "color": "#6f8a2f",
    "label": "Campos de Caim e Abel",
-   "group": "Mapas desenhados (opcional)"
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640
   },
   {
    "id": "map.arca",
-   "src": "maps/arca.png",
+   "src": "maps/arca.jpg",
    "kind": "map",
-   "optional": true,
    "color": "#3a5a8a",
    "label": "A Arca de Noé",
-   "group": "Mapas desenhados (opcional)"
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640
   },
   {
    "id": "icon.estrela",

@@ -7,8 +7,8 @@ export const CONFIG = {
   supabaseUrl: '',      // filled in Phase 2
   supabaseAnonKey: '',  // filled in Phase 2
   emailDomain: 'genesis.local',
-  // Logical size of the screen's shorter side (~8 tiles of 32 px).
+  // Logical size of the screen's shorter side (~7 tiles of 32 px).
   // Works with the phone upright or lying down.
-  viewShortSide: 256,
+  viewShortSide: 224,
   tileSize: 32,
 };

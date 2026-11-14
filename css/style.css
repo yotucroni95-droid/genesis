@@ -279,3 +279,100 @@ img.pixel, canvas.pixel {
   color: var(--ink-dim);
 }
 .tag--final { background: rgba(124, 240, 166, .18); color: var(--ok); }
+
+/* ---------- Explorar (teste) ---------- */
+.maps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+}
+.map-card {
+  padding: 0;
+  border: 2px solid var(--panel-edge);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--panel);
+  color: var(--ink);
+  font: 600 15px/1.2 var(--font);
+  cursor: pointer;
+  touch-action: manipulation;
+  text-align: left;
+}
+.map-card:active { border-color: var(--gold); transform: translateY(1px); }
+.map-card__img {
+  aspect-ratio: 3 / 2;
+  background-size: cover;
+  background-position: center;
+  image-rendering: pixelated;
+}
+.map-card__name { padding: 10px 12px; min-height: 44px; }
+
+/* ---------- Mapa: barra de cima ---------- */
+.hud {
+  position: absolute;
+  top: calc(var(--safe-top) + 10px);
+  left: calc(var(--safe-left) + 10px);
+  right: calc(var(--safe-right) + 10px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+  z-index: 2;
+}
+.hud > * { pointer-events: auto; }
+.hud .btn--ghost { background: rgba(7, 10, 28, .6); }
+.hud__title {
+  flex: 1;
+  text-align: center;
+  font-size: 18px;
+  color: var(--gold);
+  text-shadow: 0 2px 0 #000, 0 0 10px rgba(0,0,0,.7);
+  pointer-events: none;
+  animation: hud-title 4s ease forwards;
+}
+@keyframes hud-title { 0%, 70% { opacity: 1; } 100% { opacity: 0; } }
+.hud__char {
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 2px solid var(--gold);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0b1030;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.hud__char img { width: 100%; height: 100%; display: block; }
+
+/* ---------- Joystick ---------- */
+.joy { position: absolute; inset: 0; pointer-events: none; }
+.joy__zone {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 50%;
+  height: 65%;
+  pointer-events: auto;
+  touch-action: none;
+}
+.joy__base {
+  position: absolute;
+  left: calc(var(--safe-left) + 84px);
+  bottom: calc(var(--safe-bottom) + 24px);
+  width: 120px;
+  height: 120px;
+  transform: translate(-50%, 0);
+  opacity: .55;
+  pointer-events: none;
+  transition: opacity .15s;
+}
+.joy.is-active .joy__base { transform: translate(-50%, -50%); opacity: .9; }
+.joy__base > img:first-child { width: 100%; height: 100%; display: block; }
+.joy__knob {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 54px;
+  height: 54px;
+  transform: translate(-50%, -50%);
+}

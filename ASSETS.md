@@ -55,15 +55,15 @@ Regras gerais:
 | `assets/tiles/campos_tiles.png` | Campos de Caim e Abel | 256×256 px |
 | `assets/tiles/arca_tiles.png` | A Arca de Noé | 256×256 px |
 
-## Mapas desenhados (opcional)
+## Mapas desenhados
 
 | Arquivo | O que é | Tamanho |
 |---|---|---|
-| `assets/maps/ceu.png` | Céu — opcional | veja abaixo |
-| `assets/maps/eden.png` | Éden — opcional | veja abaixo |
-| `assets/maps/fora_eden.png` | Fora do Éden — opcional | veja abaixo |
-| `assets/maps/campos.png` | Campos de Caim e Abel — opcional | veja abaixo |
-| `assets/maps/arca.png` | A Arca de Noé — opcional | veja abaixo |
+| `assets/maps/ceu.jpg` | Céu | 960×640 px |
+| `assets/maps/eden.jpg` | Éden | 960×640 px |
+| `assets/maps/fora_eden.jpg` | Fora do Éden | 960×640 px |
+| `assets/maps/campos.jpg` | Campos de Caim e Abel | 960×640 px |
+| `assets/maps/arca.jpg` | A Arca de Noé | 960×640 px |
 
 ## Ícones
 
@@ -127,7 +127,7 @@ Regras gerais:
 - **sheet**: Folha de personagem: 3 ou 4 colunas (passos) × 4 linhas (baixo, esquerda, direita, cima), cada quadro 32×32. Personagens parados (serpente, grupos de anjos) têm uma linha só
 - **portrait**: Retrato 64×64
 - **tiles**: Folha de peças do mapa: 8×8 peças de 32×32 (256×256). A peça 0 é a do canto superior esquerdo, contando para a direita
-- **map**: Opcional. Mapa inteiro já desenhado; se existir, substitui o chão feito de peças. Tamanho = largura do mapa em peças × 32
+- **map**: Mapa inteiro já desenhado, visto de cima, em JPG (fica leve no celular). 960×640 = 30 × 20 peças de 32 px. Onde dá para andar fica marcado em `content/maps/*.json` (camada `collision`)
 - **icon**: Ícone 32×32
 - **medal**: Medalha 64×64
 - **ui**: Interface

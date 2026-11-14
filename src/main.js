@@ -8,8 +8,10 @@ import { Assets } from './assets/loader.js';
 import { createTitleScene } from './scenes/title.js';
 import { createCreditsScene } from './scenes/credits.js';
 import { createGalleryScene } from './scenes/gallery.js';
+import { createExploreScene } from './scenes/explore.js';
+import { createWorldScene } from './scenes/world-map.js';
 
-const CONTENT_FILES = ['characters.json', 'chapters/index.json'];
+const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
 function blockBrowserGestures() {
   // Stop pinch-zoom, double-tap zoom and pull-to-refresh on phones.
@@ -17,7 +19,7 @@ function blockBrowserGestures() {
   document.addEventListener('gesturestart', stop, { passive: false });
   document.addEventListener('dblclick', stop, { passive: false });
   document.addEventListener('touchmove', (e) => {
-    if (!e.target.closest('.screen__body')) e.preventDefault();
+    if (!e.target.closest || !e.target.closest('.screen__body')) e.preventDefault();
   }, { passive: false });
   document.addEventListener('contextmenu', stop);
 }
@@ -56,6 +58,8 @@ async function boot() {
   game.scenes.register('title', createTitleScene);
   game.scenes.register('credits', createCreditsScene);
   game.scenes.register('gallery', createGalleryScene);
+  game.scenes.register('explore', createExploreScene);
+  game.scenes.register('world', createWorldScene);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),
@@ -68,6 +72,7 @@ async function boot() {
   await game.scenes.go('title');
   loop.start();
   bootEl.classList.add('is-done');
+  setTimeout(() => { bootEl.style.display = 'none'; }, 600);
   window.__genesis = game; // handy for debugging in the browser console
 }
 

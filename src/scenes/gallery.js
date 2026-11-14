@@ -39,7 +39,7 @@ export function createGalleryScene(game) {
       ui.appendChild(
         h('section', { class: 'screen' },
           h('header', { class: 'screen__head' },
-            iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go('title'), '←'),
+            iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go('explore'), '←'),
             h('h1', { text: 'Artes do jogo' }),
           ),
           body,

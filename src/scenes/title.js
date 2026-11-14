@@ -14,7 +14,7 @@ export function createTitleScene(game) {
         ? h('img', { class: 'pixel', src: game.assets.url('logo.genesis'), alt: 'Gênesis' })
         : h('div', { class: 'title__name', text: 'Gênesis' });
 
-      const start = () => game.scenes.go('gallery');
+      const start = () => game.scenes.go('explore');
 
       ui.appendChild(
         h('section', { class: 'title', onClick: start },

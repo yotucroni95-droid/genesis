@@ -1,0 +1,29 @@
+{
+  "maps": [
+    {
+      "id": "ceu",
+      "name": "O Céu",
+      "file": "maps/ceu.json"
+    },
+    {
+      "id": "eden",
+      "name": "O Jardim do Éden",
+      "file": "maps/eden.json"
+    },
+    {
+      "id": "fora_eden",
+      "name": "Fora do Éden",
+      "file": "maps/fora_eden.json"
+    },
+    {
+      "id": "campos",
+      "name": "Os Campos de Caim e Abel",
+      "file": "maps/campos.json"
+    },
+    {
+      "id": "arca",
+      "name": "A Arca de Noé",
+      "file": "maps/arca.json"
+    }
+  ]
+}

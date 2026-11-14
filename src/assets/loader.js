@@ -48,6 +48,12 @@ export class Assets {
     return this.data.get(path);
   }
 
+  /** Loads a content JSON on demand (e.g. a map) and keeps it for next time. */
+  async loadJSON(path) {
+    if (!this.data.has(path)) this.data.set(path, await loadJSON(`content/${path}`));
+    return this.data.get(path);
+  }
+
   /**
    * @param {string} manifestUrl
    * @param {string[]} jsonFiles extra JSON content to preload (relative to /content)
