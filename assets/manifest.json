@@ -871,8 +871,8 @@
    "id": "puzzle.criacao",
    "src": "puzzles/criacao.png",
    "kind": "puzzle",
-   "w": 192,
-   "h": 192,
+   "w": 288,
+   "h": 189,
    "color": "#3a7bd5",
    "label": "A Criação",
    "group": "Imagens do quebra-cabeça"
@@ -881,8 +881,8 @@
    "id": "puzzle.eden",
    "src": "puzzles/eden.png",
    "kind": "puzzle",
-   "w": 192,
-   "h": 192,
+   "w": 288,
+   "h": 162,
    "color": "#4fae4f",
    "label": "O Jardim",
    "group": "Imagens do quebra-cabeça"
@@ -891,8 +891,8 @@
    "id": "puzzle.arca",
    "src": "puzzles/arca.png",
    "kind": "puzzle",
-   "w": 192,
-   "h": 192,
+   "w": 288,
+   "h": 186,
    "color": "#8a6a3a",
    "label": "A Arca",
    "group": "Imagens do quebra-cabeça"

@@ -118,9 +118,9 @@ Regras gerais:
 
 | Arquivo | O que é | Tamanho |
 |---|---|---|
-| `assets/puzzles/criacao.png` | A Criação | 192×192 px |
-| `assets/puzzles/eden.png` | O Jardim | 192×192 px |
-| `assets/puzzles/arca.png` | A Arca | 192×192 px |
+| `assets/puzzles/criacao.png` | A Criação | 288×189 px |
+| `assets/puzzles/eden.png` | O Jardim | 288×162 px |
+| `assets/puzzles/arca.png` | A Arca | 288×186 px |
 
 ## Formatos
 
@@ -132,6 +132,6 @@ Regras gerais:
 - **medal**: Medalha 64×64
 - **ui**: Interface
 - **logo**: Logo
-- **puzzle**: Imagem do quebra-cabeça 192×192 (é cortada em 3×3)
+- **puzzle**: Imagem do quebra-cabeça, 288 px de largura e a altura que a imagem tiver (é cortada em 3×3)
 
 Para acrescentar uma arte nova (por exemplo, do Êxodo), acrescente uma linha em `assets/manifest.json` com o mesmo formato das outras.
