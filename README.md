@@ -65,5 +65,5 @@ O código do jogo não muda.
 5. Os outros três desafios: memória, jogo da velha e quebra-cabeça ✅
 6. Álbum, medalhas, níveis e escolha de personagem ✅
 7. ~~Painel do líder~~ (retirado: sem servidor, cada um vê o próprio álbum)
-8. Conteúdo dos capítulos 0 a 4
+8. Conteúdo dos capítulos 0 a 4 ✅ (17 paradas)
 9. Acabamento e testes no celular

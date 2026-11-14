@@ -1,0 +1,283 @@
+{
+  "id": "cap4",
+  "number": 4,
+  "title": "Noé e a Arca",
+  "map": "arca",
+  "intro": "O mundo se encheu de maldade, mas Noé andava com Deus. Ajude a preparar a arca!",
+  "unlocks": [
+    "noe"
+  ],
+  "medal": "capitulo_4",
+  "npcs": [
+    {
+      "sheet": "noe",
+      "x": 17,
+      "y": 9,
+      "dir": 0
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap4_s1",
+      "title": "Construindo a arca",
+      "x": 12,
+      "y": 9,
+      "verse": "Gênesis 6:5-22",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Com o tempo, as pessoas encheram a terra de violência, e Deus ficou triste no coração."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Mas Noé encontrou graça aos olhos do Senhor. Ele era justo e andava com Deus."
+        },
+        {
+          "speaker": "deus",
+          "text": "Faça uma arca de madeira, com três andares, uma porta e uma janela. Entre nela com a sua família."
+        },
+        {
+          "speaker": "noe",
+          "text": "Farei tudo como o Senhor mandou."
+        },
+        {
+          "speaker": "narrador",
+          "text": "E Noé fez tudo exatamente como Deus tinha ordenado."
+        }
+      ],
+      "challenge": {
+        "type": "puzzle",
+        "config": {
+          "image": "puzzle.arca"
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap4_s2",
+      "title": "Os animais entram",
+      "x": 10,
+      "y": 11,
+      "verse": "Gênesis 7:1-16",
+      "story": [
+        {
+          "speaker": "deus",
+          "text": "Entre na arca, você e toda a sua família, porque vi que você é justo."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Dos animais puros entraram sete casais; dos outros, um casal de cada espécie, de dois em dois."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Noé, sua esposa, seus três filhos e as esposas deles entraram na arca: oito pessoas ao todo."
+        },
+        {
+          "speaker": "narrador",
+          "text": "E o próprio Senhor fechou a porta."
+        }
+      ],
+      "challenge": {
+        "type": "memory",
+        "config": {
+          "pairs": [
+            {
+              "crop": "map.arca",
+              "x": 168,
+              "y": 198,
+              "w": 66,
+              "h": 39,
+              "label": "Elefantes"
+            },
+            {
+              "crop": "map.arca",
+              "x": 208,
+              "y": 258,
+              "w": 84,
+              "h": 66,
+              "label": "Girafas"
+            },
+            {
+              "crop": "map.arca",
+              "x": 222,
+              "y": 399,
+              "w": 39,
+              "h": 42,
+              "label": "Leões"
+            },
+            {
+              "crop": "map.arca",
+              "x": 327,
+              "y": 396,
+              "w": 57,
+              "h": 54,
+              "label": "Zebras"
+            },
+            {
+              "crop": "map.arca",
+              "x": 588,
+              "y": 378,
+              "w": 48,
+              "h": 36,
+              "label": "Cavalos"
+            },
+            {
+              "crop": "map.arca",
+              "x": 669,
+              "y": 432,
+              "w": 30,
+              "h": 33,
+              "label": "Cabras"
+            },
+            {
+              "crop": "map.arca",
+              "x": 712,
+              "y": 246,
+              "w": 90,
+              "h": 66,
+              "label": "Ovelhas"
+            },
+            {
+              "crop": "map.arca",
+              "x": 726,
+              "y": 327,
+              "w": 69,
+              "h": 33,
+              "label": "Vacas"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap4_s3",
+      "title": "A pomba",
+      "x": 24,
+      "y": 12,
+      "verse": "Gênesis 7:11-12; 8:6-12",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Choveu sobre a terra quarenta dias e quarenta noites, e as águas cobriram até os montes mais altos."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Mas a arca flutuava em segurança. Depois de muitos dias, as águas começaram a baixar."
+        },
+        {
+          "speaker": "noe",
+          "text": "Vou soltar uma pomba para ver se a terra já secou."
+        },
+        {
+          "speaker": "narrador",
+          "text": "A pomba voltou à tarde com uma folha nova de oliveira no bico! Sete dias depois, soltou de novo, e ela não voltou mais."
+        }
+      ],
+      "challenge": {
+        "type": "tictactoe",
+        "config": {
+          "difficulty": 0.85
+        }
+      },
+      "rewards": {
+        "xp": 100
+      }
+    },
+    {
+      "id": "cap4_s4",
+      "title": "A aliança do arco-íris",
+      "x": 14,
+      "y": 16,
+      "verse": "Gênesis 9:8-17",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Noé saiu da arca com a família e os animais, e a primeira coisa que fez foi construir um altar e agradecer a Deus."
+        },
+        {
+          "speaker": "deus",
+          "text": "Faço a minha aliança com vocês: nunca mais um dilúvio destruirá a terra."
+        },
+        {
+          "speaker": "deus",
+          "text": "Coloco o meu arco nas nuvens. Ele será o sinal da aliança entre mim e a terra."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Toda vez que você vir um arco-íris, lembre-se: Deus cumpre as suas promessas."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 4,
+          "questions": [
+            {
+              "q": "Por que Noé foi salvo?",
+              "options": [
+                "Porque era o mais forte",
+                "Porque encontrou graça diante de Deus e andava com Ele",
+                "Porque construiu a maior casa"
+              ],
+              "answer": 1,
+              "explain": "Noé confiou em Deus quando todos zombavam.",
+              "verse": "Gênesis 6:8-9"
+            },
+            {
+              "q": "Quantos dias e noites choveu?",
+              "options": [
+                "Sete",
+                "Quarenta",
+                "Cem"
+              ],
+              "answer": 1,
+              "explain": "Foram quarenta dias e quarenta noites de chuva.",
+              "verse": "Gênesis 7:12"
+            },
+            {
+              "q": "Quem fechou a porta da arca?",
+              "options": [
+                "Noé",
+                "Os filhos de Noé",
+                "O próprio Senhor"
+              ],
+              "answer": 2,
+              "explain": "Deus cuidou de cada detalhe da proteção da família de Noé.",
+              "verse": "Gênesis 7:16"
+            },
+            {
+              "q": "O que a pomba trouxe no bico?",
+              "options": [
+                "Uma folha de oliveira",
+                "Um galho de figueira",
+                "Uma flor"
+              ],
+              "answer": 0,
+              "explain": "A folha mostrou que a terra estava voltando a ter vida.",
+              "verse": "Gênesis 8:11"
+            },
+            {
+              "q": "Qual é o sinal da aliança de Deus com a terra?",
+              "options": [
+                "O sol",
+                "O arco-íris",
+                "Uma estrela"
+              ],
+              "answer": 1,
+              "explain": "O arco-íris lembra que Deus nunca mais destruirá a terra com um dilúvio.",
+              "verse": "Gênesis 9:13"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    }
+  ]
+}

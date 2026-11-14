@@ -1,0 +1,229 @@
+{
+  "id": "cap2",
+  "number": 2,
+  "title": "A Queda",
+  "map": "fora_eden",
+  "intro": "Algo triste aconteceu no jardim. Descubra o que houve e qual foi a promessa de Deus.",
+  "unlocks": [],
+  "medal": "capitulo_2",
+  "npcs": [
+    {
+      "sheet": "serpente",
+      "x": 3,
+      "y": 2
+    },
+    {
+      "sheet": "adao",
+      "x": 10,
+      "y": 6,
+      "dir": 0
+    },
+    {
+      "sheet": "eva",
+      "x": 15,
+      "y": 5,
+      "dir": 0
+    },
+    {
+      "sheet": "anjos_fieis",
+      "x": 24,
+      "y": 4,
+      "variant": 2
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap2_s1",
+      "title": "A conversa com a serpente",
+      "x": 6,
+      "y": 3,
+      "verse": "Gênesis 3:1-6",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "A serpente era o mais astuto de todos os animais. Um dia, ela falou com Eva perto da árvore proibida."
+        },
+        {
+          "speaker": "serpente",
+          "text": "É verdade que Deus disse que vocês não podem comer de nenhuma árvore do jardim?"
+        },
+        {
+          "speaker": "eva",
+          "text": "Podemos comer de todas, menos da árvore do meio do jardim. Se comermos, morreremos."
+        },
+        {
+          "speaker": "serpente",
+          "text": "Vocês não vão morrer! No dia em que comerem, serão como Deus."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Eva olhou o fruto, desejou, pegou e comeu. Depois deu a Adão, que estava com ela, e ele também comeu."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "O que a serpente fez com a ordem de Deus?",
+              "options": [
+                "Repetiu certinho",
+                "Colocou dúvida e mudou as palavras de Deus",
+                "Não falou nada sobre ela"
+              ],
+              "answer": 1,
+              "explain": "O inimigo usa dúvidas e meias-verdades para nos afastar de Deus.",
+              "verse": "Gênesis 3:1"
+            },
+            {
+              "q": "O que a serpente prometeu?",
+              "options": [
+                "Que eles seriam como Deus",
+                "Que ganhariam outro jardim",
+                "Que viveriam no céu"
+              ],
+              "answer": 0,
+              "explain": "Era o mesmo orgulho de Lúcifer: querer ser como Deus.",
+              "verse": "Gênesis 3:5"
+            },
+            {
+              "q": "Depois de Eva comer, o que aconteceu?",
+              "options": [
+                "Ela jogou o fruto fora",
+                "Ela deu a Adão, e ele também comeu",
+                "Ela contou para Deus"
+              ],
+              "answer": 1,
+              "explain": "Os dois escolheram desobedecer.",
+              "verse": "Gênesis 3:6"
+            },
+            {
+              "q": "Quem estava por trás da serpente, segundo a Bíblia?",
+              "options": [
+                "Um anjo fiel",
+                "O diabo, a antiga serpente",
+                "Ninguém"
+              ],
+              "answer": 1,
+              "explain": "Apocalipse chama Satanás de \"a antiga serpente\".",
+              "verse": "Apocalipse 12:9"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 70
+      }
+    },
+    {
+      "id": "cap2_s2",
+      "title": "\"Onde você está?\"",
+      "x": 13,
+      "y": 6,
+      "verse": "Gênesis 3:7-10",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Os olhos dos dois se abriram e eles perceberam que estavam nus. Costuraram folhas de figueira para se cobrir."
+        },
+        {
+          "speaker": "narrador",
+          "text": "À tarde, ouviram a voz de Deus no jardim e se esconderam entre as árvores."
+        },
+        {
+          "speaker": "deus",
+          "text": "Onde você está?"
+        },
+        {
+          "speaker": "adao",
+          "text": "Ouvi a tua voz no jardim e tive medo... por isso me escondi."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Mesmo depois do erro, foi Deus quem foi procurar Adão e Eva. Ele nunca desiste de nós."
+        }
+      ],
+      "challenge": {
+        "type": "tictactoe",
+        "config": {
+          "difficulty": 0.45
+        }
+      },
+      "rewards": {
+        "xp": 70
+      }
+    },
+    {
+      "id": "cap2_s3",
+      "title": "A promessa",
+      "x": 11,
+      "y": 15,
+      "verse": "Gênesis 3:15, 21",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "O pecado trouxe tristeza, dor e morte para o mundo. Mas Deus já tinha um plano."
+        },
+        {
+          "speaker": "deus",
+          "text": "Porei inimizade entre você, serpente, e a mulher, entre a sua descendência e o descendente dela. Ele lhe ferirá a cabeça."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Essa é a primeira promessa da Bíblia: um dia nasceria alguém da mulher que venceria o mal para sempre."
+        },
+        {
+          "speaker": "narrador",
+          "text": "E Deus fez roupas de pele para Adão e Eva e os vestiu, com cuidado de Pai."
+        }
+      ],
+      "challenge": {
+        "type": "puzzle",
+        "config": {
+          "image": "puzzle.eden"
+        }
+      },
+      "rewards": {
+        "xp": 70
+      }
+    },
+    {
+      "id": "cap2_s4",
+      "title": "O querubim no portão",
+      "x": 26,
+      "y": 6,
+      "verse": "Gênesis 3:22-24",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Adão e Eva precisaram sair do jardim do Éden para trabalhar a terra de onde Adão tinha sido tirado."
+        },
+        {
+          "speaker": "querubim",
+          "text": "Eu guardo o caminho da árvore da vida, com uma espada de fogo que gira para todos os lados."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Do lado de fora, a vida ficou mais difícil. Mas a promessa de Deus foi com eles."
+        }
+      ],
+      "challenge": {
+        "type": "memory",
+        "config": {
+          "pairs": [
+            "adao",
+            "eva",
+            "serpente",
+            "querubim",
+            "miguel",
+            "gabriel"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    }
+  ]
+}

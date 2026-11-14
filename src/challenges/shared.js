@@ -13,6 +13,19 @@ export function shuffle(list) {
 
 /** Picture for a character: its portrait, or the first frame of its sprite sheet. */
 export function characterPicture(assets, ref) {
+  // a piece cut out of any picture, e.g. an animal painted on a map
+  if (ref && ref.crop) {
+    const img = assets.image(ref.crop);
+    if (!img) return '';
+    const size = Math.max(ref.w, ref.h);
+    const c = document.createElement('canvas');
+    c.width = size;
+    c.height = size;
+    const ctx = c.getContext('2d');
+    ctx.imageSmoothingEnabled = false;
+    ctx.drawImage(img, ref.x, ref.y, ref.w, ref.h, (size - ref.w) / 2, (size - ref.h) / 2, ref.w, ref.h);
+    return c.toDataURL();
+  }
   const id = typeof ref === 'string' ? ref : ref.id || ref.sheet;
   const portrait = assets.entry(`portrait.${id}`);
   if (portrait && portrait.image) return assets.url(`portrait.${id}`);
@@ -32,6 +45,7 @@ export function characterPicture(assets, ref) {
 
 export function characterName(assets, ref) {
   if (ref && ref.label) return ref.label;
+  if (ref && ref.crop) return '';
   const id = typeof ref === 'string' ? ref : ref.id || ref.sheet;
   const c = assets.json('characters.json').characters.find((x) => x.id === id);
   return c ? c.name : id;

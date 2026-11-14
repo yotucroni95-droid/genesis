@@ -1,0 +1,196 @@
+{
+  "id": "cap3",
+  "number": 3,
+  "title": "Caim e Abel",
+  "map": "campos",
+  "intro": "Adão e Eva tiveram dois filhos: Caim e Abel. Visite os campos e conheça a história deles.",
+  "unlocks": [
+    "abel"
+  ],
+  "medal": "capitulo_3",
+  "npcs": [
+    {
+      "sheet": "caim",
+      "x": 12,
+      "y": 8,
+      "dir": 0
+    },
+    {
+      "sheet": "abel",
+      "x": 24,
+      "y": 8,
+      "dir": 0
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap3_s1",
+      "title": "As ofertas",
+      "x": 21,
+      "y": 11,
+      "verse": "Gênesis 4:2-5",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Abel cuidava de ovelhas, e Caim trabalhava na terra, plantando."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Um dia, Caim levou a Deus uma oferta dos frutos da terra."
+        },
+        {
+          "speaker": "abel",
+          "text": "Vou oferecer a Deus os primeiros filhotes do meu rebanho, o melhor que eu tenho."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus se agradou de Abel e da sua oferta, mas não da oferta de Caim. E Caim ficou com muita raiva."
+        }
+      ],
+      "challenge": {
+        "type": "memory",
+        "config": {
+          "pairs": [
+            "abel",
+            "caim",
+            "adao",
+            "eva",
+            {
+              "crop": "map.campos",
+              "x": 720,
+              "y": 144,
+              "w": 42,
+              "h": 33,
+              "label": "Ovelha"
+            },
+            {
+              "crop": "map.campos",
+              "x": 744,
+              "y": 393,
+              "w": 60,
+              "h": 42,
+              "label": "Vaca"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap3_s2",
+      "title": "O conselho de Deus",
+      "x": 10,
+      "y": 11,
+      "verse": "Gênesis 4:6-7",
+      "story": [
+        {
+          "speaker": "deus",
+          "text": "Caim, por que você está com raiva? Por que essa cara fechada?"
+        },
+        {
+          "speaker": "deus",
+          "text": "Se você fizer o bem, será aceito. Mas, se não fizer, o pecado está à porta, querendo dominar você. Você precisa dominá-lo."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus avisou Caim com carinho, antes que algo pior acontecesse. Ele também nos avisa quando a raiva cresce no coração."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "O que Abel ofereceu a Deus?",
+              "options": [
+                "Frutos da terra",
+                "Os primeiros e melhores do seu rebanho",
+                "Ouro e prata"
+              ],
+              "answer": 1,
+              "explain": "Abel deu o melhor, com fé.",
+              "verse": "Gênesis 4:4"
+            },
+            {
+              "q": "Como Caim reagiu quando Deus não aceitou sua oferta?",
+              "options": [
+                "Ficou feliz pelo irmão",
+                "Ficou com muita raiva",
+                "Pediu ajuda a Abel"
+              ],
+              "answer": 1,
+              "explain": "A inveja e a raiva tomaram conta de Caim.",
+              "verse": "Gênesis 4:5"
+            },
+            {
+              "q": "O que Deus disse que estava \"à porta\"?",
+              "options": [
+                "Um anjo",
+                "O pecado",
+                "Um leão"
+              ],
+              "answer": 1,
+              "explain": "O pecado é como alguém esperando para entrar. Deus nos ajuda a fechar a porta.",
+              "verse": "Gênesis 4:7"
+            },
+            {
+              "q": "O que Deus pediu que Caim fizesse?",
+              "options": [
+                "Dominasse o pecado",
+                "Fosse embora",
+                "Construísse um altar maior"
+              ],
+              "answer": 0,
+              "explain": "Mesmo com raiva, Caim podia escolher fazer o bem.",
+              "verse": "Gênesis 4:7"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap3_s3",
+      "title": "A fé de Abel",
+      "x": 26,
+      "y": 5,
+      "verse": "Gênesis 4:8-10; Hebreus 11:4",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Caim não ouviu o conselho de Deus. Chamou o irmão para o campo e, ali, atacou Abel, e Abel morreu."
+        },
+        {
+          "speaker": "deus",
+          "text": "Onde está Abel, seu irmão?"
+        },
+        {
+          "speaker": "caim",
+          "text": "Não sei. Por acaso sou eu o guarda do meu irmão?"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus sabia de tudo, e Caim sofreu as consequências do que fez."
+        },
+        {
+          "speaker": "narrador",
+          "text": "A Bíblia diz que, pela fé, Abel ofereceu a Deus um sacrifício melhor. E, mesmo depois de morto, a fé dele ainda fala conosco."
+        }
+      ],
+      "challenge": {
+        "type": "tictactoe",
+        "config": {
+          "difficulty": 0.65
+        }
+      },
+      "rewards": {
+        "xp": 100
+      }
+    }
+  ]
+}
