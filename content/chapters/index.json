@@ -1,0 +1,34 @@
+{
+  "chapters": [
+    {
+      "id": "cap0",
+      "number": 0,
+      "title": "O Conflito no Céu",
+      "file": "chapters/cap0.json"
+    },
+    {
+      "id": "cap1",
+      "number": 1,
+      "title": "O Jardim do Éden",
+      "file": "chapters/cap1.json"
+    },
+    {
+      "id": "cap2",
+      "number": 2,
+      "title": "A Queda",
+      "file": "chapters/cap2.json"
+    },
+    {
+      "id": "cap3",
+      "number": 3,
+      "title": "Caim e Abel",
+      "file": "chapters/cap3.json"
+    },
+    {
+      "id": "cap4",
+      "number": 4,
+      "title": "Noé e a Arca",
+      "file": "chapters/cap4.json"
+    }
+  ]
+}

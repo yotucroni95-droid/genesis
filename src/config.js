@@ -1,0 +1,13 @@
+// Public configuration. Never put secrets here: this file is published.
+// The Supabase "anon" key is designed to be public; security comes from
+// Row Level Security in supabase/migrations.
+
+export const CONFIG = {
+  version: '0.1.0',
+  supabaseUrl: '',      // filled in Phase 2
+  supabaseAnonKey: '',  // filled in Phase 2
+  emailDomain: 'genesis.local',
+  // Logical width of the game view in pixels (~8 tiles of 32 px).
+  viewWidth: 256,
+  tileSize: 32,
+};

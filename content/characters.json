@@ -1,0 +1,103 @@
+{
+  "characters": [
+    {
+      "id": "peregrino",
+      "name": "Peregrino",
+      "playable": true,
+      "base": true,
+      "color": "#4f8cff",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "miguel",
+      "name": "Arcanjo Miguel",
+      "playable": true,
+      "base": false,
+      "color": "#e8c04a",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "gabriel",
+      "name": "Arcanjo Gabriel",
+      "playable": true,
+      "base": false,
+      "color": "#9fd8ff",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "adao",
+      "name": "Adão",
+      "playable": true,
+      "base": false,
+      "color": "#5fb35a",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "eva",
+      "name": "Eva",
+      "playable": true,
+      "base": false,
+      "color": "#7fd07a",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "abel",
+      "name": "Abel",
+      "playable": true,
+      "base": false,
+      "color": "#d9a066",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "noe",
+      "name": "Noé",
+      "playable": true,
+      "base": false,
+      "color": "#b08cdb",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "lucifer",
+      "name": "Lúcifer",
+      "playable": false,
+      "base": false,
+      "color": "#4a3a6b",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "serpente",
+      "name": "Serpente",
+      "playable": false,
+      "base": false,
+      "color": "#3f7f4f",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "caim",
+      "name": "Caim",
+      "playable": false,
+      "base": false,
+      "color": "#8a5a3a",
+      "virtue": "",
+      "passage": ""
+    },
+    {
+      "id": "querubim",
+      "name": "Querubim",
+      "playable": false,
+      "base": false,
+      "color": "#f3e9b5",
+      "virtue": "",
+      "passage": ""
+    }
+  ]
+}
