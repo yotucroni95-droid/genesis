@@ -16,7 +16,7 @@ export class Display {
     this.listeners = new Set();
     this.resize = this.resize.bind(this);
     window.addEventListener('resize', this.resize);
-    window.addEventListener('orientationchange', this.resize);
+    window.addEventListener('orientationchange', () => { this.resize(); setTimeout(this.resize, 350); });
     if (window.visualViewport) window.visualViewport.addEventListener('resize', this.resize);
     this.resize();
   }
@@ -44,6 +44,11 @@ export class Display {
 
   /** Call at the start of each frame. Leaves the context in logical pixels. */
   begin(clearColor = '#070a1c') {
+    // iPhones sometimes report the old size right after rotating or opening
+    // from the home screen: check every frame and fix the canvas if needed.
+    const c = this.canvas;
+    const dpr = window.devicePixelRatio || 1;
+    if (Math.round(c.clientWidth * dpr) !== c.width || Math.round(c.clientHeight * dpr) !== c.height) this.resize();
     const { ctx } = this;
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.imageSmoothingEnabled = false;

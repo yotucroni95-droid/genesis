@@ -109,8 +109,11 @@ async function boot() {
     return goScene(name, params);
   };
   // the first touch anywhere turns sound on (phones require it); buttons click
+  // Phones open audio only on these "activation" events (finger lifted / click)
+  for (const type of ['pointerup', 'touchend', 'click', 'keydown']) {
+    document.addEventListener(type, unlockAudio, { capture: true, passive: true });
+  }
   document.addEventListener('pointerdown', (e) => {
-    unlockAudio();
     if (e.target.closest && e.target.closest('button')) sfx('click');
   }, true);
 

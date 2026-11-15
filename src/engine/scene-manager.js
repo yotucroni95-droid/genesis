@@ -47,6 +47,8 @@ export class SceneManager {
   }
 
   update(dt) {
+    // a scene that is still loading (enter not finished) does not update yet
+    if (this.switching) return;
     if (this.current && this.current.update) this.current.update(dt);
   }
 

@@ -39,11 +39,17 @@ export class GameLoop {
     this.last = now;
     if (frame > this.maxFrame) frame = this.maxFrame;
     this.accumulator += frame;
-    while (this.accumulator >= this.step) {
-      this.update(this.step);
-      this.accumulator -= this.step;
-    }
-    this.render(this.accumulator / this.step);
+    // schedule the next frame first: one error must never freeze the game
     this.rafId = requestAnimationFrame(this._tick);
+    try {
+      while (this.accumulator >= this.step) {
+        this.update(this.step);
+        this.accumulator -= this.step;
+      }
+      this.render(this.accumulator / this.step);
+    } catch (err) {
+      this.accumulator = 0;
+      if (!this.reported) { this.reported = true; console.error(err); if (this.onError) this.onError(err); }
+    }
   }
 }

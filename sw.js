@@ -3,7 +3,7 @@
 //   * code and content (HTML, JS, CSS, JSON): network first, cache as backup
 //   * images and fonts: cache first, refreshed in the background
 
-const CACHE = 'genesis-v8';
+const CACHE = 'genesis-v9';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -21,7 +21,7 @@ self.addEventListener('activate', (event) => {
 });
 
 function isMedia(url) {
-  return /\.(png|jpe?g|webp|gif|svg|woff2?|ttf|mp3|m4a)$/i.test(url.pathname) || url.hostname.includes('fonts.g');
+  return /\.(png|jpe?g|webp|gif|svg|woff2?|ttf|webm)$/i.test(url.pathname) || url.hostname.includes('fonts.g');
 }
 
 async function networkFirst(request) {
@@ -29,7 +29,7 @@ async function networkFirst(request) {
   try {
     // navigation requests cannot be re-created with options, so use the URL
     const fresh = request.mode === 'navigate' ? await fetch(request.url, { cache: 'no-cache' }) : await fetch(request, { cache: 'no-cache' });
-    if (fresh && fresh.ok) cache.put(request, fresh.clone());
+    if (fresh && fresh.status === 200) cache.put(request, fresh.clone()).catch(() => {});
     return fresh;
   } catch {
     const cached = await cache.match(request, { ignoreSearch: true });
@@ -41,7 +41,7 @@ async function networkFirst(request) {
 async function cacheFirst(request) {
   const cache = await caches.open(CACHE);
   const cached = await cache.match(request);
-  const refresh = fetch(request).then((res) => { if (res && (res.ok || res.type === 'opaque')) cache.put(request, res.clone()); return res; }).catch(() => null);
+  const refresh = fetch(request).then((res) => { if (res && res.status === 200) cache.put(request, res.clone()).catch(() => {}); return res; }).catch(() => null);
   return cached || (await refresh) || Response.error();
 }
 
@@ -51,5 +51,8 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(request.url);
   const sameOrigin = url.origin === self.location.origin;
   if (!sameOrigin && !url.hostname.includes('fonts.g')) return;
+  // Audio is left to the browser: iPhones ask for it in pieces (Range),
+  // and answering from the cache makes the sound fail silently.
+  if (request.headers.has('range') || /\.(mp3|m4a)$/i.test(url.pathname)) return;
   event.respondWith(isMedia(url) ? cacheFirst(request) : networkFirst(request));
 });

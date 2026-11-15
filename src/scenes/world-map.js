@@ -65,6 +65,8 @@ export function createWorldScene(game) {
   return {
     async enter(params, ui) {
       leaving = false;
+      map = null; // nothing moves or draws until everything below is ready
+      input = null;
       if (params.chapterId) {
         const entry = game.assets.json('chapters/index.json').chapters.find((c) => c.id === params.chapterId);
         chapter = await game.assets.loadJSON(entry.file);
@@ -128,7 +130,7 @@ export function createWorldScene(game) {
     },
 
     update(dt) {
-      if (!map) return;
+      if (!map || !input) return; // still loading (slow phone internet)
       const vec = leaving ? { x: 0, y: 0 } : input.vector();
       player.update(dt, vec, map);
       if (player.moving) { stepT += dt; if (stepT > 0.32) { stepT = 0; sfx('step'); } }
