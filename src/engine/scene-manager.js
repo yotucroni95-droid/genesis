@@ -22,7 +22,8 @@ export class SceneManager {
   async go(name, params = {}) {
     const factory = this.factories.get(name);
     if (!factory) throw new Error(`Unknown scene: ${name}`);
-    if (this.switching) return;
+    // A tap while a screen is still loading is not lost: it runs right after.
+    if (this.switching) { this.pending = [name, params]; return; }
     this.switching = true;
     try {
       if (this.current && this.current.exit) await this.current.exit();
@@ -37,6 +38,11 @@ export class SceneManager {
       if (scene.enter) await scene.enter(params, ui);
     } finally {
       this.switching = false;
+      if (this.pending) {
+        const [n, p] = this.pending;
+        this.pending = null;
+        this.go(n, p);
+      }
     }
   }
 

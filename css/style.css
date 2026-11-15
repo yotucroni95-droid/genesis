@@ -939,3 +939,5 @@ button.chip { cursor: pointer; touch-action: manipulation; }
 .arena__logoimg { width: 90px; height: 90px; font-size: 64px; }
 .btn--icon .ico { width: 30px; height: 30px; }
 .reward .ico { width: 32px; height: 32px; }
+
+button { touch-action: manipulation; }
