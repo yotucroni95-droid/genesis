@@ -9,7 +9,7 @@ import { addCoins, addTrophies, track } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 import { sfx } from '../audio/audio.js';
 import { celebrate } from '../ui/celebrate.js';
-import { rankBadge } from '../ui/game-ui.js';
+import { rankBadge, ico } from '../ui/game-ui.js';
 import { shareCard } from '../ui/share.js';
 
 const SECONDS = 10;
@@ -26,7 +26,7 @@ export function createArenaScene(game) {
 
       const intro = () => {
         area.replaceChildren(h('div', { class: 'quiz__result' },
-          h('div', { class: 'arena__logo', text: '⚡' }),
+          h('div', { class: 'arena__logo' }, ico('icon.arena', '⚡', 'arena__logoimg')),
           h('h2', { class: 'quiz__q', text: 'Desafio Relâmpago' }),
           h('p', { class: 'screen__note', text: `Responda o mais rápido que puder: ${SECONDS} segundos por pergunta e 3 vidas. Acerte em sequência para multiplicar os pontos!` }),
           h('p', { class: 'arena__best', text: save.state.arenaBest ? `Seu recorde: ${save.state.arenaBest} pontos` : 'Ainda sem recorde. Bora!' }),
@@ -52,7 +52,7 @@ export function createArenaScene(game) {
         const paintHud = () => {
           const mult = combo >= 6 ? 3 : combo >= 3 ? 2 : 1;
           hud.replaceChildren(
-            h('span', { class: 'arena__lives', text: '❤️'.repeat(lives) + '🖤'.repeat(3 - lives) }),
+            h('span', { class: 'arena__lives' }, ...[0, 1, 2].map((k) => (k < lives ? ico('icon.coracao', '❤️') : ico('icon.coracao_vazio', '🖤')))),
             h('b', { class: 'arena__score', text: `${score} pts` }),
             h('span', { class: `arena__combo${mult > 1 ? ' is-hot' : ''}`, text: mult > 1 ? `COMBO x${mult} 🔥` : `Sequência ${combo}` }),
           );

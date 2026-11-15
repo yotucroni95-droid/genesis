@@ -138,7 +138,7 @@ Para acrescentar uma arte nova (por exemplo, do Êxodo), acrescente uma linha em
 
 ## Artes do modo viciante (novas)
 
-Enquanto o arquivo não existir, o jogo mostra um emoji no lugar. Basta salvar o PNG com o nome exato e publicar.
+Todas já recebidas e no jogo (ícones 96×96, baús, patentes e molduras 128×128). Se trocar alguma, salve o PNG com o mesmo nome. Se apagar, o jogo volta a mostrar o emoji.
 
 ### Ícones do modo viciante (64×64)
 
@@ -190,3 +190,7 @@ Enquanto o arquivo não existir, o jogo mostra um emoji no lugar. Basta salvar o
 | `assets/ui/patente_diamante.png` | Patente Diamante | retângulo/desenho |
 | `assets/ui/patente_lendario.png` | Patente Lendário | retângulo/desenho |
 
+
+### Molduras do perfil (128×128)
+
+`assets/ui/moldura_madeira.png`, `moldura_pedra.png`, `moldura_folhagem.png`, `moldura_ceu.png`, `moldura_fogo.png`, `moldura_real.png`, `moldura_arco_iris.png`, `moldura_luz_divina.png` (centro transparente; o rosto do jogador aparece por dentro).

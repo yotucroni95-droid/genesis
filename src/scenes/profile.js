@@ -3,7 +3,7 @@
 import { h } from '../ui/dom.js';
 import { gameScreen } from '../ui/screen.js';
 import { toast } from '../ui/toast.js';
-import { loadExtras, rankBadge, rankProgress, framedAvatar } from '../ui/game-ui.js';
+import { loadExtras, rankBadge, rankProgress, framedAvatar, frameView, ico } from '../ui/game-ui.js';
 import { totalStars, RARITY_COLOR, RANKS } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 import { shareCard } from '../ui/share.js';
@@ -29,7 +29,7 @@ export function createProfileScene(game) {
             game.scenes.go('profile');
           },
         },
-        kind === 'frames' ? h('div', { class: `frame frame--${c.id}`, style: { width: '44px', height: '44px' } }, h('img', { class: 'pixel', src: game.assets.url(`portrait.${s.avatarId}`), alt: '' })) : null,
+        kind === 'frames' ? frameView(c.id, 48, game.assets.url(`portrait.${s.avatarId}`)) : ico('icon.titulo', '🏷️'),
         h('span', { text: owned ? c.name : '???' }));
       }));
       ui.appendChild(gameScreen(game, 'Perfil', h('div', { class: 'profile-page' },

@@ -7,7 +7,7 @@ import { completeStop } from '../content/progression.js';
 import { findStop } from './story.js';
 import { Starfield } from './starfield.js';
 import { rewardStop, rewardChapter, RARITY_LABEL } from '../game/economy.js';
-import { vibrate, rankBadge } from '../ui/game-ui.js';
+import { vibrate, rankBadge, ico, hasArt } from '../ui/game-ui.js';
 import { celebrate } from '../ui/celebrate.js';
 import { sfx } from '../audio/audio.js';
 
@@ -62,11 +62,11 @@ export function createChallengeScene(game) {
 
       const items = [];
       for (const x of loot) {
-        if (x.type === 'coins') items.push(h('div', { class: 'reward' }, h('span', { class: 'chip__emoji', text: '🪙' }), h('span', { text: `+${x.amount} talentos` })));
-        if (x.type === 'trophies') items.push(h('div', { class: 'reward' }, h('span', { class: 'chip__emoji', text: '🏆' }), h('span', { text: `+${x.amount} troféus` })));
-        if (x.type === 'rank') items.push(h('div', { class: 'reward reward--big' }, h('span', { class: 'chip__emoji', text: '⬆️' }), h('span', { text: `Nova patente: ${x.rank.name}! Ganhou um baú.` })));
+        if (x.type === 'coins') items.push(h('div', { class: 'reward' }, ico('icon.moeda', '🪙'), h('span', { text: `+${x.amount} talentos` })));
+        if (x.type === 'trophies') items.push(h('div', { class: 'reward' }, ico('icon.trofeu', '🏆'), h('span', { text: `+${x.amount} troféus` })));
+        if (x.type === 'rank') items.push(h('div', { class: 'reward reward--big' }, ico('icon.subir', '⬆️'), h('span', { text: `Nova patente: ${x.rank.name}! Ganhou um baú.` })));
       }
-      if (chapterBox) items.push(h('div', { class: 'reward reward--big' }, h('span', { class: 'chip__emoji', text: '🎁' }), h('span', { text: `Baú ${RARITY_LABEL[chapterBox]} pelo capítulo! Abra no lobby.` })));
+      if (chapterBox) items.push(h('div', { class: 'reward reward--big' }, ico('icon.baus', '🎁'), h('span', { text: `Baú ${RARITY_LABEL[chapterBox]} pelo capítulo! Abra no lobby.` })));
       if (!wasDone && stop.rewards && stop.rewards.xp) {
         items.push(h('div', { class: 'reward' }, h('img', { class: 'pixel', src: game.assets.url('icon.estrela'), alt: '' }), h('span', { text: `+${stop.rewards.xp} de experiência` })));
       }
@@ -77,7 +77,13 @@ export function createChallengeScene(game) {
       }
       const chapterDone = events.some((e) => e.type === 'chapter');
       area.replaceChildren(h('div', { class: 'quiz__result' },
-        h('div', { class: 'stars' }, ...[1, 2, 3].map((n) => h('span', { class: `stars__s${n <= starInfo.stars ? ' is-on' : ''}`, style: { animationDelay: `${n * 0.25}s` }, text: '★' }))),
+        h('div', { class: 'stars' }, ...[1, 2, 3].map((n) => {
+          const on = n <= starInfo.stars;
+          const el = hasArt('icon.estrela_cheia') ? ico(on ? 'icon.estrela_cheia' : 'icon.estrela_vazia', '★', 'stars__img') : h('span', { text: '★' });
+          el.classList.add(...(on ? ['is-on'] : []));
+          el.style.animationDelay = `${n * 0.25}s`;
+          return el;
+        })),
         starInfo.stars < 3 ? h('small', { class: 'screen__note', text: 'Jogue de novo para tentar 3 estrelas!' }) : null,
         h('h2', { class: 'quiz__q', text: chapterDone ? `Capítulo ${chapter.number} concluído!` : wasDone ? 'Você jogou de novo!' : 'Parada concluída!' }),
         h('p', { class: 'screen__note', text: `Não esqueça de ler ${stop.verse} na sua Bíblia.` }),

@@ -4,6 +4,7 @@ import { h } from '../ui/dom.js';
 import { iconButton } from '../ui/icon-button.js';
 import { Starfield } from './starfield.js';
 import { NICK_RULE, sanitizeNick } from '../save/save-manager.js';
+import { ico } from '../ui/game-ui.js';
 
 const FIRST = ['Leao', 'Guerreiro', 'Pastor', 'Arca', 'Luz', 'Estrela', 'Profeta', 'Falcao', 'Sentinela', 'Escudo', 'Trovao', 'Fogo', 'Aguia', 'Raio', 'Semente', 'Cedro', 'Harpa', 'Farol'];
 const SECOND = ['DeJuda', 'Fiel', 'DaFe', 'Veloz', 'Valente', 'DoEden', 'Celeste', 'Forte', 'Bravo', 'DeOuro', 'Dourado', 'Sabio', 'Livre', 'Alfa'];
@@ -69,7 +70,7 @@ export function createNicknameScene(game) {
             preview,
             h('div', { class: 'field' },
               input,
-              h('button', { class: 'btn btn--ghost btn--icon', 'aria-label': 'Gerar um apelido', title: 'Gerar um apelido', onClick: () => { input.value = randomNick(); refresh(); }, text: '🎲' }),
+              h('button', { class: 'btn btn--ghost btn--icon', 'aria-label': 'Gerar um apelido', title: 'Gerar um apelido', onClick: () => { input.value = randomNick(); refresh(); } }, ico('icon.dado', '🎲')),
             ),
             hint,
             confirm,

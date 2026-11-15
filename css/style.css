@@ -927,3 +927,15 @@ button.chip { cursor: pointer; touch-action: manipulation; }
 .rank--big .rank__art { width: 64px; height: 64px; }
 .chest--art { filter: drop-shadow(0 0 12px color-mix(in srgb, var(--chest) 70%, transparent)); }
 .chest__img { width: 100%; height: 100%; object-fit: contain; }
+
+/* Molduras com arte */
+.frame--art { padding: 0; background: none; box-shadow: none; }
+.frame--art .frame__face { position: absolute; inset: 17%; width: 66%; height: 66%; border-radius: 6px; }
+.frame--art .frame__over { position: absolute; inset: 0; width: 100%; height: 100%; background: none; border-radius: 0; }
+.loot__ico { width: 64px; height: 64px; font-size: 48px; }
+.stars__img { width: 56px; height: 56px; animation: starpop .5s cubic-bezier(.3,1.6,.6,1) both; filter: drop-shadow(0 0 10px rgba(255,211,110,.6)); }
+.arena__lives { display: inline-flex; gap: 4px; }
+.arena__lives .ico { width: 26px; height: 26px; }
+.arena__logoimg { width: 90px; height: 90px; font-size: 64px; }
+.btn--icon .ico { width: 30px; height: 30px; }
+.reward .ico { width: 32px; height: 32px; }

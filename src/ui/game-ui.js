@@ -61,13 +61,23 @@ export function currencyBar(game, { onCoins } = {}) {
   );
 }
 
+/** A portrait inside a frame: the artist's frame art when present, else the CSS one. */
+export function frameView(frameId, size, portraitUrl) {
+  const art = `ui.moldura_${frameId}`;
+  if (hasArt(art)) {
+    return h('div', { class: 'frame frame--art', style: { width: `${size}px`, height: `${size}px` } },
+      h('img', { class: 'pixel frame__face', src: portraitUrl, alt: '' }),
+      h('img', { class: 'pixel frame__over', src: A.url(art), alt: '' }));
+  }
+  return h('div', { class: `frame frame--${frameId}`, style: { width: `${size}px`, height: `${size}px` } },
+    h('img', { class: 'pixel', src: portraitUrl, alt: '' }));
+}
+
 /** Portrait inside the player's equipped frame. */
 export function framedAvatar(game, size = 56, characterId) {
   const s = game.save.state;
   const id = characterId || s.avatarId;
-  return h('div', { class: `frame frame--${s.equipped.frame}`, style: { width: `${size}px`, height: `${size}px` } },
-    h('img', { class: 'pixel', src: game.assets.url(`portrait.${id}`), alt: '' }),
-  );
+  return frameView(s.equipped.frame, size, game.assets.url(`portrait.${id}`));
 }
 
 export function titleName(extras, id) {

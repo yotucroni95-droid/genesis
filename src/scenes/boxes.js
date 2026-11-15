@@ -2,13 +2,13 @@
 
 import { h } from '../ui/dom.js';
 import { gameScreen } from '../ui/screen.js';
-import { chest, formatWait, vibrate, loadExtras } from '../ui/game-ui.js';
+import { chest, formatWait, vibrate, loadExtras, frameView, ico } from '../ui/game-ui.js';
 import { openBox, claimFreeBox, freeBoxReadyIn, RARITY_LABEL, RARITY_COLOR } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 import { sfx } from '../audio/audio.js';
 
 function rewardView(game, it) {
-  if (it.type === 'coins') return h('div', { class: 'loot loot--coins' }, h('div', { class: 'loot__big', text: '🪙' }), h('b', { text: `+${it.amount}` }), h('small', { text: 'talentos' }));
+  if (it.type === 'coins') return h('div', { class: 'loot loot--coins' }, ico('icon.moeda', '🪙', 'loot__ico'), h('b', { text: `+${it.amount}` }), h('small', { text: 'talentos' }));
   if (it.type === 'verse') {
     return h('div', { class: 'loot verse-card', style: { '--r': RARITY_COLOR[it.card.rarity] } },
       it.isNew ? h('span', { class: 'loot__new', text: 'NOVA!' }) : null,
@@ -19,7 +19,7 @@ function rewardView(game, it) {
   }
   const label = it.type === 'title' ? 'Novo título' : 'Nova moldura';
   return h('div', { class: 'loot', style: { '--r': RARITY_COLOR[it.item.rarity] } },
-    it.type === 'frame' ? h('div', { class: `frame frame--${it.item.id}`, style: { width: '70px', height: '70px' } }, h('img', { class: 'pixel', src: game.assets.url(`portrait.${game.save.state.avatarId}`), alt: '' })) : h('div', { class: 'loot__big', text: '🏷️' }),
+    it.type === 'frame' ? frameView(it.item.id, 84, game.assets.url(`portrait.${game.save.state.avatarId}`)) : ico('icon.titulo', '🏷️', 'loot__ico'),
     h('small', { text: label }), h('b', { text: it.item.name }),
   );
 }
