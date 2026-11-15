@@ -31,7 +31,7 @@ export function createMedalsScene(game) {
       }));
       ui.appendChild(h('section', { class: 'screen' },
         h('header', { class: 'screen__head' },
-          iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go('explore'), '←'),
+          iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go('lobby'), '←'),
           h('h1', { text: 'Medalhas' }),
           h('span', { class: 'head-count', text: `${earnedCount} de ${medals.length}` }),
         ),

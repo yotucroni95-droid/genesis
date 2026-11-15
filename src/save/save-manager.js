@@ -14,6 +14,20 @@ function emptySave() {
     progress: {},      // stopId -> { completedAt, score }
     unlocked: { peregrino: now }, // characterId -> unlockedAt
     achievements: {},  // achievementId -> earnedAt
+    // ---- Modo viciante ----
+    coins: 0,
+    trophies: 0,
+    stars: {},         // stopId -> 1..3 (best)
+    boxes: [],         // [{ uid, rarity, from }]
+    freeBoxAt: 0,      // timestamp of the last free timed box
+    verses: {},        // verse card id -> how many
+    titles: { aprendiz: now },
+    frames: { madeira: now },
+    equipped: { title: 'aprendiz', frame: 'madeira' },
+    arenaBest: 0,
+    daily: null,       // { date, missions: [...], bonusClaimed }
+    streak: { count: 0, last: '' },
+    stats: {},
     createdAt: now,
     lastSeen: now,
   };
@@ -44,7 +58,16 @@ export class SaveManager {
       const raw = localStorage.getItem(KEY);
       if (!raw) return emptySave();
       const data = JSON.parse(raw);
-      return { ...emptySave(), ...data, unlocked: { peregrino: data.createdAt, ...(data.unlocked || {}) } };
+      const base = emptySave();
+      return {
+        ...base,
+        ...data,
+        unlocked: { peregrino: data.createdAt || base.createdAt, ...(data.unlocked || {}) },
+        titles: { ...base.titles, ...(data.titles || {}) },
+        frames: { ...base.frames, ...(data.frames || {}) },
+        equipped: { ...base.equipped, ...(data.equipped || {}) },
+        streak: { ...base.streak, ...(data.streak || {}) },
+      };
     } catch {
       this.storageOk = false;
       return emptySave();
@@ -119,6 +142,12 @@ export class SaveManager {
 
   markTip(id) {
     this.state.tips = { ...(this.state.tips || {}), [id]: true };
+    this.write();
+  }
+
+  /** Generic change + save, used by the game economy. */
+  update(fn) {
+    fn(this.state);
     this.write();
   }
 

@@ -3,7 +3,7 @@
 //   * code and content (HTML, JS, CSS, JSON): network first, cache as backup
 //   * images and fonts: cache first, refreshed in the background
 
-const CACHE = 'genesis-v1';
+const CACHE = 'genesis-v2';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

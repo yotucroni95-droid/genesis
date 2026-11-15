@@ -16,6 +16,13 @@ import { createChallengeScene } from './scenes/challenge.js';
 import { createAlbumScene } from './scenes/album.js';
 import { createMedalsScene } from './scenes/medals.js';
 import { createAvatarScene } from './scenes/avatar.js';
+import { createLobbyScene } from './scenes/lobby.js';
+import { createBoxesScene } from './scenes/boxes.js';
+import { createShopScene } from './scenes/shop.js';
+import { createMissionsScene } from './scenes/missions.js';
+import { createArenaScene } from './scenes/arena.js';
+import { createCollectionScene } from './scenes/collection.js';
+import { createProfileScene } from './scenes/profile.js';
 import { SaveManager } from './save/save-manager.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
@@ -73,6 +80,7 @@ async function boot() {
   game.scenes.register('album', createAlbumScene);
   game.scenes.register('medals', createMedalsScene);
   game.scenes.register('avatar', createAvatarScene);
+  for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, collection: createCollectionScene, profile: createProfileScene })) game.scenes.register(name, f);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),

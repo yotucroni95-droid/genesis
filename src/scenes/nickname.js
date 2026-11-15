@@ -24,7 +24,7 @@ export function createNicknameScene(game) {
   return {
     enter(params, ui) {
       const save = game.save;
-      const next = params.next || 'explore';
+      const next = params.next || 'lobby';
       const input = h('input', {
         class: 'field__input',
         type: 'text',

@@ -22,7 +22,8 @@ export function createExploreScene(game) {
         const mapId = chapter ? chapter.map : null;
         let status = 'Em breve';
         if (chapter && !open) status = 'Complete o capítulo anterior';
-        if (open) status = done ? 'Concluído ✓' : `${prog.done} de ${prog.total} paradas`;
+        const st = chapter ? chapter.stops.reduce((n, sp) => n + ((save.state.stars || {})[sp.id] || 0), 0) : 0;
+        if (open) status = `${done ? 'Concluído ✓ · ' : `${prog.done}/${prog.total} paradas · `}⭐ ${st}/${prog.total * 3}`;
         grid.appendChild(
           h('button', {
             class: `map-card${open ? '' : ' is-locked'}${done ? ' is-done' : ''}`,
@@ -57,9 +58,9 @@ export function createExploreScene(game) {
       ui.appendChild(
         h('section', { class: 'screen' },
           h('header', { class: 'screen__head' },
-            iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go('title'), '←'),
+            iconButton(game.assets, 'icon.voltar', 'Voltar ao lobby', () => game.scenes.go('lobby'), '←'),
             h('h1', { text: 'Jornada' }),
-            h('button', { class: 'player-chip', title: 'Trocar apelido', onClick: () => game.scenes.go('nickname', { next: 'explore' }) },
+            h('button', { class: 'player-chip', title: 'Trocar apelido', onClick: () => game.scenes.go('profile') },
               h('img', { class: 'pixel', src: game.assets.url(`portrait.${save.state.avatarId}`), alt: '' }),
               h('span', { text: `@${save.state.nick}` }),
               h('b', { class: 'player-chip__lvl', text: `Nv ${save.state.level}` }),

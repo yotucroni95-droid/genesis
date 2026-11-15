@@ -6,6 +6,8 @@ import { getChallenge } from '../challenges/index.js';
 import { completeStop } from '../content/progression.js';
 import { findStop } from './story.js';
 import { Starfield } from './starfield.js';
+import { rewardStop, rewardChapter, RARITY_LABEL } from '../game/economy.js';
+import { vibrate } from '../ui/game-ui.js';
 
 const TITLES = { quiz: 'Quiz', memory: 'Jogo da memória', tictactoe: 'Jogo da velha', puzzle: 'Quebra-cabeça' };
 
@@ -13,6 +15,7 @@ export function createChallengeScene(game) {
   const stars = new Starfield(70);
   return {
     async enter(params, ui) {
+      this.params = params;
       const { chapter, stop } = await findStop(game, params.chapterId, params.stopId);
       const back = () => game.scenes.go('world', params.back);
       const area = h('div', { class: 'challenge__area' });
@@ -37,11 +40,21 @@ export function createChallengeScene(game) {
 
       const wasDone = game.save.isStopDone(stop.id);
       const events = completeStop(game.save, chapter, stop, result.score);
+      const loot = rewardStop(game.save, chapter, stop, result, !wasDone);
+      const chapterBox = events.some((e) => e.type === 'chapter') ? rewardChapter(game.save, chapter) : null;
+      const starInfo = loot.find((x) => x.type === 'stars');
+      vibrate(starInfo.stars === 3 ? [60, 40, 60, 40, 120] : 80);
       if (!wasDone && stop.rewards && stop.rewards.xp) game.save.addXp(stop.rewards.xp);
       const names = Object.fromEntries(game.assets.json('characters.json').characters.map((c) => [c.id, c.name]));
       const medalName = (id) => (game.assets.entry(`medal.${id}`) || {}).label || id;
 
       const items = [];
+      for (const x of loot) {
+        if (x.type === 'coins') items.push(h('div', { class: 'reward' }, h('span', { class: 'chip__emoji', text: '🪙' }), h('span', { text: `+${x.amount} talentos` })));
+        if (x.type === 'trophies') items.push(h('div', { class: 'reward' }, h('span', { class: 'chip__emoji', text: '🏆' }), h('span', { text: `+${x.amount} troféus` })));
+        if (x.type === 'rank') items.push(h('div', { class: 'reward reward--big' }, h('span', { class: 'chip__emoji', text: '⬆️' }), h('span', { text: `Nova patente: ${x.rank.name}! Ganhou um baú.` })));
+      }
+      if (chapterBox) items.push(h('div', { class: 'reward reward--big' }, h('span', { class: 'chip__emoji', text: '🎁' }), h('span', { text: `Baú ${RARITY_LABEL[chapterBox]} pelo capítulo! Abra no lobby.` })));
       if (!wasDone && stop.rewards && stop.rewards.xp) {
         items.push(h('div', { class: 'reward' }, h('img', { class: 'pixel', src: game.assets.url('icon.estrela'), alt: '' }), h('span', { text: `+${stop.rewards.xp} de experiência` })));
       }
@@ -52,10 +65,15 @@ export function createChallengeScene(game) {
       }
       const chapterDone = events.some((e) => e.type === 'chapter');
       area.replaceChildren(h('div', { class: 'quiz__result' },
+        h('div', { class: 'stars' }, ...[1, 2, 3].map((n) => h('span', { class: `stars__s${n <= starInfo.stars ? ' is-on' : ''}`, style: { animationDelay: `${n * 0.25}s` }, text: '★' }))),
+        starInfo.stars < 3 ? h('small', { class: 'screen__note', text: 'Jogue de novo para tentar 3 estrelas!' }) : null,
         h('h2', { class: 'quiz__q', text: chapterDone ? `Capítulo ${chapter.number} concluído!` : wasDone ? 'Você jogou de novo!' : 'Parada concluída!' }),
         h('p', { class: 'screen__note', text: `Não esqueça de ler ${stop.verse} na sua Bíblia.` }),
         h('div', { class: 'rewards' }, ...items),
-        h('button', { class: 'btn', text: chapterDone ? 'Ver capítulos' : 'Voltar ao mapa', onClick: () => (chapterDone ? game.scenes.go('explore') : back()) }),
+        h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' } },
+          h('button', { class: 'btn', text: chapterDone ? 'Ver capítulos' : 'Voltar ao mapa', onClick: () => (chapterDone ? game.scenes.go('explore') : back()) }),
+          starInfo.stars < 3 ? h('button', { class: 'btn btn--ghost', text: 'Tentar de novo', onClick: () => game.scenes.go('challenge', this.params) }) : null,
+        ),
       ));
     },
     update(dt) { stars.update(dt); },

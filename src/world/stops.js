@@ -60,6 +60,14 @@ export class Stops {
         ctx.fillRect(Math.round(s.px - 2), Math.round(s.py - 34 - pulse * 4), 4, 30);
       }
       ctx.restore();
+      const st = done ? ((this.save.state.stars || {})[s.id] || 0) : 0;
+      for (let k = 0; k < 3; k++) {
+        if (!done) break;
+        ctx.fillStyle = k < st ? '#ffd36e' : 'rgba(255,255,255,.25)';
+        const sx = Math.round(s.px - 10 + k * 8);
+        const sy = Math.round(s.py - 26);
+        ctx.fillRect(sx + 1, sy, 2, 5); ctx.fillRect(sx, sy + 1, 4, 3);
+      }
       if (this.marker && this.marker.image) {
         const size = 24;
         ctx.globalAlpha = done ? 0.5 : 0.9;

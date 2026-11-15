@@ -50,6 +50,15 @@ Todo desafio fica em `src/challenges/` e segue a mesma regra: `start(config, env
 
 O código do jogo não muda.
 
+## Modo viciante (Fase 10)
+
+- **Lobby:** personagem grande no centro, patente, troféus e talentos, botões JOGAR, Arena, Baús, Missões, Loja, Coleção e Personagens.
+- **Estrelas** (1 a 3) em cada parada, **talentos** (moeda do jogo, sem dinheiro de verdade), **troféus** e **patentes** (Bronze I até Lendário).
+- **Baús** Comum, Raro, Épico e Lendário com abertura animada; mais troféus = mais chance de baú raro. Baú grátis a cada 4 horas.
+- **Missões diárias** e **sequência de dias**; **Arena** (Desafio Relâmpago) com combo e recorde.
+- **Coleção** de 40 cartas de versículo, **títulos** e **molduras** para o perfil.
+- Regras em `src/game/economy.js`; conteúdo em `content/verses.json`, `content/cosmetics.json` e `content/arena.json`.
+
 ## Atualizações e modo sem internet
 
 O arquivo `sw.js` guarda o jogo no celular. Com internet, ele sempre busca a versão mais nova do código e do conteúdo; sem internet, usa o que já guardou. As imagens são reaproveitadas e atualizadas em segundo plano.

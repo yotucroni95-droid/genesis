@@ -1,0 +1,106 @@
+{
+ "titles": [
+  {
+   "id": "aprendiz",
+   "name": "Aprendiz",
+   "rarity": "comum"
+  },
+  {
+   "id": "explorador",
+   "name": "Explorador",
+   "rarity": "comum"
+  },
+  {
+   "id": "peregrino_fiel",
+   "name": "Peregrino Fiel",
+   "rarity": "comum"
+  },
+  {
+   "id": "guardiao_eden",
+   "name": "Guardião do Éden",
+   "rarity": "raro"
+  },
+  {
+   "id": "amigo_animais",
+   "name": "Amigo dos Animais",
+   "rarity": "raro"
+  },
+  {
+   "id": "construtor",
+   "name": "Construtor da Arca",
+   "rarity": "raro"
+  },
+  {
+   "id": "mensageiro",
+   "name": "Mensageiro",
+   "rarity": "raro"
+  },
+  {
+   "id": "sentinela",
+   "name": "Sentinela da Luz",
+   "rarity": "épico"
+  },
+  {
+   "id": "coracao_abel",
+   "name": "Coração de Abel",
+   "rarity": "épico"
+  },
+  {
+   "id": "voz_arco",
+   "name": "Voz do Arco-Íris",
+   "rarity": "épico"
+  },
+  {
+   "id": "escolhido",
+   "name": "Escolhido de Gênesis",
+   "rarity": "lendário"
+  },
+  {
+   "id": "lenda_arca",
+   "name": "Lenda da Arca",
+   "rarity": "lendário"
+  }
+ ],
+ "frames": [
+  {
+   "id": "madeira",
+   "name": "Madeira",
+   "rarity": "comum"
+  },
+  {
+   "id": "pedra",
+   "name": "Pedra",
+   "rarity": "comum"
+  },
+  {
+   "id": "folhagem",
+   "name": "Folhagem",
+   "rarity": "raro"
+  },
+  {
+   "id": "ceu",
+   "name": "Céu",
+   "rarity": "raro"
+  },
+  {
+   "id": "fogo",
+   "name": "Fogo",
+   "rarity": "épico"
+  },
+  {
+   "id": "real",
+   "name": "Real",
+   "rarity": "épico"
+  },
+  {
+   "id": "arco_iris",
+   "name": "Arco-Íris",
+   "rarity": "lendário"
+  },
+  {
+   "id": "luz_divina",
+   "name": "Luz Divina",
+   "rarity": "lendário"
+  }
+ ]
+}

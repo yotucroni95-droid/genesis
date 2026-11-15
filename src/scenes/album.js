@@ -43,7 +43,7 @@ export function createAlbumScene(game) {
       const grid = h('div', { class: 'album' }, ...list.map((c) => characterCard(game.assets, c, save.isUnlocked(c.id), { onClick: () => open(c), selected: save.state.avatarId === c.id })));
       ui.appendChild(h('section', { class: 'screen' },
         h('header', { class: 'screen__head' },
-          iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go(params.backScene || 'explore', params.back || {}), '←'),
+          iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go(params.backScene || 'lobby', params.back || {}), '←'),
           h('h1', { text: 'Álbum' }),
           h('span', { class: 'head-count', text: `${have} de ${list.length} cartas` }),
         ),

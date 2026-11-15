@@ -31,7 +31,7 @@ export function createTitleScene(game) {
 
       const start = () => {
         goLandscapeFullscreen();
-        game.scenes.go(game.save.hasNick ? 'explore' : 'nickname');
+        game.scenes.go(game.save.hasNick ? 'lobby' : 'nickname', { next: 'lobby' });
       };
 
       ui.appendChild(

@@ -1,0 +1,63 @@
+// Player profile: rank, stats, and choosing title and frame.
+
+import { h } from '../ui/dom.js';
+import { gameScreen } from '../ui/screen.js';
+import { toast } from '../ui/toast.js';
+import { loadExtras, rankBadge, rankProgress, framedAvatar } from '../ui/game-ui.js';
+import { totalStars, RARITY_COLOR, RANKS } from '../game/economy.js';
+import { Starfield } from './starfield.js';
+
+export function createProfileScene(game) {
+  const stars = new Starfield(100);
+  return {
+    async enter(_p, ui) {
+      game.extras = game.extras || await loadExtras(game.assets);
+      const save = game.save;
+      const s = save.state;
+      const totalStops = 17;
+      const stat = (label, value) => h('div', { class: 'stat' }, h('b', { text: String(value) }), h('small', { text: label }));
+      const picker = (kind, list) => h('div', { class: 'picker' }, ...list.map((c) => {
+        const owned = s[kind][c.id];
+        const on = s.equipped[kind === 'titles' ? 'title' : 'frame'] === c.id;
+        return h('button', {
+          class: `pick${on ? ' is-on' : ''}${owned ? '' : ' is-locked'}`,
+          style: { '--r': RARITY_COLOR[c.rarity] },
+          onClick: () => {
+            if (!owned) { toast('Encontre em baús para liberar!'); return; }
+            save.update((st) => { st.equipped = { ...st.equipped, [kind === 'titles' ? 'title' : 'frame']: c.id }; });
+            game.scenes.go('profile');
+          },
+        },
+        kind === 'frames' ? h('div', { class: `frame frame--${c.id}`, style: { width: '44px', height: '44px' } }, h('img', { class: 'pixel', src: game.assets.url(`portrait.${s.avatarId}`), alt: '' })) : null,
+        h('span', { text: owned ? c.name : '???' }));
+      }));
+      ui.appendChild(gameScreen(game, 'Perfil', h('div', { class: 'profile-page' },
+        h('div', { class: 'profile-card' },
+          framedAvatar(game, 96),
+          h('div', {},
+            h('h2', { text: `@${s.nick}` }),
+            h('p', { class: 'profile-card__title', text: (game.extras.cosmetics.titles.find((x) => x.id === s.equipped.title) || {}).name || '' }),
+            h('button', { class: 'btn btn--ghost btn--small', text: 'Trocar apelido', onClick: () => game.scenes.go('nickname', { next: 'profile' }) }),
+          ),
+          h('div', { class: 'profile-card__rank' }, rankBadge(s.trophies || 0, { big: true }), rankProgress(s.trophies || 0)),
+        ),
+        h('div', { class: 'stats' },
+          stat('Nível', s.level), stat('Troféus', s.trophies || 0), stat('Estrelas', `${totalStars(save)}/${totalStops * 3}`),
+          stat('Talentos', s.coins || 0), stat('Recorde Arena', s.arenaBest || 0), stat('Dias seguidos', s.streak.count || 0),
+          stat('Cartas', `${Object.keys(s.verses || {}).length}/${game.extras.verses.length}`), stat('Personagens', Object.keys(s.unlocked).length),
+        ),
+        h('h3', { text: 'Títulos' }), picker('titles', game.extras.cosmetics.titles),
+        h('h3', { text: 'Molduras' }), picker('frames', game.extras.cosmetics.frames),
+        h('h3', { text: 'Patentes' }),
+        h('div', { class: 'ranks' }, ...RANKS.map((r) => h('div', { class: `ranks__item${(s.trophies || 0) >= r.min ? ' is-on' : ''}` }, rankBadge(r.min), h('small', { text: `${r.min} 🏆` })))),
+        h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '12px' } },
+          h('button', { class: 'btn btn--ghost', text: 'Álbum de personagens', onClick: () => game.scenes.go('album', { backScene: 'profile' }) }),
+          h('button', { class: 'btn btn--ghost', text: 'Medalhas', onClick: () => game.scenes.go('medals') }),
+          h('button', { class: 'btn btn--ghost', text: 'Coleção de versículos', onClick: () => game.scenes.go('collection') }),
+        ),
+      )));
+    },
+    update(dt) { stars.update(dt); },
+    render(ctx, d) { stars.render(ctx, d.width, d.height); },
+  };
+}

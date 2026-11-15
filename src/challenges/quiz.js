@@ -65,7 +65,7 @@ export function start(config, env) {
             ? 'Você conhece bem esta parte da história.'
             : `Você precisa acertar pelo menos ${minScore}. Releia a passagem e tente de novo!` }),
           passed
-            ? h('button', { class: 'btn', text: 'Continuar', onClick: () => resolve({ success: true, score: Math.round((score / questions.length) * 100) }) })
+            ? h('button', { class: 'btn', text: 'Continuar', onClick: () => resolve({ success: true, score: Math.round((score / questions.length) * 100), correct: score }) })
             : h('button', { class: 'btn', text: 'Tentar de novo', onClick: () => { index = 0; score = 0; showQuestion(); } }),
         ),
       );
