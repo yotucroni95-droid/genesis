@@ -135,3 +135,58 @@ Regras gerais:
 - **puzzle**: Imagem do quebra-cabeça, 288 px de largura e a altura que a imagem tiver (é cortada em 3×3)
 
 Para acrescentar uma arte nova (por exemplo, do Êxodo), acrescente uma linha em `assets/manifest.json` com o mesmo formato das outras.
+
+## Artes do modo viciante (novas)
+
+Enquanto o arquivo não existir, o jogo mostra um emoji no lugar. Basta salvar o PNG com o nome exato e publicar.
+
+### Ícones do modo viciante (64×64)
+
+| Arquivo | O que é | Hoje aparece |
+|---|---|---|
+| `assets/icons/moeda.png` | Talento (moeda do jogo) | 🪙 |
+| `assets/icons/personagens.png` | Personagens | 🧑 |
+| `assets/icons/colecao.png` | Coleção de cartas | 🃏 |
+| `assets/icons/missoes.png` | Missões do dia | 📅 |
+| `assets/icons/baus.png` | Baús | 🎁 |
+| `assets/icons/loja.png` | Loja | 🛒 |
+| `assets/icons/arena.png` | Arena (raio) | ⚡ |
+| `assets/icons/whatsapp.png` | Compartilhar no WhatsApp | 📲 |
+| `assets/icons/som.png` | Som ligado | 🔊 |
+| `assets/icons/mudo.png` | Som desligado | 🔇 |
+| `assets/icons/pergaminho.png` | Pergaminho escondido | 📜 |
+| `assets/icons/fogo.png` | Sequência de dias / combo | 🔥 |
+| `assets/icons/escudo.png` | Resistir (escudo) | 🛡️ |
+| `assets/icons/coracao.png` | Vida cheia (Arena) | ❤️ |
+| `assets/icons/coracao_vazio.png` | Vida perdida (Arena) | 🖤 |
+| `assets/icons/dado.png` | Gerar apelido (dado) | 🎲 |
+| `assets/icons/subir.png` | Subiu de patente | ⬆️ |
+| `assets/icons/titulo.png` | Título do perfil | 🏷️ |
+| `assets/icons/relogio.png` | Tempo do baú grátis | ⏱️ |
+| `assets/icons/narrador.png` | Narrador | 🎙️ |
+| `assets/icons/estrela_cheia.png` | Estrela de avaliação (cheia) | ⭐ |
+| `assets/icons/estrela_vazia.png` | Estrela de avaliação (vazia) | ☆ |
+
+### Baús (128×128)
+
+| Arquivo | O que é | Hoje aparece |
+|---|---|---|
+| `assets/ui/bau_comum.png` | Baú Comum (fechado) | retângulo/desenho |
+| `assets/ui/bau_comum_aberto.png` | Baú Comum (aberto) | retângulo/desenho |
+| `assets/ui/bau_raro.png` | Baú Raro (fechado) | retângulo/desenho |
+| `assets/ui/bau_raro_aberto.png` | Baú Raro (aberto) | retângulo/desenho |
+| `assets/ui/bau_epico.png` | Baú Épico (fechado) | retângulo/desenho |
+| `assets/ui/bau_epico_aberto.png` | Baú Épico (aberto) | retângulo/desenho |
+| `assets/ui/bau_lendario.png` | Baú Lendário (fechado) | retângulo/desenho |
+| `assets/ui/bau_lendario_aberto.png` | Baú Lendário (aberto) | retângulo/desenho |
+
+### Patentes (64×64)
+
+| Arquivo | O que é | Hoje aparece |
+|---|---|---|
+| `assets/ui/patente_bronze.png` | Patente Bronze | retângulo/desenho |
+| `assets/ui/patente_prata.png` | Patente Prata | retângulo/desenho |
+| `assets/ui/patente_ouro.png` | Patente Ouro | retângulo/desenho |
+| `assets/ui/patente_diamante.png` | Patente Diamante | retângulo/desenho |
+| `assets/ui/patente_lendario.png` | Patente Lendário | retângulo/desenho |
+

@@ -7,6 +7,12 @@ import { speak, stopSpeaking, narratorOn, setNarrator, loadRecorded } from '../a
 import { sfx } from '../audio/audio.js';
 
 const CHARS_PER_SECOND = 40;
+// Minimum reading time per sentence, so nobody skips the Bible text in a
+// hurry: about 65 ms per letter, between 2.5 and 9 seconds.
+const MS_PER_CHAR = 65;
+const MIN_READ = 2500;
+const MAX_READ = 9000;
+let lockTimer = 0;
 
 export async function findStop(game, chapterId, stopId) {
   const entry = game.assets.json('chapters/index.json').chapters.find((c) => c.id === chapterId);
@@ -31,12 +37,16 @@ export function createStoryScene(game) {
       let line = 0;
       let shown = 0;
       let typing = false;
+      let readyAt = 0;
+      let lockMs = 0;
+      const reread = game.save.isStopDone(stop.id); // already read once: wait a bit less
 
       const portrait = h('div', { class: 'talk__face' });
       const name = h('div', { class: 'talk__name' });
       const text = h('p', { class: 'talk__text' });
       const next = h('button', { class: 'btn talk__next', text: 'Próximo' });
       const counter = h('div', { class: 'talk__count' });
+      const hint = h('small', { class: 'talk__hint', hidden: true, text: 'Leia com calma 🙂' });
       const narratorBtn = h('button', { class: 'talk__voice', title: 'Narrador', onClick: (e) => {
         e.stopPropagation();
         setNarrator(!narratorOn());
@@ -57,6 +67,15 @@ export function createStoryScene(game) {
         counter.textContent = `${line + 1}/${stop.story.length}`;
         next.textContent = line === stop.story.length - 1 ? 'Ao desafio!' : 'Próximo';
         if (narratorOn()) speak(l.text, `${stop.id}-${line}`);
+        lockMs = Math.min(MAX_READ, Math.max(MIN_READ, l.text.length * MS_PER_CHAR)) * (reread ? 0.5 : 1);
+        readyAt = performance.now() + lockMs;
+        next.classList.add('is-locked');
+        clearInterval(lockTimer);
+        lockTimer = setInterval(() => {
+          const left = readyAt - performance.now();
+          next.style.setProperty('--p', `${Math.min(100, Math.round((1 - left / lockMs) * 100))}%`);
+          if (left <= 0) { clearInterval(lockTimer); next.classList.remove('is-locked'); }
+        }, 80);
         shown = 0;
         typing = true;
         text.textContent = '';
@@ -77,6 +96,14 @@ export function createStoryScene(game) {
           text.textContent = l.text;
           return;
         }
+        if (performance.now() < readyAt) { // still reading time: gentle reminder
+          next.classList.remove('is-nudge');
+          void next.offsetWidth;
+          next.classList.add('is-nudge');
+          hint.hidden = false;
+          return;
+        }
+        hint.hidden = true;
         if (line < stop.story.length - 1) { line += 1; render(); return; }
         stopSpeaking();
         game.scenes.go('challenge', params);
@@ -90,6 +117,7 @@ export function createStoryScene(game) {
           text,
           h('div', { class: 'talk__foot' },
             narratorBtn,
+            hint,
             h('span', { class: 'verse' }, h('img', { class: 'pixel', src: game.assets.url('icon.livro'), alt: '' }), `Leia: ${stop.verse}`),
             next,
           ),
@@ -109,7 +137,7 @@ export function createStoryScene(game) {
       ));
       render();
     },
-    exit() { clearInterval(timer); stopSpeaking(); },
+    exit() { clearInterval(timer); clearInterval(lockTimer); stopSpeaking(); },
     render(ctx, d) { ctx.fillStyle = '#05071a'; ctx.fillRect(0, 0, d.width, d.height); },
   };
 }

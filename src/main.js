@@ -26,6 +26,7 @@ import { createProfileScene } from './scenes/profile.js';
 import { createDailyScene } from './scenes/daily.js';
 import { SaveManager } from './save/save-manager.js';
 import { unlockAudio, playMusic, sfx } from './audio/audio.js';
+import { setUiAssets } from './ui/game-ui.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -71,6 +72,7 @@ async function boot() {
     return;
   }
 
+  setUiAssets(assets);
   game.scenes.register('title', createTitleScene);
   game.scenes.register('credits', createCreditsScene);
   game.scenes.register('gallery', createGalleryScene);

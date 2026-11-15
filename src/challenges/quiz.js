@@ -38,12 +38,15 @@ export function start(config, env) {
           chosen.classList.add(o.correct ? 'is-right' : 'is-wrong');
           buttons[opts.findIndex((x) => x.correct)].classList.add('is-right');
           feedback.hidden = false;
+          const nextBtn = h('button', { class: 'btn', disabled: true, text: index < questions.length - 1 ? 'Próxima pergunta' : 'Ver resultado', onClick: () => { index += 1; if (index < questions.length) showQuestion(); else showResult(); } });
           feedback.replaceChildren(
             h('strong', { text: o.correct ? 'Isso mesmo!' : 'Quase!' }),
             h('p', { text: q.explain }),
             h('span', { class: 'verse' }, h('img', { class: 'pixel', src: env.assets.url('icon.livro'), alt: '' }), q.verse),
-            h('button', { class: 'btn', text: index < questions.length - 1 ? 'Próxima pergunta' : 'Ver resultado', onClick: () => { index += 1; if (index < questions.length) showQuestion(); else showResult(); } }),
+            nextBtn,
           );
+          // a short pause so the explanation and the verse are read
+          setTimeout(() => { nextBtn.disabled = false; }, Math.min(5000, Math.max(1800, q.explain.length * 45)));
         },
       }, o.text));
       wrap.replaceChildren(

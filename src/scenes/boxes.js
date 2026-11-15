@@ -41,6 +41,7 @@ export function createBoxesScene(game) {
         sfx('shake'); setTimeout(() => sfx('shake'), 400); setTimeout(() => sfx('shake'), 800);
         setTimeout(() => {
           c.classList.add('is-open');
+          if (c.openArt) c.querySelector('img').src = c.openArt;
           overlay.classList.add('is-flash');
           vibrate(120);
           sfx('open');

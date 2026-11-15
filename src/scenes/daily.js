@@ -70,11 +70,18 @@ export function createDailyScene(game) {
           } }, o))),
         );
       };
+      const readBtn = h('button', { class: 'btn', disabled: true, text: '📖 Li na minha Bíblia (10)', onClick: ask });
+      let secs = 10;
+      const t = setInterval(() => {
+        secs -= 1;
+        readBtn.textContent = secs > 0 ? `📖 Li na minha Bíblia (${secs})` : '📖 Li na minha Bíblia';
+        if (secs <= 0) { readBtn.disabled = false; clearInterval(t); }
+      }, 1000);
       area.replaceChildren(card,
         h('p', { class: 'screen__note', text: `Abra a sua Bíblia em ${v.ref} e leia o versículo. Depois responda uma perguntinha para ganhar talentos!` }),
         h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' } },
           h('button', { class: 'btn btn--ghost', text: '🔊 Ouvir', onClick: () => speak(`${v.text} ${v.ref}`) }),
-          h('button', { class: 'btn', text: '📖 Li na minha Bíblia', onClick: ask }),
+          readBtn,
         ),
       );
     },

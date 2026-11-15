@@ -12,7 +12,7 @@ import { Stops } from '../world/stops.js';
 import { Talk } from '../world/talk.js';
 import { Scrolls } from '../world/scrolls.js';
 import { celebrate } from '../ui/celebrate.js';
-import { loadExtras } from '../ui/game-ui.js';
+import { loadExtras, ico } from '../ui/game-ui.js';
 import { RARITY_LABEL } from '../game/economy.js';
 import { Input } from '../input/input.js';
 import { muteButton } from '../ui/mute-button.js';
@@ -133,8 +133,8 @@ export function createWorldScene(game) {
       if (scrolls) {
         scrolls.update(dt, player);
         const n = scrolls.found.length;
-        const txt = `📜 ${n}/5`;
-        if (scrollChip.textContent !== txt) scrollChip.textContent = txt;
+        const txt = `${n}/5`;
+        if (scrollChip.dataset.t !== txt) { scrollChip.dataset.t = txt; scrollChip.replaceChildren(ico('icon.pergaminho', '📜'), h('b', { text: txt })); }
       }
       if (joyHint && (vec.x || vec.y)) {
         joyHint.remove();

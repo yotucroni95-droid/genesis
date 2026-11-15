@@ -4,6 +4,19 @@
 import { h } from './dom.js';
 import { rankFor, nextRank, RARITY_COLOR } from '../game/economy.js';
 
+// Icons: when the artist's PNG exists it is used, otherwise the emoji.
+let A = null;
+export function setUiAssets(assets) { A = assets; }
+export function hasArt(id) {
+  const e = A && A.entry(id);
+  return Boolean(e && e.image && !e.placeholder);
+}
+export function ico(id, emoji, cls = '') {
+  if (hasArt(id)) return h('img', { class: `pixel ico ${cls}`, src: A.url(id), alt: '' });
+  return h('span', { class: `ico ico--emoji ${cls}`, text: emoji });
+}
+const RARITY_FILE = { comum: 'comum', raro: 'raro', 'épico': 'epico', 'lendário': 'lendario' };
+
 export async function loadExtras(assets) {
   const [verses, cosmetics, arena] = await Promise.all([
     assets.loadJSON('verses.json'), assets.loadJSON('cosmetics.json'), assets.loadJSON('arena.json'),
@@ -14,8 +27,11 @@ export async function loadExtras(assets) {
 export function rankBadge(trophies, { big = false } = {}) {
   const r = rankFor(trophies);
   const numeral = (r.name.match(/ (I{1,3})$/) || [])[1] || '★';
+  const art = `ui.patente_${r.id.replace(/\d$/, '')}`;
   return h('div', { class: `rank${big ? ' rank--big' : ''}`, style: { '--rank': r.color }, title: r.name },
-    h('div', { class: 'rank__shield' }, h('span', { text: numeral })),
+    hasArt(art)
+      ? h('div', { class: 'rank__art' }, h('img', { class: 'pixel', src: A.url(art), alt: '' }), numeral !== '★' ? h('span', { text: numeral }) : null)
+      : h('div', { class: 'rank__shield' }, h('span', { text: numeral })),
     h('div', { class: 'rank__name', text: r.name }),
   );
 }
@@ -32,7 +48,7 @@ export function rankProgress(trophies) {
 
 export function chip(icon, value, opts = {}) {
   return h(opts.onClick ? 'button' : 'div', { class: `chip${opts.cls ? ` ${opts.cls}` : ''}`, onClick: opts.onClick, title: opts.title },
-    icon.startsWith('data:') || icon.includes('/') ? h('img', { class: 'pixel', src: icon, alt: '' }) : h('span', { class: 'chip__emoji', text: icon }),
+    typeof icon === 'string' ? h('span', { class: 'chip__emoji', text: icon }) : icon,
     h('b', { text: String(value) }),
   );
 }
@@ -40,8 +56,8 @@ export function chip(icon, value, opts = {}) {
 export function currencyBar(game, { onCoins } = {}) {
   const s = game.save.state;
   return h('div', { class: 'currency' },
-    chip('🏆', s.trophies || 0, { title: 'Troféus' }),
-    chip('🪙', s.coins || 0, { title: 'Talentos (moedas)', onClick: onCoins, cls: 'chip--coins' }),
+    chip(ico('icon.trofeu', '🏆', 'chip__ico'), s.trophies || 0, { title: 'Troféus' }),
+    chip(ico('icon.moeda', '🪙', 'chip__ico'), s.coins || 0, { title: 'Talentos (moedas)', onClick: onCoins, cls: 'chip--coins' }),
   );
 }
 
@@ -61,6 +77,13 @@ export function titleName(extras, id) {
 
 /** A treasure chest drawn with CSS, coloured by rarity. */
 export function chest(rarity, { size = 90, shake = false } = {}) {
+  const art = `ui.bau_${RARITY_FILE[rarity]}`;
+  if (hasArt(art)) {
+    const el = h('div', { class: `chest chest--art${shake ? ' is-shaking' : ''}`, style: { '--chest': RARITY_COLOR[rarity], width: `${size}px`, height: `${size}px` } },
+      h('img', { class: 'pixel chest__img', src: A.url(art), alt: '' }));
+    el.openArt = hasArt(`${art}_aberto`) ? A.url(`${art}_aberto`) : null;
+    return el;
+  }
   return h('div', { class: `chest${shake ? ' is-shaking' : ''}`, style: { '--chest': RARITY_COLOR[rarity], width: `${size}px`, height: `${Math.round(size * 0.8)}px` } },
     h('div', { class: 'chest__lid' }),
     h('div', { class: 'chest__body' }, h('div', { class: 'chest__lock' })),

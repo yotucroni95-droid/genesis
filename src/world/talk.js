@@ -6,6 +6,7 @@ import { h } from '../ui/dom.js';
 import { toast } from '../ui/toast.js';
 import { sfx } from '../audio/audio.js';
 import { addCoins, track } from '../game/economy.js';
+import { ico } from '../ui/game-ui.js';
 
 const NEAR = 64;   // starts talking
 const FAR = 84;    // stops talking
@@ -18,7 +19,7 @@ export class Talk {
     this.active = null;
     this.turn = {};
     this.text = h('p', { class: 'talkb__text' });
-    this.resistBtn = h('button', { class: 'btn btn--small talkb__resist', text: '🛡️ Resistir', onClick: (e) => { e.stopPropagation(); this.resist(); } });
+    this.resistBtn = h('button', { class: 'btn btn--small talkb__resist', onClick: (e) => { e.stopPropagation(); this.resist(); } }, ico('icon.escudo', '🛡️'), ' Resistir');
     this.el = h('div', { class: 'talkb', hidden: true }, this.text, this.resistBtn);
     ui.appendChild(this.el);
   }

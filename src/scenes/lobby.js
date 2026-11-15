@@ -4,7 +4,7 @@
 import { h } from '../ui/dom.js';
 import { toast } from '../ui/toast.js';
 import { Starfield } from './starfield.js';
-import { loadExtras, rankBadge, rankProgress, currencyBar, framedAvatar, titleName, badge, chest, formatWait } from '../ui/game-ui.js';
+import { loadExtras, rankBadge, rankProgress, currencyBar, framedAvatar, titleName, badge, chest, formatWait, ico } from '../ui/game-ui.js';
 import { startDay, pendingMissions, freeBoxReadyIn } from '../game/economy.js';
 import { muteButton } from '../ui/mute-button.js';
 import { shareCard } from '../ui/share.js';
@@ -44,7 +44,7 @@ export function createLobbyScene(game) {
       timer = setInterval(updateFree, 30000);
 
       const side = (icon, label, onClick, n = 0, extra = null) => h('button', { class: 'lobby__btn', onClick },
-        h('span', { class: 'lobby__icon', text: icon }), h('span', { text: label }), badge(n), extra);
+        typeof icon === 'string' ? h('span', { class: 'lobby__icon', text: icon }) : icon, h('span', { text: label }), badge(n), extra);
 
       stage = h('button', { class: 'lobby__stage', 'aria-label': 'Girar o personagem', onClick: () => { dir = (dir + 1) % 4; } });
 
@@ -59,27 +59,27 @@ export function createLobbyScene(game) {
           ),
           h('button', { class: 'lobby__rank', onClick: go('profile') }, rankBadge(s.trophies || 0), rankProgress(s.trophies || 0)),
           currencyBar(game, { onCoins: go('shop') }),
-          h('button', { class: 'btn btn--ghost btn--icon', title: 'Compartilhar no WhatsApp', 'aria-label': 'Compartilhar no WhatsApp', onClick: () => shareCard(game), text: '📲' }),
+          h('button', { class: 'btn btn--ghost btn--icon', title: 'Compartilhar no WhatsApp', 'aria-label': 'Compartilhar no WhatsApp', onClick: () => shareCard(game) }, ico('icon.whatsapp', '📲')),
           muteButton(),
         ),
         h('div', { class: 'lobby__left' },
-          side('🧑', 'Personagens', go('avatar', { backScene: 'lobby' })),
-          side('🃏', 'Coleção', go('collection')),
-          side('📖', 'Versículo', go('daily'), dailyDone(save) ? 0 : 1),
-          side('🏅', 'Medalhas', go('medals')),
+          side(ico('icon.personagens', '🧑', 'lobby__icon'), 'Personagens', go('avatar', { backScene: 'lobby' })),
+          side(ico('icon.colecao', '🃏', 'lobby__icon'), 'Coleção', go('collection')),
+          side(ico('icon.livro', '📖', 'lobby__icon'), 'Versículo', go('daily'), dailyDone(save) ? 0 : 1),
+          side(ico('icon.medalha', '🏅', 'lobby__icon'), 'Medalhas', go('medals')),
         ),
         stage,
         h('div', { class: 'lobby__right' },
-          side('📅', 'Missões', go('missions'), pendingMissions(save)),
-          side('🎁', 'Baús', go('boxes'), boxesCount, freeLabel),
-          side('🛒', 'Loja', go('shop')),
+          side(ico('icon.missoes', '📅', 'lobby__icon'), 'Missões', go('missions'), pendingMissions(save)),
+          side(ico('icon.baus', '🎁', 'lobby__icon'), 'Baús', go('boxes'), boxesCount, freeLabel),
+          side(ico('icon.loja', '🛒', 'lobby__icon'), 'Loja', go('shop')),
         ),
         h('div', { class: 'lobby__name' },
           h('b', { text: (game.assets.json('characters.json').characters.find((c) => c.id === s.avatarId) || {}).name || '' }),
           h('button', { class: 'lobby__change', onClick: go('avatar', { backScene: 'lobby' }), text: 'Trocar personagem' }),
         ),
         h('div', { class: 'lobby__bottom' },
-          h('button', { class: 'btn btn--arena', onClick: go('arena') }, h('span', { text: '⚡' }), h('span', {}, h('b', { text: 'ARENA' }), h('small', { text: s.arenaBest ? `Recorde: ${s.arenaBest}` : 'Desafio relâmpago' }))),
+          h('button', { class: 'btn btn--arena', onClick: go('arena') }, ico('icon.arena', '⚡', 'arena__ico'), h('span', {}, h('b', { text: 'ARENA' }), h('small', { text: s.arenaBest ? `Recorde: ${s.arenaBest}` : 'Desafio relâmpago' }))),
           h('button', { class: 'btn btn--play', onClick: go('explore') }, h('b', { text: 'JOGAR' }), h('small', { text: 'Jornada' })),
         ),
       ));
