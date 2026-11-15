@@ -68,9 +68,11 @@ export function createExploreScene(game) {
           h('div', { class: 'screen__body' },
             profile,
             grid,
-            h('div', { style: { marginTop: '18px', display: 'flex', justifyContent: 'center' } },
-              h('button', { class: 'btn btn--ghost', onClick: () => game.scenes.go('gallery'), text: 'Artes do jogo' }),
-            ),
+            // the art gallery is a tool for the leader/artist: only with ?debug=1
+            new URLSearchParams(location.search).has('debug')
+              ? h('div', { style: { marginTop: '18px', display: 'flex', justifyContent: 'center' } },
+                h('button', { class: 'btn btn--ghost', onClick: () => game.scenes.go('gallery'), text: 'Artes do jogo' }))
+              : null,
           ),
         ),
       );

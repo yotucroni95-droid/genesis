@@ -27,6 +27,7 @@ export function createWorldScene(game) {
   let currentStop = null;
   let leaving = false;
   let onKey = null;
+  let joyHint = null;
 
   function refreshCharButton() {
     charButton.querySelector('img').src = game.assets.url(`portrait.${player.characterId}`);
@@ -84,6 +85,10 @@ export function createWorldScene(game) {
       );
       ui.appendChild(enterBox);
       input = new Input(ui, game.assets);
+      if (!game.save.seenTip('joystick')) {
+        joyHint = h('div', { class: 'joy-hint' }, h('span', { text: 'Arraste o polegar aqui para andar' }));
+        ui.appendChild(joyHint);
+      }
       onKey = (e) => { if ((e.code === 'Enter' || e.code === 'Space') && currentStop) { e.preventDefault(); enterStop(); } };
       window.addEventListener('keydown', onKey);
       if (chapter && !params.at && chapter.intro) toast(chapter.intro, { ms: 5000 });
@@ -97,7 +102,13 @@ export function createWorldScene(game) {
 
     update(dt) {
       if (!map) return;
-      player.update(dt, leaving ? { x: 0, y: 0 } : input.vector(), map);
+      const vec = leaving ? { x: 0, y: 0 } : input.vector();
+      player.update(dt, vec, map);
+      if (joyHint && (vec.x || vec.y)) {
+        joyHint.remove();
+        joyHint = null;
+        game.save.markTip('joystick');
+      }
       ambient.update(dt);
       if (stops) {
         stops.update(dt);

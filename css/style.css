@@ -683,3 +683,36 @@ input, textarea { -webkit-user-select: text; user-select: text; touch-action: ma
 .medal.is-earned { border-color: var(--gold); }
 .medal.is-earned img { filter: none; }
 .medal.is-earned strong { color: var(--gold); }
+
+/* ---------- Dica do joystick (primeira vez) ---------- */
+.joy-hint {
+  position: absolute;
+  left: calc(var(--safe-left) + 24px);
+  bottom: calc(var(--safe-bottom) + 150px);
+  max-width: 200px;
+  padding: 10px 14px;
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  background: rgba(7, 10, 28, .9);
+  color: var(--ink);
+  font-size: 15px;
+  pointer-events: none;
+  animation: hint-bob 1.2s ease-in-out infinite;
+}
+.joy-hint::after {
+  content: "";
+  position: absolute;
+  left: 52px;
+  bottom: -12px;
+  border: 10px solid transparent;
+  border-top-color: var(--gold);
+  border-bottom: 0;
+}
+@keyframes hint-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+/* Celular deitado: tela do apelido mais compacta */
+@media (orientation: landscape) and (max-height: 600px) {
+  .nick { gap: 8px; padding-top: 0; }
+  .nick__portrait { width: 64px; height: 64px; }
+  .nick-preview { font-size: 20px; min-height: 24px; }
+}

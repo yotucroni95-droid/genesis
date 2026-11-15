@@ -50,6 +50,10 @@ Todo desafio fica em `src/challenges/` e segue a mesma regra: `start(config, env
 
 O código do jogo não muda.
 
+## Atualizações e modo sem internet
+
+O arquivo `sw.js` guarda o jogo no celular. Com internet, ele sempre busca a versão mais nova do código e do conteúdo; sem internet, usa o que já guardou. As imagens são reaproveitadas e atualizadas em segundo plano.
+
 ## Segurança
 
 - Nenhum segredo fica neste repositório, e o jogo não envia dados de ninguém para fora do celular.
@@ -66,4 +70,4 @@ O código do jogo não muda.
 6. Álbum, medalhas, níveis e escolha de personagem ✅
 7. ~~Painel do líder~~ (retirado: sem servidor, cada um vê o próprio álbum)
 8. Conteúdo dos capítulos 0 a 4 ✅ (17 paradas)
-9. Acabamento e testes no celular
+9. Acabamento: funciona sem internet, sempre pega a versão nova, ícone para a tela inicial, dica do joystick ✅

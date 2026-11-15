@@ -114,6 +114,14 @@ export class SaveManager {
     this.write();
   }
 
+  /** Remembers that a tip was already shown, so it does not show again. */
+  seenTip(id) { return Boolean(this.state.tips && this.state.tips[id]); }
+
+  markTip(id) {
+    this.state.tips = { ...(this.state.tips || {}), [id]: true };
+    this.write();
+  }
+
   setLevel(level) {
     if (level <= this.state.level) return false;
     this.state.level = level;

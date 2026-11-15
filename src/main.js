@@ -90,3 +90,8 @@ async function boot() {
 }
 
 boot();
+
+// Offline support and always-fresh updates (not on the local test server).
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
