@@ -10,6 +10,7 @@ import { Player } from '../world/player.js';
 import { Ambient } from '../world/ambient.js';
 import { Stops } from '../world/stops.js';
 import { Talk } from '../world/talk.js';
+import { loadRecorded, stopSpeaking } from '../audio/narrator.js';
 import { Scrolls } from '../world/scrolls.js';
 import { celebrate } from '../ui/celebrate.js';
 import { loadExtras, ico } from '../ui/game-ui.js';
@@ -98,6 +99,7 @@ export function createWorldScene(game) {
       );
       ui.appendChild(enterBox);
       talk = stops ? new Talk(ui, stops, game.save, chapter.id) : null;
+      await loadRecorded(game.assets);
       if (stops) {
         game.extras = game.extras || await loadExtras(game.assets);
         scrollChip = h('div', { class: 'chip hud__scrolls', title: 'Pergaminhos escondidos' });
@@ -121,6 +123,7 @@ export function createWorldScene(game) {
       input = null;
       if (talk) talk.destroy();
       talk = null;
+      stopSpeaking();
       window.removeEventListener('keydown', onKey);
     },
 

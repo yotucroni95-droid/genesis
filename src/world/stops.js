@@ -15,7 +15,7 @@ export class Stops {
     }));
     this.npcs = (chapter.npcs || []).map((n) => {
       const sheet = assets.entry(`sheet.${n.sheet}`);
-      return { ...n, sheet, px: (n.x + 0.5) * map.tileW, py: (n.y + 1) * map.tileH - 4, seed: Math.random() * 10 };
+      return { ...n, sheetId: n.sheet, sheet, px: (n.x + 0.5) * map.tileW, py: (n.y + 1) * map.tileH - 4, seed: Math.random() * 10 };
     });
     // NPCs are solid: the block covers the feet and lower body, so the player
     // can never walk over a character, only stand in front of or behind it.

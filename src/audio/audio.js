@@ -87,7 +87,7 @@ export function setMuted(value) {
   muted = value;
   try { localStorage.setItem(KEY, value ? '1' : '0'); } catch { /* ignore */ }
   if (master) master.gain.setTargetAtTime(value ? 0 : 1, ctx.currentTime, 0.05);
-  if (window.speechSynthesis && value) window.speechSynthesis.cancel();
+  if (value) stopVoice();
 }
 
 export function toggleMuted() { setMuted(!muted); return muted; }
@@ -149,6 +149,43 @@ export function sfx(name) {
   if (playSample(name)) return;
   const f = SFX[name];
   if (f) f();
+}
+
+// ---------- recorded voices (narrator and characters) ----------
+
+const voiceCache = new Map();
+let voiceSrc = null;
+
+export function stopVoice() {
+  if (voiceSrc) { try { voiceSrc.stop(); } catch { /* already stopped */ } }
+  voiceSrc = null;
+  if (musicGain && ctx) musicGain.gain.setTargetAtTime(0.12, ctx.currentTime, 0.3);
+}
+
+/** Plays a recorded line (m4a). Music gets quieter while someone speaks. */
+export async function playVoice(url) {
+  const c = ensure();
+  if (!c || muted) return;
+  stopVoice();
+  let buf = voiceCache.get(url);
+  if (!buf) {
+    try {
+      const data = await (await fetch(url)).arrayBuffer();
+      buf = await new Promise((res, rej) => c.decodeAudioData(data, res, rej));
+      voiceCache.set(url, buf);
+      if (voiceCache.size > 40) voiceCache.delete(voiceCache.keys().next().value);
+    } catch { return; }
+  }
+  if (muted) return;
+  const src = c.createBufferSource();
+  const g = c.createGain();
+  g.gain.value = 1.4;
+  src.buffer = buf;
+  src.connect(g).connect(master);
+  musicGain.gain.setTargetAtTime(0.035, c.currentTime, 0.15);
+  src.onended = () => { if (voiceSrc === src) stopVoice(); };
+  voiceSrc = src;
+  src.start();
 }
 
 // ---------- music: small looping tunes per mood ----------

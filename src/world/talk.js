@@ -7,6 +7,7 @@ import { toast } from '../ui/toast.js';
 import { sfx } from '../audio/audio.js';
 import { addCoins, track } from '../game/economy.js';
 import { ico } from '../ui/game-ui.js';
+import { speak, narratorOn } from '../audio/narrator.js';
 
 const NEAR = 64;   // starts talking
 const FAR = 84;    // stops talking
@@ -40,6 +41,7 @@ export class Talk {
         const i = this.turn[k] || 0;
         this.turn[k] = i + 1;
         this.type(best.talk[i % best.talk.length]);
+        if (narratorOn()) speak('', `talk-${this.chapterId}-${best.sheetId}-${best.x}-${best.y}-${i % best.talk.length}`);
         this.el.classList.toggle('is-tempter', Boolean(best.tempter));
         this.resistBtn.hidden = !best.tempter;
         this.el.hidden = false;
@@ -76,6 +78,7 @@ export class Talk {
     }
     clearInterval(this.timer);
     this.text.textContent = `"${n.resist.text}" (${n.resist.verse})`;
+    if (narratorOn()) speak('', `resist-${this.chapterId}-${n.sheetId}-${n.x}-${n.y}`);
     this.resistBtn.hidden = true;
     toast(`🛡️ Você resistiu à tentação!${first ? ' +10 talentos' : ''}`, { ms: 2500 });
   }

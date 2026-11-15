@@ -67,7 +67,7 @@ O código do jogo não muda.
 - **Comemoração em tela cheia** ao subir de patente, liberar personagem, concluir capítulo e achar os pergaminhos.
 - **Compartilhar no WhatsApp**: imagem com patente, troféus, estrelas e recorde + link (`src/ui/share.js`).
 - **Versículo do dia** com pergunta de completar a palavra (`src/scenes/daily.js`).
-- **Narrador**: lê as histórias com a melhor voz em português do celular. Para usar uma **voz gravada de verdade**, coloque arquivos em `assets/voice/` e liste-os em `content/voices.json`, por exemplo `{ "files": { "cap0_s1-0": "assets/voice/cap0_s1-0.mp3" } }` (parada + número da fala, começando do 0).
+- **Narrador e vozes**: 166 falas gravadas com vozes brasileiras do Kokoro (skill media-use), com pausas humanizadas — narrador e Deus (Santa), homens (Alex), Eva e anjos fiéis (Dora), Lúcifer/serpente/anjos caídos (mistura). Ficam em `assets/voice/` e são listadas em `content/voices.json`. Para regenerar depois de mudar um texto: `~/.local/kokoro-venv/bin/python tools/narrate.py .` (precisa do Kokoro instalado no Mac).
 
 ## Atualizações e modo sem internet
 

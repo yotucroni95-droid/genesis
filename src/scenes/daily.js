@@ -7,7 +7,7 @@ import { loadExtras } from '../ui/game-ui.js';
 import { addCoins } from '../game/economy.js';
 import { shuffle } from '../challenges/shared.js';
 import { sfx } from '../audio/audio.js';
-import { speak } from '../audio/narrator.js';
+import { speak, loadRecorded, stopSpeaking } from '../audio/narrator.js';
 import { RARITY_LABEL, RARITY_COLOR } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 
@@ -35,6 +35,7 @@ export function createDailyScene(game) {
       game.extras = game.extras || await loadExtras(game.assets);
       const save = game.save;
       const v = todayVerse(game.extras);
+      await loadRecorded(game.assets);
       const area = h('div', { class: 'daily' });
       ui.appendChild(gameScreen(game, 'Versículo do dia 📖', area));
       const card = h('div', { class: 'verse-card daily__card', style: { '--r': RARITY_COLOR[v.rarity] } },
@@ -44,7 +45,7 @@ export function createDailyScene(game) {
       );
       if (dailyDone(save)) {
         area.replaceChildren(card, h('p', { class: 'screen__note', text: 'Você já fez o versículo de hoje. Volte amanhã para um novo!' }),
-          h('button', { class: 'btn btn--ghost', text: '🔊 Ouvir', onClick: () => speak(`${v.text} ${v.ref}`) }));
+          h('button', { class: 'btn btn--ghost', text: '🔊 Ouvir', onClick: () => speak('', `verse-${v.id}`) }));
         return;
       }
       const ask = () => {
@@ -80,11 +81,12 @@ export function createDailyScene(game) {
       area.replaceChildren(card,
         h('p', { class: 'screen__note', text: `Abra a sua Bíblia em ${v.ref} e leia o versículo. Depois responda uma perguntinha para ganhar talentos!` }),
         h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' } },
-          h('button', { class: 'btn btn--ghost', text: '🔊 Ouvir', onClick: () => speak(`${v.text} ${v.ref}`) }),
+          h('button', { class: 'btn btn--ghost', text: '🔊 Ouvir', onClick: () => speak('', `verse-${v.id}`) }),
           readBtn,
         ),
       );
     },
+    exit() { stopSpeaking(); },
     update(dt) { stars.update(dt); },
     render(ctx, d) { stars.render(ctx, d.width, d.height); },
   };
