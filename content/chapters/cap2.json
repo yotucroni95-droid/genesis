@@ -10,25 +10,50 @@
     {
       "sheet": "serpente",
       "x": 3,
-      "y": 2
+      "y": 2,
+      "tempter": true,
+      "talk": [
+        "É verdade que Deus não deixa vocês comerem de nenhuma árvore?",
+        "Coma do fruto... você não vai morrer. Vai ser igual a Deus!",
+        "Só uma mordidinha. Ninguém vai saber..."
+      ],
+      "resist": {
+        "text": "Não! Eu fico com a palavra de Deus.",
+        "verse": "Mateus 4:4"
+      }
     },
     {
       "sheet": "adao",
       "x": 19,
       "y": 4,
-      "dir": 0
+      "dir": 0,
+      "talk": [
+        "Eu e Eva erramos... mas Deus veio nos procurar.",
+        "Lembre-se: Deus prometeu um Salvador.",
+        "Obedecer a Deus é sempre o melhor caminho."
+      ]
     },
     {
       "sheet": "eva",
       "x": 17,
       "y": 4,
-      "dir": 0
+      "dir": 0,
+      "talk": [
+        "Eu ouvi a serpente em vez de ouvir a Deus. Não faça como eu.",
+        "Mesmo depois do erro, Deus nos vestiu com cuidado. Ele nos ama.",
+        "A promessa de Gênesis 3:15 me dá esperança."
+      ]
     },
     {
       "sheet": "anjos_fieis",
       "x": 24,
       "y": 4,
-      "variant": 2
+      "variant": 2,
+      "talk": [
+        "Eu guardo o caminho da árvore da vida.",
+        "Um dia Deus vai abrir de novo o caminho para a árvore da vida.",
+        "Leia Apocalipse 22:2 e veja!"
+      ]
     }
   ],
   "stops": [

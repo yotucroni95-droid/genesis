@@ -3,6 +3,8 @@
 
 import { h } from '../ui/dom.js';
 import { iconButton } from '../ui/icon-button.js';
+import { speak, stopSpeaking, narratorOn, setNarrator, loadRecorded } from '../audio/narrator.js';
+import { sfx } from '../audio/audio.js';
 
 const CHARS_PER_SECOND = 40;
 
@@ -24,6 +26,7 @@ export function createStoryScene(game) {
   return {
     async enter(params, ui) {
       const { chapter, stop } = await findStop(game, params.chapterId, params.stopId);
+      await loadRecorded(game.assets);
       const mapUrl = game.assets.url(`map.${chapter.map}`);
       let line = 0;
       let shown = 0;
@@ -34,6 +37,12 @@ export function createStoryScene(game) {
       const text = h('p', { class: 'talk__text' });
       const next = h('button', { class: 'btn talk__next', text: 'Próximo' });
       const counter = h('div', { class: 'talk__count' });
+      const narratorBtn = h('button', { class: 'talk__voice', title: 'Narrador', onClick: (e) => {
+        e.stopPropagation();
+        setNarrator(!narratorOn());
+        narratorBtn.textContent = narratorOn() ? '🔊 Narrador' : '🔈 Narrador desligado';
+        if (narratorOn()) speak(stop.story[line].text, `${stop.id}-${line}`);
+      } }, narratorOn() ? '🔊 Narrador' : '🔈 Narrador desligado');
 
       const render = () => {
         const l = stop.story[line];
@@ -47,6 +56,7 @@ export function createStoryScene(game) {
         );
         counter.textContent = `${line + 1}/${stop.story.length}`;
         next.textContent = line === stop.story.length - 1 ? 'Ao desafio!' : 'Próximo';
+        if (narratorOn()) speak(l.text, `${stop.id}-${line}`);
         shown = 0;
         typing = true;
         text.textContent = '';
@@ -54,6 +64,7 @@ export function createStoryScene(game) {
         timer = setInterval(() => {
           shown += 1;
           text.textContent = l.text.slice(0, shown);
+          if (shown % 4 === 0 && !narratorOn()) sfx('talk');
           if (shown >= l.text.length) { typing = false; clearInterval(timer); }
         }, 1000 / CHARS_PER_SECOND);
       };
@@ -67,6 +78,7 @@ export function createStoryScene(game) {
           return;
         }
         if (line < stop.story.length - 1) { line += 1; render(); return; }
+        stopSpeaking();
         game.scenes.go('challenge', params);
       };
       next.addEventListener('click', (e) => { e.stopPropagation(); advance(); });
@@ -77,6 +89,7 @@ export function createStoryScene(game) {
           h('div', { class: 'talk__head' }, name, counter),
           text,
           h('div', { class: 'talk__foot' },
+            narratorBtn,
             h('span', { class: 'verse' }, h('img', { class: 'pixel', src: game.assets.url('icon.livro'), alt: '' }), `Leia: ${stop.verse}`),
             next,
           ),
@@ -96,7 +109,7 @@ export function createStoryScene(game) {
       ));
       render();
     },
-    exit() { clearInterval(timer); },
+    exit() { clearInterval(timer); stopSpeaking(); },
     render(ctx, d) { ctx.fillStyle = '#05071a'; ctx.fillRect(0, 0, d.width, d.height); },
   };
 }

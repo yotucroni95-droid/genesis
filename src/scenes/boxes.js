@@ -5,6 +5,7 @@ import { gameScreen } from '../ui/screen.js';
 import { chest, formatWait, vibrate, loadExtras } from '../ui/game-ui.js';
 import { openBox, claimFreeBox, freeBoxReadyIn, RARITY_LABEL, RARITY_COLOR } from '../game/economy.js';
 import { Starfield } from './starfield.js';
+import { sfx } from '../audio/audio.js';
 
 function rewardView(game, it) {
   if (it.type === 'coins') return h('div', { class: 'loot loot--coins' }, h('div', { class: 'loot__big', text: '🪙' }), h('b', { text: `+${it.amount}` }), h('small', { text: 'talentos' }));
@@ -37,10 +38,12 @@ export function createBoxesScene(game) {
         const c = chest(box.rarity, { size: 150, shake: true });
         overlay.replaceChildren(h('div', { class: 'opening__stage' }, c, h('p', { class: 'opening__hint', text: `Baú ${RARITY_LABEL[box.rarity]}` })));
         vibrate([40, 60, 40, 60, 80]);
+        sfx('shake'); setTimeout(() => sfx('shake'), 400); setTimeout(() => sfx('shake'), 800);
         setTimeout(() => {
           c.classList.add('is-open');
           overlay.classList.add('is-flash');
           vibrate(120);
+          sfx('open');
           const result = openBox(save, box.uid, game.extras);
           let i = 0;
           const showNext = () => {
@@ -54,6 +57,7 @@ export function createBoxesScene(game) {
               return;
             }
             const it = result.items[i++];
+            sfx(it.type === 'coins' ? 'coin' : 'star');
             overlay.replaceChildren(h('div', { class: 'opening__stage', onClick: showNext },
               h('div', { class: 'opening__one' }, rewardView(game, it)),
               h('p', { class: 'opening__hint', text: `Toque para continuar (${i}/${result.items.length})` }),

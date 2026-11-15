@@ -9,7 +9,14 @@ import { Camera } from '../world/camera.js';
 import { Player } from '../world/player.js';
 import { Ambient } from '../world/ambient.js';
 import { Stops } from '../world/stops.js';
+import { Talk } from '../world/talk.js';
+import { Scrolls } from '../world/scrolls.js';
+import { celebrate } from '../ui/celebrate.js';
+import { loadExtras } from '../ui/game-ui.js';
+import { RARITY_LABEL } from '../game/economy.js';
 import { Input } from '../input/input.js';
+import { muteButton } from '../ui/mute-button.js';
+import { sfx } from '../audio/audio.js';
 
 const DEBUG = new URLSearchParams(location.search).has('debug');
 
@@ -28,6 +35,10 @@ export function createWorldScene(game) {
   let leaving = false;
   let onKey = null;
   let joyHint = null;
+  let talk = null;
+  let scrolls = null;
+  let scrollChip = null;
+  let stepT = 0;
 
   function refreshCharButton() {
     charButton.querySelector('img').src = game.assets.url(`portrait.${player.characterId}`);
@@ -42,6 +53,7 @@ export function createWorldScene(game) {
   function enterStop() {
     if (!currentStop || leaving) return;
     leaving = true;
+    sfx('enter');
     game.scenes.go('story', {
       chapterId: chapter.id,
       stopId: currentStop.id,
@@ -74,6 +86,7 @@ export function createWorldScene(game) {
       ui.appendChild(h('div', { class: 'hud' },
         iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go('explore'), '←'),
         h('div', { class: 'hud__title', text: title }),
+        muteButton(),
         charButton,
       ));
       refreshCharButton();
@@ -84,6 +97,15 @@ export function createWorldScene(game) {
           h('img', { class: 'pixel', src: game.assets.url('icon.entrar'), alt: '' }), 'Entrar'),
       );
       ui.appendChild(enterBox);
+      talk = stops ? new Talk(ui, stops, game.save, chapter.id) : null;
+      if (stops) {
+        game.extras = game.extras || await loadExtras(game.assets);
+        scrollChip = h('div', { class: 'chip hud__scrolls', title: 'Pergaminhos escondidos' });
+        ui.querySelector('.hud').insertBefore(scrollChip, ui.querySelector('.hud .mute'));
+        scrolls = new Scrolls(map, chapter, player, stops, game.save, game.extras, (rarity) => {
+          celebrate({ title: 'Achou os 5 pergaminhos!', subtitle: `Você ganhou um baú ${RARITY_LABEL[rarity]}. Amanhã eles estarão em outros lugares!`, image: game.assets.url('icon.album') });
+        });
+      }
       input = new Input(ui, game.assets);
       if (!game.save.seenTip('joystick')) {
         joyHint = h('div', { class: 'joy-hint' }, h('span', { text: 'Arraste o polegar aqui para andar' }));
@@ -97,6 +119,8 @@ export function createWorldScene(game) {
     exit() {
       if (input) input.destroy();
       input = null;
+      if (talk) talk.destroy();
+      talk = null;
       window.removeEventListener('keydown', onKey);
     },
 
@@ -104,6 +128,14 @@ export function createWorldScene(game) {
       if (!map) return;
       const vec = leaving ? { x: 0, y: 0 } : input.vector();
       player.update(dt, vec, map);
+      if (player.moving) { stepT += dt; if (stepT > 0.32) { stepT = 0; sfx('step'); } }
+      if (talk) talk.update(player);
+      if (scrolls) {
+        scrolls.update(dt, player);
+        const n = scrolls.found.length;
+        const txt = `📜 ${n}/5`;
+        if (scrollChip.textContent !== txt) scrollChip.textContent = txt;
+      }
       if (joyHint && (vec.x || vec.y)) {
         joyHint.remove();
         joyHint = null;
@@ -136,6 +168,7 @@ export function createWorldScene(game) {
       map.drawGround(ctx, view);
       ambient.drawBelow(ctx, view);
       if (stops) stops.drawGround(ctx);
+      if (scrolls) scrolls.draw(ctx);
       // characters sorted by depth, so whoever is lower on screen is in front
       const list = stops ? stops.drawables() : [];
       list.push({ y: player.y, draw: (c) => player.draw(c) });
@@ -143,6 +176,7 @@ export function createWorldScene(game) {
       ambient.drawAbove(ctx, view);
       if (DEBUG) map.drawDebug(ctx);
       ctx.restore();
+      if (talk) talk.place(camera, display);
     },
   };
 }

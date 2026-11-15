@@ -13,13 +13,28 @@
       "sheet": "caim",
       "x": 12,
       "y": 8,
-      "dir": 0
+      "dir": 0,
+      "tempter": true,
+      "talk": [
+        "Por que Deus gostou mais da oferta do meu irmão?! Que raiva...",
+        "Raiva é normal... deixa ela crescer, vai!",
+        "Inveja não faz mal a ninguém... ou faz?"
+      ],
+      "resist": {
+        "text": "Vou dominar a raiva com a ajuda de Deus.",
+        "verse": "Efésios 4:26"
+      }
     },
     {
       "sheet": "abel",
       "x": 20,
       "y": 8,
-      "dir": 0
+      "dir": 0,
+      "talk": [
+        "Eu dou a Deus o melhor que tenho, com fé.",
+        "Cuidar das ovelhas me ensina sobre o cuidado de Deus.",
+        "Já leu Hebreus 11:4? Fala de mim!"
+      ]
     }
   ],
   "stops": [

@@ -5,6 +5,9 @@ import { gameScreen } from '../ui/screen.js';
 import { toast } from '../ui/toast.js';
 import { startDay, claimMission } from '../game/economy.js';
 import { Starfield } from './starfield.js';
+import { celebrate } from '../ui/celebrate.js';
+import { rankBadge } from '../ui/game-ui.js';
+import { sfx } from '../audio/audio.js';
 
 export function createMissionsScene(game) {
   const stars = new Starfield(100);
@@ -26,6 +29,8 @@ export function createMissionsScene(game) {
             : h('button', { class: 'btn btn--small', disabled: !done, text: `🪙 ${m.reward} + 🏆 5`, onClick: () => {
               const r = claimMission(save, i);
               if (r) {
+                sfx('coin');
+                if (r.rankUp) celebrate({ title: 'Nova patente!', subtitle: `Você chegou a ${r.rankUp.name} e ganhou um baú!`, badge: rankBadge(r.rankUp.min, { big: true }) });
                 toast(`+${r.coins} talentos e +${r.trophies} troféus!${r.rankUp ? ` Nova patente: ${r.rankUp.name}!` : ''}${r.bonus ? ' Todas feitas: ganhou um baú!' : ''}`, { ms: 3500 });
                 game.scenes.go('missions');
               }

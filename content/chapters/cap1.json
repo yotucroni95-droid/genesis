@@ -14,13 +14,23 @@
       "sheet": "adao",
       "x": 11,
       "y": 11,
-      "dir": 0
+      "dir": 0,
+      "talk": [
+        "Bem-vindo ao Éden! Eu dei nome a todos esses animais.",
+        "Deus conversa com a gente aqui no jardim todo fim de tarde.",
+        "Cuidar do jardim é o meu trabalho. Que alegria!"
+      ]
     },
     {
       "sheet": "eva",
       "x": 17,
       "y": 11,
-      "dir": 0
+      "dir": 0,
+      "talk": [
+        "Olha quantas flores! Deus fez tudo muito bom.",
+        "Podemos comer de todas as árvores, menos de uma. Confiamos em Deus.",
+        "Você já viu o leão brincando com a ovelha? Aqui é assim!"
+      ]
     }
   ],
   "stops": [

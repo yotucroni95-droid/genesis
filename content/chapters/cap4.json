@@ -13,7 +13,12 @@
       "sheet": "noe",
       "x": 17,
       "y": 9,
-      "dir": 0
+      "dir": 0,
+      "talk": [
+        "Estou construindo a arca do jeito que Deus mandou!",
+        "Muita gente ri de mim, mas eu confio em Deus.",
+        "Entre na arca enquanto a porta está aberta!"
+      ]
     }
   ],
   "stops": [

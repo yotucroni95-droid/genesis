@@ -14,43 +14,93 @@
       "sheet": "gabriel",
       "x": 12,
       "y": 6,
-      "dir": 0
+      "dir": 0,
+      "talk": [
+        "Bem-vindo ao céu! Aqui tudo é luz, porque Deus é amor.",
+        "Eu levo as mensagens de Deus. Ele sempre cumpre o que promete.",
+        "Já leu Lucas 1:19? Sou eu lá!"
+      ]
     },
     {
       "sheet": "miguel",
       "x": 18,
       "y": 6,
-      "dir": 0
+      "dir": 0,
+      "talk": [
+        "Quem é como Deus? Ninguém! Fique firme do lado da luz.",
+        "A lei de Deus é a lei do amor. Ela protege a gente.",
+        "Coragem! O bem sempre vence no final."
+      ]
     },
     {
       "sheet": "lucifer",
       "x": 3,
       "y": 12,
-      "dir": 2
+      "dir": 2,
+      "tempter": true,
+      "talk": [
+        "Psiu... a lei de Deus é injusta. Por que obedecer?",
+        "Você podia ser como Deus. Ninguém manda em você!",
+        "Deus está escondendo coisas boas de você... confie em mim."
+      ],
+      "resist": {
+        "text": "A lei de Deus é santa, justa e boa!",
+        "verse": "Romanos 7:12"
+      }
     },
     {
       "sheet": "anjos_fieis",
       "x": 25,
       "y": 11,
-      "variant": 0
+      "variant": 0,
+      "talk": [
+        "Nós escolhemos confiar em Deus. Sempre vale a pena!",
+        "Santo, santo, santo é o Senhor!",
+        "Fique perto da luz, peregrino!"
+      ]
     },
     {
       "sheet": "anjos_fieis",
       "x": 27,
       "y": 12,
-      "variant": 3
+      "variant": 3,
+      "talk": [
+        "Nós escolhemos confiar em Deus. Sempre vale a pena!",
+        "Santo, santo, santo é o Senhor!",
+        "Fique perto da luz, peregrino!"
+      ]
     },
     {
       "sheet": "anjos_caidos",
       "x": 1,
       "y": 7,
-      "variant": 1
+      "variant": 1,
+      "tempter": true,
+      "talk": [
+        "Venha com a gente! Lúcifer prometeu liberdade...",
+        "Pra que seguir regras? Faça o que quiser!",
+        "Deus é muito exigente... largue isso!"
+      ],
+      "resist": {
+        "text": "Prefiro confiar em quem me ama de verdade.",
+        "verse": "Tiago 4:7"
+      }
     },
     {
       "sheet": "anjos_caidos",
       "x": 4,
       "y": 7,
-      "variant": 2
+      "variant": 2,
+      "tempter": true,
+      "talk": [
+        "Venha com a gente! Lúcifer prometeu liberdade...",
+        "Pra que seguir regras? Faça o que quiser!",
+        "Deus é muito exigente... largue isso!"
+      ],
+      "resist": {
+        "text": "Prefiro confiar em quem me ama de verdade.",
+        "verse": "Tiago 4:7"
+      }
     }
   ],
   "stops": [

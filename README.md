@@ -59,6 +59,16 @@ O código do jogo não muda.
 - **Coleção** de 40 cartas de versículo, **títulos** e **molduras** para o perfil.
 - Regras em `src/game/economy.js`; conteúdo em `content/verses.json`, `content/cosmetics.json` e `content/arena.json`.
 
+## Vida nos mapas, som e narrador (Fase 11)
+
+- **Personagens falam** quando o jogador chega perto (`talk` em cada NPC do capítulo). Os tentadores (`tempter: true`) mostram o botão **Resistir**, que responde com um versículo (`resist`) e dá talentos uma vez por dia.
+- **5 pergaminhos escondidos** por mapa, em lugares sorteados a cada dia; prêmio sorteado em cada um e baú ao achar os 5 (`src/world/scrolls.js`).
+- **Sons e música** gerados pelo próprio jogo (`src/audio/audio.js`), com botão 🔊/🔇 que silencia tudo (inclusive o narrador).
+- **Comemoração em tela cheia** ao subir de patente, liberar personagem, concluir capítulo e achar os pergaminhos.
+- **Compartilhar no WhatsApp**: imagem com patente, troféus, estrelas e recorde + link (`src/ui/share.js`).
+- **Versículo do dia** com pergunta de completar a palavra (`src/scenes/daily.js`).
+- **Narrador**: lê as histórias com a melhor voz em português do celular. Para usar uma **voz gravada de verdade**, coloque arquivos em `assets/voice/` e liste-os em `content/voices.json`, por exemplo `{ "files": { "cap0_s1-0": "assets/voice/cap0_s1-0.mp3" } }` (parada + número da fala, começando do 0).
+
 ## Atualizações e modo sem internet
 
 O arquivo `sw.js` guarda o jogo no celular. Com internet, ele sempre busca a versão mais nova do código e do conteúdo; sem internet, usa o que já guardou. As imagens são reaproveitadas e atualizadas em segundo plano.

@@ -34,6 +34,7 @@ export function start(config, env) {
           buttons.forEach((b) => { b.disabled = true; });
           const chosen = buttons[opts.indexOf(o)];
           if (o.correct) score += 1;
+          env.sfx && env.sfx(o.correct ? 'correct' : 'wrong');
           chosen.classList.add(o.correct ? 'is-right' : 'is-wrong');
           buttons[opts.findIndex((x) => x.correct)].classList.add('is-right');
           feedback.hidden = false;

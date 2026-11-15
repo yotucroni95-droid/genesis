@@ -7,7 +7,9 @@ import { completeStop } from '../content/progression.js';
 import { findStop } from './story.js';
 import { Starfield } from './starfield.js';
 import { rewardStop, rewardChapter, RARITY_LABEL } from '../game/economy.js';
-import { vibrate } from '../ui/game-ui.js';
+import { vibrate, rankBadge } from '../ui/game-ui.js';
+import { celebrate } from '../ui/celebrate.js';
+import { sfx } from '../audio/audio.js';
 
 const TITLES = { quiz: 'Quiz', memory: 'Jogo da memória', tictactoe: 'Jogo da velha', puzzle: 'Quebra-cabeça' };
 
@@ -30,7 +32,7 @@ export function createChallengeScene(game) {
       // Do not wait here: the scene must finish entering so buttons (like
       // "Voltar") keep working while the challenge is being played.
       getChallenge(stop.challenge.type)
-        .start(stop.challenge.config || {}, { root: area, assets: game.assets, verse: stop.verse })
+        .start(stop.challenge.config || {}, { root: area, assets: game.assets, verse: stop.verse, sfx })
         .then((result) => this.finish(result, { chapter, stop, area, back }));
     },
 
@@ -44,6 +46,16 @@ export function createChallengeScene(game) {
       const chapterBox = events.some((e) => e.type === 'chapter') ? rewardChapter(game.save, chapter) : null;
       const starInfo = loot.find((x) => x.type === 'stars');
       vibrate(starInfo.stars === 3 ? [60, 40, 60, 40, 120] : 80);
+      [0, 1, 2].slice(0, starInfo.stars).forEach((k) => setTimeout(() => sfx('star'), 300 + k * 250));
+      setTimeout(() => sfx('coin'), 1100);
+      const names0 = Object.fromEntries(game.assets.json('characters.json').characters.map((c) => [c.id, c.name]));
+      setTimeout(() => {
+        for (const e of events) {
+          if (e.type === 'unlock') celebrate({ title: 'Personagem liberado!', subtitle: `${names0[e.id] || e.id} agora está no seu álbum. Jogue com ele!`, image: game.assets.url(`portrait.${e.id}`) });
+          if (e.type === 'chapter') celebrate({ title: `Capítulo ${chapter.number} concluído!`, subtitle: chapter.title, image: game.assets.url(`medal.${chapter.medal}`) });
+        }
+        for (const x of loot) if (x.type === 'rank') celebrate({ title: 'Nova patente!', subtitle: `Você chegou a ${x.rank.name} e ganhou um baú!`, badge: rankBadge(x.rank.min, { big: true }) });
+      }, 1600);
       if (!wasDone && stop.rewards && stop.rewards.xp) game.save.addXp(stop.rewards.xp);
       const names = Object.fromEntries(game.assets.json('characters.json').characters.map((c) => [c.id, c.name]));
       const medalName = (id) => (game.assets.entry(`medal.${id}`) || {}).label || id;

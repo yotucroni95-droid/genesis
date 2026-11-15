@@ -23,7 +23,9 @@ import { createMissionsScene } from './scenes/missions.js';
 import { createArenaScene } from './scenes/arena.js';
 import { createCollectionScene } from './scenes/collection.js';
 import { createProfileScene } from './scenes/profile.js';
+import { createDailyScene } from './scenes/daily.js';
 import { SaveManager } from './save/save-manager.js';
+import { unlockAudio, playMusic, sfx } from './audio/audio.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -80,7 +82,7 @@ async function boot() {
   game.scenes.register('album', createAlbumScene);
   game.scenes.register('medals', createMedalsScene);
   game.scenes.register('avatar', createAvatarScene);
-  for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, collection: createCollectionScene, profile: createProfileScene })) game.scenes.register(name, f);
+  for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, collection: createCollectionScene, profile: createProfileScene, daily: createDailyScene })) game.scenes.register(name, f);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),
@@ -89,6 +91,25 @@ async function boot() {
       game.scenes.render(ctx, display, alpha);
     },
   });
+
+  // background music follows the screen (map screens use the chapter's tune)
+  const goScene = game.scenes.go.bind(game.scenes);
+  game.scenes.go = async (name, params = {}) => {
+    let tune = 'lobby';
+    if (name === 'arena') tune = 'arena';
+    if (['world', 'story', 'challenge'].includes(name)) {
+      const id = params.chapterId || (params.back && params.back.chapterId);
+      const entry = id && assets.json('chapters/index.json').chapters.find((c) => c.id === id);
+      tune = entry ? ({ cap0: 'ceu', cap1: 'eden', cap2: 'fora_eden', cap3: 'campos', cap4: 'arca' })[id] || 'eden' : (params.mapId || 'eden');
+    }
+    playMusic(tune);
+    return goScene(name, params);
+  };
+  // the first touch anywhere turns sound on (phones require it); buttons click
+  document.addEventListener('pointerdown', (e) => {
+    unlockAudio();
+    if (e.target.closest && e.target.closest('button')) sfx('click');
+  }, true);
 
   await game.scenes.go('title');
   loop.start();

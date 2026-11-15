@@ -6,6 +6,9 @@ import { toast } from '../ui/toast.js';
 import { Starfield } from './starfield.js';
 import { loadExtras, rankBadge, rankProgress, currencyBar, framedAvatar, titleName, badge, chest, formatWait } from '../ui/game-ui.js';
 import { startDay, pendingMissions, freeBoxReadyIn } from '../game/economy.js';
+import { muteButton } from '../ui/mute-button.js';
+import { shareCard } from '../ui/share.js';
+import { dailyDone } from './daily.js';
 
 let greeted = false;
 
@@ -56,10 +59,13 @@ export function createLobbyScene(game) {
           ),
           h('button', { class: 'lobby__rank', onClick: go('profile') }, rankBadge(s.trophies || 0), rankProgress(s.trophies || 0)),
           currencyBar(game, { onCoins: go('shop') }),
+          h('button', { class: 'btn btn--ghost btn--icon', title: 'Compartilhar no WhatsApp', 'aria-label': 'Compartilhar no WhatsApp', onClick: () => shareCard(game), text: '📲' }),
+          muteButton(),
         ),
         h('div', { class: 'lobby__left' },
           side('🧑', 'Personagens', go('avatar', { backScene: 'lobby' })),
           side('🃏', 'Coleção', go('collection')),
+          side('📖', 'Versículo', go('daily'), dailyDone(save) ? 0 : 1),
           side('🏅', 'Medalhas', go('medals')),
         ),
         stage,

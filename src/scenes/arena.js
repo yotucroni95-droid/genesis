@@ -7,6 +7,10 @@ import { loadExtras, vibrate } from '../ui/game-ui.js';
 import { shuffle } from '../challenges/shared.js';
 import { addCoins, addTrophies, track } from '../game/economy.js';
 import { Starfield } from './starfield.js';
+import { sfx } from '../audio/audio.js';
+import { celebrate } from '../ui/celebrate.js';
+import { rankBadge } from '../ui/game-ui.js';
+import { shareCard } from '../ui/share.js';
 
 const SECONDS = 10;
 
@@ -86,6 +90,7 @@ export function createArenaScene(game) {
             buttons[opts.findIndex((o) => o.ok)].classList.add('is-right');
             if (!right && buttons[k]) buttons[k].classList.add('is-wrong');
           }
+          sfx(right ? 'correct' : 'wrong');
           if (right) {
             combo += 1;
             correct += 1;
@@ -111,6 +116,8 @@ export function createArenaScene(game) {
           addCoins(save, coins);
           const rankUp = trophies ? addTrophies(save, trophies) : null;
           track(save, 'arenaPlay', 1);
+          sfx(record ? 'fanfare' : 'coin');
+          if (rankUp) setTimeout(() => celebrate({ title: 'Nova patente!', subtitle: `Você chegou a ${rankUp.name} e ganhou um baú!`, badge: rankBadge(rankUp.min, { big: true }) }), 800);
           track(save, 'arenaScore', score);
           track(save, 'correct', correct);
           area.replaceChildren(h('div', { class: 'quiz__result' },
@@ -124,6 +131,7 @@ export function createArenaScene(game) {
             ),
             h('div', { style: { display: 'flex', gap: '10px' } },
               h('button', { class: 'btn', text: 'Jogar de novo', onClick: play }),
+              h('button', { class: 'btn btn--share', text: '📲 Desafiar amigos', onClick: () => shareCard(game, { headline: `Fiz ${score} pontos na Arena do Gênesis! Duvido você bater!` }) }),
               h('button', { class: 'btn btn--ghost', text: 'Lobby', onClick: () => game.scenes.go('lobby') }),
             ),
           ));
