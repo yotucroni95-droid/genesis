@@ -28,10 +28,57 @@ function ensure() {
   return ctx;
 }
 
+// Recorded effects (Pixabay licence, from the media-use skill). Each name
+// maps to [file, volume]; anything not listed here is synthesised.
+const SAMPLES = {
+  click: [['click-soft', 0.35]],
+  coin: [['ping', 0.5]],
+  correct: [['chime', 0.45]],
+  wrong: [['error', 0.4]],
+  star: [['sparkle', 0.55]],
+  open: [['impact-bass-1', 0.6], ['sparkle', 0.5, 0.25]],
+  scroll: [['sparkle', 0.6]],
+  fanfare: [['riser', 0.45], ['chime', 0.6, 0.9]],
+  enter: [['whoosh-short', 0.5]],
+  transition: [['whoosh', 0.25]],
+  resist: [['chime', 0.55]],
+  notify: [['notification', 0.4]],
+};
+const buffers = {};
+let samplesLoading = false;
+
+function loadSamples() {
+  if (samplesLoading || !ctx) return;
+  samplesLoading = true;
+  const files = new Set(Object.values(SAMPLES).flat().map(([f]) => f));
+  for (const f of files) {
+    fetch(`assets/sfx/${f}.mp3`)
+      .then((r) => (r.ok ? r.arrayBuffer() : Promise.reject()))
+      .then((b) => new Promise((res, rej) => ctx.decodeAudioData(b, res, rej)))
+      .then((buf) => { buffers[f] = buf; })
+      .catch(() => { /* keep the synthesised version */ });
+  }
+}
+
+function playSample(name) {
+  const list = SAMPLES[name];
+  if (!list || !list.every(([f]) => buffers[f])) return false;
+  for (const [f, vol, delay = 0] of list) {
+    const src = ctx.createBufferSource();
+    const g = ctx.createGain();
+    g.gain.value = vol;
+    src.buffer = buffers[f];
+    src.connect(g).connect(sfxGain);
+    src.start(ctx.currentTime + delay);
+  }
+  return true;
+}
+
 /** Call on the first tap: phones only allow sound after a touch. */
 export function unlockAudio() {
   const c = ensure();
   if (c && c.state === 'suspended') c.resume();
+  loadSamples();
 }
 
 export function isMuted() { return muted; }
@@ -92,10 +139,14 @@ const SFX = {
   fanfare: () => { [[523, 0], [523, 0.12], [523, 0.24], [659, 0.36], [784, 0.6], [659, 0.78], [784, 0.9], [1047, 1.05]].forEach(([f, t]) => tone(f, t, 0.35, { type: 'square', vol: 0.3 })); },
   enter: () => { tone(392, 0, 0.1, { type: 'triangle' }); tone(784, 0.08, 0.2, { type: 'triangle' }); },
   talk: () => tone(440 + Math.random() * 120, 0, 0.04, { type: 'square', vol: 0.12 }),
+  transition: () => noise(0, 0.25, 0.08),
+  notify: () => { tone(880, 0, 0.1, { type: 'sine' }); tone(1320, 0.08, 0.2, { type: 'sine' }); },
   resist: () => { tone(392, 0, 0.15, { type: 'triangle' }); tone(523, 0.1, 0.15, { type: 'triangle' }); tone(784, 0.2, 0.4, { type: 'sine', vol: 0.5 }); },
 };
 
 export function sfx(name) {
+  if (muted || !ensure()) return;
+  if (playSample(name)) return;
   const f = SFX[name];
   if (f) f();
 }

@@ -3,7 +3,7 @@
 //   * code and content (HTML, JS, CSS, JSON): network first, cache as backup
 //   * images and fonts: cache first, refreshed in the background
 
-const CACHE = 'genesis-v5';
+const CACHE = 'genesis-v6';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -21,7 +21,7 @@ self.addEventListener('activate', (event) => {
 });
 
 function isMedia(url) {
-  return /\.(png|jpe?g|webp|gif|svg|woff2?|ttf)$/i.test(url.pathname) || url.hostname.includes('fonts.g');
+  return /\.(png|jpe?g|webp|gif|svg|woff2?|ttf|mp3)$/i.test(url.pathname) || url.hostname.includes('fonts.g');
 }
 
 async function networkFirst(request) {

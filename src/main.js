@@ -105,6 +105,7 @@ async function boot() {
       tune = entry ? ({ cap0: 'ceu', cap1: 'eden', cap2: 'fora_eden', cap3: 'campos', cap4: 'arca' })[id] || 'eden' : (params.mapId || 'eden');
     }
     playMusic(tune);
+    if (name !== 'title' && name !== 'challenge') sfx('transition');
     return goScene(name, params);
   };
   // the first touch anywhere turns sound on (phones require it); buttons click
