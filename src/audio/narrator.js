@@ -5,8 +5,10 @@
 import { isMuted } from './audio.js';
 
 const KEY = 'genesis.narrator';
-let auto = true;
-try { auto = localStorage.getItem(KEY) !== '0'; } catch { /* ignore */ }
+// Off by default until recorded natural voices are added; recorded files
+// always play when the narrator is on.
+let auto = false;
+try { auto = localStorage.getItem(KEY) === '1'; } catch { /* ignore */ }
 let current = null;
 let recorded = null;
 
