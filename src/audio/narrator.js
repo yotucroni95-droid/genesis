@@ -17,14 +17,31 @@ export function setNarrator(on) {
   if (!on) stopSpeaking();
 }
 
-function bestVoice() {
-  const voices = (window.speechSynthesis && window.speechSynthesis.getVoices()) || [];
-  const pt = voices.filter((v) => /^pt(-|_)?BR/i.test(v.lang) || v.lang === 'pt-BR');
-  const all = pt.length ? pt : voices.filter((v) => /^pt/i.test(v.lang));
-  const rank = (v) => (/(natural|neural|premium|enhanced|online)/i.test(v.name) ? 0 : /google/i.test(v.name) ? 1 : /(luciana|francisca|thalita|antonio|daniel)/i.test(v.name) ? 2 : 3);
-  return all.sort((a, b) => rank(a) - rank(b))[0] || null;
+let voicesReady = null;
+function getVoices() {
+  // Chrome on Android loads the list later: wait for it once
+  if (!window.speechSynthesis) return Promise.resolve([]);
+  const now = window.speechSynthesis.getVoices();
+  if (now.length) return Promise.resolve(now);
+  if (!voicesReady) {
+    voicesReady = new Promise((resolve) => {
+      window.speechSynthesis.onvoiceschanged = () => resolve(window.speechSynthesis.getVoices());
+      setTimeout(() => resolve(window.speechSynthesis.getVoices()), 1500);
+    });
+  }
+  return voicesReady;
 }
-if (window.speechSynthesis) window.speechSynthesis.onvoiceschanged = () => {};
+
+/** Only Brazilian Portuguese voices; never Portugal's. Best-sounding first. */
+async function bestVoice() {
+  const voices = await getVoices();
+  const br = voices.filter((v) => /^pt[-_]br$/i.test(v.lang) || /brasil|brazil/i.test(v.name));
+  const rank = (v) => (/(natural|neural|premium|enhanced|online)/i.test(v.name) ? 0
+    : /google/i.test(v.name) ? 1
+      : /(luciana|francisca|thalita|antonio|daniel|felipe)/i.test(v.name) ? 2
+        : /(grandma|grandpa|eddy|flo|reed|rocko|sandy|shelley)/i.test(v.name) ? 9 : 3);
+  return br.sort((a, b) => rank(a) - rank(b))[0] || null;
+}
 
 export async function loadRecorded(assets) {
   if (recorded) return recorded;
@@ -48,11 +65,14 @@ export function speak(text, key) {
     return;
   }
   if (!window.speechSynthesis) return;
-  const u = new SpeechSynthesisUtterance(text.replace(/[*_"“”]/g, ''));
-  const v = bestVoice();
-  if (v) u.voice = v;
-  u.lang = 'pt-BR';
-  u.rate = 0.95;
-  u.pitch = 1;
-  window.speechSynthesis.speak(u);
+  bestVoice().then((v) => {
+    if (!v) return; // no Brazilian voice on this phone: stay silent instead of using Portugal's
+    const u = new SpeechSynthesisUtterance(text.replace(/[*_"“”]/g, ''));
+    u.voice = v;
+    u.lang = v.lang;
+    u.rate = 0.95;
+    u.pitch = 1;
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+  });
 }
