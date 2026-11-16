@@ -23,8 +23,8 @@
     },
     {
       "sheet": "jaco",
-      "x": 11,
-      "y": 7,
+      "x": 7,
+      "y": 9,
       "dir": 0,
       "talk": [
         "Deus estava comigo até quando eu fugia.",
@@ -35,7 +35,7 @@
     {
       "sheet": "rebeca",
       "x": 5,
-      "y": 10,
+      "y": 5,
       "dir": 0,
       "talk": [
         "Meus meninos brigavam desde a barriga!",
@@ -44,8 +44,8 @@
     },
     {
       "sheet": "anjos_caidos",
-      "x": 26,
-      "y": 4,
+      "x": 25,
+      "y": 9,
       "dir": 0,
       "talk": [
         "Troque o que é de Deus por algo agora. Que mal tem?",
@@ -64,8 +64,8 @@
     {
       "id": "cap8_s1",
       "title": "O prato de lentilhas",
-      "x": 6,
-      "y": 6,
+      "x": 15,
+      "y": 12,
       "verse": "Gênesis 25:27-34; 27:41-43",
       "story": [
         {
@@ -149,7 +149,7 @@
       "id": "cap8_s2",
       "title": "A escada de Betel",
       "x": 14,
-      "y": 11,
+      "y": 7,
       "verse": "Gênesis 28:10-22",
       "story": [
         {
@@ -186,8 +186,8 @@
     {
       "id": "cap8_s3",
       "title": "A luta no Jaboque",
-      "x": 23,
-      "y": 6,
+      "x": 14,
+      "y": 14,
       "verse": "Gênesis 32:22-30",
       "story": [
         {
@@ -224,8 +224,8 @@
     {
       "id": "cap8_s4",
       "title": "O abraço dos irmãos",
-      "x": 25,
-      "y": 15,
+      "x": 21,
+      "y": 7,
       "verse": "Gênesis 33:1-4",
       "story": [
         {

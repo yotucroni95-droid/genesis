@@ -22,8 +22,8 @@
     },
     {
       "sheet": "povo",
-      "x": 5,
-      "y": 12,
+      "x": 4,
+      "y": 9,
       "dir": 0,
       "talk": [
         "Eu sou Rúben, o mais velho. Não quero que façam mal a José.",
@@ -33,7 +33,7 @@
     },
     {
       "sheet": "povo",
-      "x": 3,
+      "x": 13,
       "y": 9,
       "dir": 0,
       "talk": [
@@ -45,7 +45,7 @@
     {
       "sheet": "povo",
       "x": 12,
-      "y": 14,
+      "y": 11,
       "dir": 0,
       "talk": [
         "Ele é o preferido... ele merece sofrer!",
@@ -64,8 +64,8 @@
     {
       "id": "cap9_s1",
       "title": "A túnica colorida",
-      "x": 6,
-      "y": 6,
+      "x": 8,
+      "y": 4,
       "verse": "Gênesis 37:1-4",
       "story": [
         {
@@ -113,8 +113,8 @@
     {
       "id": "cap9_s2",
       "title": "Os sonhos de José",
-      "x": 14,
-      "y": 11,
+      "x": 8,
+      "y": 13,
       "verse": "Gênesis 37:5-11",
       "story": [
         {
@@ -193,8 +193,8 @@
     {
       "id": "cap9_s3",
       "title": "Vendido pelos irmãos",
-      "x": 23,
-      "y": 6,
+      "x": 10,
+      "y": 10,
       "verse": "Gênesis 37:12-28",
       "story": [
         {
@@ -241,8 +241,8 @@
     {
       "id": "cap9_s4",
       "title": "Fiel na prisão",
-      "x": 25,
-      "y": 15,
+      "x": 24,
+      "y": 18,
       "verse": "Gênesis 39:1-6, 20-23; 40:1-23",
       "story": [
         {

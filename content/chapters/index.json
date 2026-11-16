@@ -34,15 +34,13 @@
       "id": "cap5",
       "number": 5,
       "title": "A Torre de Babel",
-      "file": "chapters/cap5.json",
-      "waitingMap": true
+      "file": "chapters/cap5.json"
     },
     {
       "id": "cap6",
       "number": 6,
       "title": "O chamado de Abraão",
-      "file": "chapters/cap6.json",
-      "waitingMap": true
+      "file": "chapters/cap6.json"
     },
     {
       "id": "cap7",
@@ -55,22 +53,19 @@
       "id": "cap8",
       "number": 8,
       "title": "Jacó e Esaú",
-      "file": "chapters/cap8.json",
-      "waitingMap": true
+      "file": "chapters/cap8.json"
     },
     {
       "id": "cap9",
       "number": 9,
       "title": "José, o sonhador",
-      "file": "chapters/cap9.json",
-      "waitingMap": true
+      "file": "chapters/cap9.json"
     },
     {
       "id": "cap10",
       "number": 10,
       "title": "José governa o Egito",
-      "file": "chapters/cap10.json",
-      "waitingMap": true
+      "file": "chapters/cap10.json"
     }
   ]
 }

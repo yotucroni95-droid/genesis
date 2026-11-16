@@ -24,6 +24,31 @@
       "id": "arca",
       "name": "A Arca de Noé",
       "file": "maps/arca.json"
+    },
+    {
+      "id": "babel",
+      "name": "Planície de Sinar",
+      "file": "maps/babel.json"
+    },
+    {
+      "id": "cana",
+      "name": "Canaã",
+      "file": "maps/cana.json"
+    },
+    {
+      "id": "betel",
+      "name": "Betel",
+      "file": "maps/betel.json"
+    },
+    {
+      "id": "dota",
+      "name": "Dotã e o Egito",
+      "file": "maps/dota.json"
+    },
+    {
+      "id": "egito",
+      "name": "O Egito",
+      "file": "maps/egito.json"
     }
   ]
 }

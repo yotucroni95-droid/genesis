@@ -17,7 +17,7 @@ export function createExploreScene(game) {
       index.forEach((entry, i) => {
         const chapter = loaded[i];
         const waiting = Boolean(entry.waitingMap); // story written, map still being drawn
-        const open = chapter && !waiting && isChapterOpen(save, i, loaded);
+        const open = chapter && !waiting && isChapterOpen(save, i, loaded, index);
         const prog = chapter ? chapterProgress(save, chapter) : { done: 0, total: 0 };
         const done = chapter && chapterDone(save, chapter);
         const mapId = chapter ? chapter.map : null;
@@ -50,7 +50,7 @@ export function createExploreScene(game) {
         } else grid.appendChild(card);
       });
       const st = save.state;
-      const totalStops = loaded.filter(Boolean).reduce((n, c) => n + c.stops.length, 0);
+      const totalStops = loaded.filter((c, i) => c && !index[i].waitingMap).reduce((n, c) => n + c.stops.length, 0);
       const doneStops = Object.keys(st.progress).length;
       const medals = Object.keys(st.achievements).length;
       const chars = Object.keys(st.unlocked).length;

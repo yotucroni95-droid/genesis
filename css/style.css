@@ -1044,3 +1044,5 @@ button { touch-action: manipulation; }
 .map-card__wrap .map-card { flex: 1; }
 .map-card__hero { background: linear-gradient(180deg, #ff8a6e, #c0392b); color: #fff; box-shadow: 0 3px 0 #6d1d14; font-size: 13px; }
 .map-card__hero.is-done { background: linear-gradient(180deg, #7cf0a6, #2f9a5a); box-shadow: 0 3px 0 #1d5a35; }
+
+.pass__final { width: 48px; height: 48px; }

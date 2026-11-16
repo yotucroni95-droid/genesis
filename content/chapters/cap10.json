@@ -14,7 +14,7 @@
     {
       "sheet": "povo",
       "x": 14,
-      "y": 5,
+      "y": 7,
       "dir": 0,
       "talk": [
         "Não há ninguém tão sábio como José!",
@@ -25,8 +25,8 @@
     },
     {
       "sheet": "jose",
-      "x": 18,
-      "y": 8,
+      "x": 16,
+      "y": 7,
       "dir": 0,
       "talk": [
         "Deus transformou o mal em bem.",
@@ -36,8 +36,8 @@
     },
     {
       "sheet": "jaco",
-      "x": 6,
-      "y": 9,
+      "x": 13,
+      "y": 13,
       "dir": 0,
       "talk": [
         "Meu filho José está vivo! Que alegria!",
@@ -46,8 +46,8 @@
     },
     {
       "sheet": "povo",
-      "x": 9,
-      "y": 12,
+      "x": 16,
+      "y": 13,
       "dir": 0,
       "talk": [
         "José é meu irmão! Ele nos perdoou!",
@@ -57,7 +57,7 @@
     },
     {
       "sheet": "lucifer",
-      "x": 27,
+      "x": 23,
       "y": 14,
       "dir": 0,
       "talk": [
@@ -76,8 +76,8 @@
     {
       "id": "cap10_s1",
       "title": "Os sonhos do Faraó",
-      "x": 6,
-      "y": 6,
+      "x": 14,
+      "y": 5,
       "verse": "Gênesis 41:1-40",
       "story": [
         {
@@ -160,8 +160,8 @@
     {
       "id": "cap10_s2",
       "title": "Os celeiros cheios",
-      "x": 14,
-      "y": 11,
+      "x": 6,
+      "y": 10,
       "verse": "Gênesis 41:46-57",
       "story": [
         {
@@ -205,8 +205,8 @@
     {
       "id": "cap10_s3",
       "title": "Os irmãos se curvam",
-      "x": 23,
-      "y": 6,
+      "x": 18,
+      "y": 10,
       "verse": "Gênesis 42:1-24",
       "story": [
         {
@@ -239,8 +239,8 @@
     {
       "id": "cap10_s4",
       "title": "\"Eu sou José\"",
-      "x": 25,
-      "y": 15,
+      "x": 23,
+      "y": 9,
       "verse": "Gênesis 44:33 – 45:15",
       "story": [
         {
@@ -277,8 +277,8 @@
     {
       "id": "cap10_s5",
       "title": "Deus transformou o mal em bem",
-      "x": 9,
-      "y": 15,
+      "x": 14,
+      "y": 16,
       "verse": "Gênesis 50:15-21",
       "story": [
         {

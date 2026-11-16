@@ -1376,8 +1376,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.rute",
@@ -1387,8 +1386,7 @@
    "h": 64,
    "color": "#e8c25a",
    "label": "Rute",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.jonas",
@@ -1412,8 +1410,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.jonas",
@@ -1423,8 +1420,7 @@
    "h": 64,
    "color": "#3a5f9e",
    "label": "Jonas",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.marta",
@@ -1448,8 +1444,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.marta",
@@ -1459,8 +1454,7 @@
    "h": 64,
    "color": "#9b3b4f",
    "label": "Marta",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.gideao",
@@ -1484,8 +1478,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.gideao",
@@ -1495,8 +1488,7 @@
    "h": 64,
    "color": "#9a6b3c",
    "label": "Gideão",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.zaqueu",
@@ -1520,8 +1512,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.zaqueu",
@@ -1531,8 +1522,7 @@
    "h": 64,
    "color": "#3f9a4f",
    "label": "Zaqueu",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.timoteo",
@@ -1556,8 +1546,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.timoteo",
@@ -1567,8 +1556,7 @@
    "h": 64,
    "color": "#4f7fd0",
    "label": "Timóteo",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.sansao",
@@ -1592,8 +1580,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.sansao",
@@ -1603,8 +1590,7 @@
    "h": 64,
    "color": "#a0522d",
    "label": "Sansão",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.ester",
@@ -1628,8 +1614,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.ester",
@@ -1639,8 +1624,7 @@
    "h": 64,
    "color": "#8a3fc0",
    "label": "Ester",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.elias",
@@ -1664,8 +1648,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.elias",
@@ -1675,8 +1658,7 @@
    "h": 64,
    "color": "#7a5230",
    "label": "Elias",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.pedro",
@@ -1700,8 +1682,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.pedro",
@@ -1711,8 +1692,7 @@
    "h": 64,
    "color": "#d0742c",
    "label": "Pedro",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.debora",
@@ -1736,8 +1716,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.debora",
@@ -1747,8 +1726,7 @@
    "h": 64,
    "color": "#6b8e23",
    "label": "Débora",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.moises",
@@ -1772,8 +1750,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.moises",
@@ -1783,8 +1760,7 @@
    "h": 64,
    "color": "#c0392b",
    "label": "Moisés",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.davi",
@@ -1808,8 +1784,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.davi",
@@ -1819,8 +1794,7 @@
    "h": 64,
    "color": "#d9632b",
    "label": "Davi",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.daniel",
@@ -1844,8 +1818,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.daniel",
@@ -1855,8 +1828,7 @@
    "h": 64,
    "color": "#2d5fb3",
    "label": "Daniel",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.josue",
@@ -1880,8 +1852,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.josue",
@@ -1891,8 +1862,7 @@
    "h": 64,
    "color": "#b08d3c",
    "label": "Josué",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.samuel",
@@ -1916,8 +1886,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.samuel",
@@ -1927,8 +1896,7 @@
    "h": 64,
    "color": "#e8e4d0",
    "label": "Samuel",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.paulo",
@@ -1952,8 +1920,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.paulo",
@@ -1963,8 +1930,7 @@
    "h": 64,
    "color": "#8b1e2e",
    "label": "Paulo",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.joao_batista",
@@ -1988,8 +1954,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.joao_batista",
@@ -1999,8 +1964,7 @@
    "h": 64,
    "color": "#8d6e4f",
    "label": "João Batista",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.salomao",
@@ -2024,8 +1988,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.salomao",
@@ -2035,8 +1998,7 @@
    "h": 64,
    "color": "#7b3fa0",
    "label": "Salomão",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.maria",
@@ -2060,8 +2022,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.maria",
@@ -2071,8 +2032,7 @@
    "h": 64,
    "color": "#3c6fc8",
    "label": "Maria",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.jesus",
@@ -2096,8 +2056,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.jesus",
@@ -2107,8 +2066,7 @@
    "h": 64,
    "color": "#fff1b8",
    "label": "Jesus",
-   "group": "Retratos raros",
-   "pending": true
+   "group": "Retratos raros"
   },
   {
    "id": "sheet.abraao",
@@ -2132,8 +2090,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.abraao",
@@ -2143,8 +2100,7 @@
    "h": 64,
    "color": "#b8875a",
    "label": "Abraão",
-   "group": "Retratos (temporada 2)",
-   "pending": true
+   "group": "Retratos (temporada 2)"
   },
   {
    "id": "sheet.sara",
@@ -2168,8 +2124,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.sara",
@@ -2179,8 +2134,7 @@
    "h": 64,
    "color": "#b58fd6",
    "label": "Sara",
-   "group": "Retratos (temporada 2)",
-   "pending": true
+   "group": "Retratos (temporada 2)"
   },
   {
    "id": "sheet.isaque",
@@ -2204,8 +2158,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.isaque",
@@ -2215,8 +2168,7 @@
    "h": 64,
    "color": "#7fb2e5",
    "label": "Isaque",
-   "group": "Retratos (temporada 2)",
-   "pending": true
+   "group": "Retratos (temporada 2)"
   },
   {
    "id": "sheet.rebeca",
@@ -2240,8 +2192,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.rebeca",
@@ -2251,8 +2202,7 @@
    "h": 64,
    "color": "#5fc7b8",
    "label": "Rebeca",
-   "group": "Retratos (temporada 2)",
-   "pending": true
+   "group": "Retratos (temporada 2)"
   },
   {
    "id": "sheet.jaco",
@@ -2276,8 +2226,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.jaco",
@@ -2287,8 +2236,7 @@
    "h": 64,
    "color": "#6f9a4f",
    "label": "Jacó",
-   "group": "Retratos (temporada 2)",
-   "pending": true
+   "group": "Retratos (temporada 2)"
   },
   {
    "id": "sheet.jose",
@@ -2312,8 +2260,7 @@
      2,
      3
     ]
-   },
-   "pending": true
+   }
   },
   {
    "id": "portrait.jose",
@@ -2323,8 +2270,7 @@
    "h": 64,
    "color": "#e0a33a",
    "label": "José",
-   "group": "Retratos (temporada 2)",
-   "pending": true
+   "group": "Retratos (temporada 2)"
   },
   {
    "id": "sheet.povo",
@@ -2343,8 +2289,7 @@
      0
     ]
    },
-   "variants": true,
-   "pending": true
+   "variants": true
   },
   {
    "id": "medal.capitulo_5",
@@ -2354,8 +2299,7 @@
    "h": 64,
    "color": "#c08a4a",
    "label": "Humilde de Coração",
-   "group": "Medalhas",
-   "pending": true
+   "group": "Medalhas"
   },
   {
    "id": "medal.capitulo_6",
@@ -2365,8 +2309,7 @@
    "h": 64,
    "color": "#d9b25a",
    "label": "Amigo de Deus",
-   "group": "Medalhas",
-   "pending": true
+   "group": "Medalhas"
   },
   {
    "id": "medal.capitulo_7",
@@ -2376,8 +2319,7 @@
    "h": 64,
    "color": "#8ab06a",
    "label": "O Senhor Proverá",
-   "group": "Medalhas",
-   "pending": true
+   "group": "Medalhas"
   },
   {
    "id": "medal.capitulo_8",
@@ -2387,8 +2329,7 @@
    "h": 64,
    "color": "#7aa0d8",
    "label": "Casa de Deus",
-   "group": "Medalhas",
-   "pending": true
+   "group": "Medalhas"
   },
   {
    "id": "medal.capitulo_9",
@@ -2398,8 +2339,7 @@
    "h": 64,
    "color": "#d98a3a",
    "label": "Sonhador Fiel",
-   "group": "Medalhas",
-   "pending": true
+   "group": "Medalhas"
   },
   {
    "id": "medal.capitulo_10",
@@ -2409,8 +2349,7 @@
    "h": 64,
    "color": "#ffd36e",
    "label": "Gênesis Completo",
-   "group": "Medalhas",
-   "pending": true
+   "group": "Medalhas"
   },
   {
    "id": "puzzle.babel",
@@ -2420,8 +2359,7 @@
    "h": 192,
    "color": "#b07a4a",
    "label": "A Torre de Babel",
-   "group": "Imagens do quebra-cabeça",
-   "pending": true
+   "group": "Imagens do quebra-cabeça"
   },
   {
    "id": "puzzle.estrelas",
@@ -2431,8 +2369,7 @@
    "h": 192,
    "color": "#30407a",
    "label": "Abraão e as estrelas",
-   "group": "Imagens do quebra-cabeça",
-   "pending": true
+   "group": "Imagens do quebra-cabeça"
   },
   {
    "id": "puzzle.rebeca",
@@ -2442,8 +2379,7 @@
    "h": 192,
    "color": "#5fa7b8",
    "label": "Rebeca no poço",
-   "group": "Imagens do quebra-cabeça",
-   "pending": true
+   "group": "Imagens do quebra-cabeça"
   },
   {
    "id": "puzzle.escada",
@@ -2453,8 +2389,7 @@
    "h": 192,
    "color": "#c9b26a",
    "label": "A escada de Jacó",
-   "group": "Imagens do quebra-cabeça",
-   "pending": true
+   "group": "Imagens do quebra-cabeça"
   },
   {
    "id": "puzzle.tunica",
@@ -2464,8 +2399,7 @@
    "h": 192,
    "color": "#d98a3a",
    "label": "José e a túnica",
-   "group": "Imagens do quebra-cabeça",
-   "pending": true
+   "group": "Imagens do quebra-cabeça"
   },
   {
    "id": "puzzle.abraco",
@@ -2475,8 +2409,7 @@
    "h": 192,
    "color": "#c06a5a",
    "label": "José perdoa os irmãos",
-   "group": "Imagens do quebra-cabeça",
-   "pending": true
+   "group": "Imagens do quebra-cabeça"
   },
   {
    "id": "map.babel",
@@ -2486,8 +2419,7 @@
    "label": "Planície de Sinar",
    "group": "Mapas desenhados (opcional)",
    "w": 960,
-   "h": 640,
-   "pending": true
+   "h": 640
   },
   {
    "id": "map.cana",
@@ -2497,8 +2429,7 @@
    "label": "Canaã (Manre)",
    "group": "Mapas desenhados (opcional)",
    "w": 960,
-   "h": 640,
-   "pending": true
+   "h": 640
   },
   {
    "id": "map.moria",
@@ -2519,8 +2450,7 @@
    "label": "Betel e o Jaboque",
    "group": "Mapas desenhados (opcional)",
    "w": 960,
-   "h": 640,
-   "pending": true
+   "h": 640
   },
   {
    "id": "map.dota",
@@ -2530,8 +2460,7 @@
    "label": "Dotã e o caminho do Egito",
    "group": "Mapas desenhados (opcional)",
    "w": 960,
-   "h": 640,
-   "pending": true
+   "h": 640
   },
   {
    "id": "map.egito",
@@ -2541,8 +2470,7 @@
    "label": "Egito",
    "group": "Mapas desenhados (opcional)",
    "w": 960,
-   "h": 640,
-   "pending": true
+   "h": 640
   },
   {
    "id": "arena.bronze",
@@ -2552,8 +2480,7 @@
    "label": "Arena bronze",
    "group": "Arenas",
    "w": 960,
-   "h": 540,
-   "pending": true
+   "h": 540
   },
   {
    "id": "arena.prata",
@@ -2563,8 +2490,7 @@
    "label": "Arena prata",
    "group": "Arenas",
    "w": 960,
-   "h": 540,
-   "pending": true
+   "h": 540
   },
   {
    "id": "arena.ouro",
@@ -2574,8 +2500,7 @@
    "label": "Arena ouro",
    "group": "Arenas",
    "w": 960,
-   "h": 540,
-   "pending": true
+   "h": 540
   },
   {
    "id": "arena.diamante",
@@ -2585,8 +2510,7 @@
    "label": "Arena diamante",
    "group": "Arenas",
    "w": 960,
-   "h": 540,
-   "pending": true
+   "h": 540
   },
   {
    "id": "arena.lendario",
@@ -2596,8 +2520,403 @@
    "label": "Arena lendario",
    "group": "Arenas",
    "w": 960,
-   "h": 540,
-   "pending": true
+   "h": 540
+  },
+  {
+   "id": "icon.lamparina",
+   "src": "icons/lamparina.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Lamparina acesa",
+   "emoji": "🪔",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.lamparina_apagada",
+   "src": "icons/lamparina_apagada.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Lamparina apagada",
+   "emoji": "🪔",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.lamparina_azul",
+   "src": "icons/lamparina_azul.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Lamparina azul (30 dias)",
+   "emoji": "🪔",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.lamparina_branca",
+   "src": "icons/lamparina_branca.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Lamparina branca (100 dias)",
+   "emoji": "🪔",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.azeite",
+   "src": "icons/azeite.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Frasco de azeite",
+   "emoji": "🫙",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.denario",
+   "src": "icons/denario.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Denário",
+   "emoji": "🥈",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.denarios",
+   "src": "icons/denarios.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Pilha de denários",
+   "emoji": "🥈",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.fragmento",
+   "src": "icons/fragmento.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Fragmento de personagem",
+   "emoji": "🧩",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.oferta",
+   "src": "icons/oferta.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Oferta",
+   "emoji": "🏷️",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.pacote",
+   "src": "icons/pacote.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Pacote",
+   "emoji": "🛍️",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.cadeado_ouro",
+   "src": "icons/cadeado_ouro.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Cadeado dourado",
+   "emoji": "🔒",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.relogio_sol",
+   "src": "icons/relogio_sol.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Relógio de sol",
+   "emoji": "⏳",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.passe",
+   "src": "icons/passe.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Passe da Fé",
+   "emoji": "🎖️",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.passe_premium",
+   "src": "icons/passe_premium.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Passe da Fé premium",
+   "emoji": "🎖️",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.semana",
+   "src": "icons/semana.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Missões da semana",
+   "emoji": "📅",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.trofeu_ouro",
+   "src": "icons/trofeu_ouro.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Troféu dourado",
+   "emoji": "🏆",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.ordem",
+   "src": "icons/ordem.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Ordem certa",
+   "emoji": "🔢",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.versiculo",
+   "src": "icons/versiculo.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Complete o versículo",
+   "emoji": "📖",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.vf",
+   "src": "icons/vf.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Verdadeiro ou Falso",
+   "emoji": "✅",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.cacapalavras",
+   "src": "icons/cacapalavras.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Caça-palavras",
+   "emoji": "🔎",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.heroi",
+   "src": "icons/heroi.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Modo Herói",
+   "emoji": "⚔️",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.desafio",
+   "src": "icons/desafio.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Desafiar amigo",
+   "emoji": "🥊",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.rastro",
+   "src": "icons/rastro.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Rastro",
+   "emoji": "👣",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.poder",
+   "src": "icons/poder.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Poder do personagem",
+   "emoji": "✨",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.louros",
+   "src": "icons/louros.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Coroa de louros",
+   "emoji": "🏅",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "icon.moldura",
+   "src": "ui/moldura_oliveira.png",
+   "kind": "icon",
+   "w": 96,
+   "h": 96,
+   "color": "#ffd36e",
+   "label": "Moldura",
+   "emoji": "🖼️",
+   "group": "Ícones da temporada 2 (96×96)"
+  },
+  {
+   "id": "ui.moldura_oliveira",
+   "src": "ui/moldura_oliveira.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Moldura Oliveira",
+   "group": "Molduras do perfil (128×128)"
+  },
+  {
+   "id": "ui.moldura_trigo",
+   "src": "ui/moldura_trigo.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Moldura Trigo",
+   "group": "Molduras do perfil (128×128)"
+  },
+  {
+   "id": "ui.moldura_mar_vermelho",
+   "src": "ui/moldura_mar_vermelho.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Moldura Mar Vermelho",
+   "group": "Molduras do perfil (128×128)"
+  },
+  {
+   "id": "ui.moldura_harpa",
+   "src": "ui/moldura_harpa.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Moldura Harpa de Davi",
+   "group": "Molduras do perfil (128×128)"
+  },
+  {
+   "id": "ui.moldura_peitoral",
+   "src": "ui/moldura_peitoral.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Moldura Peitoral",
+   "group": "Molduras do perfil (128×128)"
+  },
+  {
+   "id": "ui.moldura_estrela_belem",
+   "src": "ui/moldura_estrela_belem.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Moldura Estrela de Belém",
+   "group": "Molduras do perfil (128×128)"
+  },
+  {
+   "id": "ui.moldura_salomao",
+   "src": "ui/moldura_salomao.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Moldura Salomão",
+   "group": "Molduras do perfil (128×128)"
+  },
+  {
+   "id": "ui.moldura_luz_celestial",
+   "src": "ui/moldura_luz_celestial.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Moldura Luz Celestial",
+   "group": "Molduras do perfil (128×128)"
+  },
+  {
+   "id": "ui.bau_celeste",
+   "src": "ui/bau_celeste.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Baú Celestial (fechado)",
+   "group": "Baús (128×128)"
+  },
+  {
+   "id": "ui.bau_celeste_aberto",
+   "src": "ui/bau_celeste_aberto.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Baú Celestial (aberto)",
+   "group": "Baús (128×128)"
+  },
+  {
+   "id": "ui.pacote_semana",
+   "src": "ui/pacote_semana.png",
+   "kind": "ui",
+   "w": 128,
+   "h": 128,
+   "color": "#ffd36e",
+   "label": "Pacote da semana",
+   "group": "Baús (128×128)"
   }
  ]
 }

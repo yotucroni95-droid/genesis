@@ -1,6 +1,7 @@
 // Player profile: rank, stats, and choosing title and frame.
 
 import { h } from '../ui/dom.js';
+import { loadChapter } from '../content/progression.js';
 import { gameScreen } from '../ui/screen.js';
 import { toast } from '../ui/toast.js';
 import { loadExtras, rankBadge, rankProgress, framedAvatar, frameView, ico } from '../ui/game-ui.js';
@@ -15,7 +16,9 @@ export function createProfileScene(game) {
       game.extras = game.extras || await loadExtras(game.assets);
       const save = game.save;
       const s = save.state;
-      const totalStops = 17;
+      const entries = game.assets.json('chapters/index.json').chapters;
+      const chs = await Promise.all(entries.map((e) => loadChapter(game.assets, e)));
+      const totalStops = chs.reduce((n, c, i) => n + (c && !entries[i].waitingMap ? c.stops.length : 0), 0);
       const slot = { titles: 'title', frames: 'frame', trails: 'trail' };
       const stat = (label, value) => h('div', { class: 'stat' }, h('b', { text: String(value) }), h('small', { text: label }));
       const picker = (kind, list) => h('div', { class: 'picker' }, ...list.map((c) => {

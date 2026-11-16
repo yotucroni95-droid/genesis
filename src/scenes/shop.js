@@ -66,7 +66,7 @@ export function createShopScene(game) {
 
       const packBought = weeklyPackBought(save);
       const pack = h('div', { class: `offer offer--pack${packBought ? ' is-sold' : ''}` },
-        ico('icon.pacote', '🎒', 'offer__ico offer__ico--big'),
+        ico('ui.pacote_semana', '🎒', 'offer__ico offer__ico--big'),
         h('div', { class: 'offer__packtext' }, h('b', { text: WEEKLY_PACK.label }), h('small', { text: WEEKLY_PACK.text })),
         packBought ? h('span', { class: 'tag tag--final', text: 'Comprado esta semana ✓' })
           : h('button', { class: 'btn offer__buy', onClick: () => {

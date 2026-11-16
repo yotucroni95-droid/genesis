@@ -4,14 +4,14 @@
 import { h } from '../ui/dom.js';
 import { gameScreen } from '../ui/screen.js';
 import { toast } from '../ui/toast.js';
-import { ico, chest, formatWait } from '../ui/game-ui.js';
+import { ico, chest, formatWait, hasArt } from '../ui/game-ui.js';
 import { pass, passReward, claimPass, PASS_LEVELS, FE_PER_LEVEL, seasonNumber, seasonEndsIn } from '../game/meta.js';
 import { Starfield } from './starfield.js';
 import { sfx } from '../audio/audio.js';
 
 function rewardIcon(r) {
   if (r.kind === 'box') return chest(r.rarity, { size: 40 });
-  if (r.kind === 'final') return chest('lendário', { size: 44 });
+  if (r.kind === 'final') return hasArt('ui.bau_celeste') ? ico('ui.bau_celeste', '🎁', 'pass__final') : chest('lendário', { size: 44 });
   return {
     coins: () => ico('icon.moeda', '🪙'), denarios: () => ico('icon.denario', '🥈'), oil: () => ico('icon.azeite', '🫙'),
     frag: () => ico('icon.fragmento', '🧩'), frame: () => ico('icon.moldura', '🖼️'),
@@ -49,7 +49,7 @@ export function createPassScene(game) {
       }));
       ui.appendChild(gameScreen(game, 'Passe da Fé', h('div', {},
         h('div', { class: 'pass__head' },
-          ico('icon.passe', '🎖️', 'pass__badge'),
+          ico(p.level >= 20 ? 'icon.passe_premium' : 'icon.passe', '🎖️', 'pass__badge'),
           h('div', { class: 'pass__info' },
             h('b', { text: `Temporada ${seasonNumber()} · Nível ${p.level} de ${PASS_LEVELS}` }),
             h('div', { class: 'bar' }, h('div', { class: 'bar__fill', style: { width: `${Math.round((inLevel / FE_PER_LEVEL) * 100)}%` } })),
