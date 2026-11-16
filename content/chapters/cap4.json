@@ -25,7 +25,7 @@
     {
       "id": "cap4_s1",
       "title": "Construindo a arca",
-      "x": 12,
+      "x": 14,
       "y": 9,
       "verse": "Gênesis 6:5-22",
       "story": [
@@ -63,8 +63,8 @@
     {
       "id": "cap4_s2",
       "title": "Os animais entram",
-      "x": 10,
-      "y": 11,
+      "x": 14,
+      "y": 12,
       "verse": "Gênesis 7:1-16",
       "story": [
         {
@@ -162,8 +162,8 @@
     {
       "id": "cap4_s3",
       "title": "A pomba",
-      "x": 24,
-      "y": 12,
+      "x": 20,
+      "y": 9,
       "verse": "Gênesis 7:11-12; 8:6-12",
       "story": [
         {
@@ -197,7 +197,7 @@
       "id": "cap4_s4",
       "title": "A aliança do arco-íris",
       "x": 14,
-      "y": 16,
+      "y": 15,
       "verse": "Gênesis 9:8-17",
       "story": [
         {

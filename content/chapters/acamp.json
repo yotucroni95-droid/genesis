@@ -89,7 +89,7 @@
     {
       "id": "acamp_s1",
       "title": "Bem-vindo ao Acampamento",
-      "x": 11,
+      "x": 12,
       "y": 14,
       "verse": "Salmos 34:7",
       "story": [
@@ -119,8 +119,8 @@
     {
       "id": "acamp_s2",
       "title": "O Clube de Aventureiros",
-      "x": 6,
-      "y": 14,
+      "x": 11,
+      "y": 11,
       "verse": "Provérbios 22:6",
       "story": [
         {
@@ -133,7 +133,7 @@
         },
         {
           "speaker": "aventureira",
-          "text": "E o nosso voto é: \"Por amor a Jesus, farei sempre o melhor.\" Vamos ver se você sabe tudo isso?"
+          "text": "E o nosso voto é: \"Por amor a Jesus, farei sempre o meu melhor.\" Vamos ver se você sabe tudo isso?"
         }
       ],
       "challenge": {
@@ -154,7 +154,7 @@
             {
               "q": "Qual é o Voto do Aventureiro?",
               "options": [
-                "Por amor a Jesus, farei sempre o melhor.",
+                "Por amor a Jesus, farei sempre o meu melhor.",
                 "Serei sempre o primeiro em tudo.",
                 "Nunca vou precisar de ajuda."
               ],
@@ -229,14 +229,14 @@
               "verse": "Provérbios 22:6"
             },
             {
-              "q": "Pela Lei do Aventureiro, Jesus pode me ajudar a ser…",
+              "q": "Pela Lei do Aventureiro, Jesus me ajuda a ser…",
               "options": [
-                "Obediente, bondoso e alegre",
+                "Obediente, puro e reverente",
                 "Rico, famoso e forte",
                 "Bravo, impaciente e preguiçoso"
               ],
               "answer": 0,
-              "explain": "A lei tem 10 partes: obediente, puro, verdadeiro, bondoso, respeitoso, atento, prestativo, alegre, considerado e reverente.",
+              "explain": "A lei tem 5 qualidades: obediente, puro, reverente, bondoso e colaborador.",
               "verse": "Provérbios 22:6"
             },
             {
@@ -307,41 +307,36 @@
     {
       "id": "acamp_s3",
       "title": "A Lei do Aventureiro",
-      "x": 2,
-      "y": 15,
+      "x": 11,
+      "y": 9,
       "verse": "Provérbios 22:6",
       "story": [
         {
           "speaker": "aventureira",
-          "text": "A Lei do Aventureiro diz que Jesus pode me ajudar a ser:"
+          "text": "A Lei do Aventureiro é curtinha. Ela diz: Jesus me ajuda a ser…"
         },
         {
           "speaker": "aventureira",
-          "text": "Obediente, puro, verdadeiro, bondoso e respeitoso…"
+          "text": "…obediente, puro, reverente, bondoso e colaborador."
         },
         {
           "speaker": "aventureira",
-          "text": "…atento, prestativo, alegre, considerado e reverente. Agora coloque as 10 partes na ordem, sem errar nenhuma!"
+          "text": "São só 5 qualidades! Agora coloque a lei na ordem, sem errar nenhuma."
         }
       ],
       "challenge": {
         "type": "ordem",
         "config": {
-          "title": "Lei do Aventureiro: Jesus pode me ajudar a ser…",
+          "title": "Lei do Aventureiro: Jesus me ajuda a ser…",
           "ref": "a Lei do Aventureiro",
           "items": [
             "Obediente",
             "Puro",
-            "Verdadeiro",
+            "Reverente",
             "Bondoso",
-            "Respeitoso",
-            "Atento",
-            "Prestativo",
-            "Alegre",
-            "Considerado",
-            "Reverente"
+            "Colaborador"
           ],
-          "count": 10,
+          "count": 5,
           "doneNote": "Para 3 estrelas, não pode errar nenhuma.",
           "failNote": "Muitos erros. Fale a lei em voz alta e tente de novo!"
         }
@@ -353,8 +348,8 @@
     {
       "id": "acamp_s4",
       "title": "A mochila pronta",
-      "x": 2,
-      "y": 5,
+      "x": 5,
+      "y": 2,
       "verse": "Provérbios 6:6-8",
       "story": [
         {
@@ -397,7 +392,7 @@
       "id": "acamp_s5",
       "title": "Os dias da criação",
       "x": 6,
-      "y": 4,
+      "y": 3,
       "verse": "Gênesis 1:1",
       "story": [
         {
@@ -436,7 +431,7 @@
       "id": "acamp_s6",
       "title": "Nunca sozinho",
       "x": 9,
-      "y": 6,
+      "y": 5,
       "verse": "Eclesiastes 4:9-10",
       "story": [
         {
@@ -789,7 +784,7 @@
     {
       "id": "acamp_s8",
       "title": "Água limpa, mata limpa",
-      "x": 21,
+      "x": 25,
       "y": 4,
       "verse": "Gênesis 2:15",
       "story": [
@@ -892,8 +887,8 @@
     {
       "id": "acamp_s9",
       "title": "Um dia no acampamento",
-      "x": 24,
-      "y": 4,
+      "x": 18,
+      "y": 8,
       "verse": "Salmos 5:3",
       "story": [
         {
@@ -938,8 +933,8 @@
     {
       "id": "acamp_s10",
       "title": "A turma do acampamento",
-      "x": 20,
-      "y": 8,
+      "x": 18,
+      "y": 10,
       "verse": "Salmos 133:1",
       "story": [
         {
@@ -999,8 +994,8 @@
     {
       "id": "acamp_s11",
       "title": "O Clube de Desbravadores",
-      "x": 11,
-      "y": 11,
+      "x": 12,
+      "y": 10,
       "verse": "1 Timóteo 4:12",
       "story": [
         {
@@ -1188,7 +1183,7 @@
       "id": "acamp_s12",
       "title": "O Voto do Desbravador",
       "x": 11,
-      "y": 8,
+      "y": 7,
       "verse": "1 Timóteo 4:12",
       "story": [
         {
@@ -1274,8 +1269,8 @@
     {
       "id": "acamp_s14",
       "title": "As classes",
-      "x": 18,
-      "y": 10,
+      "x": 17,
+      "y": 9,
       "verse": "Lucas 2:52",
       "story": [
         {
@@ -1495,7 +1490,7 @@
               "ref": "Mateus 28:19-20"
             },
             {
-              "s": "O Voto do Aventureiro é: \"Por amor a Jesus, farei sempre o melhor\".",
+              "s": "O Voto do Aventureiro é: \"Por amor a Jesus, farei sempre o meu melhor\".",
               "ok": true,
               "ref": "Colossenses 3:23"
             },
@@ -1547,8 +1542,8 @@
     {
       "id": "acamp_s16",
       "title": "A lenha certa",
-      "x": 8,
-      "y": 1,
+      "x": 9,
+      "y": 2,
       "verse": "Isaías 43:2",
       "story": [
         {
@@ -1724,7 +1719,7 @@
     {
       "id": "acamp_s17",
       "title": "Fogueira segura",
-      "x": 14,
+      "x": 12,
       "y": 4,
       "verse": "Isaías 43:2",
       "story": [
@@ -1828,7 +1823,7 @@
       "id": "acamp_s18",
       "title": "Nós e amarras",
       "x": 24,
-      "y": 11,
+      "y": 15,
       "verse": "Eclesiastes 4:12",
       "story": [
         {
@@ -2011,8 +2006,8 @@
     {
       "id": "acamp_s19",
       "title": "Rumo ao norte",
-      "x": 26,
-      "y": 13,
+      "x": 21,
+      "y": 15,
       "verse": "Salmos 19:1",
       "story": [
         {
@@ -2195,8 +2190,8 @@
     {
       "id": "acamp_s20",
       "title": "O grande desafio do Guia",
-      "x": 23,
-      "y": 14,
+      "x": 19,
+      "y": 15,
       "verse": "Josué 1:9",
       "story": [
         {

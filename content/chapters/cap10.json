@@ -77,7 +77,7 @@
       "id": "cap10_s1",
       "title": "Os sonhos do Faraó",
       "x": 14,
-      "y": 5,
+      "y": 7,
       "verse": "Gênesis 41:1-40",
       "story": [
         {
@@ -160,7 +160,7 @@
     {
       "id": "cap10_s2",
       "title": "Os celeiros cheios",
-      "x": 6,
+      "x": 10,
       "y": 10,
       "verse": "Gênesis 41:46-57",
       "story": [
@@ -239,8 +239,8 @@
     {
       "id": "cap10_s4",
       "title": "\"Eu sou José\"",
-      "x": 23,
-      "y": 9,
+      "x": 20,
+      "y": 7,
       "verse": "Gênesis 44:33 – 45:15",
       "story": [
         {
@@ -278,7 +278,7 @@
       "id": "cap10_s5",
       "title": "Deus transformou o mal em bem",
       "x": 14,
-      "y": 16,
+      "y": 14,
       "verse": "Gênesis 50:15-21",
       "story": [
         {

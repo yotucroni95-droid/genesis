@@ -14,11 +14,12 @@ from PIL import Image, ImageDraw
 from scipy import ndimage
 
 C = 4                       # cell size in pixels
-FOOT_W, FOOT_H = 14, 8      # player foot box (src/world/player.js)
+FOOT_W, FOOT_H = 26, 14     # checks use a box almost twice the real feet (14x8), so passages are roomy for a thumb
 STOP_NEAR = 30              # src/world/stops.js NEAR
 TALK_NEAR = 64              # src/world/talk.js NEAR
 MARGIN = 8                  # stand comfortably inside those ranges
-BRUSH = 3                   # passage half-width in cells (about 28 px wide)
+BRUSH = 4                   # passage half-width in cells (about 36 px wide)
+MIN_R = 4                   # every road must fit a disc of this radius in cells (36 px wide)
 
 # per-map tuning of the road detection, when the default needs help
 # 'lab': perceptual colour distance + smooth paint, for maps whose houses share the road colour
@@ -26,6 +27,7 @@ TUNE = {
     'babel': dict(mode='lab'), 'egito': dict(mode='lab'), 'dota': dict(mode='lab'),
     'fora_eden': dict(mode='lab'), 'ceu': dict(mode='lab'),
     'betel': dict(sat=(0.75, 1.4)),
+    'moria': dict(hue=0.03),
     # map id: dict(hue=..., sat=(lo, hi) as factors of the road's saturation, val=min factor, fill=cell fraction)
 }
 
@@ -88,16 +90,17 @@ def detect(img, road, t):
     return cells, water
 
 
-def foot_free(walk, solids):
+def foot_free(walk, solids, fw=None, fh=None):
     """free[y, x] for feet points on a 2 px lattice (x, y in pixels / 2)."""
     Hc, Wc = walk.shape
     H2, W2 = Hc * C // 2, Wc * C // 2
     # integral image of blocked cells for fast box tests
     blocked = (~walk).astype(np.int32)
     ii = np.zeros((Hc + 1, Wc + 1), np.int32); ii[1:, 1:] = blocked.cumsum(0).cumsum(1)
+    fw = fw or FOOT_W; fh = fh or FOOT_H
     ys, xs = np.mgrid[0:H2, 0:W2]
     X, Y = xs * 2, ys * 2
-    x0 = X - FOOT_W // 2; x1 = X + FOOT_W // 2; y0 = Y - FOOT_H; y1 = Y
+    x0 = X - fw // 2; x1 = X + fw // 2; y0 = Y - fh; y1 = Y
     ok = (x0 >= 0) & (y0 >= 0) & (x1 <= Wc * C) & (y1 <= Hc * C)
     cx0 = np.clip(x0 // C, 0, Wc); cx1 = np.clip((x1 - 1) // C + 1, 0, Wc)
     cy0 = np.clip(y0 // C, 0, Hc); cy1 = np.clip((y1 - 1) // C + 1, 0, Hc)
@@ -134,6 +137,9 @@ def carve(walk, cost, R, px, py):
     rc = np.zeros_like(walk)
     ys, xs = np.nonzero(R)
     rc[np.clip(ys * 2 // C - 1, 0, Hc - 1), np.clip(xs * 2 // C, 0, Wc - 1)] = True
+    # join the passage to open road (room on every side), never to a tight corner
+    roomy = rc & (ndimage.distance_transform_edt(walk) >= BRUSH)
+    if roomy.any(): rc = roomy
     tx, ty = int(px // C), int(py // C)
     dist = np.full(walk.shape, np.inf); prev = {}
     dist[ty, tx] = 0; pq = [(0.0, tx, ty)]
@@ -159,6 +165,11 @@ def carve(walk, cost, R, px, py):
     return path
 
 
+def disc(r):
+    yy, xx = np.ogrid[-r:r + 1, -r:r + 1]
+    return xx * xx + yy * yy <= r * r + 1
+
+
 def rle(row):
     out, cur, n = [], False, 0
     for v in row:
@@ -172,6 +183,39 @@ def npc_box(n, T, frame):
     px, py = (n['x'] + 0.5) * T, (n['y'] + 1) * T - 4
     w = h = round(frame * 0.55)
     return (px - w / 2, py - h, w, h), (px, py)
+
+
+def place_stops_on_road(walk, chapters, T, spawn):
+    """Every story stop stands on the painted road (the user's rule): a stop whose
+    centre is not on open road moves to the nearest road tile joined to the start."""
+    lab_, _ = ndimage.label(walk)
+    sx, sy = int(spawn[0] // C), int((spawn[1] - 4) // C)
+    ys, xs = np.nonzero(walk)
+    k = np.argmin((xs - sx) ** 2 + (ys - sy) ** 2)
+    main = lab_ == lab_[ys[k], xs[k]]
+    room = ndimage.distance_transform_edt(walk) >= 3          # 12 px from the edge
+    ok = main & room
+    Hc, Wc = walk.shape
+    def good(tx, ty):
+        cx, cy = int((tx + 0.5) * T // C), int((ty + 0.5) * T // C)
+        return 0 <= cx < Wc and 0 <= cy < Hc and ok[cy, cx]
+    moved = []
+    for ch in chapters:
+        placed = []
+        for s in ch['stops']:
+            if good(s['x'], s['y']) and all(abs(s['x'] - x) + abs(s['y'] - y) >= 2 for x, y in placed):
+                placed.append((s['x'], s['y'])); continue
+            best = None
+            for r in range(1, 12):
+                cands = [(s['x'] + dx, s['y'] + dy) for dx in range(-r, r + 1) for dy in range(-r, r + 1) if max(abs(dx), abs(dy)) == r]
+                cands = [c for c in cands if good(*c) and all(abs(c[0] - x) + abs(c[1] - y) >= 2 for x, y in placed)]
+                if cands:
+                    best = min(cands, key=lambda c: (c[0] - s['x']) ** 2 + (c[1] - s['y']) ** 2); break
+            if best:
+                moved.append(f"{s['id']} ({s['x']},{s['y']})->({best[0]},{best[1]})")
+                s['x'], s['y'] = best
+            placed.append((s['x'], s['y']))
+    return moved
 
 
 def process(G, mid, chapters, frames, review):
@@ -192,6 +236,7 @@ def process(G, mid, chapters, frames, review):
     walk = np.isin(lab, [i + 1 for i, s in enumerate(sizes) if s >= 40])
     cost = np.where(walk, 1.0, 5.0); cost[water] = 80.0
     sp = g['spawn']; spawn = ((sp['x'] + 0.5) * T, (sp['y'] + 1) * T - 4)
+    moved = place_stops_on_road(walk, chapters, T, spawn)
     targets = []
     for ch in chapters:
         for s in ch['stops']:
@@ -200,7 +245,7 @@ def process(G, mid, chapters, frames, review):
     for ch in chapters:
         for nn in ch.get('npcs', []):
             box, (px, py) = npc_box(nn, T, frames.get(nn['sheet'], 32))
-            solids.append(box)
+            # people do not block the way (src/world/stops.js): no solid box
             targets.append(('npc', f"{nn['sheet']}@{nn['x']},{nn['y']}", px, py - 12, TALK_NEAR - MARGIN - 12))
     # people are solid: passages go around them, never through
     for (sx, sy, sw, sh) in solids:
@@ -230,6 +275,39 @@ def process(G, mid, chapters, frames, review):
     rc[np.clip(ys * 2 // C - 1, 0, walk.shape[0] - 1), np.clip(xs * 2 // C, 0, walk.shape[1] - 1)] = True
     lab_, _ = ndimage.label(walk)
     walk = np.isin(lab_, np.unique(lab_[rc & walk])) & walk
+    # now that rooftops and loose bits are gone: smooth the jagged edges and widen
+    # every stretch narrower than 36 px, so the player never snags on a pixel corner
+    # (never into water)
+    walk = ndimage.binary_closing(walk, structure=disc(2))
+    for _ in range(2):
+        thin = walk & ~ndimage.binary_opening(walk, structure=disc(MIN_R))
+        walk |= ndimage.binary_dilation(thin, structure=disc(2)) & ~water
+    for (x0, y0, x1, y1) in g.get('walkBlock', []):
+        walk[y0 // C:y1 // C, x0 // C:x1 // C] = False
+    lab_, _ = ndimage.label(walk)
+    free = foot_free(walk, solids); R = reach(free, spawn)
+    rc = np.zeros_like(walk); ys, xs = np.nonzero(R)
+    rc[np.clip(ys * 2 // C - 1, 0, walk.shape[0] - 1), np.clip(xs * 2 // C, 0, walk.shape[1] - 1)] = True
+    walk = np.isin(lab_, np.unique(lab_[rc & walk])) & walk
+    # necks: ground the real feet (14x8) reach but the roomy test box does not.
+    # Each such area gets a wide passage to the roomy part, so no road chokes.
+    for _ in range(6):
+        Rs = reach(foot_free(walk, solids, 14, 8), spawn)
+        Rw = reach(foot_free(walk, solids), spawn)
+        orphan = Rs & ~ndimage.binary_dilation(Rw, iterations=4)
+        lab_o, n_o = ndimage.label(orphan)
+        if not n_o: break
+        sizes = ndimage.sum(orphan, lab_o, range(1, n_o + 1))
+        big = [i + 1 for i, sz in enumerate(sizes) if sz > 60]
+        if not big: break
+        for i in big:
+            ys, xs = np.nonzero(lab_o == i); k = len(xs) // 2
+            carved.append((f'neck@{xs[k]*2},{ys[k]*2}', carve(walk, cost, Rw, xs[k] * 2, ys[k] * 2)))
+            Rw = reach(foot_free(walk, solids), spawn)
+    # a clear pad where the player appears
+    cx, cy = int(spawn[0] // C), int((spawn[1] - 6) // C)
+    pad = np.zeros_like(walk); pad[max(0, cy - 5):cy + 6, max(0, cx - 5):cx + 6] = disc(5)[max(0, 5 - cy):, max(0, 5 - cx):][:pad[max(0, cy - 5):cy + 6, max(0, cx - 5):cx + 6].shape[0], :pad[max(0, cy - 5):cy + 6, max(0, cx - 5):cx + 6].shape[1]]
+    walk |= pad & ~water
     free = foot_free(walk, solids); R = reach(free, spawn)
     if not free[int(spawn[1] // 2), int(spawn[0] // 2)]: print(f'   WARNING {mid}: spawn not on the path')
     bad = [t[1] for t in targets if not near_ok(R, t[2], t[3], t[4])]
@@ -255,6 +333,12 @@ def process(G, mid, chapters, frames, review):
             d.ellipse([px - r, py - r, px + r, py + r], outline=col, width=2)
         d.rectangle([spawn[0] - 5, spawn[1] - 5, spawn[0] + 5, spawn[1] + 5], fill=(0, 255, 0))
         im.save(os.path.join(review, f'walk_{mid}.png'))
+    for ch in chapters:
+        if any(m.split(' ')[0] in [st['id'] for st in ch['stops']] for m in moved):
+            fn = f"{G}/content/chapters/{ch['id']}.json"
+            nl = '\n' if open(fn).read().endswith('\n') else ''
+            open(fn, 'w').write(json.dumps(ch, ensure_ascii=False, indent=2) + nl)
+    if moved: print('   stops moved onto the road: ' + '; '.join(moved))
     print(f'{mid:12s} walkable {walk.mean() * 100:4.1f}%  passages opened: {len(carved)}  {"UNREACHABLE: " + ", ".join(bad) if bad else "all reachable"}')
     return bad
 

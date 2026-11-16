@@ -58,7 +58,7 @@ function moveAxis(map, x, y, w, h, d, horizontal) {
   return best;
 }
 
-const ASSIST = 14; // pixels: how far around a corner the player is helped
+const ASSIST = 22; // pixels: how far around a corner the player is helped
 
 /**
  * Corner help: when a move along one axis is blocked, look a few pixels to
@@ -95,4 +95,17 @@ export function moveBox(map, box, dx, dy) {
     ({ x, y } = cornerSlide(map, x, y, box.w, box.h, dy, false, step));
   }
   return { x, y };
+}
+
+/** The nearest spot where the feet fit, searching outward (null if none close). */
+export function nearestFree(map, x, y, w = 14, h = 8, maxR = 160) {
+  if (!boxHitsMap(map, x - w / 2, y - h, w, h)) return { x, y };
+  for (let r = 2; r <= maxR; r += 2) {
+    for (let a = 0; a < 32; a++) {
+      const px = x + Math.cos((a / 32) * Math.PI * 2) * r;
+      const py = y + Math.sin((a / 32) * Math.PI * 2) * r;
+      if (!boxHitsMap(map, px - w / 2, py - h, w, h)) return { x: px, y: py };
+    }
+  }
+  return null;
 }

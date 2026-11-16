@@ -19,14 +19,9 @@ export class Stops {
       const sheet = assets.entry(`sheet.${n.sheet}`);
       return { ...n, sheetId: n.sheet, sheet, px: (n.x + 0.5) * map.tileW, py: (n.y + 1) * map.tileH - 4, seed: Math.random() * 10 };
     });
-    // NPCs are solid: the block covers the feet and lower body, so the player
-    // can never walk over a character, only stand in front of or behind it.
-    map.extraSolids = this.npcs.map((n) => {
-      const f = (n.sheet && n.sheet.frame) || 32;
-      const w = Math.round(f * 0.55);
-      const h = Math.round(f * 0.55);
-      return { x: n.px - w / 2, y: n.py - h, w, h };
-    });
+    // People never block the way: players complained of builders standing in
+    // the middle of narrow roads. The player walks past them (drawn by depth).
+    map.extraSolids = [];
   }
 
   update(dt) { this.time += dt; }

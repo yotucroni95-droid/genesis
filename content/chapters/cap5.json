@@ -64,7 +64,7 @@
     {
       "id": "cap5_s1",
       "title": "Uma só língua",
-      "x": 7,
+      "x": 6,
       "y": 7,
       "verse": "Gênesis 11:1-2",
       "story": [
@@ -141,7 +141,7 @@
       "id": "cap5_s2",
       "title": "Tijolos e orgulho",
       "x": 7,
-      "y": 9,
+      "y": 11,
       "verse": "Gênesis 11:3-4",
       "story": [
         {
@@ -255,7 +255,7 @@
     {
       "id": "cap5_s4",
       "title": "Espalhados pela Terra",
-      "x": 23,
+      "x": 22,
       "y": 12,
       "verse": "Gênesis 11:8-9",
       "story": [

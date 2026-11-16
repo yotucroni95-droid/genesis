@@ -2,6 +2,7 @@
 // ambient life, glowing story stops and the "Entrar" button.
 
 import { h } from '../ui/dom.js';
+import { nearestFree } from '../world/collision.js';
 import { iconButton } from '../ui/icon-button.js';
 import { toast } from '../ui/toast.js';
 import { TileMap } from '../world/tilemap.js';
@@ -85,7 +86,9 @@ export function createWorldScene(game) {
       const mapId = chapter ? chapter.map : params.mapId || 'eden';
       const json = await game.assets.loadJSON(`maps/${mapId}.json`);
       map = new TileMap(json, game.assets);
-      const at = params.at || { x: (map.spawn.x + 0.5) * map.tileW, y: (map.spawn.y + 1) * map.tileH - 4 };
+      let at = params.at || { x: (map.spawn.x + 0.5) * map.tileW, y: (map.spawn.y + 1) * map.tileH - 4 };
+      // never start stuck: if this spot is blocked (an old save, a changed map), step onto the path
+      at = nearestFree(map, at.x, at.y) || nearestFree(map, (map.spawn.x + 0.5) * map.tileW, (map.spawn.y + 1) * map.tileH - 4) || at;
       player = new Player(game.assets, game.save.state.avatarId || 'peregrino', at.x, at.y);
       ambient = new Ambient(map);
       stops = chapter ? new Stops(chapter, map, game.assets, game.save, { hero, visible: (id) => stopVisible(game.save, chapter, id) }) : null;
@@ -118,6 +121,7 @@ export function createWorldScene(game) {
         scrolls = new Scrolls(map, chapter, player, stops, game.save, game.extras, (rarity) => {
           celebrate({ title: 'Achou os 5 pergaminhos!', subtitle: `Você ganhou um baú ${RARITY_LABEL[rarity]}. Amanhã eles estarão em outros lugares!`, image: game.assets.url('icon.album') });
         });
+        if (DEBUG) window.__world.scrolls = scrolls;
       }
       const tr = ((game.extras && game.extras.cosmetics.trails) || []).find((t) => t.id === game.save.state.equipped.trail);
       trailColor = tr ? tr.color : '';

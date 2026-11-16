@@ -61,7 +61,7 @@
       "id": "cap2_s1",
       "title": "A conversa com a serpente",
       "x": 6,
-      "y": 3,
+      "y": 2,
       "verse": "Gênesis 3:1-6",
       "story": [
         {
@@ -144,7 +144,7 @@
     {
       "id": "cap2_s2",
       "title": "\"Onde você está?\"",
-      "x": 13,
+      "x": 12,
       "y": 6,
       "verse": "Gênesis 3:7-10",
       "story": [
@@ -216,7 +216,7 @@
     {
       "id": "cap2_s4",
       "title": "O querubim no portão",
-      "x": 26,
+      "x": 25,
       "y": 6,
       "verse": "Gênesis 3:22-24",
       "story": [

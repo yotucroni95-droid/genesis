@@ -35,16 +35,18 @@ export class Scrolls {
   get found() { return this.save.state.scrolls.found[this.chapterId] || []; }
 
   place(map, player, stops) {
-    // every spot reachable on foot from where the player starts
+    // every spot reachable on foot from the map's start (not from where the
+    // player stands now: then the five places stay the same all day long)
     const S = 8;
+    const start = { x: (map.spawn.x + 0.5) * map.tileW, y: (map.spawn.y + 1) * map.tileH - 4 };
     const W = Math.floor(map.pixelW / S);
     const H = Math.floor(map.pixelH / S);
     const free = (x, y) => !boxHitsMap(map, x * S - 7, y * S - 8, 14, 8);
     const seen = new Uint8Array(W * H);
-    const sx = Math.round(player.x / S);
-    const sy = Math.round(player.y / S);
+    const sx = Math.round(start.x / S);
+    const sy = Math.round(start.y / S);
     const queue = [[sx, sy]];
-    const spots = [];
+    let spots = [];
     seen[sy * W + sx] = 1;
     while (queue.length) {
       const [x, y] = queue.pop();
@@ -57,14 +59,21 @@ export class Scrolls {
         if (free(nx, ny)) queue.push([nx, ny]);
       }
     }
+    // scrolls lie in the middle of the road, never squeezed against an edge
+    const roomy = spots.filter(([x, y]) => !boxHitsMap(map, x - 15, y - 15, 30, 22));
+    if (roomy.length >= 40) spots = roomy;
     const rnd = seeded(`${this.today}|${this.chapterId}`);
-    const avoid = [[player.x, player.y, 110], ...stops.stops.map((s) => [s.px, s.py, 60]), ...stops.npcs.map((n) => [n.px, n.py, 40])];
+    const avoid = [[start.x, start.y, 110], ...stops.stops.map((s) => [s.px, s.py, 60]), ...stops.npcs.map((n) => [n.px, n.py, 40])];
     const chosen = [];
-    for (let tries = 0; tries < 4000 && chosen.length < COUNT; tries++) {
-      const [x, y] = spots[Math.floor(rnd() * spots.length)];
-      if (avoid.some(([ax, ay, r]) => Math.hypot(ax - x, ay - y) < r)) continue;
-      if (chosen.some((c) => Math.hypot(c.x - x, c.y - y) < 140)) continue;
-      chosen.push({ x, y, phase: rnd() * 6 });
+    // always five: on small maps the spacing is relaxed step by step
+    for (const k of [1, 0.75, 0.5, 0.3, 0.15, 0]) {
+      for (let tries = 0; tries < 3000 && chosen.length < COUNT; tries++) {
+        const [x, y] = spots[Math.floor(rnd() * spots.length)];
+        if (avoid.some(([ax, ay, r]) => Math.hypot(ax - x, ay - y) < r * k)) continue;
+        if (chosen.some((c) => Math.hypot(c.x - x, c.y - y) < Math.max(24, 140 * k))) continue;
+        chosen.push({ x, y, phase: rnd() * 6 });
+      }
+      if (chosen.length >= COUNT) break;
     }
     return chosen.map((c, i) => ({ ...c, i }));
   }
