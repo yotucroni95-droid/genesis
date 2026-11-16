@@ -6,7 +6,7 @@ import { h } from '../ui/dom.js';
 import { toast } from '../ui/toast.js';
 import { addCoins } from './economy.js';
 import { addDenarios } from './meta.js';
-import { GIFT_HASHES } from './codes-list.js';
+import { GIFT_HASHES, RETIRED_HASHES } from './codes-list.js';
 
 export const GIFT = { character: 'paulo', coins: 1500, denarios: 50 };
 
@@ -24,7 +24,8 @@ export async function redeem(game, value) {
   const hash = await sha256(`genesis-presente|${code}`);
   if (!GIFT_HASHES.includes(hash)) return { ok: false, msg: 'Código inválido. Confira as letras e os tracinhos.' };
   const { save } = game;
-  if ((save.state.redeemed || {})[hash]) return { ok: false, msg: 'Este código já foi usado neste celular.' };
+  const used = Object.keys(save.state.redeemed || {});
+  if (used.includes(hash) || used.some((x) => RETIRED_HASHES.includes(x))) return { ok: false, msg: 'Você já resgatou o presente do desafio neste celular.' };
   const got = [];
   if (!save.isUnlocked(GIFT.character)) {
     save.unlock(GIFT.character);
@@ -41,7 +42,7 @@ export async function redeem(game, value) {
 }
 
 export function openRedeem(game, backScene = 'shop') {
-  const input = h('input', { type: 'text', class: 'field__input', autocomplete: 'off', autocapitalize: 'characters', spellcheck: 'false', placeholder: 'Código' });
+  const input = h('input', { type: 'text', class: 'field__input', autocomplete: 'off', autocapitalize: 'characters', spellcheck: 'false', placeholder: 'GENESIS-XXXX-XXXX-XXXX' });
   const close = () => modal.remove();
   const go = async () => {
     const r = await redeem(game, input.value);
