@@ -9,6 +9,7 @@ import { SHOP, buyBox, RARITY_LABEL, RARITY_COLOR } from '../game/economy.js';
 import { dailyOffers, buyOffer, buyWeeklyPack, weeklyPackBought, WEEKLY_PACK, charById, fragmentsNeeded } from '../game/meta.js';
 import { Starfield } from './starfield.js';
 import { sfx } from '../audio/audio.js';
+import { openRedeem } from '../game/codes.js';
 
 const WHAT = {
   comum: 'Talentos, 1 carta e fragmentos',
@@ -89,6 +90,9 @@ export function createShopScene(game) {
       )));
 
       ui.appendChild(gameScreen(game, 'Loja', h('div', {},
+        h('div', { class: 'shop__code' },
+          h('span', { text: '🎁 Ganhou um código num desafio?' }),
+          h('button', { class: 'btn btn--small', text: 'Resgatar código', onClick: () => openRedeem(game, 'shop') })),
         h('div', { class: 'shop__title' }, h('h3', { text: 'Ofertas do dia' }), h('small', { text: `Novas ofertas em ${formatWait(msUntilMidnight())}` })),
         h('div', { class: 'offers' }, ...offers),
         h('h3', { text: 'Pacote da semana' }),

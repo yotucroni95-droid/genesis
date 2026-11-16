@@ -57,7 +57,7 @@ O código do jogo não muda.
 - **Baús** Comum, Raro, Épico e Lendário com abertura animada; mais troféus = mais chance de baú raro. Baú grátis a cada 6 horas.
 - **Missões diárias** e **sequência de dias**; **Arena** (Desafio Relâmpago) com combo e recorde.
 - **Coleção** de 40 cartas de versículo, **títulos** e **molduras** para o perfil.
-- Regras em `src/game/economy.js`; conteúdo em `content/verses.json`, `content/cosmetics.json` e `content/arena.json`.
+- Regras em `src/game/economy.js`; conteúdo em `content/verses.json`, `content/cosmetics.json` e `content/arena-extra.json` (a Arena usa `content/arena.json`, gerado por `tools/build_arena.py` com todas as perguntas do jogo).
 
 ## Vida nos mapas, som e narrador (Fase 11)
 

@@ -1,0 +1,484 @@
+{
+ "questions": [
+  {
+   "q": "O que Deus criou no primeiro dia?",
+   "options": [
+    "A luz",
+    "Os animais",
+    "O sol"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 1:3-5"
+  },
+  {
+   "q": "Em que dia Deus criou o sol, a lua e as estrelas?",
+   "options": [
+    "No quarto dia",
+    "No primeiro dia",
+    "No sexto dia"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 1:14-19"
+  },
+  {
+   "q": "Em que dia Deus criou o ser humano?",
+   "options": [
+    "No sexto dia",
+    "No terceiro dia",
+    "No sétimo dia"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 1:26-31"
+  },
+  {
+   "q": "O que Deus fez no sétimo dia?",
+   "options": [
+    "Descansou",
+    "Criou os peixes",
+    "Criou o mar"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:2-3"
+  },
+  {
+   "q": "No quinto dia Deus encheu o mar e o céu de quê?",
+   "options": [
+    "Peixes e aves",
+    "Plantas e árvores",
+    "Estrelas"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 1:20-23"
+  },
+  {
+   "q": "Do que Deus formou Adão?",
+   "options": [
+    "Do pó da terra",
+    "De uma nuvem",
+    "De uma pedra"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:7"
+  },
+  {
+   "q": "De onde Deus formou Eva?",
+   "options": [
+    "De uma costela de Adão",
+    "Do barro do rio",
+    "De uma árvore"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:21-22"
+  },
+  {
+   "q": "Quem deu nome aos animais?",
+   "options": [
+    "Adão",
+    "Eva",
+    "Noé"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:19-20"
+  },
+  {
+   "q": "Qual árvore Adão e Eva não podiam comer?",
+   "options": [
+    "A do conhecimento do bem e do mal",
+    "A da vida",
+    "A oliveira"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:17"
+  },
+  {
+   "q": "O rio que saía do Éden se dividia em quantos braços?",
+   "options": [
+    "Quatro",
+    "Dois",
+    "Sete"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:10"
+  },
+  {
+   "q": "Qual animal enganou Eva?",
+   "options": [
+    "A serpente",
+    "O leão",
+    "O corvo"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:1"
+  },
+  {
+   "q": "O que a serpente disse que eles seriam se comessem o fruto?",
+   "options": [
+    "Como Deus",
+    "Mais fortes",
+    "Imortais no céu"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:5"
+  },
+  {
+   "q": "Com o que Adão e Eva se cobriram depois de pecar?",
+   "options": [
+    "Folhas de figueira",
+    "Peles de ovelha",
+    "Pano de linho"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:7"
+  },
+  {
+   "q": "Qual foi a pergunta de Deus para Adão no jardim?",
+   "options": [
+    "Onde você está?",
+    "Quem é você?",
+    "O que você comeu?"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:9"
+  },
+  {
+   "q": "O que Deus fez para vestir Adão e Eva?",
+   "options": [
+    "Roupas de pele",
+    "Roupas de folhas",
+    "Mantos de ouro"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:21"
+  },
+  {
+   "q": "Quem guardou o caminho da árvore da vida?",
+   "options": [
+    "Querubins",
+    "Leões",
+    "Adão"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:24"
+  },
+  {
+   "q": "O que o querubim segurava?",
+   "options": [
+    "Uma espada de fogo",
+    "Uma trombeta",
+    "Um escudo de prata"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:24"
+  },
+  {
+   "q": "Qual era o trabalho de Abel?",
+   "options": [
+    "Pastor de ovelhas",
+    "Lavrador",
+    "Construtor"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 4:2"
+  },
+  {
+   "q": "Qual era o trabalho de Caim?",
+   "options": [
+    "Lavrador da terra",
+    "Pastor",
+    "Pescador"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 4:2"
+  },
+  {
+   "q": "Por que a oferta de Abel agradou a Deus?",
+   "options": [
+    "Ele ofereceu com fé o melhor que tinha",
+    "Era a maior oferta",
+    "Ele ofereceu ouro"
+   ],
+   "answer": 0,
+   "ref": "Hebreus 11:4"
+  },
+  {
+   "q": "O que Deus disse que estava à porta de Caim?",
+   "options": [
+    "O pecado",
+    "Um anjo",
+    "Um leão"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 4:7"
+  },
+  {
+   "q": "Qual foi a resposta de Caim quando Deus perguntou por Abel?",
+   "options": [
+    "Sou eu o guarda do meu irmão?",
+    "Ele foi viajar",
+    "Ele está dormindo"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 4:9"
+  },
+  {
+   "q": "Qual filho Adão e Eva tiveram depois de Abel?",
+   "options": [
+    "Sete",
+    "Enoque",
+    "Sem"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 4:25"
+  },
+  {
+   "q": "Quem andou com Deus e foi levado por Ele?",
+   "options": [
+    "Enoque",
+    "Caim",
+    "Lameque"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 5:24"
+  },
+  {
+   "q": "Quem foi o homem que viveu mais anos segundo Gênesis?",
+   "options": [
+    "Matusalém",
+    "Noé",
+    "Adão"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 5:27"
+  },
+  {
+   "q": "Quantos filhos Noé teve?",
+   "options": [
+    "Três",
+    "Dois",
+    "Doze"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 6:10"
+  },
+  {
+   "q": "Quais eram os nomes dos filhos de Noé?",
+   "options": [
+    "Sem, Cam e Jafé",
+    "Caim, Abel e Sete",
+    "Abraão, Isaque e Jacó"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 6:10"
+  },
+  {
+   "q": "Quantos andares tinha a arca?",
+   "options": [
+    "Três",
+    "Um",
+    "Dez"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 6:16"
+  },
+  {
+   "q": "De que material era a arca?",
+   "options": [
+    "Madeira",
+    "Pedra",
+    "Ferro"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 6:14"
+  },
+  {
+   "q": "Quantos casais de animais puros entraram na arca?",
+   "options": [
+    "Sete",
+    "Um",
+    "Três"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 7:2"
+  },
+  {
+   "q": "Quantas pessoas foram salvas na arca?",
+   "options": [
+    "Oito",
+    "Doze",
+    "Duas"
+   ],
+   "answer": 0,
+   "ref": "1 Pedro 3:20"
+  },
+  {
+   "q": "Quantos dias e noites choveu?",
+   "options": [
+    "Quarenta",
+    "Sete",
+    "Cem"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 7:12"
+  },
+  {
+   "q": "Quem fechou a porta da arca?",
+   "options": [
+    "O Senhor",
+    "Noé",
+    "Sem"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 7:16"
+  },
+  {
+   "q": "Qual ave Noé soltou primeiro?",
+   "options": [
+    "Um corvo",
+    "Uma pomba",
+    "Uma águia"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 8:7"
+  },
+  {
+   "q": "O que a pomba trouxe no bico?",
+   "options": [
+    "Uma folha de oliveira",
+    "Uma flor",
+    "Um galho de figueira"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 8:11"
+  },
+  {
+   "q": "Em que montes a arca parou?",
+   "options": [
+    "Montes de Ararate",
+    "Monte Sinai",
+    "Monte das Oliveiras"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 8:4"
+  },
+  {
+   "q": "Qual foi a primeira coisa que Noé fez ao sair da arca?",
+   "options": [
+    "Construiu um altar",
+    "Plantou uma vinha",
+    "Construiu uma casa"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 8:20"
+  },
+  {
+   "q": "Qual é o sinal da aliança de Deus com Noé?",
+   "options": [
+    "O arco-íris",
+    "Uma estrela",
+    "O sol"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 9:13"
+  },
+  {
+   "q": "O que Deus prometeu depois do dilúvio?",
+   "options": [
+    "Nunca mais destruir a terra com um dilúvio",
+    "Que nunca mais choveria",
+    "Que não haveria inverno"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 9:11"
+  },
+  {
+   "q": "Lúcifer foi criado como?",
+   "options": [
+    "Um anjo perfeito e cheio de sabedoria",
+    "Um ser mau",
+    "Um ser humano"
+   ],
+   "answer": 0,
+   "ref": "Ezequiel 28:12-15"
+  },
+  {
+   "q": "O que Lúcifer quis ser?",
+   "options": [
+    "Semelhante ao Altíssimo",
+    "Um pastor",
+    "Um rei da terra"
+   ],
+   "answer": 0,
+   "ref": "Isaías 14:14"
+  },
+  {
+   "q": "Quem liderou os anjos fiéis na batalha no céu?",
+   "options": [
+    "Miguel",
+    "Gabriel",
+    "Lúcifer"
+   ],
+   "answer": 0,
+   "ref": "Apocalipse 12:7"
+  },
+  {
+   "q": "O que significa o nome Miguel?",
+   "options": [
+    "Quem é como Deus?",
+    "Deus é forte",
+    "Luz do céu"
+   ],
+   "answer": 0,
+   "ref": "Apocalipse 12:7"
+  },
+  {
+   "q": "Qual anjo disse: \"Estou na presença de Deus\"?",
+   "options": [
+    "Gabriel",
+    "Miguel",
+    "Um querubim"
+   ],
+   "answer": 0,
+   "ref": "Lucas 1:19"
+  },
+  {
+   "q": "Como a Bíblia chama Satanás em Apocalipse 12:9?",
+   "options": [
+    "A antiga serpente",
+    "O leão de Judá",
+    "A estrela da manhã"
+   ],
+   "answer": 0,
+   "ref": "Apocalipse 12:9"
+  },
+  {
+   "q": "O que vem antes da queda, segundo Provérbios?",
+   "options": [
+    "O orgulho",
+    "A alegria",
+    "A paciência"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 16:18"
+  },
+  {
+   "q": "Qual é a primeira promessa de salvação da Bíblia?",
+   "options": [
+    "Gênesis 3:15",
+    "Gênesis 1:1",
+    "Gênesis 9:13"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:15"
+  },
+  {
+   "q": "O que Deus viu ao terminar a criação?",
+   "options": [
+    "Que era muito bom",
+    "Que faltava algo",
+    "Que era pequeno"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 1:31"
+  }
+ ]
+}

@@ -79,6 +79,7 @@
 "src/engine/display.js",
 "src/engine/loop.js",
 "src/engine/scene-manager.js",
+"content/arena-extra.json",
 "content/arena.json",
 "content/characters.json",
 "content/cosmetics.json",

@@ -1003,6 +1003,7 @@ button { touch-action: manipulation; }
 /* Loja: ofertas */
 .shop__title { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
 .shop__title small { color: var(--ok); }
+.shop__code { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin: 4px 0 12px; padding: 10px 14px; border: 2px dashed var(--gold, #ffd36e); border-radius: 12px; background: rgba(255, 211, 110, .08); font-weight: 700; }
 .offers { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
 .offer { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 8px; border: 2px solid var(--r, var(--panel-edge)); border-radius: 14px; background: linear-gradient(180deg, rgba(43,58,122,.6), rgba(7,10,28,.9)); text-align: center; box-shadow: 0 0 12px color-mix(in srgb, var(--r, #000) 35%, transparent); }
 .offer b { font-size: 14px; }

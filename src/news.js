@@ -4,10 +4,12 @@
 const SEEN_KEY = 'genesis.newsSeen';
 
 export const NEWS = {
-  id: '2026-11-16b',
+  id: '2026-11-16c',
   title: 'Nova versão do Gênesis!',
   intro: 'Você está jogando a versão nova. Resolvemos alguns problemas que vocês nos contaram:',
   fixes: [
+    'Arena: agora são 240 perguntas, e as que você já respondeu vão para o fim da fila. Chega de pergunta repetida!',
+    'Ganhou um código num desafio? Resgate na Loja, no botão “Resgatar código”.',
     'Os caminhos de todos os mapas foram revisados: agora dá para passar em todo lugar, inclusive em Babel e na ponte do Éden.',
     'Os personagens agora ficam ao lado da estrada, fora do caminho: ninguém fica parado no meio da passagem.',
     'Os personagens lendários (Paulo, João Batista, Salomão, Maria, Abel e a Aventureira) agora olham para a direita quando você vira o joystick para a direita.',

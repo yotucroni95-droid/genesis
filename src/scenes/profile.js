@@ -9,7 +9,6 @@ import { totalStars, RARITY_COLOR, RANKS } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 import { shareCard } from '../ui/share.js';
 import { attachSecretUnlock } from '../game/admin.js';
-import { openRedeem } from '../game/codes.js';
 
 export function createProfileScene(game) {
   const stars = new Starfield(100);
@@ -67,7 +66,6 @@ export function createProfileScene(game) {
           h('button', { class: 'btn btn--ghost', text: 'Álbum de personagens', onClick: () => game.scenes.go('album', { backScene: 'profile' }) }),
           h('button', { class: 'btn btn--ghost', text: 'Medalhas', onClick: () => game.scenes.go('medals') }),
           h('button', { class: 'btn btn--ghost', text: 'Coleção de versículos', onClick: () => game.scenes.go('collection') }),
-          h('button', { class: 'btn btn--ghost', text: '🎁 Resgatar código', onClick: () => openRedeem(game) }),
         ),
       )));
       attachSecretUnlock(game, ui.querySelector('.screen__head h1')); // hidden owner tool (game/admin.js)

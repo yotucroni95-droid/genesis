@@ -21,6 +21,24 @@ function seededShuffle(list, seed) {
   return a;
 }
 
+const SEEN_KEY = 'genesis.arenaSeen';
+const qKey = (q) => q.q.toLowerCase().replace(/\W+/g, '').slice(0, 40);
+function readSeen() { try { return JSON.parse(localStorage.getItem(SEEN_KEY) || '[]'); } catch { return []; } }
+function markSeen(q, total) {
+  const seen = readSeen().filter((k) => k !== qKey(q));
+  seen.push(qKey(q));
+  // forget the oldest once almost every question was seen, so the cycle restarts
+  while (seen.length > Math.max(1, total - 20)) seen.shift();
+  try { localStorage.setItem(SEEN_KEY, JSON.stringify(seen)); } catch { /* storage blocked */ }
+}
+/** Questions this phone has not seen lately come first (duels keep the shared order). */
+function unseenFirst(deck) {
+  const seen = new Map(readSeen().map((k, i) => [k, i]));
+  const fresh = deck.filter((q) => !seen.has(qKey(q)));
+  const old = deck.filter((q) => seen.has(qKey(q))).sort((a, b) => seen.get(qKey(a)) - seen.get(qKey(b)));
+  return fresh.concat(old);
+}
+
 const SECONDS = 10;
 
 export function createArenaScene(game) {
@@ -56,7 +74,8 @@ export function createArenaScene(game) {
 
       const play = () => {
         const seed = duel ? duel.seed : 1 + Math.floor(Math.random() * 999999);
-        const deck = seededShuffle(game.extras.arena, seed);
+        let deck = seededShuffle(game.extras.arena, seed);
+        if (!duel) deck = unseenFirst(deck);
         let i = 0;
         let lives = LIVES;
         let hints = power(save, 'hint');
@@ -91,8 +110,9 @@ export function createArenaScene(game) {
         let current = null;
         let buttons = [];
         const next = () => {
-          if (i >= deck.length) i = 0;
+          if (i >= deck.length) { i = 0; deck = seededShuffle(deck, seed + 1); }
           current = deck[i++];
+          if (!duel) markSeen(current, deck.length);
           const opts = shuffle(current.options.map((text, k) => ({ text, ok: k === current.answer })));
           buttons = opts.map((o, k) => h('button', { class: 'quiz__opt', onClick: () => answer(k, opts) }, o.text));
           const hintBtn = hints > 0 ? h('button', { class: 'btn btn--ghost btn--small arena__hint', text: `💡 Dica (${hints})`, onClick: () => {

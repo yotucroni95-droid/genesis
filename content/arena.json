@@ -479,6 +479,1926 @@
    ],
    "answer": 0,
    "ref": "Gênesis 1:31"
+  },
+  {
+   "q": "Como Ezequiel descreve o querubim antes de pecar?",
+   "options": [
+    "Perfeito em beleza e sabedoria",
+    "Feio e fraco",
+    "Um anjo sem importância"
+   ],
+   "answer": 0,
+   "ref": "Ezequiel 28:12-15"
+  },
+  {
+   "q": "Qual era o desejo do coração de Lúcifer?",
+   "options": [
+    "Servir aos outros anjos",
+    "Ser semelhante ao Altíssimo",
+    "Morar na Terra"
+   ],
+   "answer": 1,
+   "ref": "Isaías 14:13-14"
+  },
+  {
+   "q": "Para onde o dragão e seus anjos foram lançados?",
+   "options": [
+    "Para a Terra",
+    "Para o fundo do mar",
+    "Para uma estrela"
+   ],
+   "answer": 0,
+   "ref": "Apocalipse 12:9"
+  },
+  {
+   "q": "Qual anjo disse: \"Eu sou ___, que assisto diante de Deus\"?",
+   "options": [
+    "Gabriel",
+    "Lúcifer",
+    "Miguel"
+   ],
+   "answer": 0,
+   "ref": "Lucas 1:19"
+  },
+  {
+   "q": "Como Tiago ensina a vencer o diabo?",
+   "options": [
+    "Fingindo que ele não existe",
+    "Sujeitando-se a Deus e resistindo ao diabo",
+    "Brigando com as pessoas"
+   ],
+   "answer": 1,
+   "ref": "Tiago 4:7"
+  },
+  {
+   "q": "Quem criou os anjos?",
+   "options": [
+    "Deus",
+    "Lúcifer",
+    "Os próprios anjos"
+   ],
+   "answer": 0,
+   "ref": "Colossenses 1:16"
+  },
+  {
+   "q": "Como Lúcifer era quando foi criado?",
+   "options": [
+    "Mau desde o começo",
+    "Cheio de sabedoria e perfeito em beleza",
+    "Igual a Deus"
+   ],
+   "answer": 1,
+   "ref": "Ezequiel 28:12"
+  },
+  {
+   "q": "O que aconteceu com Lúcifer depois?",
+   "options": [
+    "Ele virou um ser humano",
+    "Ele criou outro mundo",
+    "Achou-se maldade nele"
+   ],
+   "answer": 2,
+   "ref": "Ezequiel 28:15"
+  },
+  {
+   "q": "Em quantos dias Deus fez a criação, e em qual descansou?",
+   "options": [
+    "Em 6 dias e descansou no 7º",
+    "Em 7 dias e descansou no 8º",
+    "Em 3 dias e descansou no 4º"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:2-3"
+  },
+  {
+   "q": "Do que Deus formou o homem?",
+   "options": [
+    "Do pó da terra",
+    "De uma pedra",
+    "De uma árvore"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:7"
+  },
+  {
+   "q": "Que trabalho Deus deu a Adão no jardim?",
+   "options": [
+    "Cultivar e guardar o jardim",
+    "Construir uma cidade",
+    "Caçar os animais"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:15"
+  },
+  {
+   "q": "Por que Deus fez a mulher?",
+   "options": [
+    "Não era bom que o homem estivesse só",
+    "Para mandar no homem",
+    "Para cuidar só dos animais"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:18"
+  },
+  {
+   "q": "No quarto dia Deus criou...",
+   "options": [
+    "O sol, a lua e as estrelas",
+    "Os peixes",
+    "As plantas"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 1:14-19"
+  },
+  {
+   "q": "À imagem de quem o ser humano foi criado?",
+   "options": [
+    "À imagem de Deus",
+    "À imagem dos anjos",
+    "À imagem dos animais"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 1:27"
+  },
+  {
+   "q": "Quantos rios saíam do Éden?",
+   "options": [
+    "Um rio que se dividia em quatro",
+    "Dois rios",
+    "Nenhum rio"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:10"
+  },
+  {
+   "q": "Qual árvore Deus disse para não comer?",
+   "options": [
+    "A árvore da vida",
+    "A árvore do conhecimento do bem e do mal",
+    "A figueira"
+   ],
+   "answer": 1,
+   "ref": "Gênesis 2:16-17"
+  },
+  {
+   "q": "Qual era o trabalho de Adão no jardim?",
+   "options": [
+    "Nenhum, só descansar",
+    "Cultivar e cuidar do jardim",
+    "Construir uma cidade"
+   ],
+   "answer": 1,
+   "ref": "Gênesis 2:15"
+  },
+  {
+   "q": "Qual foi a mentira da serpente?",
+   "options": [
+    "\"Certamente não morrereis\"",
+    "\"Deus ama vocês\"",
+    "\"Cuidem bem do jardim\""
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:4"
+  },
+  {
+   "q": "O que Adão e Eva perceberam depois de comer o fruto?",
+   "options": [
+    "Que estavam nus",
+    "Que podiam voar",
+    "Que tinham virado anjos"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:7"
+  },
+  {
+   "q": "O que Adão e Eva fizeram quando ouviram Deus no jardim?",
+   "options": [
+    "Se esconderam",
+    "Correram até Ele",
+    "Começaram a cantar"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:8"
+  },
+  {
+   "q": "Que pergunta Deus fez a Adão?",
+   "options": [
+    "\"Onde estás?\"",
+    "\"Quem és tu?\"",
+    "\"Que horas são?\""
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:9"
+  },
+  {
+   "q": "Com o que Deus vestiu Adão e Eva?",
+   "options": [
+    "Túnicas de peles",
+    "Folhas de figueira",
+    "Roupas de linho"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:21"
+  },
+  {
+   "q": "O que guardava o caminho da árvore da vida?",
+   "options": [
+    "Querubins e uma espada flamejante",
+    "Um muro de pedra",
+    "Dois leões"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:24"
+  },
+  {
+   "q": "Se confessarmos nossos pecados, Deus...",
+   "options": [
+    "É fiel e justo para nos perdoar",
+    "Fica bravo para sempre",
+    "Não escuta"
+   ],
+   "answer": 0,
+   "ref": "1 João 1:9"
+  },
+  {
+   "q": "O que a serpente fez com a ordem de Deus?",
+   "options": [
+    "Repetiu certinho",
+    "Colocou dúvida e mudou as palavras de Deus",
+    "Não falou nada sobre ela"
+   ],
+   "answer": 1,
+   "ref": "Gênesis 3:1"
+  },
+  {
+   "q": "O que a serpente prometeu?",
+   "options": [
+    "Que eles seriam como Deus",
+    "Que ganhariam outro jardim",
+    "Que viveriam no céu"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 3:5"
+  },
+  {
+   "q": "Depois de Eva comer, o que aconteceu?",
+   "options": [
+    "Ela jogou o fruto fora",
+    "Ela deu a Adão, e ele também comeu",
+    "Ela contou para Deus"
+   ],
+   "answer": 1,
+   "ref": "Gênesis 3:6"
+  },
+  {
+   "q": "Quem estava por trás da serpente, segundo a Bíblia?",
+   "options": [
+    "Um anjo fiel",
+    "O diabo, a antiga serpente",
+    "Ninguém"
+   ],
+   "answer": 1,
+   "ref": "Apocalipse 12:9"
+  },
+  {
+   "q": "O que Deus disse a Caim sobre o pecado?",
+   "options": [
+    "Que ele devia dominá-lo",
+    "Que não era nada",
+    "Que devia escondê-lo"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 4:7"
+  },
+  {
+   "q": "O que Caim respondeu quando Deus perguntou por Abel?",
+   "options": [
+    "\"Sou eu o guardador do meu irmão?\"",
+    "\"Ele está dormindo\"",
+    "\"Não conheço Abel\""
+   ],
+   "answer": 0,
+   "ref": "Gênesis 4:9"
+  },
+  {
+   "q": "Qual filho Deus deu a Adão e Eva depois de Abel?",
+   "options": [
+    "Sete",
+    "Enoque",
+    "Noé"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 4:25"
+  },
+  {
+   "q": "O que Abel ofereceu a Deus?",
+   "options": [
+    "Frutos da terra",
+    "Os primeiros e melhores do seu rebanho",
+    "Ouro e prata"
+   ],
+   "answer": 1,
+   "ref": "Gênesis 4:4"
+  },
+  {
+   "q": "Como Caim reagiu quando Deus não aceitou sua oferta?",
+   "options": [
+    "Ficou feliz pelo irmão",
+    "Ficou com muita raiva",
+    "Pediu ajuda a Abel"
+   ],
+   "answer": 1,
+   "ref": "Gênesis 4:5"
+  },
+  {
+   "q": "O que Deus disse que estava \"à porta\"?",
+   "options": [
+    "Um anjo",
+    "O pecado",
+    "Um leão"
+   ],
+   "answer": 1,
+   "ref": "Gênesis 4:7"
+  },
+  {
+   "q": "O que Deus pediu que Caim fizesse?",
+   "options": [
+    "Dominasse o pecado",
+    "Fosse embora",
+    "Construísse um altar maior"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 4:7"
+  },
+  {
+   "q": "Por que Noé achou graça diante de Deus?",
+   "options": [
+    "Ele era justo e andava com Deus",
+    "Ele era o mais rico",
+    "Ele era o mais forte"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 6:8-9"
+  },
+  {
+   "q": "De que madeira a arca foi feita?",
+   "options": [
+    "Madeira de gofer (cipreste)",
+    "Bambu",
+    "Pinho"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 6:14"
+  },
+  {
+   "q": "Quantos filhos Noé tinha?",
+   "options": [
+    "Três: Sem, Cam e Jafé",
+    "Dois",
+    "Cinco"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 6:10"
+  },
+  {
+   "q": "O que Noé fez ao sair da arca?",
+   "options": [
+    "Construiu um altar ao Senhor",
+    "Foi dormir",
+    "Construiu uma cidade"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 8:20"
+  },
+  {
+   "q": "Onde a arca parou?",
+   "options": [
+    "Nos montes de Ararate",
+    "No monte Sinai",
+    "No meio do mar"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 8:4"
+  },
+  {
+   "q": "Por que Noé foi salvo?",
+   "options": [
+    "Porque era o mais forte",
+    "Porque encontrou graça diante de Deus e andava com Ele",
+    "Porque construiu a maior casa"
+   ],
+   "answer": 1,
+   "ref": "Gênesis 6:8-9"
+  },
+  {
+   "q": "Qual é o sinal da aliança de Deus com a terra?",
+   "options": [
+    "O sol",
+    "O arco-íris",
+    "Uma estrela"
+   ],
+   "answer": 1,
+   "ref": "Gênesis 9:13"
+  },
+  {
+   "q": "Quantas línguas o povo falava antes de Babel?",
+   "options": [
+    "Uma só",
+    "Duas",
+    "Muitas"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 11:1"
+  },
+  {
+   "q": "Onde o povo resolveu morar?",
+   "options": [
+    "Numa planície na terra de Sinar",
+    "No monte Ararate",
+    "No Egito"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 11:2"
+  },
+  {
+   "q": "O que Deus tinha pedido à família de Noé?",
+   "options": [
+    "Que enchessem a Terra",
+    "Que construíssem uma torre",
+    "Que voltassem para o Éden"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 9:1"
+  },
+  {
+   "q": "De quem descendia esse povo?",
+   "options": [
+    "Da família de Noé",
+    "De Caim",
+    "Dos anjos"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 10:32"
+  },
+  {
+   "q": "O que o nome Babel lembra?",
+   "options": [
+    "Confusão",
+    "Cidade feliz",
+    "Torre de ouro"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 11:9"
+  },
+  {
+   "q": "Por que Deus confundiu as línguas?",
+   "options": [
+    "Por causa do orgulho do povo",
+    "Porque estavam com fome",
+    "Porque a torre caiu sozinha"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 11:4-7"
+  },
+  {
+   "q": "Segundo Tiago, Deus dá graça a quem?",
+   "options": [
+    "Aos humildes",
+    "Aos orgulhosos",
+    "Aos famosos"
+   ],
+   "answer": 0,
+   "ref": "Tiago 4:6"
+  },
+  {
+   "q": "O que Deus pediu a Abrão?",
+   "options": [
+    "Que saísse da sua terra e fosse para onde Deus mostrasse",
+    "Que construísse uma torre",
+    "Que voltasse para o Éden"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 12:1"
+  },
+  {
+   "q": "Quantos anos Abrão tinha quando partiu?",
+   "options": [
+    "75 anos",
+    "20 anos",
+    "120 anos"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 12:4"
+  },
+  {
+   "q": "Por meio de Abrão, quem seria abençoado?",
+   "options": [
+    "Todas as famílias da Terra",
+    "Só a família dele",
+    "Só os reis"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 12:3"
+  },
+  {
+   "q": "O que Abrão fez ao chegar a Canaã?",
+   "options": [
+    "Construiu um altar ao Senhor",
+    "Construiu uma cidade",
+    "Voltou para casa"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 12:7"
+  },
+  {
+   "q": "Para qual nome Deus mudou Abrão?",
+   "options": [
+    "Abraão",
+    "Israel",
+    "Isaque"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 17:5"
+  },
+  {
+   "q": "Onde Abraão recebeu os três visitantes?",
+   "options": [
+    "Perto dos carvalhos de Manre",
+    "No Egito",
+    "Em Babel"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 18:1"
+  },
+  {
+   "q": "O que quer dizer o nome Isaque?",
+   "options": [
+    "\"Ele ri\"",
+    "\"Presente\"",
+    "\"Forte\""
+   ],
+   "answer": 0,
+   "ref": "Gênesis 21:3-6"
+  },
+  {
+   "q": "Para onde Deus mandou Abraão ir?",
+   "options": [
+    "Ao monte Moriá",
+    "Ao Egito",
+    "A Babel"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 22:2"
+  },
+  {
+   "q": "O que Isaque carregava subindo o monte?",
+   "options": [
+    "A lenha",
+    "Uma ovelha",
+    "Uma espada"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 22:6"
+  },
+  {
+   "q": "O que Isaque perguntou ao pai?",
+   "options": [
+    "\"Onde está o cordeiro?\"",
+    "\"Quando vamos comer?\"",
+    "\"Por que estamos aqui?\""
+   ],
+   "answer": 0,
+   "ref": "Gênesis 22:7"
+  },
+  {
+   "q": "O que Abraão respondeu?",
+   "options": [
+    "\"Deus mesmo vai providenciar\"",
+    "\"Eu não sei\"",
+    "\"Vamos comprar um\""
+   ],
+   "answer": 0,
+   "ref": "Gênesis 22:8"
+  },
+  {
+   "q": "O que Abraão viu preso no arbusto?",
+   "options": [
+    "Um carneiro",
+    "Um leão",
+    "Uma pomba"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 22:13"
+  },
+  {
+   "q": "Que nome Abraão deu ao lugar?",
+   "options": [
+    "\"O Senhor proverá\"",
+    "Betel",
+    "Babel"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 22:14"
+  },
+  {
+   "q": "O que Rebeca respondeu quando perguntaram se iria?",
+   "options": [
+    "\"Irei\"",
+    "\"Nunca\"",
+    "\"Talvez amanhã\""
+   ],
+   "answer": 0,
+   "ref": "Gênesis 24:58"
+  },
+  {
+   "q": "Quem era o caçador?",
+   "options": [
+    "Esaú",
+    "Jacó",
+    "Isaque"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 25:27"
+  },
+  {
+   "q": "O que Jacó estava cozinhando?",
+   "options": [
+    "Ensopado de lentilhas",
+    "Peixe assado",
+    "Pão de trigo"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 25:29-34"
+  },
+  {
+   "q": "O que Esaú trocou pelo prato de comida?",
+   "options": [
+    "Seu direito de filho mais velho",
+    "Suas ovelhas",
+    "Sua casa"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 25:33-34"
+  },
+  {
+   "q": "Por que Jacó precisou fugir?",
+   "options": [
+    "Esaú ficou com muita raiva dele",
+    "Veio um dilúvio",
+    "Ele se perdeu no deserto"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 27:41-43"
+  },
+  {
+   "q": "O que Jacó usou como travesseiro?",
+   "options": [
+    "Uma pedra",
+    "Um saco de trigo",
+    "Sua capa"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 28:11"
+  },
+  {
+   "q": "O que quer dizer Betel?",
+   "options": [
+    "\"Casa de Deus\"",
+    "\"Cidade grande\"",
+    "\"Rio azul\""
+   ],
+   "answer": 0,
+   "ref": "Gênesis 28:19"
+  },
+  {
+   "q": "Qual foi o novo nome de Jacó?",
+   "options": [
+    "Israel",
+    "Abraão",
+    "José"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 32:28"
+  },
+  {
+   "q": "O que Jacó deu a José?",
+   "options": [
+    "Uma túnica colorida",
+    "Uma espada",
+    "Um camelo"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 37:3"
+  },
+  {
+   "q": "Quantos filhos Jacó teve?",
+   "options": [
+    "Doze",
+    "Dois",
+    "Sete"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 35:22-26"
+  },
+  {
+   "q": "No sonho, o que se curvava diante do feixe de José?",
+   "options": [
+    "Os feixes dos irmãos",
+    "As árvores",
+    "Os camelos"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 37:7"
+  },
+  {
+   "q": "No segundo sonho, o que se curvava diante de José?",
+   "options": [
+    "O sol, a lua e onze estrelas",
+    "Doze leões",
+    "Uma montanha"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 37:9-11"
+  },
+  {
+   "q": "Quem convenceu os irmãos a não matar José?",
+   "options": [
+    "Rúben",
+    "Judá",
+    "Benjamim"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 37:21-22"
+  },
+  {
+   "q": "Por quantas moedas José foi vendido?",
+   "options": [
+    "Vinte moedas de prata",
+    "Cem moedas de ouro",
+    "Trinta moedas de bronze"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 37:28"
+  },
+  {
+   "q": "No Egito, quem comprou José?",
+   "options": [
+    "Potifar, oficial do Faraó",
+    "O próprio Faraó",
+    "Um pastor"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 39:1"
+  },
+  {
+   "q": "Com o que o Faraó sonhou?",
+   "options": [
+    "Vacas e espigas",
+    "Leões e águias",
+    "Estrelas e luas"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 41:1-7"
+  },
+  {
+   "q": "Quem lembrou de José?",
+   "options": [
+    "O copeiro do Faraó",
+    "O padeiro",
+    "Potifar"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 41:9-13"
+  },
+  {
+   "q": "Segundo José, quem explicava os sonhos?",
+   "options": [
+    "Deus",
+    "Os magos",
+    "O próprio José"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 41:16"
+  },
+  {
+   "q": "O que significavam as sete vacas gordas?",
+   "options": [
+    "Sete anos de fartura",
+    "Sete reis",
+    "Sete dias de festa"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 41:29-30"
+  },
+  {
+   "q": "Quantos anos de fome vieram?",
+   "options": [
+    "Sete",
+    "Três",
+    "Quarenta"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 41:30"
+  },
+  {
+   "q": "Qual irmão ficou em casa na primeira viagem?",
+   "options": [
+    "Benjamim",
+    "Rúben",
+    "Judá"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 42:4"
+  },
+  {
+   "q": "O que José disse sobre o mal que os irmãos planejaram?",
+   "options": [
+    "Que Deus o transformou em bem",
+    "Que nunca perdoaria",
+    "Que ia se vingar"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 50:20"
+  },
+  {
+   "q": "Para que idade é o Clube de Aventureiros?",
+   "options": [
+    "De 6 a 9 anos",
+    "De 10 a 15 anos",
+    "De 16 a 21 anos"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:6"
+  },
+  {
+   "q": "Qual é o Voto do Aventureiro?",
+   "options": [
+    "Por amor a Jesus, farei sempre o meu melhor.",
+    "Serei sempre o primeiro em tudo.",
+    "Nunca vou precisar de ajuda."
+   ],
+   "answer": 0,
+   "ref": "Colossenses 3:23"
+  },
+  {
+   "q": "Quem participa do clube junto com as crianças?",
+   "options": [
+    "A família: pais e responsáveis",
+    "Ninguém, só as crianças",
+    "Só o pastor"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:6"
+  },
+  {
+   "q": "Qual é a classe dos Aventureiros de 6 anos?",
+   "options": [
+    "Abelhinhas Laboriosas",
+    "Guia",
+    "Pioneiro"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:6"
+  },
+  {
+   "q": "Qual é a classe dos Aventureiros de 7 anos?",
+   "options": [
+    "Luminares",
+    "Excursionista",
+    "Companheiro"
+   ],
+   "answer": 0,
+   "ref": "Mateus 5:16"
+  },
+  {
+   "q": "Qual é a classe dos Aventureiros de 8 anos?",
+   "options": [
+    "Edificadores",
+    "Amigo",
+    "Pesquisador"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:6"
+  },
+  {
+   "q": "Qual é a classe dos Aventureiros de 9 anos?",
+   "options": [
+    "Mãos Ajudadoras",
+    "Guia",
+    "Luminares"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:6"
+  },
+  {
+   "q": "O Clube de Aventureiros é de qual igreja?",
+   "options": [
+    "Igreja Adventista do Sétimo Dia",
+    "De um time de futebol",
+    "De uma escola de música"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:6"
+  },
+  {
+   "q": "Pela Lei do Aventureiro, Jesus me ajuda a ser…",
+   "options": [
+    "Obediente, puro e reverente",
+    "Rico, famoso e forte",
+    "Bravo, impaciente e preguiçoso"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:6"
+  },
+  {
+   "q": "O que acontece quando o Aventureiro completa a sua classe?",
+   "options": [
+    "É investido numa cerimônia especial",
+    "Ganha um carro",
+    "Nada acontece"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:6"
+  },
+  {
+   "q": "Qual é o livro mais importante na mochila do Aventureiro?",
+   "options": [
+    "A Bíblia",
+    "Um gibi",
+    "Um álbum de figurinhas"
+   ],
+   "answer": 0,
+   "ref": "Salmos 119:105"
+  },
+  {
+   "q": "Provérbios 22:6 diz: \"Ensina a criança no caminho em que deve…\"",
+   "options": [
+    "andar",
+    "correr",
+    "dormir"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:6"
+  },
+  {
+   "q": "Ao fazer 10 anos, o Aventureiro pode entrar em qual clube?",
+   "options": [
+    "Clube de Desbravadores",
+    "Clube do Livro",
+    "Clube de Xadrez"
+   ],
+   "answer": 0,
+   "ref": "1 Timóteo 4:12"
+  },
+  {
+   "q": "Para que servem as especialidades dos Aventureiros?",
+   "options": [
+    "Aprender coisas novas e ganhar um distintivo",
+    "Ficar sem fazer nada",
+    "Ganhar dinheiro"
+   ],
+   "answer": 0,
+   "ref": "Colossenses 3:23"
+  },
+  {
+   "q": "Como andar pelas trilhas do acampamento?",
+   "options": [
+    "Sempre com um companheiro e avisando o líder",
+    "Sozinho, sem avisar ninguém",
+    "De noite, sem lanterna"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:9-10"
+  },
+  {
+   "q": "Quantos apitos seguidos são um pedido de socorro?",
+   "options": [
+    "3 apitos",
+    "1 apito",
+    "10 apitos"
+   ],
+   "answer": 0,
+   "ref": "Salmos 121:1-2"
+  },
+  {
+   "q": "Você se perdeu na mata. O que fazer?",
+   "options": [
+    "Parar, ficar calmo e esperar no mesmo lugar",
+    "Correr sem rumo",
+    "Entrar mais na mata"
+   ],
+   "answer": 0,
+   "ref": "Salmos 121:1-2"
+  },
+  {
+   "q": "Na hora do silêncio, à noite…",
+   "options": [
+    "Fico quieto na barraca para todos descansarem",
+    "Faço bagunça",
+    "Saio para explorar"
+   ],
+   "answer": 0,
+   "ref": "Salmos 4:8"
+  },
+  {
+   "q": "Para ir ao banheiro de noite, leve…",
+   "options": [
+    "Lanterna e um companheiro",
+    "Nada",
+    "Uma vela acesa"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:9-10"
+  },
+  {
+   "q": "Pode acender vela ou fogareiro dentro da barraca?",
+   "options": [
+    "Não, nunca: a barraca pega fogo fácil",
+    "Sim, para esquentar",
+    "Só se estiver ventando"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:3"
+  },
+  {
+   "q": "Viu uma cobra na trilha. O que fazer?",
+   "options": [
+    "Afastar-se devagar e avisar um adulto",
+    "Pegar com a mão",
+    "Jogar pedras nela"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:3"
+  },
+  {
+   "q": "Quando pode nadar no lago?",
+   "options": [
+    "Só com um adulto e um salva-vidas olhando",
+    "Sozinho, quando quiser",
+    "De noite"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "Começou uma tempestade com raios. Onde NÃO ficar?",
+   "options": [
+    "Debaixo de uma árvore alta e sozinha",
+    "Num abrigo seguro",
+    "Longe da água"
+   ],
+   "answer": 0,
+   "ref": "Salmos 46:1"
+  },
+  {
+   "q": "O que levar sempre na trilha?",
+   "options": [
+    "Água, apito e boné",
+    "Só doces",
+    "Um celular sem bateria"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:9-10"
+  },
+  {
+   "q": "Salmos 34:7: o anjo do Senhor acampa ao redor de quem…",
+   "options": [
+    "teme a Deus",
+    "é rico",
+    "corre mais rápido"
+   ],
+   "answer": 0,
+   "ref": "Salmos 34:7"
+  },
+  {
+   "q": "Para que serve andar em duplas?",
+   "options": [
+    "Um cuida do outro e ninguém fica para trás",
+    "Para ter com quem brigar",
+    "Para dividir a sobremesa"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:9-10"
+  },
+  {
+   "q": "Antes de sair para uma atividade, você avisa…",
+   "options": [
+    "O seu conselheiro ou líder",
+    "Ninguém",
+    "Só o esquilo"
+   ],
+   "answer": 0,
+   "ref": "Hebreus 13:17"
+  },
+  {
+   "q": "Queimou a mão. O que fazer primeiro?",
+   "options": [
+    "Deixar em água corrente fria por uns 10 minutos",
+    "Passar manteiga",
+    "Passar pasta de dente"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Na queimadura apareceu uma bolha. E agora?",
+   "options": [
+    "Não estourar e cobrir com um pano limpo",
+    "Estourar com uma agulha",
+    "Arrancar a pele"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "O nariz começou a sangrar. Como ficar?",
+   "options": [
+    "Cabeça um pouco para a frente, apertando a parte mole do nariz",
+    "Cabeça para trás",
+    "Deitado de barriga para cima"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Qual é o telefone do SAMU no Brasil?",
+   "options": [
+    "192",
+    "111",
+    "999"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Qual é o telefone dos Bombeiros?",
+   "options": [
+    "193",
+    "100",
+    "555"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Um corte está sangrando. O que fazer?",
+   "options": [
+    "Apertar com um pano limpo",
+    "Deixar sangrar",
+    "Passar terra"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Picada de abelha: como tirar o ferrão?",
+   "options": [
+    "Raspar com a borda de um cartão",
+    "Apertar com os dedos",
+    "Deixar lá dentro"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Picada de cobra: o que NÃO fazer?",
+   "options": [
+    "Cortar, chupar ou amarrar o local",
+    "Ficar calmo e parado",
+    "Ir logo para o hospital"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Torceu o tornozelo. O que ajuda?",
+   "options": [
+    "Repouso, gelo envolto num pano e o pé para cima",
+    "Correr para passar",
+    "Massagem bem forte"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Muito sol e pouca água podem causar…",
+   "options": [
+    "Desidratação e insolação",
+    "Fome de chocolate",
+    "Dor de dente"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "O que vai no kit de primeiros socorros?",
+   "options": [
+    "Gaze, esparadrapo e luvas",
+    "Doces e brinquedos",
+    "Pedras"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Antes de ajudar alguém machucado, você…",
+   "options": [
+    "Chama um adulto e vê se o lugar é seguro",
+    "Sai correndo",
+    "Tira uma foto"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Quem cuidou do homem ferido na parábola de Jesus?",
+   "options": [
+    "O bom samaritano",
+    "O sacerdote",
+    "O levita"
+   ],
+   "answer": 0,
+   "ref": "Lucas 10:33-34"
+  },
+  {
+   "q": "Para que idade é o Clube de Desbravadores?",
+   "options": [
+    "De 10 a 15 anos",
+    "De 6 a 9 anos",
+    "De 18 a 30 anos"
+   ],
+   "answer": 0,
+   "ref": "1 Timóteo 4:12"
+  },
+  {
+   "q": "Qual é a cor do lenço dos Desbravadores?",
+   "options": [
+    "Amarelo",
+    "Verde",
+    "Roxo"
+   ],
+   "answer": 0,
+   "ref": "1 Timóteo 4:12"
+  },
+  {
+   "q": "Qual é a cor da camisa do uniforme dos Desbravadores?",
+   "options": [
+    "Caqui",
+    "Laranja",
+    "Rosa"
+   ],
+   "answer": 0,
+   "ref": "1 Timóteo 4:12"
+  },
+  {
+   "q": "Como se chama o pequeno grupo de desbravadores com um conselheiro?",
+   "options": [
+    "Unidade",
+    "Batalhão",
+    "Time"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:9-10"
+  },
+  {
+   "q": "Quem cuida de uma unidade?",
+   "options": [
+    "O conselheiro",
+    "O cozinheiro",
+    "O motorista"
+   ],
+   "answer": 0,
+   "ref": "Hebreus 13:17"
+  },
+  {
+   "q": "Como se chama o grande acampamento com muitos clubes juntos?",
+   "options": [
+    "Campori",
+    "Feira",
+    "Maratona"
+   ],
+   "answer": 0,
+   "ref": "Salmos 133:1"
+  },
+  {
+   "q": "Como se chama a cerimônia em que o desbravador recebe a classe?",
+   "options": [
+    "Investidura",
+    "Formatura",
+    "Aniversário"
+   ],
+   "answer": 0,
+   "ref": "1 Timóteo 4:12"
+  },
+  {
+   "q": "Distintivos de habilidades, como Nós e Acampamento, são as…",
+   "options": [
+    "Especialidades",
+    "Medalhas olímpicas",
+    "Figurinhas"
+   ],
+   "answer": 0,
+   "ref": "Colossenses 3:23"
+  },
+  {
+   "q": "O que o desbravador aprende nas classes?",
+   "options": [
+    "Bíblia, natureza, serviço e habilidades",
+    "Só videogame",
+    "Só matemática"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Em que ano a Associação Geral adotou oficialmente o Clube de Desbravadores?",
+   "options": [
+    "1950",
+    "1820",
+    "2010"
+   ],
+   "answer": 0,
+   "ref": "1 Timóteo 4:12"
+  },
+  {
+   "q": "Para que serve a faixa transversal do uniforme?",
+   "options": [
+    "Mostrar as especialidades conquistadas",
+    "Segurar a calça",
+    "Enfeitar a barraca"
+   ],
+   "answer": 0,
+   "ref": "Colossenses 3:23"
+  },
+  {
+   "q": "Qual é o lema dos Desbravadores?",
+   "options": [
+    "O amor de Cristo me motiva",
+    "Quem chega primeiro ganha",
+    "Cada um por si"
+   ],
+   "answer": 0,
+   "ref": "2 Coríntios 5:14"
+  },
+  {
+   "q": "1 Timóteo 4:12 pede que o jovem seja…",
+   "options": [
+    "exemplo para os fiéis",
+    "o mais forte",
+    "o mais rico"
+   ],
+   "answer": 0,
+   "ref": "1 Timóteo 4:12"
+  },
+  {
+   "q": "Um exemplo de serviço à comunidade é…",
+   "options": [
+    "Ajudar em campanhas de doação e limpeza",
+    "Ficar só no celular",
+    "Atrapalhar os vizinhos"
+   ],
+   "answer": 0,
+   "ref": "Mateus 5:16"
+  },
+  {
+   "q": "Qual é a primeira classe dos Desbravadores, aos 10 anos?",
+   "options": [
+    "Amigo",
+    "Guia",
+    "Pioneiro"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Qual é a classe dos 11 anos?",
+   "options": [
+    "Companheiro",
+    "Excursionista",
+    "Amigo"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Qual é a classe dos 12 anos?",
+   "options": [
+    "Pesquisador",
+    "Guia",
+    "Companheiro"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Qual é a classe dos 13 anos?",
+   "options": [
+    "Pioneiro",
+    "Amigo",
+    "Pesquisador"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Qual é a classe dos 14 anos?",
+   "options": [
+    "Excursionista",
+    "Companheiro",
+    "Guia"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Qual é a classe dos 15 anos?",
+   "options": [
+    "Guia",
+    "Pioneiro",
+    "Amigo"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Qual classe vem logo depois de Pesquisador?",
+   "options": [
+    "Pioneiro",
+    "Amigo",
+    "Companheiro"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Qual classe vem logo antes de Guia?",
+   "options": [
+    "Excursionista",
+    "Pioneiro",
+    "Amigo"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Quantas classes regulares os Desbravadores têm?",
+   "options": [
+    "6",
+    "3",
+    "12"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Lucas 2:52: Jesus crescia em sabedoria, estatura e…",
+   "options": [
+    "graça diante de Deus e dos homens",
+    "dinheiro",
+    "fama"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Para receber a classe, o desbravador precisa…",
+   "options": [
+    "Cumprir os requisitos e ser investido",
+    "Só pagar",
+    "Só fazer aniversário"
+   ],
+   "answer": 0,
+   "ref": "Colossenses 3:23"
+  },
+  {
+   "q": "A classe Guia é…",
+   "options": [
+    "A última classe regular",
+    "A primeira classe",
+    "Uma classe dos Aventureiros"
+   ],
+   "answer": 0,
+   "ref": "Lucas 2:52"
+  },
+  {
+   "q": "Qual destas é uma classe de Aventureiros, e não de Desbravadores?",
+   "options": [
+    "Luminares",
+    "Pioneiro",
+    "Companheiro"
+   ],
+   "answer": 0,
+   "ref": "Mateus 5:16"
+  },
+  {
+   "q": "Quais são os três lados do triângulo do fogo?",
+   "options": [
+    "Combustível, oxigênio e calor",
+    "Água, terra e vento",
+    "Pedra, areia e sal"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "O que pega fogo primeiro?",
+   "options": [
+    "A isca: palha e folhas bem secas",
+    "Um tronco grosso",
+    "Uma pedra"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "Depois da isca, o que se coloca?",
+   "options": [
+    "Gravetos finos e secos",
+    "Troncos enormes",
+    "Folhas verdes molhadas"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "Fogueira em forma de cone, com os gravetos em pé:",
+   "options": [
+    "Pirâmide",
+    "Estrela",
+    "Caçador"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "Fogueira com os troncos cruzados em camadas, como uma casinha:",
+   "options": [
+    "Cabana",
+    "Estrela",
+    "Refletor"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "Fogueira com os troncos apontando para o centro, empurrados aos poucos:",
+   "options": [
+    "Estrela",
+    "Cabana",
+    "Pirâmide"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "Fogueira com uma parede de troncos atrás, que joga o calor para a frente:",
+   "options": [
+    "Refletor",
+    "Estrela",
+    "Pirâmide"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "Fogueira com dois troncos paralelos para apoiar a panela:",
+   "options": [
+    "Caçador",
+    "Estrela",
+    "Refletor"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "Por que a lenha deve estar seca?",
+   "options": [
+    "Lenha molhada faz fumaça e não queima bem",
+    "Molhada queima melhor",
+    "Tanto faz"
+   ],
+   "answer": 0,
+   "ref": "Isaías 43:2"
+  },
+  {
+   "q": "Onde pegar lenha?",
+   "options": [
+    "Galhos secos caídos no chão",
+    "Galhos verdes arrancados",
+    "Cercas e bancos"
+   ],
+   "answer": 0,
+   "ref": "Gênesis 2:15"
+  },
+  {
+   "q": "Quais pedras NÃO usar em volta da fogueira?",
+   "options": [
+    "Pedras de rio molhadas: podem estourar",
+    "Pedras secas",
+    "Nenhuma pedra é perigosa"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:3"
+  },
+  {
+   "q": "Acender fogueira com álcool ou gasolina é…",
+   "options": [
+    "Muito perigoso: nunca faça",
+    "O jeito certo",
+    "Bom para crianças"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:3"
+  },
+  {
+   "q": "À noite, Deus guiou Israel no deserto com uma coluna de…",
+   "options": [
+    "fogo",
+    "água",
+    "fumaça preta"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 13:21"
+  },
+  {
+   "q": "Nó para unir duas cordas da mesma grossura (e para bandagens):",
+   "options": [
+    "Nó direito",
+    "Lais de guia",
+    "Volta do fiel"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Nó para unir cordas de grossuras diferentes:",
+   "options": [
+    "Nó de escota",
+    "Nó direito",
+    "Catau"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Laço que não corre, usado em resgates:",
+   "options": [
+    "Lais de guia",
+    "Nó de correr",
+    "Nó de escota"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Nó para prender a corda num poste e começar uma amarra:",
+   "options": [
+    "Volta do fiel",
+    "Nó direito",
+    "Nó de oito"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Nó para encurtar uma corda sem cortar:",
+   "options": [
+    "Catau",
+    "Lais de guia",
+    "Nó de escota"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Nó de arremate que impede a corda de escapar por um buraco:",
+   "options": [
+    "Nó de oito",
+    "Volta do fiel",
+    "Nó direito"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Amarra para unir dois paus que se cruzam em ângulo reto:",
+   "options": [
+    "Amarra quadrada",
+    "Amarra diagonal",
+    "Nó de correr"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Amarra para paus cruzados em X que tendem a se separar:",
+   "options": [
+    "Amarra diagonal",
+    "Amarra quadrada",
+    "Nó direito"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Construções com troncos e cordas (pontes, torres e portais) são as…",
+   "options": [
+    "Pioneirias",
+    "Origamis",
+    "Mosaicos"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Antes de usar uma corda para escalar, você deve…",
+   "options": [
+    "Conferir se ela não está gasta ou cortada",
+    "Molhar a corda",
+    "Pintar a corda"
+   ],
+   "answer": 0,
+   "ref": "Provérbios 22:3"
+  },
+  {
+   "q": "Eclesiastes 4:12: o cordão de três dobras…",
+   "options": [
+    "não se rompe facilmente",
+    "é fraco",
+    "serve só de enfeite"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "A ponta solta da corda, que faz o nó, se chama…",
+   "options": [
+    "Chicote",
+    "Seio",
+    "Firme"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "A parte dobrada da corda, em forma de U, se chama…",
+   "options": [
+    "Seio",
+    "Chicote",
+    "Firme"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Para que serve a volta redonda com dois cotes?",
+   "options": [
+    "Prender a corda numa árvore ou argola",
+    "Unir duas cordas",
+    "Encurtar a corda"
+   ],
+   "answer": 0,
+   "ref": "Eclesiastes 4:12"
+  },
+  {
+   "q": "Onde o sol nasce?",
+   "options": [
+    "No leste (nascente)",
+    "No oeste",
+    "No sul"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "Onde o sol se põe?",
+   "options": [
+    "No oeste (poente)",
+    "No leste",
+    "No norte"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "Quais são os quatro pontos cardeais?",
+   "options": [
+    "Norte, sul, leste e oeste",
+    "Cima, baixo, frente e trás",
+    "Nordeste, sudeste, noroeste e sudoeste"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "Entre o norte e o leste fica o…",
+   "options": [
+    "Nordeste",
+    "Sudoeste",
+    "Noroeste"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "Entre o sul e o oeste fica o…",
+   "options": [
+    "Sudoeste",
+    "Nordeste",
+    "Sudeste"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "A agulha da bússola aponta para o…",
+   "options": [
+    "Norte magnético",
+    "Sol",
+    "Lugar mais alto"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "O que atrapalha a bússola?",
+   "options": [
+    "Metais e ímãs por perto",
+    "Água",
+    "Música"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "No céu do Brasil, que constelação ajuda a achar o sul?",
+   "options": [
+    "Cruzeiro do Sul",
+    "Ursa Maior",
+    "Estrela Polar"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "Prolongando o braço maior do Cruzeiro do Sul umas 4 vezes e meia, chegamos ao…",
+   "options": [
+    "Polo Sul celeste",
+    "Norte",
+    "Sol"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "De manhã, com o braço direito apontado para onde o sol nasce, você está de frente para o…",
+   "options": [
+    "Norte",
+    "Sul",
+    "Oeste"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "Num mapa, o norte normalmente fica…",
+   "options": [
+    "Em cima",
+    "Embaixo",
+    "À esquerda"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "O desenho com os pontos cardeais e colaterais se chama…",
+   "options": [
+    "Rosa dos ventos",
+    "Girassol",
+    "Cata-vento"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "Salmos 19:1: os céus proclamam a…",
+   "options": [
+    "glória de Deus",
+    "previsão do tempo",
+    "hora do almoço"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
+  },
+  {
+   "q": "De frente para o norte, o leste fica à sua…",
+   "options": [
+    "Direita",
+    "Esquerda",
+    "Costas"
+   ],
+   "answer": 0,
+   "ref": "Salmos 19:1"
   }
  ]
 }

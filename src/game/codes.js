@@ -40,13 +40,13 @@ export async function redeem(game, value) {
   return { ok: true, msg: `Presente recebido: ${got.join(', ')}!` };
 }
 
-export function openRedeem(game) {
+export function openRedeem(game, backScene = 'shop') {
   const input = h('input', { type: 'text', class: 'field__input', autocomplete: 'off', autocapitalize: 'characters', spellcheck: 'false', placeholder: 'Código' });
   const close = () => modal.remove();
   const go = async () => {
     const r = await redeem(game, input.value);
     toast(r.msg, { ms: r.ok ? 5000 : 3000 });
-    if (r.ok) { close(); game.scenes.go('profile'); }
+    if (r.ok) { close(); game.scenes.go(backScene); }
   };
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
   const modal = h('div', { class: 'modal' }, h('div', { class: 'modal__box' },
