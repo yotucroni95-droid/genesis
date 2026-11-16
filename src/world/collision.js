@@ -3,6 +3,15 @@
 // along walls instead of sticking to them.
 
 export function boxHitsMap(map, x, y, w, h) {
+  if (map.walk) {
+    if (map.boxOffPath(x, y, w, h)) return true;
+    if (map.extraSolids) {
+      for (const r of map.extraSolids) {
+        if (x < r.x + r.w && x + w > r.x && y < r.y + r.h && y + h > r.y) return true;
+      }
+    }
+    return false;
+  }
   const tx0 = Math.floor(x / map.tileW);
   const ty0 = Math.floor(y / map.tileH);
   const tx1 = Math.floor((x + w - 0.001) / map.tileW);

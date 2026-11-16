@@ -27,9 +27,14 @@ export class TileMap {
     this.foreground = ext.foreground || []; // parts of the picture drawn over the characters (a gate they walk under)
     this.waterCell = 4;
     this.waterMask = null;
-    if (this.background && ext.waterSolid !== false) this.waterMask = this.buildWaterMask();
     this.roadMask = null; // 4x4 px cells of painted road inside blocked tiles
-    if (this.background && ext.roadColor) this.roadMask = this.buildRoadMask(ext.roadColor, ext.roadTolerance || 48);
+    // Walk mask (tools/make_walk.py): the player walks only on the painted path.
+    // When a map has it, it replaces the tile grid, the water and the road masks.
+    this.walk = ext.walk ? this.decodeWalk(ext.walk) : null;
+    if (!this.walk) {
+      if (this.background && ext.waterSolid !== false) this.waterMask = this.buildWaterMask();
+      if (this.background && ext.roadColor) this.roadMask = this.buildRoadMask(ext.roadColor, ext.roadTolerance || 48);
+    }
   }
 
   /**
@@ -81,6 +86,34 @@ export class TileMap {
     }
     this.roadW = W;
     return mask;
+  }
+
+  /** Run lengths per row (blocked first) -> 1 = walkable cell. */
+  decodeWalk({ cell, w, h, rows }) {
+    const data = new Uint8Array(w * h);
+    rows.forEach((row, y) => {
+      let x = 0;
+      let v = 0;
+      for (const n of row.split(',')) {
+        const len = Number(n);
+        if (v) data.fill(1, y * w + x, y * w + x + len);
+        x += len;
+        v = 1 - v;
+      }
+    });
+    return { cell, w, h, data };
+  }
+
+  /** True when any part of the rectangle (pixels) is off the walkable path. */
+  boxOffPath(x, y, bw, bh) {
+    const { cell, w, h, data } = this.walk;
+    const x0 = Math.floor(x / cell), y0 = Math.floor(y / cell);
+    const x1 = Math.floor((x + bw - 0.001) / cell), y1 = Math.floor((y + bh - 0.001) / cell);
+    if (x0 < 0 || y0 < 0 || x1 >= w || y1 >= h) return true;
+    for (let cy = y0; cy <= y1; cy++) {
+      for (let cx = x0; cx <= x1; cx++) if (!data[cy * w + cx]) return true;
+    }
+    return false;
   }
 
   /** True when the whole rectangle inside a blocked tile is painted road. */
@@ -204,6 +237,12 @@ export class TileMap {
   }
 
   drawDebug(ctx) {
+    if (this.walk) {
+      const { cell, w, h, data } = this.walk;
+      ctx.fillStyle = 'rgba(255,0,0,0.28)';
+      for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) if (!data[y * w + x]) ctx.fillRect(x * cell, y * cell, cell, cell);
+      return;
+    }
     if (this.waterMask) {
       ctx.fillStyle = 'rgba(0,120,255,.45)';
       for (let y = 0; y < this.waterH; y++) {
