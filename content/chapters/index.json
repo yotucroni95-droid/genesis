@@ -73,8 +73,7 @@
       "file": "chapters/acamp.json",
       "event": true,
       "window": {
-        "start": "2026-11-16",
-        "end": "2026-12-31"
+        "start": "2026-11-16"
       }
     }
   ]
