@@ -6,6 +6,7 @@ import { chest, formatWait, vibrate, loadExtras, frameView, ico } from '../ui/ga
 import { openBox, claimFreeBox, freeBoxReadyIn, RARITY_LABEL, RARITY_COLOR } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 import { sfx } from '../audio/audio.js';
+import { fragmentsNeeded } from '../game/meta.js';
 
 function rewardView(game, it) {
   if (it.type === 'coins') return h('div', { class: 'loot loot--coins' }, ico('icon.moeda', '🪙', 'loot__ico'), h('b', { text: `+${it.amount}` }), h('small', { text: 'talentos' }));
@@ -30,7 +31,7 @@ function rewardView(game, it) {
       it.unlocked ? h('span', { class: 'loot__new', text: 'LIBERADO!' }) : null,
       h('img', { class: 'pixel loot__face', src: game.assets.url(`portrait.${c.id}`), alt: '' }),
       h('b', { text: `+${it.amount} 🧩 ${c.name}` }),
-      h('small', { text: it.unlocked ? 'Personagem liberado!' : it.converted ? `Já tinha: +${it.converted} denários` : `${it.have}/10 fragmentos · ${RARITY_LABEL[c.rarity]}` }));
+      h('small', { text: it.unlocked ? 'Personagem liberado!' : it.converted ? `Já tinha: +${it.converted} denários` : `${it.have}/${fragmentsNeeded(c)} fragmentos · ${RARITY_LABEL[c.rarity]}` }));
   }
   if (it.type === 'trail') {
     return h('div', { class: 'loot', style: { '--r': RARITY_COLOR[it.item.rarity] } },
@@ -52,7 +53,11 @@ export function createBoxesScene(game) {
       const list = h('div', { class: 'boxes' });
       const overlay = h('div', { class: 'opening', hidden: true });
 
+      let busy = false; // one box at a time: a double tap must not open it twice
+      const close = () => { overlay.hidden = true; overlay.replaceChildren(); busy = false; render(); };
       const open = (box) => {
+        if (busy || !save.state.boxes.some((b) => b.uid === box.uid)) return;
+        busy = true;
         overlay.hidden = false;
         const c = chest(box.rarity, { size: 150, shake: true });
         overlay.replaceChildren(h('div', { class: 'opening__stage' }, c, h('p', { class: 'opening__hint', text: `Baú ${RARITY_LABEL[box.rarity]}` })));
@@ -69,10 +74,13 @@ export function createBoxesScene(game) {
           const showNext = () => {
             overlay.classList.remove('is-flash');
             if (i >= result.items.length) {
-              overlay.replaceChildren(h('div', { class: 'opening__stage' },
-                h('h2', { text: 'Tudo isso é seu!' }),
+              // title and button always visible; only the prizes scroll
+              overlay.replaceChildren(h('div', { class: 'opening__sum' },
+                h('div', { class: 'opening__sumhead' },
+                  h('h2', { text: 'Tudo isso é seu!' }),
+                  h('button', { class: 'btn', text: 'Continuar', onClick: close }),
+                ),
                 h('div', { class: 'opening__all' }, ...result.items.map((it) => rewardView(game, it))),
-                h('button', { class: 'btn', text: 'Continuar', onClick: () => { overlay.hidden = true; render(); } }),
               ));
               return;
             }
@@ -81,6 +89,7 @@ export function createBoxesScene(game) {
             overlay.replaceChildren(h('div', { class: 'opening__stage', onClick: showNext },
               h('div', { class: 'opening__one' }, rewardView(game, it)),
               h('p', { class: 'opening__hint', text: `Toque para continuar (${i}/${result.items.length})` }),
+              h('button', { class: 'btn btn--ghost btn--small opening__skip', text: 'Ver tudo', onClick: (e) => { e.stopPropagation(); i = result.items.length; showNext(); } }),
             ));
           };
           setTimeout(showNext, 450);

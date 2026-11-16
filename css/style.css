@@ -769,7 +769,7 @@ button.chip { cursor: pointer; touch-action: manipulation; }
 .lobby__btn:active { transform: translateY(2px); box-shadow: 0 2px 0 #050716; }
 .lobby__icon { font-size: 22px; }
 .lobby__free { width: 100%; font-size: 11px; color: var(--ok); }
-.lobby__chestpeek { position: absolute; right: -10px; bottom: -8px; pointer-events: none; }
+.lobby__btn .lobby__chestpeek { position: absolute; right: 14px; top: 50%; margin-top: -17px; pointer-events: none; }
 .lobby__stage { grid-area: stage; border: 0; background: none; cursor: pointer; min-height: 80px; }
 .lobby__name { grid-area: name; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .lobby__name b { font-size: 18px; color: var(--gold); text-shadow: 0 2px 0 #000; }
@@ -809,6 +809,18 @@ button.chip { cursor: pointer; touch-action: manipulation; }
 .opening__hint { margin: 0; color: var(--ink-dim); font-size: 15px; }
 .opening__one { animation: lootpop .45s cubic-bezier(.3,1.6,.6,1); }
 .opening__all { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+/* the final list: header with the button stays put, the prizes scroll */
+.opening:has(.opening__sum) { place-items: stretch; padding: max(10px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left)); }
+.opening__sum { display: flex; flex-direction: column; gap: 10px; height: 100%; min-height: 0; width: 100%; max-width: 900px; margin: 0 auto; }
+.opening__sumhead { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex: 0 0 auto; }
+.opening__sumhead h2 { margin: 0; color: var(--gold); font-size: clamp(18px, 4vw, 26px); }
+.opening__sum .opening__all { flex: 1 1 auto; min-height: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; align-content: flex-start; padding: 4px 2px 16px; }
+.opening__sum .loot { min-width: 118px; padding: 10px; gap: 4px; }
+.opening__sum .loot b { font-size: 16px; }
+.opening__sum .loot__face, .opening__sum .loot__ico { width: 48px; height: 48px; }
+.opening__sum .verse-card { width: 140px; font-size: 13px; }
+.opening__stage { width: 100%; }
+.opening__skip { margin-top: 4px; }
 .opening__all .verse-card { width: 150px; }
 @keyframes lootpop { from { transform: scale(.3) rotate(-8deg); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 .loot { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px; min-width: 140px; border: 3px solid var(--r, var(--gold)); border-radius: 16px; background: var(--panel); box-shadow: 0 0 24px color-mix(in srgb, var(--r, #ffd36e) 60%, transparent); }
@@ -1046,3 +1058,6 @@ button { touch-action: manipulation; }
 .map-card__hero.is-done { background: linear-gradient(180deg, #7cf0a6, #2f9a5a); box-shadow: 0 3px 0 #1d5a35; }
 
 .pass__final { width: 48px; height: 48px; }
+.boxcard .btn { display: inline-flex; align-items: center; justify-content: center; }
+/* every tappable thing: no double-tap zoom delay, no text selection, no grey flash */
+button, .btn, [role="button"], .boxcard, .map-card, .lobby__btn { touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }

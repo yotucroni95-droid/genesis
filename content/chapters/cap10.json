@@ -229,7 +229,7 @@
       "challenge": {
         "type": "tictactoe",
         "config": {
-          "difficulty": 0.7
+          "difficulty": 0.5
         }
       },
       "rewards": {

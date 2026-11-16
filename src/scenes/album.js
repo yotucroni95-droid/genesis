@@ -6,7 +6,7 @@ import { iconButton } from '../ui/icon-button.js';
 import { toast } from '../ui/toast.js';
 import { characterCard, playableCharacters } from '../ui/character-card.js';
 import { Starfield } from './starfield.js';
-import { powerLines } from '../game/meta.js';
+import { powerLines, fragmentsNeeded } from '../game/meta.js';
 
 export function createAlbumScene(game) {
   const stars = new Starfield(80);
@@ -21,7 +21,7 @@ export function createAlbumScene(game) {
         const unlocked = save.isUnlocked(c.id);
         if (!unlocked) {
           if (c.rarity === 'único') toast('Jesus é único: só aparece muito raramente num baú Lendário, ou de presente para quem juntar todos os outros personagens.', { ms: 6000 });
-          else if (c.rarity) toast(`Junte 10 fragmentos de ${c.name} em baús, no Passe da Fé e na Loja. Você tem ${(save.state.fragments || {})[c.id] || 0}.`, { ms: 4500 });
+          else if (c.rarity) toast(`Junte ${fragmentsNeeded(c)} fragmentos de ${c.name} em baús, no Passe da Fé e na Loja. Você tem ${(save.state.fragments || {})[c.id] || 0}.`, { ms: 4500 });
           else toast(c.unlockedIn != null ? `Conclua o Capítulo ${c.unlockedIn} para liberar este personagem.` : 'Continue jogando para liberar!');
           return;
         }

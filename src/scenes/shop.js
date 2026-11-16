@@ -6,7 +6,7 @@ import { gameScreen } from '../ui/screen.js';
 import { chest, frameView, ico, loadExtras, formatWait } from '../ui/game-ui.js';
 import { toast } from '../ui/toast.js';
 import { SHOP, buyBox, RARITY_LABEL, RARITY_COLOR } from '../game/economy.js';
-import { dailyOffers, buyOffer, buyWeeklyPack, weeklyPackBought, WEEKLY_PACK, charById, FRAGMENTS_NEEDED } from '../game/meta.js';
+import { dailyOffers, buyOffer, buyWeeklyPack, weeklyPackBought, WEEKLY_PACK, charById, fragmentsNeeded } from '../game/meta.js';
 import { Starfield } from './starfield.js';
 import { sfx } from '../audio/audio.js';
 
@@ -34,7 +34,7 @@ export function createShopScene(game) {
           const c = charById(o.id);
           return h('div', { class: 'offer__face', style: { '--r': RARITY_COLOR[c.rarity] } },
             h('img', { class: 'pixel', src: game.assets.url(`portrait.${o.id}`), alt: '' }),
-            h('span', { class: 'offer__frag', text: `🧩 ${(save.state.fragments || {})[o.id] || 0}/${FRAGMENTS_NEEDED}` }));
+            h('span', { class: 'offer__frag', text: `🧩 ${(save.state.fragments || {})[o.id] || 0}/${fragmentsNeeded(charById(o.id))}` }));
         }
         if (o.kind === 'oil') return ico('icon.azeite', '🫙', 'offer__ico');
         if (o.kind === 'box') return chest(o.rarity, { size: 56 });

@@ -39,7 +39,7 @@ export class Scrolls {
     const S = 8;
     const W = Math.floor(map.pixelW / S);
     const H = Math.floor(map.pixelH / S);
-    const free = (x, y) => !boxHitsMap(map, x * S - 9, y * S - 10, 18, 10);
+    const free = (x, y) => !boxHitsMap(map, x * S - 7, y * S - 8, 14, 8);
     const seen = new Uint8Array(W * H);
     const sx = Math.round(player.x / S);
     const sy = Math.round(player.y / S);

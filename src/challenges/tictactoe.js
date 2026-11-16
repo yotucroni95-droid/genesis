@@ -1,6 +1,8 @@
 // Tic-tac-toe against a simple computer that can be beaten.
 // config.difficulty (0 to 1): how often the computer plays its best move.
-// A draw or a loss lets the player try again; winning once completes it.
+// Winning completes it. A draw also counts (fewer points), because against a
+// good player a draw is the fair result. Each lost round makes the shadow a
+// little more careless, so nobody gets stuck here.
 
 import { h } from '../ui/dom.js';
 import { resultPanel } from './shared.js';
@@ -38,7 +40,7 @@ function computerMove(b, difficulty) {
 }
 
 export function start(config, env) {
-  const difficulty = config.difficulty ?? 0.3;
+  let difficulty = Math.min(0.8, config.difficulty ?? 0.3);
   const wrap = h('div', { class: 'ttt' });
   env.root.appendChild(wrap);
 
@@ -64,17 +66,19 @@ export function start(config, env) {
         locked = true;
         if (w.line) w.line.forEach((i) => cells[i].classList.add('is-line'));
         setTimeout(() => {
-          if (w.mark === 'X') {
-            wins += 1;
+          if (w.mark === 'X' || w.mark === 'draw') {
+            const win = w.mark === 'X';
+            if (win) wins += 1;
             wrap.replaceChildren(resultPanel({
-              big: '✦', title: 'A luz venceu!',
-              note: rounds === 1 ? 'Vitória de primeira!' : `Você venceu na partida ${rounds}.`,
+              big: win ? '✦' : '=', title: win ? 'A luz venceu!' : 'Empate! A sombra não venceu.',
+              note: win ? (rounds === 1 ? 'Vitória de primeira!' : `Você venceu na partida ${rounds}.`) : 'Empatar com a sombra também vale. Vença para ganhar mais estrelas!',
               button: 'Continuar',
-              onClick: () => resolve({ success: true, score: Math.max(40, 100 - (rounds - 1) * 15) }),
+              onClick: () => resolve({ success: true, score: win ? Math.max(40, 100 - (rounds - 1) * 15) : 50 }),
             }));
           } else {
+            difficulty = Math.max(0.1, difficulty - 0.2); // the shadow gets more careless after each loss
             wrap.replaceChildren(resultPanel({
-              title: w.mark === 'draw' ? 'Empate!' : 'A sombra ganhou desta vez.',
+              title: 'A sombra ganhou desta vez.',
               note: 'Tente de novo: pense duas jogadas à frente!',
               button: 'Jogar de novo',
               onClick: play,

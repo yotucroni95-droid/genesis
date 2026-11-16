@@ -2,6 +2,7 @@
 // Unlocked: portrait, name, virtue and Bible passage.
 
 import { h } from './dom.js';
+import { fragmentsNeeded } from '../game/meta.js';
 
 const RARITY = { comum: ['Comum', '#9fb3c8'], raro: ['Raro', '#4fa3ff'], 'épico': ['Épico', '#b56dff'], 'lendário': ['Lendário', '#ffc93c'], 'único': ['ÚNICO', '#fff1b8'] };
 
@@ -15,7 +16,7 @@ export function characterCard(assets, c, unlocked, { onClick, selected = false, 
   const r = RARITY[c.rarity];
   const cls = `cc${unlocked ? '' : ' is-locked'}${selected ? ' is-selected' : ''}${r ? ` cc--rare cc--${c.rarity === 'único' ? 'unico' : c.rarity.normalize('NFD').replace(/[̀-ͯ]/g, '')}` : ''}`;
   let lockedLine = c.unlockedIn != null ? `Capítulo ${c.unlockedIn}` : '';
-  if (r) lockedLine = c.rarity === 'único' ? 'Quase impossível' : `🧩 ${fragments}/10`;
+  if (r) lockedLine = c.rarity === 'único' ? 'Quase impossível' : `🧩 ${fragments}/${fragmentsNeeded(c)}`;
   return h('button', { class: cls, onClick, style: r ? { '--rar': r[1] } : {}, 'aria-label': unlocked ? c.name : 'Personagem bloqueado' },
     r ? h('span', { class: 'cc__rarity', text: r[0] }) : null,
     frame && !frame.placeholder ? h('img', { class: 'pixel cc__frame', src: assets.url('ui.card_frame'), alt: '' }) : null,

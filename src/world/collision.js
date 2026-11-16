@@ -9,7 +9,12 @@ export function boxHitsMap(map, x, y, w, h) {
   const ty1 = Math.floor((y + h - 0.001) / map.tileH);
   for (let ty = ty0; ty <= ty1; ty++) {
     for (let tx = tx0; tx <= tx1; tx++) {
-      if (map.isSolidTile(tx, ty)) return true;
+      if (!map.isSolidTile(tx, ty)) continue;
+      // a painted road crossing the edge of a blocked tile stays walkable
+      const inside = tx >= 0 && ty >= 0 && tx < map.cols && ty < map.rows;
+      if (inside && map.isRoadRect(Math.max(x, tx * map.tileW), Math.max(y, ty * map.tileH),
+        Math.min(x + w, (tx + 1) * map.tileW), Math.min(y + h, (ty + 1) * map.tileH))) continue;
+      return true;
     }
   }
   if (map.extraSolids) {
@@ -44,9 +49,41 @@ function moveAxis(map, x, y, w, h, d, horizontal) {
   return best;
 }
 
+const ASSIST = 14; // pixels: how far around a corner the player is helped
+
+/**
+ * Corner help: when a move along one axis is blocked, look a few pixels to
+ * each side. If the way is open there (the entrance of a road, a gap between
+ * fences), slide toward it, so the player never snags on a corner.
+ */
+function cornerSlide(map, x, y, w, h, d, horizontal, step) {
+  const sign = Math.sign(d);
+  const probe = sign * Math.max(2, Math.abs(d));
+  for (let k = 1; k <= ASSIST; k++) {
+    for (const side of [-1, 1]) {
+      const off = side * k;
+      const ok = horizontal
+        ? !boxHitsMap(map, x, y + off, w, h) && !boxHitsMap(map, x + probe, y + off, w, h)
+        : !boxHitsMap(map, x + off, y, w, h) && !boxHitsMap(map, x + off, y + probe, w, h);
+      if (!ok) continue;
+      // free path found: move toward it (never further than one step)
+      const m = side * Math.min(k, step);
+      return horizontal ? { x, y: moveAxis(map, x, y, w, h, m, false) } : { x: moveAxis(map, x, y, w, h, m, true), y };
+    }
+  }
+  return { x, y };
+}
+
 /** box = {x, y, w, h} (top-left). Returns the moved box position. */
 export function moveBox(map, box, dx, dy) {
-  const x = moveAxis(map, box.x, box.y, box.w, box.h, dx, true);
-  const y = moveAxis(map, x, box.y, box.w, box.h, dy, false);
+  let x = moveAxis(map, box.x, box.y, box.w, box.h, dx, true);
+  let y = moveAxis(map, x, box.y, box.w, box.h, dy, false);
+  const step = Math.max(Math.abs(dx), Math.abs(dy)) || 1;
+  // blocked on the main direction of travel and not moving the other way: help
+  if (Math.abs(dx) >= Math.abs(dy) && Math.abs(x - box.x) < Math.abs(dx) * 0.5 && Math.abs(y - box.y) < 0.01) {
+    ({ x, y } = cornerSlide(map, x, y, box.w, box.h, dx, true, step));
+  } else if (Math.abs(dy) > Math.abs(dx) && Math.abs(y - box.y) < Math.abs(dy) * 0.5 && Math.abs(x - box.x) < 0.01) {
+    ({ x, y } = cornerSlide(map, x, y, box.w, box.h, dy, false, step));
+  }
   return { x, y };
 }

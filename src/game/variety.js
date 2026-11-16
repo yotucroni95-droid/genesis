@@ -44,7 +44,7 @@ export async function planChallenge(game, chapter, stop, { hero = false } = {}) 
     case 'versiculo':
       return { type, config: { verses, count: hero ? 5 : 3 } };
     case 'tictactoe':
-      return { type, config: { difficulty: hero ? 0.95 : Math.min(0.9, ((original.config && original.config.difficulty) || 0.3) + 0.15 * level) } };
+      return { type, config: { difficulty: hero ? 0.8 : Math.min(0.6, ((original.config && original.config.difficulty) || 0.3) + 0.1 * level) } };
     default:
       return { type: original.type, config: original.config || {} };
   }

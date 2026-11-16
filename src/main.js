@@ -31,6 +31,7 @@ import { setUiAssets } from './ui/game-ui.js';
 import { setCharacters, onMetaEvent, charById } from './game/meta.js';
 import { toast } from './ui/toast.js';
 import { celebrate } from './ui/celebrate.js';
+import { installReliableTaps } from './ui/tap.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -47,6 +48,7 @@ function blockBrowserGestures() {
 
 async function boot() {
   blockBrowserGestures();
+  installReliableTaps();
 
   const bootEl = document.getElementById('boot');
   const fill = bootEl.querySelector('.bar__fill');

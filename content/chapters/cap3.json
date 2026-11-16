@@ -200,7 +200,7 @@
       "challenge": {
         "type": "tictactoe",
         "config": {
-          "difficulty": 0.65
+          "difficulty": 0.5
         }
       },
       "rewards": {

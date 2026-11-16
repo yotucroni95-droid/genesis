@@ -95,7 +95,7 @@ O arquivo `sw.js` guarda o jogo no celular. Com internet, ele sempre busca a ver
 
 - **Desafios que mudam**: ao repetir uma parada, o jogo sorteia outro desafio (`src/game/variety.js`) com perguntas do banco `content/questions.json` (quiz, verdadeiro ou falso, ordem certa, caça-palavras, complete o versículo). Fica mais difícil a cada repetição.
 - **Modo Herói**: capítulo concluído ganha o botão ⚔️ na Jornada. Desafios difíceis, sem a história, com o dobro de talentos e denários.
-- **Personagens raros por fragmentos** (`content/characters.json`, campo `rarity` e `power`): 10 fragmentos liberam. Jesus é "único": 1 em 500 no baú Lendário, ou quando o jogador tem todos os outros. Enquanto a arte não chega, o manifest marca `"pending": true` e o boneco usa o Peregrino tingido.
+- **Personagens raros por fragmentos** (`content/characters.json`, campo `rarity` e `power`): fragmentos liberam (comum 20, raro 30, épico 45, lendário 70). Jesus é "único": 1 em 500 no baú Lendário, ou quando o jogador tem todos os outros. Enquanto a arte não chega, o manifest marca `"pending": true` e o boneco usa o Peregrino tingido.
 - **Lamparina (ofensiva)**, **missões da semana**, **Passe da Fé** (30 níveis, temporada de 28 dias) e **ofertas da Loja**: `src/game/meta.js`.
 - **Desafiar amigo**: o botão da Arena manda um link `?desafio=semente.pontos.apelido`; quem abre responde às mesmas perguntas.
 - **100% offline**: `sw.js` baixa tudo o que está em `precache.json`. **Depois de acrescentar ou remover arquivos, rode** `python3 tools/make_precache.py`, e aumente `VERSION` no `sw.js` quando o código mudar.

@@ -15,6 +15,7 @@
 "src/ui/screen.js",
 "src/ui/share.js",
 "src/ui/signature.js",
+"src/ui/tap.js",
 "src/ui/toast.js",
 "src/scenes/album.js",
 "src/scenes/arena.js",

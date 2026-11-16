@@ -12,7 +12,7 @@ export class Player {
     this.dir = DIR.down;
     this.moving = false;
     this.animTime = 0;
-    this.box = { w: 18, h: 10 }; // feet hitbox
+    this.box = { w: 14, h: 8 }; // feet hitbox (small, so narrow roads are easy)
     this.setCharacter(characterId);
   }
 

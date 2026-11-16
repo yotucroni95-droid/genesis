@@ -27,6 +27,71 @@ export class TileMap {
     this.waterCell = 4;
     this.waterMask = null;
     if (this.background && ext.waterSolid !== false) this.waterMask = this.buildWaterMask();
+    this.roadMask = null; // 4x4 px cells of painted road inside blocked tiles
+    if (this.background && ext.roadColor) this.roadMask = this.buildRoadMask(ext.roadColor, ext.roadTolerance || 48);
+  }
+
+  /**
+   * The collision grid is made of 32 px tiles, but the painted roads curve.
+   * Where a blocked tile touches a walkable one, every 4x4 px cell painted in
+   * the road's colour is opened, so the player can follow the road exactly
+   * (corners, curves, diagonals) without walking into houses or trees.
+   */
+  buildRoadMask(color, tol) {
+    const c = 4;
+    const W = Math.floor(this.pixelW / c);
+    const H = Math.floor(this.pixelH / c);
+    const canvas = document.createElement('canvas');
+    canvas.width = this.pixelW;
+    canvas.height = this.pixelH;
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+    ctx.drawImage(this.background, 0, 0, this.pixelW, this.pixelH);
+    let px;
+    try { px = ctx.getImageData(0, 0, this.pixelW, this.pixelH).data; } catch { return null; }
+    const [r0, g0, b0] = color;
+    const tol2 = tol * tol;
+    const mask = new Uint8Array(W * H);
+    const per = this.tileW / c;
+    for (let ty = 0; ty < this.rows; ty++) {
+      for (let tx = 0; tx < this.cols; tx++) {
+        if (!this.isSolidTile(tx, ty)) continue;
+        let nearFree = false;
+        for (let dy = -1; dy <= 1 && !nearFree; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            const nx = tx + dx, ny = ty + dy;
+            if (nx >= 0 && ny >= 0 && nx < this.cols && ny < this.rows && !this.solid[ny * this.cols + nx]) { nearFree = true; break; }
+          }
+        }
+        if (!nearFree) continue;
+        for (let cy = ty * per; cy < (ty + 1) * per; cy++) {
+          for (let cx = tx * per; cx < (tx + 1) * per; cx++) {
+            let n = 0;
+            for (let y = cy * c; y < cy * c + c; y++) {
+              for (let x = cx * c; x < cx * c + c; x++) {
+                const i = (y * this.pixelW + x) * 4;
+                const dr = px[i] - r0, dg = px[i + 1] - g0, db = px[i + 2] - b0;
+                if (dr * dr + dg * dg + db * db < tol2) n++;
+              }
+            }
+            if (n >= 12) mask[cy * W + cx] = 1;
+          }
+        }
+      }
+    }
+    this.roadW = W;
+    return mask;
+  }
+
+  /** True when the whole rectangle inside a blocked tile is painted road. */
+  isRoadRect(x0, y0, x1, y1) {
+    if (!this.roadMask) return false;
+    const c = 4;
+    for (let y = Math.floor(y0 / c); y <= Math.floor((y1 - 0.001) / c); y++) {
+      for (let x = Math.floor(x0 / c); x <= Math.floor((x1 - 0.001) / c); x++) {
+        if (!this.roadMask[y * this.roadW + x]) return false;
+      }
+    }
+    return true;
   }
 
   /**
@@ -131,6 +196,10 @@ export class TileMap {
       }
       ctx.fillStyle = 'rgba(255,220,0,.35)';
       for (const [bx, by, bw, bh] of this.bridges) ctx.fillRect(bx, by, bw, bh);
+    }
+    if (this.roadMask) {
+      ctx.fillStyle = 'rgba(0,255,90,.5)';
+      for (let i = 0; i < this.roadMask.length; i++) if (this.roadMask[i]) ctx.fillRect((i % this.roadW) * 4, Math.floor(i / this.roadW) * 4, 4, 4);
     }
     ctx.fillStyle = 'rgba(255,0,60,.35)';
     for (let ty = 0; ty < this.rows; ty++) {

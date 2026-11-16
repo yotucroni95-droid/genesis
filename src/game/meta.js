@@ -31,7 +31,9 @@ export function addDenarios(save, n) {
 
 // ---------- characters, fragments and powers ----------
 
-export const FRAGMENTS_NEEDED = 10;
+// Fragments needed to unlock a character, by rarity: rarer heroes take longer.
+export const FRAGMENTS_BY_RARITY = { comum: 20, raro: 30, 'épico': 45, 'lendário': 70 };
+export const fragmentsNeeded = (c) => FRAGMENTS_BY_RARITY[(c && c.rarity) || 'comum'] || 20;
 export const RARITY_ORDER = ['comum', 'raro', 'épico', 'lendário', 'único'];
 let CHARS = [];
 export function setCharacters(list) { CHARS = list; }
@@ -57,7 +59,7 @@ export function powerLines(c) {
   return Object.entries((c && c.power) || {}).map(([k, v]) => (POWER_TEXT[k] ? POWER_TEXT[k](v) : ''));
 }
 
-/** Gives fragments; unlocks the character at 10. Returns { id, amount, unlocked }. */
+/** Gives fragments; unlocks the character when it has enough. Returns { id, amount, unlocked }. */
 export function addFragments(save, id, amount) {
   if (save.isUnlocked(id)) {
     const comp = { comum: 2, raro: 4, 'épico': 8, 'lendário': 15 }[(charById(id) || {}).rarity] || 2;
@@ -68,7 +70,7 @@ export function addFragments(save, id, amount) {
   save.update((s) => {
     s.fragments = { ...(s.fragments || {}) };
     s.fragments[id] = (s.fragments[id] || 0) + amount;
-    if (s.fragments[id] >= FRAGMENTS_NEEDED) {
+    if (s.fragments[id] >= fragmentsNeeded(charById(id))) {
       s.unlocked[id] = new Date().toISOString();
       delete s.fragments[id];
       unlocked = true;
@@ -94,10 +96,10 @@ function weighted(weights, rnd = Math.random) {
 }
 
 const DROPS = {
-  comum: [[3, { comum: 80, raro: 20 }]],
-  raro: [[4, { comum: 50, raro: 40, 'épico': 10 }]],
-  'épico': [[5, { raro: 50, 'épico': 45, 'lendário': 5 }], [3, { comum: 60, raro: 40 }]],
-  'lendário': [[6, { 'épico': 50, 'lendário': 50 }], [4, { raro: 50, 'épico': 50 }]],
+  comum: [[1, { comum: 85, raro: 15 }]],
+  raro: [[2, { comum: 55, raro: 40, 'épico': 5 }]],
+  'épico': [[3, { raro: 55, 'épico': 42, 'lendário': 3 }], [1, { comum: 60, raro: 40 }]],
+  'lendário': [[4, { 'épico': 60, 'lendário': 40 }], [2, { raro: 50, 'épico': 50 }]],
 };
 const JESUS_CHANCE = 1 / 500; // only in legendary boxes
 
@@ -276,10 +278,10 @@ export function passReward(level) {
   if (level % 5 === 0) return { kind: 'box', rarity: 'raro', label: 'Baú Raro' };
   const cycle = [
     { kind: 'coins', amount: 60, label: '60 talentos' },
-    { kind: 'frag', amount: 3, rarity: 'comum', label: '3 fragmentos' },
+    { kind: 'frag', amount: 2, rarity: 'comum', label: '2 fragmentos' },
     { kind: 'denarios', amount: 3, label: '3 denários' },
     { kind: 'oil', amount: 1, label: '1 frasco de azeite' },
-    { kind: 'frag', amount: 3, rarity: 'raro', label: '3 fragmentos raros' },
+    { kind: 'frag', amount: 2, rarity: 'raro', label: '2 fragmentos raros' },
     { kind: 'coins', amount: 100, label: '100 talentos' },
   ];
   return cycle[level % cycle.length];
@@ -333,10 +335,10 @@ export function dailyOffers(save, cosmetics) {
     const c = pool[Math.floor(rnd() * pool.length)];
     if (c) offers.push({ kind: 'frag', id: c.id, amount, price, currency, label: `${amount} fragmentos de ${c.name}` });
   };
-  fragOffer(rnd() < 0.6 ? 'comum' : 'raro', 5, 0, 'coins');
+  fragOffer(rnd() < 0.6 ? 'comum' : 'raro', 3, 0, 'coins');
   offers[0].price = charById(offers[0].id).rarity === 'comum' ? 120 : 220;
-  fragOffer('épico', 3, 12, 'denarios');
-  fragOffer('lendário', 2, 25, 'denarios');
+  fragOffer('épico', 2, 12, 'denarios');
+  fragOffer('lendário', 1, 25, 'denarios');
   offers.push({ kind: 'oil', amount: 1, price: 150, currency: 'coins', label: 'Frasco de azeite' });
   const kinds = ['frames', 'titles', 'trails'];
   const kind = kinds[Math.floor(rnd() * kinds.length)];
@@ -352,7 +354,7 @@ export function dailyOffers(save, cosmetics) {
     owned: o.kind === 'cosmetic' ? Boolean((save.state[o.cosmeticKind] || {})[o.id]) : o.kind === 'frag' ? save.isUnlocked(o.id) : o.kind === 'oil' ? (save.state.oil || 0) >= OIL_MAX : false }));
 }
 
-export const WEEKLY_PACK = { price: 30, label: 'Pacote da semana', text: 'Baú Épico + 6 fragmentos épicos + 2 frascos de azeite' };
+export const WEEKLY_PACK = { price: 30, label: 'Pacote da semana', text: 'Baú Épico + 4 fragmentos épicos + 2 frascos de azeite' };
 
 function pay(save, price, currency) {
   const have = currency === 'denarios' ? save.state.denarios || 0 : save.state.coins || 0;
@@ -383,7 +385,7 @@ export function buyWeeklyPack(save) {
   if (!pay(save, WEEKLY_PACK.price, 'denarios')) return { error: 'Denários insuficientes.' };
   addBox(save, 'épico', 'pacote da semana');
   const c = pickCharacter(save, 'épico');
-  const frag = c ? addFragments(save, c.id, 6) : null;
+  const frag = c ? addFragments(save, c.id, 4) : null;
   save.update((s) => { s.oil = (s.oil || 0) + 2; s.packWeek = weekKey(); });
   return { ok: true, character: c, frag };
 }

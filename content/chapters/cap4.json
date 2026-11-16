@@ -186,7 +186,7 @@
       "challenge": {
         "type": "tictactoe",
         "config": {
-          "difficulty": 0.85
+          "difficulty": 0.5
         }
       },
       "rewards": {

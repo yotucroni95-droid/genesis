@@ -16,6 +16,7 @@ export function iconButton(assets, iconId, label, onClick, fallback = '') {
  */
 export function fastButton(btn, action) {
   let lastTouch = 0;
+  btn.dataset.fast = '1'; // handles its own touch (see ui/tap.js)
   btn.addEventListener('pointerup', (e) => {
     if (e.pointerType === 'mouse') return;
     lastTouch = Date.now();
