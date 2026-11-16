@@ -62,6 +62,7 @@
 "src/world/talk.js",
 "src/world/tilemap.js",
 "src/content/progression.js",
+"src/game/admin.js",
 "src/game/economy.js",
 "src/game/meta.js",
 "src/game/variety.js",

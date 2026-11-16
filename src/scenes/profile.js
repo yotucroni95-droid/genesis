@@ -8,6 +8,7 @@ import { loadExtras, rankBadge, rankProgress, framedAvatar, frameView, ico } fro
 import { totalStars, RARITY_COLOR, RANKS } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 import { shareCard } from '../ui/share.js';
+import { attachSecretUnlock } from '../game/admin.js';
 
 export function createProfileScene(game) {
   const stars = new Starfield(100);
@@ -67,6 +68,7 @@ export function createProfileScene(game) {
           h('button', { class: 'btn btn--ghost', text: 'Coleção de versículos', onClick: () => game.scenes.go('collection') }),
         ),
       )));
+      attachSecretUnlock(game, ui.querySelector('.screen__head h1')); // hidden owner tool (game/admin.js)
     },
     update(dt) { stars.update(dt); },
     render(ctx, d) { stars.render(ctx, d.width, d.height); },
