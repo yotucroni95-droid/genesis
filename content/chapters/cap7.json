@@ -12,8 +12,8 @@
   "npcs": [
     {
       "sheet": "abraao",
-      "x": 13,
-      "y": 4,
+      "x": 19,
+      "y": 3,
       "dir": 0,
       "talk": [
         "O Senhor proverá. Nunca esqueça disso.",
@@ -22,8 +22,8 @@
     },
     {
       "sheet": "isaque",
-      "x": 15,
-      "y": 13,
+      "x": 16,
+      "y": 9,
       "dir": 0,
       "talk": [
         "Meu pai disse: \"Deus mesmo vai providenciar.\" E providenciou!",
@@ -33,7 +33,7 @@
     },
     {
       "sheet": "rebeca",
-      "x": 7,
+      "x": 15,
       "y": 16,
       "dir": 0,
       "talk": [
@@ -44,7 +44,7 @@
     },
     {
       "sheet": "anjos_caidos",
-      "x": 24,
+      "x": 20,
       "y": 10,
       "dir": 0,
       "talk": [
@@ -64,8 +64,8 @@
     {
       "id": "cap7_s1",
       "title": "Deus prova Abraão",
-      "x": 6,
-      "y": 6,
+      "x": 19,
+      "y": 17,
       "verse": "Gênesis 22:1-8",
       "story": [
         {
@@ -148,8 +148,8 @@
     {
       "id": "cap7_s2",
       "title": "O Senhor proverá",
-      "x": 14,
-      "y": 11,
+      "x": 15,
+      "y": 3,
       "verse": "Gênesis 22:9-14",
       "story": [
         {
@@ -196,8 +196,8 @@
     {
       "id": "cap7_s3",
       "title": "A oração no poço",
-      "x": 23,
-      "y": 6,
+      "x": 13,
+      "y": 19,
       "verse": "Gênesis 24:1-21",
       "story": [
         {
@@ -272,8 +272,8 @@
     {
       "id": "cap7_s4",
       "title": "Rebeca diz \"Irei\"",
-      "x": 25,
-      "y": 15,
+      "x": 10,
+      "y": 17,
       "verse": "Gênesis 24:50-67",
       "story": [
         {

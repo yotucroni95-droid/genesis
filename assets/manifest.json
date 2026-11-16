@@ -2439,8 +2439,7 @@
    "label": "Monte Moriá",
    "group": "Mapas desenhados (opcional)",
    "w": 960,
-   "h": 640,
-   "pending": true
+   "h": 640
   },
   {
    "id": "map.betel",

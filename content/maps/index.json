@@ -49,6 +49,11 @@
       "id": "egito",
       "name": "O Egito",
       "file": "maps/egito.json"
+    },
+    {
+      "id": "moria",
+      "name": "O monte Moriá",
+      "file": "maps/moria.json"
     }
   ]
 }
