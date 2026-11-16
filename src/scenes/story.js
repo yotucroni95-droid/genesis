@@ -129,7 +129,7 @@ export function createStoryScene(game) {
         h('header', { class: 'story__head' },
           iconButton(game.assets, 'icon.voltar', 'Voltar ao mapa', () => game.scenes.go('world', params.back), '←'),
           h('div', {},
-            h('div', { class: 'story__chapter', text: `Capítulo ${chapter.number} · ${chapter.title}` }),
+            h('div', { class: 'story__chapter', text: chapter.event ? `⛺ ${chapter.title}` : `Capítulo ${chapter.number} · ${chapter.title}` }),
             h('h1', { class: 'story__title', text: stop.title }),
           ),
         ),

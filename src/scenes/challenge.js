@@ -12,6 +12,7 @@ import { grantCosmetic } from '../game/meta.js';
 import { vibrate, rankBadge, ico, hasArt } from '../ui/game-ui.js';
 import { celebrate } from '../ui/celebrate.js';
 import { sfx } from '../audio/audio.js';
+import { eventUnlocks } from '../game/event.js';
 
 
 export function createChallengeScene(game) {
@@ -60,14 +61,16 @@ export function createChallengeScene(game) {
         setTimeout(() => celebrate({ title: 'Herói do capítulo!', subtitle: `Você venceu o Modo Herói de "${chapter.title}". Ganhou um baú Épico e o título Herói de Gênesis!`, image: game.assets.url(`medal.${chapter.medal}`) }), 1800);
       }
       const starInfo = loot.find((x) => x.type === 'stars');
+      events.push(...eventUnlocks(game.save, chapter, stop, Math.max(starInfo.stars, (game.save.state.stars || {})[stop.id] || 0)));
+      const doneName = chapter.event ? `${chapter.title} concluído!` : `Capítulo ${chapter.number} concluído!`;
       vibrate(starInfo.stars === 3 ? [60, 40, 60, 40, 120] : 80);
       [0, 1, 2].slice(0, starInfo.stars).forEach((k) => setTimeout(() => sfx('star'), 300 + k * 250));
       setTimeout(() => sfx('coin'), 1100);
       const names0 = Object.fromEntries(game.assets.json('characters.json').characters.map((c) => [c.id, c.name]));
       setTimeout(() => {
         for (const e of events) {
-          if (e.type === 'unlock') celebrate({ title: 'Personagem liberado!', subtitle: `${names0[e.id] || e.id} agora está no seu álbum. Jogue com ele!`, image: game.assets.url(`portrait.${e.id}`) });
-          if (e.type === 'chapter') celebrate({ title: `Capítulo ${chapter.number} concluído!`, subtitle: chapter.title, image: game.assets.url(`medal.${chapter.medal}`) });
+          if (e.type === 'unlock') celebrate({ title: 'Personagem liberado!', subtitle: `${names0[e.id] || e.id} agora está no seu álbum. Já pode jogar!`, image: game.assets.url(`portrait.${e.id}`) });
+          if (e.type === 'chapter') celebrate({ title: doneName, subtitle: chapter.title, image: game.assets.url(`medal.${chapter.medal}`) });
         }
         for (const x of loot) if (x.type === 'rank') celebrate({ title: 'Nova patente!', subtitle: `Você chegou a ${x.rank.name} e ganhou um baú!`, badge: rankBadge(x.rank.min, { big: true }) });
       }, 1600);
@@ -100,9 +103,9 @@ export function createChallengeScene(game) {
           el.style.animationDelay = `${n * 0.25}s`;
           return el;
         })),
-        starInfo.stars < 3 ? h('small', { class: 'screen__note', text: 'Jogue de novo para tentar 3 estrelas!' }) : null,
-        h('h2', { class: 'quiz__q', text: heroChapter ? 'HERÓI DO CAPÍTULO! ⚔️' : chapterDone ? `Capítulo ${chapter.number} concluído!` : hero ? 'Desafio de herói vencido! ⚔️' : wasDone ? 'Você jogou de novo!' : 'Parada concluída!' }),
-        h('p', { class: 'screen__note', text: `Não esqueça de ler ${stop.verse} na sua Bíblia.` }),
+        starInfo.stars < 3 ? h('small', { class: 'screen__note', text: chapter.event ? 'No Acampamento, o próximo desafio só abre com 3 estrelas. Tente de novo!' : 'Jogue de novo para tentar 3 estrelas!' }) : null,
+        h('h2', { class: 'quiz__q', text: heroChapter ? 'HERÓI DO CAPÍTULO! ⚔️' : chapterDone ? doneName : hero ? 'Desafio de herói vencido! ⚔️' : wasDone ? 'Você jogou de novo!' : 'Parada concluída!' }),
+        h('p', { class: 'screen__note', text: chapter.event ? `Leia ${stop.verse} na sua Bíblia.` : `Não esqueça de ler ${stop.verse} na sua Bíblia.` }),
         h('div', { class: 'rewards' }, ...items),
         h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' } },
           h('button', { class: 'btn', text: chapterDone ? 'Ver capítulos' : 'Voltar ao mapa', onClick: () => (chapterDone ? game.scenes.go('explore') : back()) }),

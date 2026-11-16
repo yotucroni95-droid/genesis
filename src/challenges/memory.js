@@ -75,7 +75,7 @@ export function start(config, env) {
     }
 
     function finish() {
-      const perfect = pairs.length;
+      const perfect = config.goodMoves || pairs.length; // moves that still count as perfect
       const score = Math.max(10, Math.round((perfect / moves) * 100));
       wrap.replaceChildren(resultPanel({
         big: `${moves} jogadas`,

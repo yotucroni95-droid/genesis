@@ -49,7 +49,7 @@ export function start(config, env) {
         resultScreen(wrap, {
           passed,
           big: mistakes === 0 ? 'Perfeito!' : `${mistakes} ${mistakes === 1 ? 'erro' : 'erros'}`,
-          note: passed ? `Leia a história completa em ${config.ref}.` : `Muitos erros. Releia ${config.ref} e tente de novo!`,
+          note: passed ? (config.doneNote || `Leia a história completa em ${config.ref}.`) : (config.failNote || `Muitos erros. Releia ${config.ref} e tente de novo!`),
           onContinue: () => resolve({ success: true, score, correct: items.length - Math.min(items.length, mistakes) }),
           onRetry: play,
         });

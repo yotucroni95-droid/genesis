@@ -9,6 +9,7 @@ import { Camera } from '../world/camera.js';
 import { Player } from '../world/player.js';
 import { Ambient } from '../world/ambient.js';
 import { Stops } from '../world/stops.js';
+import { stopVisible, eventProgress } from '../game/event.js';
 import { Talk } from '../world/talk.js';
 import { loadRecorded, stopSpeaking } from '../audio/narrator.js';
 import { Scrolls } from '../world/scrolls.js';
@@ -87,13 +88,13 @@ export function createWorldScene(game) {
       const at = params.at || { x: (map.spawn.x + 0.5) * map.tileW, y: (map.spawn.y + 1) * map.tileH - 4 };
       player = new Player(game.assets, game.save.state.avatarId || 'peregrino', at.x, at.y);
       ambient = new Ambient(map);
-      stops = chapter ? new Stops(chapter, map, game.assets, game.save, { hero }) : null;
+      stops = chapter ? new Stops(chapter, map, game.assets, game.save, { hero, visible: (id) => stopVisible(game.save, chapter, id) }) : null;
       firstFrame = true;
       if (DEBUG) window.__world = { map, player, camera, stops }; // only with ?debug=1, for testing
 
       charButton = h('button', { class: 'hud__char', 'aria-label': 'Trocar personagem', title: 'Trocar personagem', onClick: chooseAvatar },
         h('img', { class: 'pixel', alt: '' }));
-      const title = chapter ? `${hero ? '⚔️ Modo Herói · ' : ''}Capítulo ${chapter.number} · ${chapter.title}` : map.name;
+      const title = !chapter ? map.name : chapter.event ? `⛺ ${chapter.title} · ${eventProgress(game.save, chapter)}/${chapter.stops.length}` : `${hero ? '⚔️ Modo Herói · ' : ''}Capítulo ${chapter.number} · ${chapter.title}`;
       ui.appendChild(h('div', { class: 'hud' },
         iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go('explore'), '←'),
         h('div', { class: 'hud__title', text: title }),

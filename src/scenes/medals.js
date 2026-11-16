@@ -13,6 +13,7 @@ export function createMedalsScene(game) {
       const chapters = game.assets.json('chapters/index.json').chapters;
       const hint = (id) => {
         if (id === 'primeiros_passos') return 'Conclua a sua primeira parada.';
+        if (id === 'acampamento') return 'Vença todos os desafios do evento Acampamento.';
         const n = Number((id.match(/capitulo_(\d+)/) || [])[1]);
         const ch = chapters.find((c) => c.number === n);
         return ch ? `Conclua o Capítulo ${n}: ${ch.title}.` : 'Continue jogando.';

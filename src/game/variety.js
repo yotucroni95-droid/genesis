@@ -17,6 +17,8 @@ export async function planChallenge(game, chapter, stop, { hero = false } = {}) 
   const plays = (save.state.plays || {})[stop.id] || 0;
   const done = save.isStopDone(stop.id);
   const original = stop.challenge;
+  // events always keep their own hard challenge (questions are drawn from a bank)
+  if (chapter.event) return { type: original.type, config: original.config || {} };
   if (!done && !hero) return { type: original.type, config: original.config || {} };
 
   const bank = ((await game.assets.loadJSON('questions.json')).chapters || {})[chapter.id] || {};

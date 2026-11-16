@@ -76,7 +76,7 @@ export function start(config, env) {
       };
       const finish = () => {
         const secs = Math.round((performance.now() - t0) / 1000);
-        const limit = 25 * puzzle.placed.length;
+        const limit = (config.secsPerWord || 25) * puzzle.placed.length;
         const score = secs <= limit ? 100 : secs <= limit * 2 ? 75 : 55;
         resultScreen(wrap, {
           passed: true,

@@ -3,8 +3,9 @@
 const NEAR = 30; // pixels: how close the player must be to enter
 
 export class Stops {
-  constructor(chapter, map, assets, save, { hero = false } = {}) {
-    this.hero = hero; // Modo Herói: red lights until beaten as a hero
+  constructor(chapter, map, assets, save, { hero = false, visible = () => true } = {}) {
+    this.hero = hero;
+    this.visible = visible; // events: only the next stop of the trail is shown // Modo Herói: red lights until beaten as a hero
     this.assets = assets;
     this.save = save;
     this.marker = assets.entry('ui.stop_marker');
@@ -35,6 +36,7 @@ export class Stops {
     let best = null;
     let bestD = NEAR;
     for (const s of this.stops) {
+      if (!this.visible(s.id)) continue;
       const d = Math.hypot(s.px - px, s.py - py);
       if (d < bestD) { best = s; bestD = d; }
     }
@@ -44,6 +46,7 @@ export class Stops {
   /** Things drawn on the ground (under characters). */
   drawGround(ctx) {
     for (const s of this.stops) {
+      if (!this.visible(s.id)) continue;
       const key = this.hero ? `${s.id}#heroi` : s.id;
       const done = this.hero ? Boolean((this.save.state.stars || {})[key]) : this.save.isStopDone(s.id);
       const pulse = 0.5 + 0.5 * Math.sin(this.time * 3 + s.x);

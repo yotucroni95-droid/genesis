@@ -65,6 +65,17 @@
       "number": 10,
       "title": "José governa o Egito",
       "file": "chapters/cap10.json"
+    },
+    {
+      "id": "acamp",
+      "number": 11,
+      "title": "Acampamento dos Desbravadores e Aventureiros",
+      "file": "chapters/acamp.json",
+      "event": true,
+      "window": {
+        "start": "2026-11-16",
+        "end": "2026-12-31"
+      }
     }
   ]
 }

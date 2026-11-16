@@ -5,6 +5,7 @@ import { iconButton } from '../ui/icon-button.js';
 import { toast } from '../ui/toast.js';
 import { Starfield } from './starfield.js';
 import { loadChapter, chapterProgress, chapterDone, isChapterOpen } from '../content/progression.js';
+import { eventWindow, eventProgress, shortDate } from '../game/event.js';
 
 export function createExploreScene(game) {
   const stars = new Starfield(80);
@@ -17,7 +18,9 @@ export function createExploreScene(game) {
       index.forEach((entry, i) => {
         const chapter = loaded[i];
         const waiting = Boolean(entry.waitingMap); // story written, map still being drawn
-        const open = chapter && !waiting && isChapterOpen(save, i, loaded, index);
+        const afterGenesis = chapter && !waiting && isChapterOpen(save, i, loaded, index);
+        const win = entry.event ? eventWindow(entry) : { open: true };
+        const open = afterGenesis && win.open;
         const prog = chapter ? chapterProgress(save, chapter) : { done: 0, total: 0 };
         const done = chapter && chapterDone(save, chapter);
         const mapId = chapter ? chapter.map : null;
@@ -25,6 +28,11 @@ export function createExploreScene(game) {
         if (chapter && !open) status = waiting ? 'Em breve: o mapa está sendo desenhado' : 'Complete o capítulo anterior';
         const st = chapter ? chapter.stops.reduce((n, sp) => n + ((save.state.stars || {})[sp.id] || 0), 0) : 0;
         if (open) status = `${done ? 'Concluído ✓ · ' : `${prog.done}/${prog.total} paradas · `}⭐ ${st}/${prog.total * 3}`;
+        if (entry.event && chapter) {
+          if (!win.open) status = win.before ? `Evento: abre em ${shortDate(win.start)}` : 'Evento encerrado. Aguarde o próximo!';
+          else if (!afterGenesis) status = 'Conclua Gênesis para entrar no Acampamento';
+          else status = `${eventProgress(save, chapter)}/${prog.total} desafios com ⭐⭐⭐${win.end ? ` · até ${shortDate(win.end)}` : ''}`;
+        }
         const card = (
           h('button', {
             class: `map-card${open ? '' : ' is-locked'}${done ? ' is-done' : ''}`,
@@ -35,13 +43,13 @@ export function createExploreScene(game) {
               done && chapter.medal ? h('img', { class: 'pixel map-card__medal', src: game.assets.url(`medal.${chapter.medal}`), alt: '' }) : null,
             ),
             h('div', { class: 'map-card__name' },
-              h('small', { text: `Capítulo ${entry.number}` }),
+              h('small', { text: entry.event ? '⛺ Evento especial' : `Capítulo ${entry.number}` }),
               h('span', { text: entry.title }),
               h('em', { text: status }),
             ),
           )
         );
-        if (done) {
+        if (done && !entry.event) {
           const heroStars = chapter.stops.reduce((n, sp) => n + ((save.state.stars || {})[`${sp.id}#heroi`] || 0), 0);
           const heroDone = (save.state.heroDone || {})[chapter.id];
           grid.appendChild(h('div', { class: 'map-card__wrap' }, card,
@@ -50,8 +58,8 @@ export function createExploreScene(game) {
         } else grid.appendChild(card);
       });
       const st = save.state;
-      const totalStops = loaded.filter((c, i) => c && !index[i].waitingMap).reduce((n, c) => n + c.stops.length, 0);
-      const doneStops = Object.keys(st.progress).length;
+      const totalStops = loaded.filter((c, i) => c && !index[i].waitingMap && !index[i].event).reduce((n, c) => n + c.stops.length, 0);
+      const doneStops = Object.keys(st.progress).filter((id) => !id.startsWith('acamp_')).length; // the event is counted on its own card
       const medals = Object.keys(st.achievements).length;
       const chars = Object.keys(st.unlocked).length;
       const profile = h('div', { class: 'profile' },

@@ -2916,6 +2916,191 @@
    "color": "#ffd36e",
    "label": "Pacote da semana",
    "group": "Baús (128×128)"
+  },
+  {
+   "id": "sheet.aventureira",
+   "src": "characters/aventureira_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#e0464b",
+   "label": "Aventureira",
+   "group": "Acampamento (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.aventureira",
+   "src": "portraits/aventureira.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#e0464b",
+   "label": "Aventureira",
+   "group": "Acampamento (retratos)"
+  },
+  {
+   "id": "sheet.aventureiro",
+   "src": "characters/aventureiro_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#2e4a8c",
+   "label": "Aventureiro",
+   "group": "Acampamento (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.aventureiro",
+   "src": "portraits/aventureiro.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#2e4a8c",
+   "label": "Aventureiro",
+   "group": "Acampamento (retratos)"
+  },
+  {
+   "id": "sheet.desbravadora",
+   "src": "characters/desbravadora_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#e8b923",
+   "label": "Desbravadora",
+   "group": "Acampamento (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.desbravadora",
+   "src": "portraits/desbravadora.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#e8b923",
+   "label": "Desbravadora",
+   "group": "Acampamento (retratos)"
+  },
+  {
+   "id": "sheet.desbravador",
+   "src": "characters/desbravador_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#8a6b3f",
+   "label": "Desbravador",
+   "group": "Acampamento (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.desbravador",
+   "src": "portraits/desbravador.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#8a6b3f",
+   "label": "Desbravador",
+   "group": "Acampamento (retratos)"
+  },
+  {
+   "id": "sheet.acampamento_povo",
+   "src": "characters/acampamento_povo_sheet.png",
+   "kind": "sheet",
+   "frame": 48,
+   "color": "#c9a46a",
+   "label": "Pessoas do acampamento (6 variações)",
+   "group": "Acampamento (andando)",
+   "w": 288,
+   "h": 48,
+   "cols": 6,
+   "rows": 1,
+   "anim": {
+    "idle": [
+     0
+    ]
+   },
+   "variants": true
+  },
+  {
+   "id": "medal.acampamento",
+   "src": "medals/acampamento.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#ffd36e",
+   "label": "Acampamento",
+   "group": "Medalhas"
+  },
+  {
+   "id": "puzzle.fogueira",
+   "src": "puzzles/fogueira.png",
+   "kind": "puzzle",
+   "w": 288,
+   "h": 192,
+   "color": "#e07a3a",
+   "label": "Fogueira do acampamento",
+   "group": "Imagens do quebra-cabeça"
+  },
+  {
+   "id": "map.acampamento",
+   "src": "maps/acampamento.jpg",
+   "kind": "map",
+   "color": "#5a9a4a",
+   "label": "Acampamento",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640
   }
  ]
 }

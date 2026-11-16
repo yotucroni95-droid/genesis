@@ -109,6 +109,12 @@
    "name": "Mestre de Gênesis",
    "rarity": "lendário",
    "hidden": true
+  },
+  {
+   "id": "desbravador_genesis",
+   "name": "Desbravador de Gênesis",
+   "rarity": "lendário",
+   "hidden": true
   }
  ],
  "frames": [

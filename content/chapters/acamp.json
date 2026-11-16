@@ -1,0 +1,2250 @@
+{
+  "id": "acamp",
+  "number": 11,
+  "title": "Acampamento",
+  "map": "acampamento",
+  "event": true,
+  "intro": "Bem-vindo ao Acampamento! Uma luz por vez: vença cada desafio com 3 estrelas para abrir o próximo.",
+  "unlocks": [],
+  "medal": "acampamento",
+  "finalReward": {
+    "box": "lendário",
+    "title": "desbravador_genesis"
+  },
+  "npcs": [
+    {
+      "sheet": "acampamento_povo",
+      "variant": 0,
+      "x": 17,
+      "y": 13,
+      "dir": 0,
+      "talk": [
+        "Bem-vindo! Aqui é tudo com 3 estrelas, combinado?",
+        "Uma luz de cada vez. A próxima só aparece com 3 estrelas.",
+        "Sempre com um companheiro!"
+      ]
+    },
+    {
+      "sheet": "acampamento_povo",
+      "variant": 1,
+      "x": 3,
+      "y": 6,
+      "dir": 0,
+      "talk": [
+        "A barraca vai em lugar alto e plano, nunca no leito do rio.",
+        "Hora do silêncio é hora de descansar.",
+        "Mochila arrumada, desbravador feliz!"
+      ]
+    },
+    {
+      "sheet": "acampamento_povo",
+      "variant": 2,
+      "x": 12,
+      "y": 5,
+      "dir": 0,
+      "talk": [
+        "Fogueira nunca fica sozinha.",
+        "Isca, gravetos e só depois a lenha.",
+        "Balde de água sempre ao lado!"
+      ]
+    },
+    {
+      "sheet": "acampamento_povo",
+      "variant": 3,
+      "x": 16,
+      "y": 6,
+      "dir": 0,
+      "talk": [
+        "Queimou? Água fria corrente.",
+        "Beba água, o sol está forte!",
+        "SAMU 192, Bombeiros 193."
+      ]
+    },
+    {
+      "sheet": "acampamento_povo",
+      "variant": 4,
+      "x": 12,
+      "y": 13,
+      "dir": 0,
+      "talk": [
+        "Tururu! Hora da alvorada!",
+        "De noite, o toque é de silêncio.",
+        "Já fez a sua devoção hoje?"
+      ]
+    },
+    {
+      "sheet": "acampamento_povo",
+      "variant": 5,
+      "x": 27,
+      "y": 14,
+      "dir": 0,
+      "talk": [
+        "Três apitos é pedido de socorro.",
+        "O Cruzeiro do Sul mostra o sul!",
+        "Nunca ande sozinho na trilha."
+      ]
+    }
+  ],
+  "stops": [
+    {
+      "id": "acamp_s1",
+      "title": "Bem-vindo ao Acampamento",
+      "x": 11,
+      "y": 14,
+      "verse": "Salmos 34:7",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Bem-vindo ao Acampamento! Aqui as provas são de verdade: cada luz só abre a próxima quando você vence com 3 estrelas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Primeiro, a trilha dos Aventureiros. Depois, a dos Desbravadores. São 20 desafios ao todo."
+        },
+        {
+          "speaker": "narrador",
+          "text": "\"O anjo do Senhor acampa ao redor dos que o temem, e os livra.\" Comece montando a cena da fogueira!"
+        }
+      ],
+      "challenge": {
+        "type": "puzzle",
+        "config": {
+          "image": "puzzle.fogueira"
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s2",
+      "title": "O Clube de Aventureiros",
+      "x": 6,
+      "y": 14,
+      "verse": "Provérbios 22:6",
+      "story": [
+        {
+          "speaker": "aventureira",
+          "text": "Oi! Eu sou do Clube de Aventureiros. Ele é para crianças de 6 a 9 anos, e a família participa junto!"
+        },
+        {
+          "speaker": "aventureira",
+          "text": "As classes são Abelhinhas Laboriosas (6), Luminares (7), Edificadores (8) e Mãos Ajudadoras (9)."
+        },
+        {
+          "speaker": "aventureira",
+          "text": "E o nosso voto é: \"Por amor a Jesus, farei sempre o melhor.\" Vamos ver se você sabe tudo isso?"
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "pool": [
+            {
+              "q": "Para que idade é o Clube de Aventureiros?",
+              "options": [
+                "De 6 a 9 anos",
+                "De 10 a 15 anos",
+                "De 16 a 21 anos"
+              ],
+              "answer": 0,
+              "explain": "Aos 10 anos a criança já pode entrar no Clube de Desbravadores.",
+              "verse": "Provérbios 22:6"
+            },
+            {
+              "q": "Qual é o Voto do Aventureiro?",
+              "options": [
+                "Por amor a Jesus, farei sempre o melhor.",
+                "Serei sempre o primeiro em tudo.",
+                "Nunca vou precisar de ajuda."
+              ],
+              "answer": 0,
+              "explain": "O voto lembra que tudo o que fazemos é por amor a Jesus.",
+              "verse": "Colossenses 3:23"
+            },
+            {
+              "q": "Quem participa do clube junto com as crianças?",
+              "options": [
+                "A família: pais e responsáveis",
+                "Ninguém, só as crianças",
+                "Só o pastor"
+              ],
+              "answer": 0,
+              "explain": "O Clube de Aventureiros envolve toda a família.",
+              "verse": "Provérbios 22:6"
+            },
+            {
+              "q": "Qual é a classe dos Aventureiros de 6 anos?",
+              "options": [
+                "Abelhinhas Laboriosas",
+                "Guia",
+                "Pioneiro"
+              ],
+              "answer": 0,
+              "explain": "As classes dos Aventureiros: Abelhinhas Laboriosas, Luminares, Edificadores e Mãos Ajudadoras.",
+              "verse": "Provérbios 22:6"
+            },
+            {
+              "q": "Qual é a classe dos Aventureiros de 7 anos?",
+              "options": [
+                "Luminares",
+                "Excursionista",
+                "Companheiro"
+              ],
+              "answer": 0,
+              "explain": "Aos 7 anos, a classe é Luminares.",
+              "verse": "Mateus 5:16"
+            },
+            {
+              "q": "Qual é a classe dos Aventureiros de 8 anos?",
+              "options": [
+                "Edificadores",
+                "Amigo",
+                "Pesquisador"
+              ],
+              "answer": 0,
+              "explain": "Aos 8 anos, a classe é Edificadores.",
+              "verse": "Provérbios 22:6"
+            },
+            {
+              "q": "Qual é a classe dos Aventureiros de 9 anos?",
+              "options": [
+                "Mãos Ajudadoras",
+                "Guia",
+                "Luminares"
+              ],
+              "answer": 0,
+              "explain": "Aos 9 anos, a classe é Mãos Ajudadoras.",
+              "verse": "Provérbios 22:6"
+            },
+            {
+              "q": "O Clube de Aventureiros é de qual igreja?",
+              "options": [
+                "Igreja Adventista do Sétimo Dia",
+                "De um time de futebol",
+                "De uma escola de música"
+              ],
+              "answer": 0,
+              "explain": "Os clubes de Aventureiros e de Desbravadores são da Igreja Adventista do Sétimo Dia.",
+              "verse": "Provérbios 22:6"
+            },
+            {
+              "q": "Pela Lei do Aventureiro, Jesus pode me ajudar a ser…",
+              "options": [
+                "Obediente, bondoso e alegre",
+                "Rico, famoso e forte",
+                "Bravo, impaciente e preguiçoso"
+              ],
+              "answer": 0,
+              "explain": "A lei tem 10 partes: obediente, puro, verdadeiro, bondoso, respeitoso, atento, prestativo, alegre, considerado e reverente.",
+              "verse": "Provérbios 22:6"
+            },
+            {
+              "q": "O que acontece quando o Aventureiro completa a sua classe?",
+              "options": [
+                "É investido numa cerimônia especial",
+                "Ganha um carro",
+                "Nada acontece"
+              ],
+              "answer": 0,
+              "explain": "A investidura é a festa de quem completou os requisitos da classe.",
+              "verse": "Provérbios 22:6"
+            },
+            {
+              "q": "Qual é o livro mais importante na mochila do Aventureiro?",
+              "options": [
+                "A Bíblia",
+                "Um gibi",
+                "Um álbum de figurinhas"
+              ],
+              "answer": 0,
+              "explain": "A Bíblia é a luz para o caminho.",
+              "verse": "Salmos 119:105"
+            },
+            {
+              "q": "Provérbios 22:6 diz: \"Ensina a criança no caminho em que deve…\"",
+              "options": [
+                "andar",
+                "correr",
+                "dormir"
+              ],
+              "answer": 0,
+              "explain": "\"…e, ainda quando for velho, não se desviará dele.\"",
+              "verse": "Provérbios 22:6"
+            },
+            {
+              "q": "Ao fazer 10 anos, o Aventureiro pode entrar em qual clube?",
+              "options": [
+                "Clube de Desbravadores",
+                "Clube do Livro",
+                "Clube de Xadrez"
+              ],
+              "answer": 0,
+              "explain": "Dos 10 aos 15 anos, o clube é o de Desbravadores.",
+              "verse": "1 Timóteo 4:12"
+            },
+            {
+              "q": "Para que servem as especialidades dos Aventureiros?",
+              "options": [
+                "Aprender coisas novas e ganhar um distintivo",
+                "Ficar sem fazer nada",
+                "Ganhar dinheiro"
+              ],
+              "answer": 0,
+              "explain": "Cada especialidade ensina algo novo, como natureza, artes ou saúde.",
+              "verse": "Colossenses 3:23"
+            }
+          ],
+          "count": 10,
+          "minScore": 7,
+          "timer": 14
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s3",
+      "title": "A Lei do Aventureiro",
+      "x": 2,
+      "y": 15,
+      "verse": "Provérbios 22:6",
+      "story": [
+        {
+          "speaker": "aventureira",
+          "text": "A Lei do Aventureiro diz que Jesus pode me ajudar a ser:"
+        },
+        {
+          "speaker": "aventureira",
+          "text": "Obediente, puro, verdadeiro, bondoso e respeitoso…"
+        },
+        {
+          "speaker": "aventureira",
+          "text": "…atento, prestativo, alegre, considerado e reverente. Agora coloque as 10 partes na ordem, sem errar nenhuma!"
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "Lei do Aventureiro: Jesus pode me ajudar a ser…",
+          "ref": "a Lei do Aventureiro",
+          "items": [
+            "Obediente",
+            "Puro",
+            "Verdadeiro",
+            "Bondoso",
+            "Respeitoso",
+            "Atento",
+            "Prestativo",
+            "Alegre",
+            "Considerado",
+            "Reverente"
+          ],
+          "count": 10,
+          "doneNote": "Para 3 estrelas, não pode errar nenhuma.",
+          "failNote": "Muitos erros. Fale a lei em voz alta e tente de novo!"
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s4",
+      "title": "A mochila pronta",
+      "x": 2,
+      "y": 5,
+      "verse": "Provérbios 6:6-8",
+      "story": [
+        {
+          "speaker": "aventureira",
+          "text": "Mochila de acampamento: as coisas pesadas vão perto das costas, e a capa de chuva fica por cima, fácil de pegar."
+        },
+        {
+          "speaker": "aventureira",
+          "text": "Lanterna, cantil, apito, Bíblia, escova, toalha… Ache tudo bem rápido para ganhar 3 estrelas!"
+        }
+      ],
+      "challenge": {
+        "type": "cacapalavras",
+        "config": {
+          "words": [
+            "MOCHILA",
+            "LANTERNA",
+            "CANTIL",
+            "BIBLIA",
+            "APITO",
+            "TOALHA",
+            "ESCOVA",
+            "CORDA",
+            "BONE",
+            "CAPA",
+            "SABONETE",
+            "MEIAS"
+          ],
+          "count": 7,
+          "size": 10,
+          "hard": true,
+          "secsPerWord": 14
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s5",
+      "title": "Os dias da criação",
+      "x": 6,
+      "y": 4,
+      "verse": "Gênesis 1:1",
+      "story": [
+        {
+          "speaker": "aventureira",
+          "text": "Os Aventureiros aprendem que tudo na natureza foi Deus quem fez, em seis dias. E no sétimo, Ele descansou."
+        },
+        {
+          "speaker": "aventureira",
+          "text": "Coloque a criação na ordem certa, sem errar. Se conseguir com 3 estrelas, eu entro para o seu time!"
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "O que Deus criou, dia após dia?",
+          "ref": "Gênesis 1 e 2",
+          "items": [
+            "A luz",
+            "O céu, separando as águas",
+            "A terra seca e as plantas",
+            "O sol, a lua e as estrelas",
+            "Os peixes e as aves",
+            "Os animais e as pessoas",
+            "O sábado: Deus descansou"
+          ],
+          "count": 7,
+          "doneNote": "Para 3 estrelas, não pode errar nenhuma."
+        }
+      },
+      "rewards": {
+        "xp": 120
+      },
+      "unlockChar": "aventureira"
+    },
+    {
+      "id": "acamp_s6",
+      "title": "Nunca sozinho",
+      "x": 9,
+      "y": 6,
+      "verse": "Eclesiastes 4:9-10",
+      "story": [
+        {
+          "speaker": "aventureiro",
+          "text": "Agora é comigo! Eu sou o Aventureiro. Regra número um do acampamento: ninguém anda sozinho."
+        },
+        {
+          "speaker": "aventureiro",
+          "text": "Perdeu-se? Pare, fique calmo e dê 3 apitos. Tempestade? Longe de árvores altas e sozinhas."
+        },
+        {
+          "speaker": "aventureiro",
+          "text": "\"Melhor é serem dois do que um: se um cair, o outro levanta o seu companheiro.\""
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "pool": [
+            {
+              "q": "Como andar pelas trilhas do acampamento?",
+              "options": [
+                "Sempre com um companheiro e avisando o líder",
+                "Sozinho, sem avisar ninguém",
+                "De noite, sem lanterna"
+              ],
+              "answer": 0,
+              "explain": "Ninguém sai sozinho: um cuida do outro.",
+              "verse": "Eclesiastes 4:9-10"
+            },
+            {
+              "q": "Quantos apitos seguidos são um pedido de socorro?",
+              "options": [
+                "3 apitos",
+                "1 apito",
+                "10 apitos"
+              ],
+              "answer": 0,
+              "explain": "Três sinais seguidos (apitos, luzes ou gritos) pedem socorro.",
+              "verse": "Salmos 121:1-2"
+            },
+            {
+              "q": "Você se perdeu na mata. O que fazer?",
+              "options": [
+                "Parar, ficar calmo e esperar no mesmo lugar",
+                "Correr sem rumo",
+                "Entrar mais na mata"
+              ],
+              "answer": 0,
+              "explain": "Parado e apitando, é muito mais fácil te acharem.",
+              "verse": "Salmos 121:1-2"
+            },
+            {
+              "q": "Na hora do silêncio, à noite…",
+              "options": [
+                "Fico quieto na barraca para todos descansarem",
+                "Faço bagunça",
+                "Saio para explorar"
+              ],
+              "answer": 0,
+              "explain": "O descanso de todos é respeitado.",
+              "verse": "Salmos 4:8"
+            },
+            {
+              "q": "Para ir ao banheiro de noite, leve…",
+              "options": [
+                "Lanterna e um companheiro",
+                "Nada",
+                "Uma vela acesa"
+              ],
+              "answer": 0,
+              "explain": "Lanterna e companhia: nunca sozinho no escuro.",
+              "verse": "Eclesiastes 4:9-10"
+            },
+            {
+              "q": "Pode acender vela ou fogareiro dentro da barraca?",
+              "options": [
+                "Não, nunca: a barraca pega fogo fácil",
+                "Sim, para esquentar",
+                "Só se estiver ventando"
+              ],
+              "answer": 0,
+              "explain": "Fogo e gás dentro da barraca são muito perigosos.",
+              "verse": "Provérbios 22:3"
+            },
+            {
+              "q": "Viu uma cobra na trilha. O que fazer?",
+              "options": [
+                "Afastar-se devagar e avisar um adulto",
+                "Pegar com a mão",
+                "Jogar pedras nela"
+              ],
+              "answer": 0,
+              "explain": "Calma e distância. Os adultos cuidam do resto.",
+              "verse": "Provérbios 22:3"
+            },
+            {
+              "q": "Quando pode nadar no lago?",
+              "options": [
+                "Só com um adulto e um salva-vidas olhando",
+                "Sozinho, quando quiser",
+                "De noite"
+              ],
+              "answer": 0,
+              "explain": "Na água, só com supervisão.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "Começou uma tempestade com raios. Onde NÃO ficar?",
+              "options": [
+                "Debaixo de uma árvore alta e sozinha",
+                "Num abrigo seguro",
+                "Longe da água"
+              ],
+              "answer": 0,
+              "explain": "Árvores altas e isoladas atraem raios.",
+              "verse": "Salmos 46:1"
+            },
+            {
+              "q": "O que levar sempre na trilha?",
+              "options": [
+                "Água, apito e boné",
+                "Só doces",
+                "Um celular sem bateria"
+              ],
+              "answer": 0,
+              "explain": "Água para não desidratar, apito para pedir ajuda e boné contra o sol.",
+              "verse": "Eclesiastes 4:9-10"
+            },
+            {
+              "q": "Salmos 34:7: o anjo do Senhor acampa ao redor de quem…",
+              "options": [
+                "teme a Deus",
+                "é rico",
+                "corre mais rápido"
+              ],
+              "answer": 0,
+              "explain": "\"…e os livra.\"",
+              "verse": "Salmos 34:7"
+            },
+            {
+              "q": "Para que serve andar em duplas?",
+              "options": [
+                "Um cuida do outro e ninguém fica para trás",
+                "Para ter com quem brigar",
+                "Para dividir a sobremesa"
+              ],
+              "answer": 0,
+              "explain": "\"Se um cair, o outro levanta o seu companheiro.\"",
+              "verse": "Eclesiastes 4:9-10"
+            },
+            {
+              "q": "Antes de sair para uma atividade, você avisa…",
+              "options": [
+                "O seu conselheiro ou líder",
+                "Ninguém",
+                "Só o esquilo"
+              ],
+              "answer": 0,
+              "explain": "O líder sempre precisa saber onde cada um está.",
+              "verse": "Hebreus 13:17"
+            }
+          ],
+          "count": 10,
+          "minScore": 7,
+          "timer": 14
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s7",
+      "title": "Na enfermaria",
+      "x": 18,
+      "y": 6,
+      "verse": "Lucas 10:33-34",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "A enfermeira do acampamento cuida de todo mundo, mas todo aventureiro precisa saber os primeiros cuidados."
+        },
+        {
+          "speaker": "aventureiro",
+          "text": "Queimadura: água fria corrente. Nariz sangrando: cabeça para a frente. Emergência: SAMU 192, Bombeiros 193!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Como o bom samaritano, que parou para cuidar de quem estava ferido."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "pool": [
+            {
+              "q": "Queimou a mão. O que fazer primeiro?",
+              "options": [
+                "Deixar em água corrente fria por uns 10 minutos",
+                "Passar manteiga",
+                "Passar pasta de dente"
+              ],
+              "answer": 0,
+              "explain": "Água fria tira o calor da pele. Manteiga e pasta pioram.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Na queimadura apareceu uma bolha. E agora?",
+              "options": [
+                "Não estourar e cobrir com um pano limpo",
+                "Estourar com uma agulha",
+                "Arrancar a pele"
+              ],
+              "answer": 0,
+              "explain": "A bolha protege a pele contra a sujeira.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "O nariz começou a sangrar. Como ficar?",
+              "options": [
+                "Cabeça um pouco para a frente, apertando a parte mole do nariz",
+                "Cabeça para trás",
+                "Deitado de barriga para cima"
+              ],
+              "answer": 0,
+              "explain": "Com a cabeça para trás o sangue desce pela garganta.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Qual é o telefone do SAMU no Brasil?",
+              "options": [
+                "192",
+                "111",
+                "999"
+              ],
+              "answer": 0,
+              "explain": "SAMU 192, Bombeiros 193 e Polícia 190.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Qual é o telefone dos Bombeiros?",
+              "options": [
+                "193",
+                "100",
+                "555"
+              ],
+              "answer": 0,
+              "explain": "SAMU 192, Bombeiros 193 e Polícia 190.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Um corte está sangrando. O que fazer?",
+              "options": [
+                "Apertar com um pano limpo",
+                "Deixar sangrar",
+                "Passar terra"
+              ],
+              "answer": 0,
+              "explain": "Apertar o ferimento ajuda o sangue a parar.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Picada de abelha: como tirar o ferrão?",
+              "options": [
+                "Raspar com a borda de um cartão",
+                "Apertar com os dedos",
+                "Deixar lá dentro"
+              ],
+              "answer": 0,
+              "explain": "Apertar empurra mais veneno para dentro.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Picada de cobra: o que NÃO fazer?",
+              "options": [
+                "Cortar, chupar ou amarrar o local",
+                "Ficar calmo e parado",
+                "Ir logo para o hospital"
+              ],
+              "answer": 0,
+              "explain": "Só o hospital trata picada de cobra.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Torceu o tornozelo. O que ajuda?",
+              "options": [
+                "Repouso, gelo envolto num pano e o pé para cima",
+                "Correr para passar",
+                "Massagem bem forte"
+              ],
+              "answer": 0,
+              "explain": "Repouso, gelo, compressão e elevação.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Muito sol e pouca água podem causar…",
+              "options": [
+                "Desidratação e insolação",
+                "Fome de chocolate",
+                "Dor de dente"
+              ],
+              "answer": 0,
+              "explain": "Beba água e fique na sombra.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "O que vai no kit de primeiros socorros?",
+              "options": [
+                "Gaze, esparadrapo e luvas",
+                "Doces e brinquedos",
+                "Pedras"
+              ],
+              "answer": 0,
+              "explain": "Material limpo para cuidar de pequenos machucados.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Antes de ajudar alguém machucado, você…",
+              "options": [
+                "Chama um adulto e vê se o lugar é seguro",
+                "Sai correndo",
+                "Tira uma foto"
+              ],
+              "answer": 0,
+              "explain": "Primeiro a segurança: a sua e a de quem precisa de ajuda.",
+              "verse": "Lucas 10:33-34"
+            },
+            {
+              "q": "Quem cuidou do homem ferido na parábola de Jesus?",
+              "options": [
+                "O bom samaritano",
+                "O sacerdote",
+                "O levita"
+              ],
+              "answer": 0,
+              "explain": "Ele limpou as feridas, fez curativo e levou o homem para uma hospedaria.",
+              "verse": "Lucas 10:33-34"
+            }
+          ],
+          "count": 10,
+          "minScore": 7,
+          "timer": 14
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s8",
+      "title": "Água limpa, mata limpa",
+      "x": 21,
+      "y": 4,
+      "verse": "Gênesis 2:15",
+      "story": [
+        {
+          "speaker": "aventureiro",
+          "text": "Água de rio ou de lago, só depois de tratar: ferver, ou 2 gotas de hipoclorito por litro e esperar 30 minutos."
+        },
+        {
+          "speaker": "aventureiro",
+          "text": "E o lixo? Tudo volta com a gente. Deixe o lugar melhor do que encontrou!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus colocou o homem no jardim \"para o cultivar e o guardar\". Responda rápido: verdadeiro ou falso?"
+        }
+      ],
+      "challenge": {
+        "type": "vf",
+        "config": {
+          "items": [
+            {
+              "s": "Água de rio pode ser bebida direto, sem tratar.",
+              "ok": false,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Ferver a água ajuda a matar os micróbios.",
+              "ok": true,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Para tratar a água, pode usar 2 gotas de hipoclorito por litro e esperar 30 minutos.",
+              "ok": true,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Lavar as mãos antes de comer evita doenças.",
+              "ok": true,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Pode lavar a louça com sabão dentro do rio.",
+              "ok": false,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Todo o lixo do acampamento deve ser levado embora.",
+              "ok": true,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Pode enterrar latas e plásticos na mata.",
+              "ok": false,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Arrancar galhos verdes das árvores é bom para a fogueira.",
+              "ok": false,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Devemos deixar o lugar melhor do que encontramos.",
+              "ok": true,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Dar comida aos animais silvestres faz bem para eles.",
+              "ok": false,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Escovar os dentes faz parte da higiene no acampamento.",
+              "ok": true,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "A barraca deve ficar no leito seco do rio, que é plano.",
+              "ok": false,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Deus colocou o homem no jardim para cuidar dele.",
+              "ok": true,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Barulho alto assusta os animais da floresta.",
+              "ok": true,
+              "ref": "Gênesis 2:15"
+            }
+          ],
+          "count": 12,
+          "seconds": 4
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s9",
+      "title": "Um dia no acampamento",
+      "x": 24,
+      "y": 4,
+      "verse": "Salmos 5:3",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "No nosso acampamento, o dia começa com o toque da alvorada e a devoção matinal."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Depois: arrumar a barraca para a inspeção, café da manhã, atividades e especialidades, e o almoço."
+        },
+        {
+          "speaker": "narrador",
+          "text": "À tarde, gincana. Depois, banho e jantar, programa ao redor da fogueira e, por fim, o toque de silêncio."
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "Coloque o dia do acampamento na ordem",
+          "ref": "a história desta parada",
+          "items": [
+            "Toque da alvorada",
+            "Devoção matinal",
+            "Arrumar a barraca para a inspeção",
+            "Café da manhã",
+            "Atividades e especialidades",
+            "Almoço",
+            "Gincana da tarde",
+            "Banho e jantar",
+            "Programa ao redor da fogueira",
+            "Toque de silêncio"
+          ],
+          "count": 10,
+          "doneNote": "Para 3 estrelas, não pode errar nenhuma.",
+          "failNote": "Muitos erros. Leia de novo a história desta parada e tente outra vez!"
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s10",
+      "title": "A turma do acampamento",
+      "x": 20,
+      "y": 8,
+      "verse": "Salmos 133:1",
+      "story": [
+        {
+          "speaker": "aventureiro",
+          "text": "Você já conhece a turma: o diretor, a conselheira, o instrutor de fogueira, a enfermeira, o corneteiro e o lanterninha."
+        },
+        {
+          "speaker": "aventureiro",
+          "text": "Ache todos os pares com pouquíssimas jogadas. Com 3 estrelas, eu vou com você!"
+        }
+      ],
+      "challenge": {
+        "type": "memory",
+        "config": {
+          "pairs": [
+            {
+              "sheet": "acampamento_povo",
+              "variant": 0,
+              "label": "Diretor"
+            },
+            {
+              "sheet": "acampamento_povo",
+              "variant": 1,
+              "label": "Conselheira"
+            },
+            {
+              "sheet": "acampamento_povo",
+              "variant": 2,
+              "label": "Instrutor"
+            },
+            {
+              "sheet": "acampamento_povo",
+              "variant": 3,
+              "label": "Enfermeira"
+            },
+            {
+              "sheet": "acampamento_povo",
+              "variant": 4,
+              "label": "Corneteiro"
+            },
+            {
+              "sheet": "acampamento_povo",
+              "variant": 5,
+              "label": "Lanterninha"
+            },
+            "aventureira",
+            "peregrino"
+          ],
+          "goodMoves": 12
+        }
+      },
+      "rewards": {
+        "xp": 120
+      },
+      "unlockChar": "aventureiro"
+    },
+    {
+      "id": "acamp_s11",
+      "title": "O Clube de Desbravadores",
+      "x": 11,
+      "y": 11,
+      "verse": "1 Timóteo 4:12",
+      "story": [
+        {
+          "speaker": "desbravadora",
+          "text": "Os Aventureiros cresceram! Eu sou a Desbravadora. O nosso clube é para quem tem de 10 a 15 anos."
+        },
+        {
+          "speaker": "desbravadora",
+          "text": "Camisa caqui, lenço amarelo, faixa de especialidades… e a unidade, o nosso pequeno grupo com um conselheiro."
+        },
+        {
+          "speaker": "desbravadora",
+          "text": "\"Ninguém despreze a tua mocidade; pelo contrário, sê exemplo.\" Esta trilha é bem mais difícil. Pronto?"
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "pool": [
+            {
+              "q": "Para que idade é o Clube de Desbravadores?",
+              "options": [
+                "De 10 a 15 anos",
+                "De 6 a 9 anos",
+                "De 18 a 30 anos"
+              ],
+              "answer": 0,
+              "explain": "Antes dos 10 anos, o clube é o de Aventureiros.",
+              "verse": "1 Timóteo 4:12"
+            },
+            {
+              "q": "Qual é a cor do lenço dos Desbravadores?",
+              "options": [
+                "Amarelo",
+                "Verde",
+                "Roxo"
+              ],
+              "answer": 0,
+              "explain": "O lenço amarelo é preso com um anel.",
+              "verse": "1 Timóteo 4:12"
+            },
+            {
+              "q": "Qual é a cor da camisa do uniforme dos Desbravadores?",
+              "options": [
+                "Caqui",
+                "Laranja",
+                "Rosa"
+              ],
+              "answer": 0,
+              "explain": "Camisa caqui, lenço amarelo e faixa de especialidades.",
+              "verse": "1 Timóteo 4:12"
+            },
+            {
+              "q": "Como se chama o pequeno grupo de desbravadores com um conselheiro?",
+              "options": [
+                "Unidade",
+                "Batalhão",
+                "Time"
+              ],
+              "answer": 0,
+              "explain": "Cada unidade tem nome, bandeirim e grito de guerra.",
+              "verse": "Eclesiastes 4:9-10"
+            },
+            {
+              "q": "Quem cuida de uma unidade?",
+              "options": [
+                "O conselheiro",
+                "O cozinheiro",
+                "O motorista"
+              ],
+              "answer": 0,
+              "explain": "O conselheiro acompanha e ensina os desbravadores da unidade.",
+              "verse": "Hebreus 13:17"
+            },
+            {
+              "q": "Como se chama o grande acampamento com muitos clubes juntos?",
+              "options": [
+                "Campori",
+                "Feira",
+                "Maratona"
+              ],
+              "answer": 0,
+              "explain": "No campori, clubes de muitos lugares acampam juntos.",
+              "verse": "Salmos 133:1"
+            },
+            {
+              "q": "Como se chama a cerimônia em que o desbravador recebe a classe?",
+              "options": [
+                "Investidura",
+                "Formatura",
+                "Aniversário"
+              ],
+              "answer": 0,
+              "explain": "Na investidura, o desbravador recebe o distintivo da classe completa.",
+              "verse": "1 Timóteo 4:12"
+            },
+            {
+              "q": "Distintivos de habilidades, como Nós e Acampamento, são as…",
+              "options": [
+                "Especialidades",
+                "Medalhas olímpicas",
+                "Figurinhas"
+              ],
+              "answer": 0,
+              "explain": "Existem centenas de especialidades: natureza, artes, saúde, missões e muito mais.",
+              "verse": "Colossenses 3:23"
+            },
+            {
+              "q": "O que o desbravador aprende nas classes?",
+              "options": [
+                "Bíblia, natureza, serviço e habilidades",
+                "Só videogame",
+                "Só matemática"
+              ],
+              "answer": 0,
+              "explain": "O clube ensina a crescer em tudo: mente, corpo e fé.",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Em que ano a Associação Geral adotou oficialmente o Clube de Desbravadores?",
+              "options": [
+                "1950",
+                "1820",
+                "2010"
+              ],
+              "answer": 0,
+              "explain": "Desde 1950 os Desbravadores fazem parte oficial da igreja no mundo todo.",
+              "verse": "1 Timóteo 4:12"
+            },
+            {
+              "q": "Para que serve a faixa transversal do uniforme?",
+              "options": [
+                "Mostrar as especialidades conquistadas",
+                "Segurar a calça",
+                "Enfeitar a barraca"
+              ],
+              "answer": 0,
+              "explain": "Cada distintivo na faixa é uma especialidade concluída.",
+              "verse": "Colossenses 3:23"
+            },
+            {
+              "q": "Qual é o lema JA?",
+              "options": [
+                "O amor de Cristo me motiva",
+                "Quem chega primeiro ganha",
+                "Cada um por si"
+              ],
+              "answer": 0,
+              "explain": "O amor de Jesus é o motivo de tudo o que fazemos.",
+              "verse": "2 Coríntios 5:14"
+            },
+            {
+              "q": "1 Timóteo 4:12 pede que o jovem seja…",
+              "options": [
+                "exemplo para os fiéis",
+                "o mais forte",
+                "o mais rico"
+              ],
+              "answer": 0,
+              "explain": "\"Ninguém despreze a tua mocidade; pelo contrário, sê exemplo.\"",
+              "verse": "1 Timóteo 4:12"
+            },
+            {
+              "q": "Um exemplo de serviço à comunidade é…",
+              "options": [
+                "Ajudar em campanhas de doação e limpeza",
+                "Ficar só no celular",
+                "Atrapalhar os vizinhos"
+              ],
+              "answer": 0,
+              "explain": "Desbravador serve com alegria.",
+              "verse": "Mateus 5:16"
+            }
+          ],
+          "count": 10,
+          "minScore": 7,
+          "timer": 14
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s12",
+      "title": "O Voto do Desbravador",
+      "x": 11,
+      "y": 8,
+      "verse": "1 Timóteo 4:12",
+      "story": [
+        {
+          "speaker": "desbravadora",
+          "text": "Todo desbravador sabe o voto de cor:"
+        },
+        {
+          "speaker": "desbravadora",
+          "text": "\"Pela graça de Deus, serei puro, bondoso e leal. Guardarei a lei do Desbravador, serei servo de Deus e amigo de todos.\""
+        },
+        {
+          "speaker": "desbravadora",
+          "text": "Monte o voto pedaço por pedaço, sem errar."
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "Monte o Voto do Desbravador",
+          "ref": "o Voto do Desbravador",
+          "items": [
+            "Pela graça de Deus,",
+            "serei puro,",
+            "bondoso",
+            "e leal.",
+            "Guardarei a lei do Desbravador,",
+            "serei servo de Deus",
+            "e amigo de todos."
+          ],
+          "count": 7,
+          "doneNote": "Para 3 estrelas, não pode errar nenhuma.",
+          "failNote": "Muitos erros. Repita o voto em voz alta e tente de novo!"
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s13",
+      "title": "A Lei do Desbravador",
+      "x": 14,
+      "y": 8,
+      "verse": "Salmos 119:105",
+      "story": [
+        {
+          "speaker": "desbravadora",
+          "text": "A Lei do Desbravador ordena-me: observar a devoção matinal, cumprir fielmente a parte que me corresponde, cuidar de meu corpo…"
+        },
+        {
+          "speaker": "desbravadora",
+          "text": "…manter a consciência limpa, ser cortês e obediente, andar com reverência na casa de Deus…"
+        },
+        {
+          "speaker": "desbravadora",
+          "text": "…ter sempre um cântico no coração e ir aonde Deus mandar. Oito partes, na ordem, sem erro!"
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "A Lei do Desbravador ordena-me…",
+          "ref": "a Lei do Desbravador",
+          "items": [
+            "Observar a devoção matinal",
+            "Cumprir fielmente a parte que me corresponde",
+            "Cuidar de meu corpo",
+            "Manter a consciência limpa",
+            "Ser cortês e obediente",
+            "Andar com reverência na casa de Deus",
+            "Ter sempre um cântico no coração",
+            "Ir aonde Deus mandar"
+          ],
+          "count": 8,
+          "doneNote": "Para 3 estrelas, não pode errar nenhuma.",
+          "failNote": "Muitos erros. Leia a lei de novo e tente outra vez!"
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s14",
+      "title": "As classes",
+      "x": 18,
+      "y": 10,
+      "verse": "Lucas 2:52",
+      "story": [
+        {
+          "speaker": "desbravadora",
+          "text": "Cada idade tem a sua classe: Amigo (10), Companheiro (11), Pesquisador (12), Pioneiro (13), Excursionista (14) e Guia (15)."
+        },
+        {
+          "speaker": "desbravadora",
+          "text": "Quem cumpre os requisitos é investido. \"Jesus crescia em sabedoria, estatura e graça.\" Nós também!"
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "pool": [
+            {
+              "q": "Qual é a primeira classe dos Desbravadores, aos 10 anos?",
+              "options": [
+                "Amigo",
+                "Guia",
+                "Pioneiro"
+              ],
+              "answer": 0,
+              "explain": "As classes: Amigo, Companheiro, Pesquisador, Pioneiro, Excursionista e Guia.",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Qual é a classe dos 11 anos?",
+              "options": [
+                "Companheiro",
+                "Excursionista",
+                "Amigo"
+              ],
+              "answer": 0,
+              "explain": "Amigo (10), Companheiro (11), Pesquisador (12), Pioneiro (13), Excursionista (14) e Guia (15).",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Qual é a classe dos 12 anos?",
+              "options": [
+                "Pesquisador",
+                "Guia",
+                "Companheiro"
+              ],
+              "answer": 0,
+              "explain": "Amigo (10), Companheiro (11), Pesquisador (12), Pioneiro (13), Excursionista (14) e Guia (15).",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Qual é a classe dos 13 anos?",
+              "options": [
+                "Pioneiro",
+                "Amigo",
+                "Pesquisador"
+              ],
+              "answer": 0,
+              "explain": "Amigo (10), Companheiro (11), Pesquisador (12), Pioneiro (13), Excursionista (14) e Guia (15).",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Qual é a classe dos 14 anos?",
+              "options": [
+                "Excursionista",
+                "Companheiro",
+                "Guia"
+              ],
+              "answer": 0,
+              "explain": "Amigo (10), Companheiro (11), Pesquisador (12), Pioneiro (13), Excursionista (14) e Guia (15).",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Qual é a classe dos 15 anos?",
+              "options": [
+                "Guia",
+                "Pioneiro",
+                "Amigo"
+              ],
+              "answer": 0,
+              "explain": "Guia é a última classe regular.",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Qual classe vem logo depois de Pesquisador?",
+              "options": [
+                "Pioneiro",
+                "Amigo",
+                "Companheiro"
+              ],
+              "answer": 0,
+              "explain": "Pesquisador (12) e depois Pioneiro (13).",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Qual classe vem logo antes de Guia?",
+              "options": [
+                "Excursionista",
+                "Pioneiro",
+                "Amigo"
+              ],
+              "answer": 0,
+              "explain": "Excursionista (14) e depois Guia (15).",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Quantas classes regulares os Desbravadores têm?",
+              "options": [
+                "6",
+                "3",
+                "12"
+              ],
+              "answer": 0,
+              "explain": "Uma para cada idade, dos 10 aos 15 anos.",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Lucas 2:52: Jesus crescia em sabedoria, estatura e…",
+              "options": [
+                "graça diante de Deus e dos homens",
+                "dinheiro",
+                "fama"
+              ],
+              "answer": 0,
+              "explain": "É assim que o desbravador também quer crescer.",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Para receber a classe, o desbravador precisa…",
+              "options": [
+                "Cumprir os requisitos e ser investido",
+                "Só pagar",
+                "Só fazer aniversário"
+              ],
+              "answer": 0,
+              "explain": "Os requisitos incluem Bíblia, natureza, serviço e habilidades de acampamento.",
+              "verse": "Colossenses 3:23"
+            },
+            {
+              "q": "A classe Guia é…",
+              "options": [
+                "A última classe regular",
+                "A primeira classe",
+                "Uma classe dos Aventureiros"
+              ],
+              "answer": 0,
+              "explain": "Guia é para quem tem 15 anos.",
+              "verse": "Lucas 2:52"
+            },
+            {
+              "q": "Qual destas é uma classe de Aventureiros, e não de Desbravadores?",
+              "options": [
+                "Luminares",
+                "Pioneiro",
+                "Companheiro"
+              ],
+              "answer": 0,
+              "explain": "Luminares é a classe dos Aventureiros de 7 anos.",
+              "verse": "Mateus 5:16"
+            }
+          ],
+          "count": 10,
+          "minScore": 7,
+          "timer": 14
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s15",
+      "title": "Lema, alvo e voto",
+      "x": 14,
+      "y": 12,
+      "verse": "Mateus 28:19-20",
+      "story": [
+        {
+          "speaker": "desbravadora",
+          "text": "Lema JA: \"O amor de Cristo me motiva.\" Alvo JA: \"A mensagem do advento a todo o mundo em minha geração.\""
+        },
+        {
+          "speaker": "desbravadora",
+          "text": "Objetivo JA: \"Salvar do pecado e guiar no serviço.\" Verdadeiro ou falso, bem rápido. Com 3 estrelas, eu sou sua!"
+        }
+      ],
+      "challenge": {
+        "type": "vf",
+        "config": {
+          "items": [
+            {
+              "s": "O lema JA é: \"O amor de Cristo me motiva\".",
+              "ok": true,
+              "ref": "2 Coríntios 5:14"
+            },
+            {
+              "s": "O alvo JA é: \"A mensagem do advento a todo o mundo em minha geração\".",
+              "ok": true,
+              "ref": "Mateus 28:19-20"
+            },
+            {
+              "s": "O objetivo JA é: \"Salvar do pecado e guiar no serviço\".",
+              "ok": true,
+              "ref": "Mateus 28:19-20"
+            },
+            {
+              "s": "O Voto do Desbravador começa com: \"Pela graça de Deus\".",
+              "ok": true,
+              "ref": "1 Timóteo 4:12"
+            },
+            {
+              "s": "A Lei do Desbravador tem 10 partes.",
+              "ok": false,
+              "ref": "1 Timóteo 4:12"
+            },
+            {
+              "s": "\"Ir aonde Deus mandar\" faz parte da Lei do Desbravador.",
+              "ok": true,
+              "ref": "Mateus 28:19-20"
+            },
+            {
+              "s": "O Voto do Aventureiro é: \"Por amor a Jesus, farei sempre o melhor\".",
+              "ok": true,
+              "ref": "Colossenses 3:23"
+            },
+            {
+              "s": "Desbravadores são crianças de 6 a 9 anos.",
+              "ok": false,
+              "ref": "1 Timóteo 4:12"
+            },
+            {
+              "s": "\"Ter sempre um cântico no coração\" faz parte da Lei do Desbravador.",
+              "ok": true,
+              "ref": "Salmos 96:1"
+            },
+            {
+              "s": "O desbravador promete ser servo de Deus e amigo de todos.",
+              "ok": true,
+              "ref": "1 Timóteo 4:12"
+            },
+            {
+              "s": "A primeira classe dos Desbravadores é Guia.",
+              "ok": false,
+              "ref": "Lucas 2:52"
+            },
+            {
+              "s": "Em Mateus 28:19, Jesus manda fazer discípulos de todas as nações.",
+              "ok": true,
+              "ref": "Mateus 28:19-20"
+            },
+            {
+              "s": "Cuidar do próprio corpo não faz parte da Lei do Desbravador.",
+              "ok": false,
+              "ref": "1 Coríntios 6:19"
+            },
+            {
+              "s": "O lema JA é: \"Cada um por si\".",
+              "ok": false,
+              "ref": "2 Coríntios 5:14"
+            }
+          ],
+          "count": 12,
+          "seconds": 4
+        }
+      },
+      "rewards": {
+        "xp": 120
+      },
+      "unlockChar": "desbravadora"
+    },
+    {
+      "id": "acamp_s16",
+      "title": "A lenha certa",
+      "x": 8,
+      "y": 1,
+      "verse": "Isaías 43:2",
+      "story": [
+        {
+          "speaker": "desbravador",
+          "text": "Eu sou o Desbravador, classe Guia. Agora a trilha mais difícil de todas: fogo, nós e orientação."
+        },
+        {
+          "speaker": "desbravador",
+          "text": "Fogo precisa de combustível, oxigênio e calor. Primeiro a isca, depois os gravetos e por último a lenha."
+        },
+        {
+          "speaker": "desbravador",
+          "text": "Pirâmide, cabana, estrela, refletor e caçador: cada fogueira tem o seu jeito. Você sabe todas?"
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "pool": [
+            {
+              "q": "Quais são os três lados do triângulo do fogo?",
+              "options": [
+                "Combustível, oxigênio e calor",
+                "Água, terra e vento",
+                "Pedra, areia e sal"
+              ],
+              "answer": 0,
+              "explain": "Sem um dos três, o fogo apaga.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "O que pega fogo primeiro?",
+              "options": [
+                "A isca: palha e folhas bem secas",
+                "Um tronco grosso",
+                "Uma pedra"
+              ],
+              "answer": 0,
+              "explain": "Isca, depois gravetos e só então a lenha grossa.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "Depois da isca, o que se coloca?",
+              "options": [
+                "Gravetos finos e secos",
+                "Troncos enormes",
+                "Folhas verdes molhadas"
+              ],
+              "answer": 0,
+              "explain": "Isca, gravetos e lenha: do mais fino para o mais grosso.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "Fogueira em forma de cone, com os gravetos em pé:",
+              "options": [
+                "Pirâmide",
+                "Estrela",
+                "Caçador"
+              ],
+              "answer": 0,
+              "explain": "A pirâmide acende rápido e dá uma chama alta.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "Fogueira com os troncos cruzados em camadas, como uma casinha:",
+              "options": [
+                "Cabana",
+                "Estrela",
+                "Refletor"
+              ],
+              "answer": 0,
+              "explain": "A cabana queima por bastante tempo e faz boas brasas.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "Fogueira com os troncos apontando para o centro, empurrados aos poucos:",
+              "options": [
+                "Estrela",
+                "Cabana",
+                "Pirâmide"
+              ],
+              "answer": 0,
+              "explain": "A estrela economiza lenha: empurra-se cada tronco conforme queima.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "Fogueira com uma parede de troncos atrás, que joga o calor para a frente:",
+              "options": [
+                "Refletor",
+                "Estrela",
+                "Pirâmide"
+              ],
+              "answer": 0,
+              "explain": "A parede reflete o calor para quem está sentado na frente.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "Fogueira com dois troncos paralelos para apoiar a panela:",
+              "options": [
+                "Caçador",
+                "Estrela",
+                "Refletor"
+              ],
+              "answer": 0,
+              "explain": "A panela fica firme entre os dois troncos.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "Por que a lenha deve estar seca?",
+              "options": [
+                "Lenha molhada faz fumaça e não queima bem",
+                "Molhada queima melhor",
+                "Tanto faz"
+              ],
+              "answer": 0,
+              "explain": "Lenha seca dá um fogo limpo e forte.",
+              "verse": "Isaías 43:2"
+            },
+            {
+              "q": "Onde pegar lenha?",
+              "options": [
+                "Galhos secos caídos no chão",
+                "Galhos verdes arrancados",
+                "Cercas e bancos"
+              ],
+              "answer": 0,
+              "explain": "Árvore viva não se corta para a fogueira.",
+              "verse": "Gênesis 2:15"
+            },
+            {
+              "q": "Quais pedras NÃO usar em volta da fogueira?",
+              "options": [
+                "Pedras de rio molhadas: podem estourar",
+                "Pedras secas",
+                "Nenhuma pedra é perigosa"
+              ],
+              "answer": 0,
+              "explain": "A água presa na pedra vira vapor e a pedra pode rachar com força.",
+              "verse": "Provérbios 22:3"
+            },
+            {
+              "q": "Acender fogueira com álcool ou gasolina é…",
+              "options": [
+                "Muito perigoso: nunca faça",
+                "O jeito certo",
+                "Bom para crianças"
+              ],
+              "answer": 0,
+              "explain": "Álcool e gasolina causam queimaduras graves.",
+              "verse": "Provérbios 22:3"
+            },
+            {
+              "q": "À noite, Deus guiou Israel no deserto com uma coluna de…",
+              "options": [
+                "fogo",
+                "água",
+                "fumaça preta"
+              ],
+              "answer": 0,
+              "explain": "De dia uma nuvem, de noite uma coluna de fogo.",
+              "verse": "Êxodo 13:21"
+            }
+          ],
+          "count": 10,
+          "minScore": 7,
+          "timer": 14
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s17",
+      "title": "Fogueira segura",
+      "x": 14,
+      "y": 4,
+      "verse": "Isaías 43:2",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "O instrutor de fogueira avisa: longe das barracas, chão limpo em volta, balde de água ao lado e nunca sozinha."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Para apagar: água, mexer as cinzas, água de novo, até não sobrar nenhuma brasa."
+        },
+        {
+          "speaker": "narrador",
+          "text": "\"Quando passares pelo fogo, não te queimarás.\" Responda em 4 segundos!"
+        }
+      ],
+      "challenge": {
+        "type": "vf",
+        "config": {
+          "items": [
+            {
+              "s": "A fogueira deve ficar longe das barracas e das árvores.",
+              "ok": true,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Devemos limpar o chão em volta da fogueira, tirando as folhas secas.",
+              "ok": true,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Pode deixar a fogueira acesa e ir dormir.",
+              "ok": false,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Um balde de água ou de areia deve ficar perto da fogueira.",
+              "ok": true,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Para apagar: jogar água, mexer as cinzas e jogar água de novo.",
+              "ok": true,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Se ainda tem cinza quente, a fogueira já está apagada.",
+              "ok": false,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Em dia de muito vento, é seguro fazer uma fogueira bem grande.",
+              "ok": false,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Crianças só mexem no fogo com um adulto por perto.",
+              "ok": true,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Jogar plástico na fogueira ajuda a acender.",
+              "ok": false,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Se a roupa pegar fogo: pare, deite e role.",
+              "ok": true,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Pode usar galhos verdes cortados de árvores vivas.",
+              "ok": false,
+              "ref": "Gênesis 2:15"
+            },
+            {
+              "s": "Uma fogueira pequena é mais fácil de controlar.",
+              "ok": true,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "Correr ajuda a apagar a roupa que pegou fogo.",
+              "ok": false,
+              "ref": "Isaías 43:2"
+            },
+            {
+              "s": "A fogueira só está apagada quando não sobra nenhuma brasa.",
+              "ok": true,
+              "ref": "Isaías 43:2"
+            }
+          ],
+          "count": 12,
+          "seconds": 4
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s18",
+      "title": "Nós e amarras",
+      "x": 24,
+      "y": 11,
+      "verse": "Eclesiastes 4:12",
+      "story": [
+        {
+          "speaker": "desbravador",
+          "text": "Nó direito, escota, lais de guia, volta do fiel, catau e nó de oito. Com eles e as amarras, fazemos pioneirias."
+        },
+        {
+          "speaker": "desbravador",
+          "text": "\"O cordão de três dobras não se rompe facilmente.\" Mostre que você sabe para que serve cada nó."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "pool": [
+            {
+              "q": "Nó para unir duas cordas da mesma grossura (e para bandagens):",
+              "options": [
+                "Nó direito",
+                "Lais de guia",
+                "Volta do fiel"
+              ],
+              "answer": 0,
+              "explain": "O nó direito é firme e fácil de desatar.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Nó para unir cordas de grossuras diferentes:",
+              "options": [
+                "Nó de escota",
+                "Nó direito",
+                "Catau"
+              ],
+              "answer": 0,
+              "explain": "A escota não escorrega mesmo com cordas diferentes.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Laço que não corre, usado em resgates:",
+              "options": [
+                "Lais de guia",
+                "Nó de correr",
+                "Nó de escota"
+              ],
+              "answer": 0,
+              "explain": "O lais de guia não aperta quem está preso nele.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Nó para prender a corda num poste e começar uma amarra:",
+              "options": [
+                "Volta do fiel",
+                "Nó direito",
+                "Nó de oito"
+              ],
+              "answer": 0,
+              "explain": "A volta do fiel começa e termina as amarras.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Nó para encurtar uma corda sem cortar:",
+              "options": [
+                "Catau",
+                "Lais de guia",
+                "Nó de escota"
+              ],
+              "answer": 0,
+              "explain": "O catau dobra a corda e prende as dobras.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Nó de arremate que impede a corda de escapar por um buraco:",
+              "options": [
+                "Nó de oito",
+                "Volta do fiel",
+                "Nó direito"
+              ],
+              "answer": 0,
+              "explain": "O nó de oito faz um \"calombo\" na ponta da corda.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Amarra para unir dois paus que se cruzam em ângulo reto:",
+              "options": [
+                "Amarra quadrada",
+                "Amarra diagonal",
+                "Nó de correr"
+              ],
+              "answer": 0,
+              "explain": "A quadrada é a amarra mais usada nas construções.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Amarra para paus cruzados em X que tendem a se separar:",
+              "options": [
+                "Amarra diagonal",
+                "Amarra quadrada",
+                "Nó direito"
+              ],
+              "answer": 0,
+              "explain": "A diagonal puxa os dois paus um contra o outro.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Construções com troncos e cordas (pontes, torres e portais) são as…",
+              "options": [
+                "Pioneirias",
+                "Origamis",
+                "Mosaicos"
+              ],
+              "answer": 0,
+              "explain": "O portal do acampamento é uma pioneiria!",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Antes de usar uma corda para escalar, você deve…",
+              "options": [
+                "Conferir se ela não está gasta ou cortada",
+                "Molhar a corda",
+                "Pintar a corda"
+              ],
+              "answer": 0,
+              "explain": "Corda estragada pode arrebentar.",
+              "verse": "Provérbios 22:3"
+            },
+            {
+              "q": "Eclesiastes 4:12: o cordão de três dobras…",
+              "options": [
+                "não se rompe facilmente",
+                "é fraco",
+                "serve só de enfeite"
+              ],
+              "answer": 0,
+              "explain": "Juntos somos mais fortes, e com Deus mais ainda.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "A ponta solta da corda, que faz o nó, se chama…",
+              "options": [
+                "Chicote",
+                "Seio",
+                "Firme"
+              ],
+              "answer": 0,
+              "explain": "Chicote é a ponta; seio é a dobra; firme é a parte parada.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "A parte dobrada da corda, em forma de U, se chama…",
+              "options": [
+                "Seio",
+                "Chicote",
+                "Firme"
+              ],
+              "answer": 0,
+              "explain": "Chicote é a ponta; seio é a dobra; firme é a parte parada.",
+              "verse": "Eclesiastes 4:12"
+            },
+            {
+              "q": "Para que serve a volta redonda com dois cotes?",
+              "options": [
+                "Prender a corda numa árvore ou argola",
+                "Unir duas cordas",
+                "Encurtar a corda"
+              ],
+              "answer": 0,
+              "explain": "É firme e aguenta bastante peso.",
+              "verse": "Eclesiastes 4:12"
+            }
+          ],
+          "count": 10,
+          "minScore": 7,
+          "timer": 14
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s19",
+      "title": "Rumo ao norte",
+      "x": 26,
+      "y": 13,
+      "verse": "Salmos 19:1",
+      "story": [
+        {
+          "speaker": "desbravador",
+          "text": "Sem bússola? O sol nasce no leste. De noite, o Cruzeiro do Sul aponta para o sul."
+        },
+        {
+          "speaker": "desbravador",
+          "text": "\"Os céus proclamam a glória de Deus.\" Prove que ninguém te perde na mata!"
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "pool": [
+            {
+              "q": "Onde o sol nasce?",
+              "options": [
+                "No leste (nascente)",
+                "No oeste",
+                "No sul"
+              ],
+              "answer": 0,
+              "explain": "O sol nasce no leste e se põe no oeste.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "Onde o sol se põe?",
+              "options": [
+                "No oeste (poente)",
+                "No leste",
+                "No norte"
+              ],
+              "answer": 0,
+              "explain": "O sol nasce no leste e se põe no oeste.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "Quais são os quatro pontos cardeais?",
+              "options": [
+                "Norte, sul, leste e oeste",
+                "Cima, baixo, frente e trás",
+                "Nordeste, sudeste, noroeste e sudoeste"
+              ],
+              "answer": 0,
+              "explain": "Os outros quatro, entre eles, são os pontos colaterais.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "Entre o norte e o leste fica o…",
+              "options": [
+                "Nordeste",
+                "Sudoeste",
+                "Noroeste"
+              ],
+              "answer": 0,
+              "explain": "Norte + leste = nordeste.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "Entre o sul e o oeste fica o…",
+              "options": [
+                "Sudoeste",
+                "Nordeste",
+                "Sudeste"
+              ],
+              "answer": 0,
+              "explain": "Sul + oeste = sudoeste.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "A agulha da bússola aponta para o…",
+              "options": [
+                "Norte magnético",
+                "Sol",
+                "Lugar mais alto"
+              ],
+              "answer": 0,
+              "explain": "A agulha é um ímã que se alinha com a Terra.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "O que atrapalha a bússola?",
+              "options": [
+                "Metais e ímãs por perto",
+                "Água",
+                "Música"
+              ],
+              "answer": 0,
+              "explain": "Afaste facas, panelas e celulares da bússola.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "No céu do Brasil, que constelação ajuda a achar o sul?",
+              "options": [
+                "Cruzeiro do Sul",
+                "Ursa Maior",
+                "Estrela Polar"
+              ],
+              "answer": 0,
+              "explain": "O Cruzeiro do Sul aparece bem no céu do hemisfério sul.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "Prolongando o braço maior do Cruzeiro do Sul umas 4 vezes e meia, chegamos ao…",
+              "options": [
+                "Polo Sul celeste",
+                "Norte",
+                "Sol"
+              ],
+              "answer": 0,
+              "explain": "Dali, desça a vista até o horizonte: ali é o sul.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "De manhã, com o braço direito apontado para onde o sol nasce, você está de frente para o…",
+              "options": [
+                "Norte",
+                "Sul",
+                "Oeste"
+              ],
+              "answer": 0,
+              "explain": "Direita no leste, esquerda no oeste, frente no norte e costas no sul.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "Num mapa, o norte normalmente fica…",
+              "options": [
+                "Em cima",
+                "Embaixo",
+                "À esquerda"
+              ],
+              "answer": 0,
+              "explain": "Por isso se diz \"nortear\".",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "O desenho com os pontos cardeais e colaterais se chama…",
+              "options": [
+                "Rosa dos ventos",
+                "Girassol",
+                "Cata-vento"
+              ],
+              "answer": 0,
+              "explain": "Ela aparece em mapas e bússolas.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "Salmos 19:1: os céus proclamam a…",
+              "options": [
+                "glória de Deus",
+                "previsão do tempo",
+                "hora do almoço"
+              ],
+              "answer": 0,
+              "explain": "As estrelas que guiam o desbravador foram criadas por Deus.",
+              "verse": "Salmos 19:1"
+            },
+            {
+              "q": "De frente para o norte, o leste fica à sua…",
+              "options": [
+                "Direita",
+                "Esquerda",
+                "Costas"
+              ],
+              "answer": 0,
+              "explain": "Norte na frente, leste à direita, oeste à esquerda e sul atrás.",
+              "verse": "Salmos 19:1"
+            }
+          ],
+          "count": 10,
+          "minScore": 7,
+          "timer": 14
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    },
+    {
+      "id": "acamp_s20",
+      "title": "O grande desafio do Guia",
+      "x": 23,
+      "y": 14,
+      "verse": "Josué 1:9",
+      "story": [
+        {
+          "speaker": "desbravador",
+          "text": "Último desafio: um caça-palavras gigante, com palavras de trás para frente e na diagonal, contra o relógio."
+        },
+        {
+          "speaker": "desbravador",
+          "text": "\"Sê forte e corajoso; não temas, porque o Senhor, teu Deus, é contigo por onde quer que andares.\""
+        },
+        {
+          "speaker": "desbravador",
+          "text": "Com 3 estrelas, eu entro para o seu time e você ganha a medalha do Acampamento!"
+        }
+      ],
+      "challenge": {
+        "type": "cacapalavras",
+        "config": {
+          "words": [
+            "FOGUEIRA",
+            "BUSSOLA",
+            "BARRACA",
+            "LENHA",
+            "CORDA",
+            "AMARRA",
+            "LENCO",
+            "MOCHILA",
+            "APITO",
+            "CANTIL",
+            "NORTE",
+            "ACAMPAR",
+            "TRILHA",
+            "ESTRELA",
+            "UNIDADE",
+            "CAMPORI",
+            "PIONEIRO",
+            "GUIA"
+          ],
+          "count": 9,
+          "size": 10,
+          "hard": true,
+          "secsPerWord": 12
+        }
+      },
+      "rewards": {
+        "xp": 200
+      },
+      "unlockChar": "desbravador"
+    }
+  ]
+}

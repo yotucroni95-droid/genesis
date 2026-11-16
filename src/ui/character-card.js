@@ -15,7 +15,7 @@ export function characterCard(assets, c, unlocked, { onClick, selected = false, 
   const frame = assets.entry('ui.card_frame');
   const r = RARITY[c.rarity];
   const cls = `cc${unlocked ? '' : ' is-locked'}${selected ? ' is-selected' : ''}${r ? ` cc--rare cc--${c.rarity === 'único' ? 'unico' : c.rarity.normalize('NFD').replace(/[̀-ͯ]/g, '')}` : ''}`;
-  let lockedLine = c.unlockedIn != null ? `Capítulo ${c.unlockedIn}` : '';
+  let lockedLine = c.event ? '⛺ Acampamento' : c.unlockedIn != null ? `Capítulo ${c.unlockedIn}` : '';
   if (r) lockedLine = c.rarity === 'único' ? 'Quase impossível' : `🧩 ${fragments}/${fragmentsNeeded(c)}`;
   return h('button', { class: cls, onClick, style: r ? { '--rar': r[1] } : {}, 'aria-label': unlocked ? c.name : 'Personagem bloqueado' },
     r ? h('span', { class: 'cc__rarity', text: r[0] }) : null,

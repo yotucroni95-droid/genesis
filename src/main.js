@@ -96,7 +96,7 @@ async function boot() {
         sfx('fanfare');
         celebrate({ title: 'JESUS!', subtitle: 'Você conseguiu o personagem único do jogo. Pouquíssimos conseguem isso. Fora de série!', image: assets.url('portrait.jesus') });
       } else {
-        celebrate({ title: 'Personagem liberado!', subtitle: `${c.name} (${c.rarity}) agora está no seu álbum. Jogue com ele!`, image: assets.url(`portrait.${e.id}`) });
+        celebrate({ title: 'Personagem liberado!', subtitle: `${c.name} (${c.rarity}) agora está no seu álbum. Já pode jogar!`, image: assets.url(`portrait.${e.id}`) });
       }
     }
     if (e.type === 'lampLit') {

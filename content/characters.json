@@ -471,6 +471,71 @@
     "arenaTime": 5,
     "hint": 1
    }
+  },
+  {
+   "id": "aventureira",
+   "name": "Aventureira",
+   "playable": true,
+   "base": false,
+   "event": "acampamento",
+   "color": "#e0464b",
+   "virtue": "Alegria",
+   "passage": "Provérbios 22:6",
+   "description": "Tem 7 anos e é do Clube de Aventureiros. Por amor a Jesus, faz sempre o melhor!",
+   "unlockedIn": null,
+   "power": {
+    "coins": 20,
+    "fe": 15
+   }
+  },
+  {
+   "id": "aventureiro",
+   "name": "Aventureiro",
+   "playable": true,
+   "base": false,
+   "event": "acampamento",
+   "color": "#2e4a8c",
+   "virtue": "Obediência",
+   "passage": "Eclesiastes 12:1",
+   "description": "Tem 8 anos, adora explorar a natureza e nunca sai sem o seu cantil.",
+   "unlockedIn": null,
+   "power": {
+    "trophies": 20,
+    "arenaTime": 2
+   }
+  },
+  {
+   "id": "desbravadora",
+   "name": "Desbravadora",
+   "playable": true,
+   "base": false,
+   "event": "acampamento",
+   "color": "#e8b923",
+   "virtue": "Lealdade",
+   "passage": "1 Timóteo 4:12",
+   "description": "Tem 13 anos, é da classe Pioneiro e sabe o voto e a lei de cor.",
+   "unlockedIn": null,
+   "power": {
+    "fe": 35,
+    "arenaLife": 1
+   }
+  },
+  {
+   "id": "desbravador",
+   "name": "Desbravador",
+   "playable": true,
+   "base": false,
+   "event": "acampamento",
+   "color": "#8a6b3f",
+   "virtue": "Coragem",
+   "passage": "Josué 1:9",
+   "description": "Tem 15 anos, é da classe Guia, monta barraca em minutos e acha o norte pelas estrelas.",
+   "unlockedIn": null,
+   "power": {
+    "coins": 35,
+    "trophies": 25,
+    "hint": 1
+   }
   }
  ]
 }

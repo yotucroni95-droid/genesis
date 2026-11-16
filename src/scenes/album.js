@@ -21,6 +21,7 @@ export function createAlbumScene(game) {
         const unlocked = save.isUnlocked(c.id);
         if (!unlocked) {
           if (c.rarity === 'único') toast('Jesus é único: só aparece muito raramente num baú Lendário, ou de presente para quem juntar todos os outros personagens.', { ms: 6000 });
+          else if (c.event) toast('Só no evento Acampamento: vença a trilha de desafios com 3 estrelas em cada um. Não sai em baú nem na Loja.', { ms: 5000 });
           else if (c.rarity) toast(`Junte ${fragmentsNeeded(c)} fragmentos de ${c.name} em baús, no Passe da Fé e na Loja. Você tem ${(save.state.fragments || {})[c.id] || 0}.`, { ms: 4500 });
           else toast(c.unlockedIn != null ? `Conclua o Capítulo ${c.unlockedIn} para liberar este personagem.` : 'Continue jogando para liberar!');
           return;
@@ -46,8 +47,10 @@ export function createAlbumScene(game) {
       };
 
       const card = (c) => characterCard(game.assets, c, save.isUnlocked(c.id), { onClick: () => open(c), selected: save.state.avatarId === c.id, fragments: (save.state.fragments || {})[c.id] || 0 });
-      const genesis = list.filter((c) => !c.rarity);
+      const genesis = list.filter((c) => !c.rarity && !c.event);
+      const camp = list.filter((c) => c.event);
       const groups = [['Personagens de Gênesis', genesis]];
+      if (camp.length) groups.push([`⛺ Acampamento · ${camp.filter((c) => save.isUnlocked(c.id)).length}/${camp.length}`, camp]);
       for (const [r, label] of [['único', 'Único'], ['lendário', 'Lendários'], ['épico', 'Épicos'], ['raro', 'Raros'], ['comum', 'Comuns']]) {
         const g = list.filter((c) => c.rarity === r);
         if (g.length) groups.push([`${label} · ${g.filter((c) => save.isUnlocked(c.id)).length}/${g.length}`, g]);

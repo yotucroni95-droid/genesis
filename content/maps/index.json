@@ -54,6 +54,11 @@
       "id": "moria",
       "name": "O monte Moriá",
       "file": "maps/moria.json"
+    },
+    {
+      "id": "acampamento",
+      "name": "Acampamento",
+      "file": "maps/acampamento.json"
     }
   ]
 }
