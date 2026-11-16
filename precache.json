@@ -65,6 +65,8 @@
 "src/world/tilemap.js",
 "src/content/progression.js",
 "src/game/admin.js",
+"src/game/codes-list.js",
+"src/game/codes.js",
 "src/game/economy.js",
 "src/game/event.js",
 "src/game/meta.js",
