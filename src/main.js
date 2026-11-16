@@ -129,7 +129,7 @@ async function boot() {
     if (['world', 'story', 'challenge'].includes(name)) {
       const id = params.chapterId || (params.back && params.back.chapterId);
       const entry = id && assets.json('chapters/index.json').chapters.find((c) => c.id === id);
-      tune = entry ? ({ cap0: 'ceu', cap1: 'eden', cap2: 'fora_eden', cap3: 'campos', cap4: 'arca' })[id] || 'eden' : (params.mapId || 'eden');
+      tune = entry ? ({ cap0: 'ceu', cap1: 'eden', cap2: 'fora_eden', cap3: 'campos', cap4: 'arca', cap5: 'campos', cap6: 'eden', cap7: 'fora_eden', cap8: 'campos', cap9: 'eden', cap10: 'arca' })[id] || 'eden' : (params.mapId || 'eden');
     }
     playMusic(tune);
     if (name !== 'title' && name !== 'challenge') sfx('transition');

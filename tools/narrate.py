@@ -12,7 +12,7 @@ import soundfile as sf
 from kokoro_onnx import Kokoro
 
 G = sys.argv[1]
-ONLY = sys.argv[sys.argv.index('--only') + 1] if '--only' in sys.argv else ''
+ONLY = tuple(sys.argv[sys.argv.index('--only') + 1].split(',')) if '--only' in sys.argv else ()  # comma-separated key prefixes
 SAMPLE = sys.argv[sys.argv.index('--sample') + 1] if '--sample' in sys.argv else ''
 CACHE = os.path.expanduser('~/.cache/hyperframes/tts')
 kokoro = Kokoro(f'{CACHE}/models/kokoro-v1.0.onnx', f'{CACHE}/voices/voices-v1.0.bin')
@@ -21,6 +21,7 @@ random.seed(7)
 
 V = {n: kokoro.get_voice_style(n) for n in ('pm_santa', 'pm_alex', 'pf_dora')}
 BLEND_DARK = (V['pm_alex'] * 0.5 + V['pm_santa'] * 0.5).astype(np.float32)
+BLEND_OLD = (V['pm_santa'] * 0.7 + V['pm_alex'] * 0.3).astype(np.float32)
 
 # role -> (voice style, base speed, pause after sentence, clause pause)
 ROLES = {
@@ -29,11 +30,13 @@ ROLES = {
     'homem': (V['pm_alex'], 0.95, 0.45, 0.18),
     'mulher': (V['pf_dora'], 0.95, 0.45, 0.18),
     'sombra': (BLEND_DARK, 0.88, 0.55, 0.22),
+    'anciao': (BLEND_OLD, 0.86, 0.6, 0.24),
 }
 SPEAKER_ROLE = {
     'narrador': 'narrador', 'deus': 'deus',
     'adao': 'homem', 'abel': 'homem', 'caim': 'homem', 'noe': 'homem', 'miguel': 'homem', 'gabriel': 'homem', 'peregrino': 'homem',
     'querubim': 'mulher', 'eva': 'mulher', 'anjos_fieis': 'mulher',
+    'abraao': 'anciao', 'isaque': 'homem', 'jaco': 'homem', 'jose': 'homem', 'sara': 'mulher', 'rebeca': 'mulher',
     'lucifer': 'sombra', 'serpente': 'sombra', 'anjos_caidos': 'sombra',
 }
 

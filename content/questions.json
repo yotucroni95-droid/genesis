@@ -1422,6 +1422,885 @@
     "v15",
     "v27"
    ]
+  },
+  "cap5": {
+   "quiz": [
+    {
+     "q": "Quantas línguas o povo falava antes de Babel?",
+     "options": [
+      "Uma só",
+      "Duas",
+      "Muitas"
+     ],
+     "answer": 0,
+     "explain": "Todos se entendiam perfeitamente.",
+     "verse": "Gênesis 11:1"
+    },
+    {
+     "q": "Onde o povo resolveu morar?",
+     "options": [
+      "Numa planície na terra de Sinar",
+      "No monte Ararate",
+      "No Egito"
+     ],
+     "answer": 0,
+     "explain": "Era uma planície grande, boa para construir.",
+     "verse": "Gênesis 11:2"
+    },
+    {
+     "q": "O que Deus tinha pedido à família de Noé?",
+     "options": [
+      "Que enchessem a Terra",
+      "Que construíssem uma torre",
+      "Que voltassem para o Éden"
+     ],
+     "answer": 0,
+     "explain": "Deus queria a humanidade espalhada, cuidando de toda a Terra.",
+     "verse": "Gênesis 9:1"
+    },
+    {
+     "q": "De quem descendia esse povo?",
+     "options": [
+      "Da família de Noé",
+      "De Caim",
+      "Dos anjos"
+     ],
+     "answer": 0,
+     "explain": "Todos vinham dos filhos de Noé: Sem, Cam e Jafé.",
+     "verse": "Gênesis 10:32"
+    },
+    {
+     "q": "O que o nome Babel lembra?",
+     "options": [
+      "Confusão",
+      "Cidade feliz",
+      "Torre de ouro"
+     ],
+     "answer": 0,
+     "explain": "Ali Deus confundiu as línguas.",
+     "verse": "Gênesis 11:9"
+    },
+    {
+     "q": "Por que Deus confundiu as línguas?",
+     "options": [
+      "Por causa do orgulho do povo",
+      "Porque estavam com fome",
+      "Porque a torre caiu sozinha"
+     ],
+     "answer": 0,
+     "explain": "Eles queriam um nome para si, contra o plano de Deus.",
+     "verse": "Gênesis 11:4-7"
+    },
+    {
+     "q": "Segundo Tiago, Deus dá graça a quem?",
+     "options": [
+      "Aos humildes",
+      "Aos orgulhosos",
+      "Aos famosos"
+     ],
+     "answer": 0,
+     "explain": "Deus resiste aos orgulhosos.",
+     "verse": "Tiago 4:6"
+    }
+   ],
+   "vf": [
+    {
+     "s": "Deus desceu para ver a cidade e a torre.",
+     "ok": true,
+     "ref": "Gênesis 11:5"
+    },
+    {
+     "s": "O povo construiu a torre para honrar a Deus.",
+     "ok": false,
+     "ref": "Gênesis 11:4"
+    },
+    {
+     "s": "Eles usaram tijolos no lugar de pedras.",
+     "ok": true,
+     "ref": "Gênesis 11:3"
+    },
+    {
+     "s": "Deus confundiu a língua das pessoas.",
+     "ok": true,
+     "ref": "Gênesis 11:7"
+    },
+    {
+     "s": "A torre chegou de verdade até o céu.",
+     "ok": false,
+     "ref": "Gênesis 11:8"
+    },
+    {
+     "s": "O povo queria ficar famoso.",
+     "ok": true,
+     "ref": "Gênesis 11:4"
+    },
+    {
+     "s": "Deus tinha pedido que eles enchessem a Terra.",
+     "ok": true,
+     "ref": "Gênesis 9:1"
+    }
+   ],
+   "ordem": [
+    {
+     "title": "Construindo Babel",
+     "ref": "Gênesis 11:1-4",
+     "items": [
+      "Todos falam a mesma língua",
+      "O povo vai morar na planície de Sinar",
+      "Eles fazem tijolos e queimam no fogo",
+      "Começam a construir a cidade e a torre",
+      "Querem ficar famosos e não se espalhar"
+     ]
+    }
+   ],
+   "palavras": [
+    "BABEL",
+    "TORRE",
+    "TIJOLO",
+    "ORGULHO",
+    "LINGUA",
+    "SINAR",
+    "CIDADE",
+    "BETUME"
+   ],
+   "verses": [
+    "v51",
+    "v30"
+   ]
+  },
+  "cap6": {
+   "quiz": [
+    {
+     "q": "O que Deus pediu a Abrão?",
+     "options": [
+      "Que saísse da sua terra e fosse para onde Deus mostrasse",
+      "Que construísse uma torre",
+      "Que voltasse para o Éden"
+     ],
+     "answer": 0,
+     "explain": "Abrão obedeceu sem saber para onde ia.",
+     "verse": "Gênesis 12:1"
+    },
+    {
+     "q": "Quantos anos Abrão tinha quando partiu?",
+     "options": [
+      "75 anos",
+      "20 anos",
+      "120 anos"
+     ],
+     "answer": 0,
+     "explain": "Nunca é tarde para obedecer a Deus.",
+     "verse": "Gênesis 12:4"
+    },
+    {
+     "q": "Por meio de Abrão, quem seria abençoado?",
+     "options": [
+      "Todas as famílias da Terra",
+      "Só a família dele",
+      "Só os reis"
+     ],
+     "answer": 0,
+     "explain": "Dessa família viria Jesus, a bênção para o mundo todo.",
+     "verse": "Gênesis 12:3"
+    },
+    {
+     "q": "O que Abrão fez ao chegar a Canaã?",
+     "options": [
+      "Construiu um altar ao Senhor",
+      "Construiu uma cidade",
+      "Voltou para casa"
+     ],
+     "answer": 0,
+     "explain": "Onde Abrão parava, ele adorava a Deus.",
+     "verse": "Gênesis 12:7"
+    },
+    {
+     "q": "Para qual nome Deus mudou Abrão?",
+     "options": [
+      "Abraão",
+      "Israel",
+      "Isaque"
+     ],
+     "answer": 0,
+     "explain": "Abraão quer dizer \"pai de muitos povos\".",
+     "verse": "Gênesis 17:5"
+    },
+    {
+     "q": "Onde Abraão recebeu os três visitantes?",
+     "options": [
+      "Perto dos carvalhos de Manre",
+      "No Egito",
+      "Em Babel"
+     ],
+     "answer": 0,
+     "explain": "Ele estava na entrada da tenda, no calor do dia.",
+     "verse": "Gênesis 18:1"
+    },
+    {
+     "q": "O que quer dizer o nome Isaque?",
+     "options": [
+      "\"Ele ri\"",
+      "\"Presente\"",
+      "\"Forte\""
+     ],
+     "answer": 0,
+     "explain": "O riso de dúvida virou riso de alegria.",
+     "verse": "Gênesis 21:3-6"
+    }
+   ],
+   "vf": [
+    {
+     "s": "Abrão sabia exatamente para onde Deus o levaria.",
+     "ok": false,
+     "ref": "Hebreus 11:8"
+    },
+    {
+     "s": "Abrão tinha 75 anos quando partiu.",
+     "ok": true,
+     "ref": "Gênesis 12:4"
+    },
+    {
+     "s": "Deus pediu que Abrão contasse as estrelas.",
+     "ok": true,
+     "ref": "Gênesis 15:5"
+    },
+    {
+     "s": "Abraão recebeu três visitantes perto dos carvalhos de Manre.",
+     "ok": true,
+     "ref": "Gênesis 18:1"
+    },
+    {
+     "s": "Sara riu quando ouviu a promessa.",
+     "ok": true,
+     "ref": "Gênesis 18:12"
+    },
+    {
+     "s": "Isaque nasceu quando Abraão tinha 50 anos.",
+     "ok": false,
+     "ref": "Gênesis 21:5"
+    },
+    {
+     "s": "Abrão construiu um altar ao chegar a Canaã.",
+     "ok": true,
+     "ref": "Gênesis 12:7"
+    }
+   ],
+   "ordem": [
+    {
+     "title": "O chamado de Abraão",
+     "ref": "Gênesis 12:1-7",
+     "items": [
+      "Sai da tua terra",
+      "Conta as estrelas",
+      "Três visitantes",
+      "O riso de Sara"
+     ]
+    }
+   ],
+   "palavras": [
+    "ABRAAO",
+    "SARA",
+    "ESTRELAS",
+    "TENDA",
+    "ISAQUE",
+    "ALTAR",
+    "PROMESSA",
+    "FE"
+   ],
+   "verses": [
+    "v41",
+    "v42",
+    "v43",
+    "v44"
+   ]
+  },
+  "cap7": {
+   "quiz": [
+    {
+     "q": "Para onde Deus mandou Abraão ir?",
+     "options": [
+      "Ao monte Moriá",
+      "Ao Egito",
+      "A Babel"
+     ],
+     "answer": 0,
+     "explain": "Lá a fé de Abraão seria provada.",
+     "verse": "Gênesis 22:2"
+    },
+    {
+     "q": "O que Isaque carregava subindo o monte?",
+     "options": [
+      "A lenha",
+      "Uma ovelha",
+      "Uma espada"
+     ],
+     "answer": 0,
+     "explain": "Isaque carregou a lenha nas costas.",
+     "verse": "Gênesis 22:6"
+    },
+    {
+     "q": "O que Isaque perguntou ao pai?",
+     "options": [
+      "\"Onde está o cordeiro?\"",
+      "\"Quando vamos comer?\"",
+      "\"Por que estamos aqui?\""
+     ],
+     "answer": 0,
+     "explain": "Isaque percebeu que faltava o cordeiro.",
+     "verse": "Gênesis 22:7"
+    },
+    {
+     "q": "O que Abraão respondeu?",
+     "options": [
+      "\"Deus mesmo vai providenciar\"",
+      "\"Eu não sei\"",
+      "\"Vamos comprar um\""
+     ],
+     "answer": 0,
+     "explain": "Abraão confiou que Deus proveria.",
+     "verse": "Gênesis 22:8"
+    },
+    {
+     "q": "O que Abraão viu preso no arbusto?",
+     "options": [
+      "Um carneiro",
+      "Um leão",
+      "Uma pomba"
+     ],
+     "answer": 0,
+     "explain": "Deus providenciou o sacrifício.",
+     "verse": "Gênesis 22:13"
+    },
+    {
+     "q": "Que nome Abraão deu ao lugar?",
+     "options": [
+      "\"O Senhor proverá\"",
+      "Betel",
+      "Babel"
+     ],
+     "answer": 0,
+     "explain": "Deus vê e providencia.",
+     "verse": "Gênesis 22:14"
+    },
+    {
+     "q": "O que Rebeca respondeu quando perguntaram se iria?",
+     "options": [
+      "\"Irei\"",
+      "\"Nunca\"",
+      "\"Talvez amanhã\""
+     ],
+     "answer": 0,
+     "explain": "Rebeca confiou que Deus estava guiando.",
+     "verse": "Gênesis 24:58"
+    }
+   ],
+   "vf": [
+    {
+     "s": "O servo de Abraão orou junto ao poço.",
+     "ok": true,
+     "ref": "Gênesis 24:12"
+    },
+    {
+     "s": "Rebeca deu água só para o servo.",
+     "ok": false,
+     "ref": "Gênesis 24:19"
+    },
+    {
+     "s": "O servo levou dez camelos.",
+     "ok": true,
+     "ref": "Gênesis 24:10"
+    },
+    {
+     "s": "Rebeca chegou antes de o servo terminar a oração.",
+     "ok": true,
+     "ref": "Gênesis 24:15"
+    },
+    {
+     "s": "Isaque foi sozinho buscar uma esposa.",
+     "ok": false,
+     "ref": "Gênesis 24:4"
+    },
+    {
+     "s": "O servo agradeceu a Deus quando viu a resposta.",
+     "ok": true,
+     "ref": "Gênesis 24:26-27"
+    },
+    {
+     "s": "Abraão viu um carneiro preso num arbusto.",
+     "ok": true,
+     "ref": "Gênesis 22:13"
+    }
+   ],
+   "ordem": [
+    {
+     "title": "No monte Moriá",
+     "ref": "Gênesis 22:1-14",
+     "items": [
+      "Deus pede a Abraão que suba o monte Moriá",
+      "Isaque carrega a lenha",
+      "Isaque pergunta: \"Onde está o cordeiro?\"",
+      "O Anjo do Senhor chama: \"Abraão, Abraão!\"",
+      "Abraão vê um carneiro preso no arbusto",
+      "O lugar se chama \"O Senhor proverá\""
+     ]
+    }
+   ],
+   "palavras": [
+    "MORIA",
+    "CARNEIRO",
+    "LENHA",
+    "POCO",
+    "REBECA",
+    "CAMELO",
+    "CANTARO",
+    "ISAQUE"
+   ],
+   "verses": [
+    "v45",
+    "v44",
+    "v42"
+   ]
+  },
+  "cap8": {
+   "quiz": [
+    {
+     "q": "Quem era o caçador?",
+     "options": [
+      "Esaú",
+      "Jacó",
+      "Isaque"
+     ],
+     "answer": 0,
+     "explain": "Esaú gostava do campo; Jacó, das tendas.",
+     "verse": "Gênesis 25:27"
+    },
+    {
+     "q": "O que Jacó estava cozinhando?",
+     "options": [
+      "Ensopado de lentilhas",
+      "Peixe assado",
+      "Pão de trigo"
+     ],
+     "answer": 0,
+     "explain": "Um ensopado vermelho de lentilhas.",
+     "verse": "Gênesis 25:29-34"
+    },
+    {
+     "q": "O que Esaú trocou pelo prato de comida?",
+     "options": [
+      "Seu direito de filho mais velho",
+      "Suas ovelhas",
+      "Sua casa"
+     ],
+     "answer": 0,
+     "explain": "Esaú desprezou algo precioso por uma vontade de momento.",
+     "verse": "Gênesis 25:33-34"
+    },
+    {
+     "q": "Por que Jacó precisou fugir?",
+     "options": [
+      "Esaú ficou com muita raiva dele",
+      "Veio um dilúvio",
+      "Ele se perdeu no deserto"
+     ],
+     "answer": 0,
+     "explain": "Engano sempre traz consequências.",
+     "verse": "Gênesis 27:41-43"
+    },
+    {
+     "q": "O que Jacó usou como travesseiro?",
+     "options": [
+      "Uma pedra",
+      "Um saco de trigo",
+      "Sua capa"
+     ],
+     "answer": 0,
+     "explain": "Ele dormiu ao ar livre, fugindo.",
+     "verse": "Gênesis 28:11"
+    },
+    {
+     "q": "O que quer dizer Betel?",
+     "options": [
+      "\"Casa de Deus\"",
+      "\"Cidade grande\"",
+      "\"Rio azul\""
+     ],
+     "answer": 0,
+     "explain": "Jacó descobriu que Deus estava ali.",
+     "verse": "Gênesis 28:19"
+    },
+    {
+     "q": "Qual foi o novo nome de Jacó?",
+     "options": [
+      "Israel",
+      "Abraão",
+      "José"
+     ],
+     "answer": 0,
+     "explain": "Ele lutou com Deus e foi abençoado.",
+     "verse": "Gênesis 32:28"
+    }
+   ],
+   "vf": [
+    {
+     "s": "Esaú era o irmão gêmeo mais velho.",
+     "ok": true,
+     "ref": "Gênesis 25:25"
+    },
+    {
+     "s": "Jacó trocou suas ovelhas por um prato de lentilhas.",
+     "ok": false,
+     "ref": "Gênesis 25:33"
+    },
+    {
+     "s": "Em Betel, Jacó sonhou com uma escada até o céu.",
+     "ok": true,
+     "ref": "Gênesis 28:12"
+    },
+    {
+     "s": "Os anjos subiam e desciam pela escada.",
+     "ok": true,
+     "ref": "Gênesis 28:12"
+    },
+    {
+     "s": "Deus mudou o nome de Jacó para Israel.",
+     "ok": true,
+     "ref": "Gênesis 32:28"
+    },
+    {
+     "s": "Esaú e Jacó nunca fizeram as pazes.",
+     "ok": false,
+     "ref": "Gênesis 33:4"
+    },
+    {
+     "s": "Jacó lutou até o amanhecer junto ao Jaboque.",
+     "ok": true,
+     "ref": "Gênesis 32:24"
+    }
+   ],
+   "ordem": [
+    {
+     "title": "A história de Jacó",
+     "ref": "Gênesis 25–33",
+     "items": [
+      "Esaú troca o direito de primogênito por lentilhas",
+      "Jacó foge de casa",
+      "Jacó sonha com a escada em Betel",
+      "Jacó luta até o amanhecer no Jaboque",
+      "Deus muda o nome de Jacó para Israel",
+      "Esaú e Jacó se abraçam"
+     ]
+    }
+   ],
+   "palavras": [
+    "JACO",
+    "ESAU",
+    "ESCADA",
+    "BETEL",
+    "ISRAEL",
+    "PEDRA",
+    "ANJOS",
+    "ABRACO"
+   ],
+   "verses": [
+    "v46",
+    "v47",
+    "v41"
+   ]
+  },
+  "cap9": {
+   "quiz": [
+    {
+     "q": "O que Jacó deu a José?",
+     "options": [
+      "Uma túnica colorida",
+      "Uma espada",
+      "Um camelo"
+     ],
+     "answer": 0,
+     "explain": "Um presente especial que despertou ciúmes.",
+     "verse": "Gênesis 37:3"
+    },
+    {
+     "q": "Quantos filhos Jacó teve?",
+     "options": [
+      "Doze",
+      "Dois",
+      "Sete"
+     ],
+     "answer": 0,
+     "explain": "Os doze filhos de Jacó deram origem às doze tribos de Israel.",
+     "verse": "Gênesis 35:22-26"
+    },
+    {
+     "q": "No sonho, o que se curvava diante do feixe de José?",
+     "options": [
+      "Os feixes dos irmãos",
+      "As árvores",
+      "Os camelos"
+     ],
+     "answer": 0,
+     "explain": "Um dia, os irmãos se curvariam de verdade.",
+     "verse": "Gênesis 37:7"
+    },
+    {
+     "q": "No segundo sonho, o que se curvava diante de José?",
+     "options": [
+      "O sol, a lua e onze estrelas",
+      "Doze leões",
+      "Uma montanha"
+     ],
+     "answer": 0,
+     "explain": "Jacó guardou esse sonho no coração.",
+     "verse": "Gênesis 37:9-11"
+    },
+    {
+     "q": "Quem convenceu os irmãos a não matar José?",
+     "options": [
+      "Rúben",
+      "Judá",
+      "Benjamim"
+     ],
+     "answer": 0,
+     "explain": "Rúben queria salvar José depois.",
+     "verse": "Gênesis 37:21-22"
+    },
+    {
+     "q": "Por quantas moedas José foi vendido?",
+     "options": [
+      "Vinte moedas de prata",
+      "Cem moedas de ouro",
+      "Trinta moedas de bronze"
+     ],
+     "answer": 0,
+     "explain": "Foi vendido a uma caravana a caminho do Egito.",
+     "verse": "Gênesis 37:28"
+    },
+    {
+     "q": "No Egito, quem comprou José?",
+     "options": [
+      "Potifar, oficial do Faraó",
+      "O próprio Faraó",
+      "Um pastor"
+     ],
+     "answer": 0,
+     "explain": "Mesmo como servo, José foi fiel.",
+     "verse": "Gênesis 39:1"
+    }
+   ],
+   "vf": [
+    {
+     "s": "O Senhor estava com José no Egito.",
+     "ok": true,
+     "ref": "Gênesis 39:2"
+    },
+    {
+     "s": "José ficou amargurado e desistiu de Deus na prisão.",
+     "ok": false,
+     "ref": "Gênesis 39:21-23"
+    },
+    {
+     "s": "Potifar era um oficial do Faraó.",
+     "ok": true,
+     "ref": "Gênesis 39:1"
+    },
+    {
+     "s": "José disse que a explicação dos sonhos pertence a Deus.",
+     "ok": true,
+     "ref": "Gênesis 40:8"
+    },
+    {
+     "s": "José foi vendido por cem moedas de ouro.",
+     "ok": false,
+     "ref": "Gênesis 37:28"
+    },
+    {
+     "s": "Rúben quis salvar José.",
+     "ok": true,
+     "ref": "Gênesis 37:21-22"
+    },
+    {
+     "s": "O carcereiro confiou a prisão aos cuidados de José.",
+     "ok": true,
+     "ref": "Gênesis 39:22"
+    }
+   ],
+   "ordem": [
+    {
+     "title": "José é vendido",
+     "ref": "Gênesis 37:12-28",
+     "items": [
+      "Jacó manda José ver os irmãos",
+      "Os irmãos dizem: \"Lá vem o sonhador!\"",
+      "Rúben pede que não matem José",
+      "José é jogado numa cisterna seca",
+      "Passa uma caravana a caminho do Egito",
+      "José é vendido por vinte moedas de prata"
+     ]
+    }
+   ],
+   "palavras": [
+    "JOSE",
+    "TUNICA",
+    "SONHO",
+    "IRMAOS",
+    "EGITO",
+    "PRISAO",
+    "RUBEN",
+    "FEIXE"
+   ],
+   "verses": [
+    "v48",
+    "v46",
+    "v30"
+   ]
+  },
+  "cap10": {
+   "quiz": [
+    {
+     "q": "Com o que o Faraó sonhou?",
+     "options": [
+      "Vacas e espigas",
+      "Leões e águias",
+      "Estrelas e luas"
+     ],
+     "answer": 0,
+     "explain": "Sete gordas e sete magras; sete cheias e sete secas.",
+     "verse": "Gênesis 41:1-7"
+    },
+    {
+     "q": "Quem lembrou de José?",
+     "options": [
+      "O copeiro do Faraó",
+      "O padeiro",
+      "Potifar"
+     ],
+     "answer": 0,
+     "explain": "O copeiro tinha esquecido José por dois anos.",
+     "verse": "Gênesis 41:9-13"
+    },
+    {
+     "q": "Segundo José, quem explicava os sonhos?",
+     "options": [
+      "Deus",
+      "Os magos",
+      "O próprio José"
+     ],
+     "answer": 0,
+     "explain": "José deu toda a glória a Deus.",
+     "verse": "Gênesis 41:16"
+    },
+    {
+     "q": "O que significavam as sete vacas gordas?",
+     "options": [
+      "Sete anos de fartura",
+      "Sete reis",
+      "Sete dias de festa"
+     ],
+     "answer": 0,
+     "explain": "Depois viriam sete anos de fome.",
+     "verse": "Gênesis 41:29-30"
+    },
+    {
+     "q": "Quantos anos de fome vieram?",
+     "options": [
+      "Sete",
+      "Três",
+      "Quarenta"
+     ],
+     "answer": 0,
+     "explain": "Depois de sete anos de fartura.",
+     "verse": "Gênesis 41:30"
+    },
+    {
+     "q": "Qual irmão ficou em casa na primeira viagem?",
+     "options": [
+      "Benjamim",
+      "Rúben",
+      "Judá"
+     ],
+     "answer": 0,
+     "explain": "Jacó teve medo de perder Benjamim.",
+     "verse": "Gênesis 42:4"
+    },
+    {
+     "q": "O que José disse sobre o mal que os irmãos planejaram?",
+     "options": [
+      "Que Deus o transformou em bem",
+      "Que nunca perdoaria",
+      "Que ia se vingar"
+     ],
+     "answer": 0,
+     "explain": "O perdão de José aponta para o perdão de Jesus.",
+     "verse": "Gênesis 50:20"
+    }
+   ],
+   "vf": [
+    {
+     "s": "O Faraó sonhou com vacas e espigas.",
+     "ok": true,
+     "ref": "Gênesis 41:1-7"
+    },
+    {
+     "s": "José disse que ele mesmo explicava os sonhos, sem Deus.",
+     "ok": false,
+     "ref": "Gênesis 41:16"
+    },
+    {
+     "s": "Vieram sete anos de fartura e sete de fome.",
+     "ok": true,
+     "ref": "Gênesis 41:29-30"
+    },
+    {
+     "s": "Os irmãos reconheceram José logo de cara.",
+     "ok": false,
+     "ref": "Gênesis 42:8"
+    },
+    {
+     "s": "Judá se ofereceu no lugar de Benjamim.",
+     "ok": true,
+     "ref": "Gênesis 44:33"
+    },
+    {
+     "s": "José se vingou dos irmãos.",
+     "ok": false,
+     "ref": "Gênesis 50:21"
+    },
+    {
+     "s": "A família de Jacó foi morar no Egito.",
+     "ok": true,
+     "ref": "Gênesis 46:6"
+    }
+   ],
+   "ordem": [
+    {
+     "title": "José governa o Egito",
+     "ref": "Gênesis 41:1-40",
+     "items": [
+      "Os sonhos do Faraó",
+      "Os celeiros cheios",
+      "Os irmãos se curvam",
+      "\"Eu sou José\"",
+      "Deus transformou o mal em bem"
+     ]
+    }
+   ],
+   "palavras": [
+    "JOSE",
+    "FARAO",
+    "TRIGO",
+    "EGITO",
+    "CELEIRO",
+    "PERDAO",
+    "NILO",
+    "FOME"
+   ],
+   "verses": [
+    "v50",
+    "v49",
+    "v52",
+    "v48"
+   ]
   }
  }
 }

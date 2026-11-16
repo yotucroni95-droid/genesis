@@ -1,0 +1,311 @@
+{
+  "id": "cap7",
+  "number": 7,
+  "title": "O monte Moriá e o poço",
+  "map": "moria",
+  "intro": "Isaque cresceu. Um dia, Deus pediu algo muito difícil a Abraão. Suba o monte e veja como Deus provê.",
+  "unlocks": [
+    "isaque",
+    "rebeca"
+  ],
+  "medal": "capitulo_7",
+  "npcs": [
+    {
+      "sheet": "abraao",
+      "x": 13,
+      "y": 4,
+      "dir": 0,
+      "talk": [
+        "O Senhor proverá. Nunca esqueça disso.",
+        "Deus pediu, e eu confiei. Ele é sempre bom."
+      ]
+    },
+    {
+      "sheet": "isaque",
+      "x": 15,
+      "y": 13,
+      "dir": 0,
+      "talk": [
+        "Meu pai disse: \"Deus mesmo vai providenciar.\" E providenciou!",
+        "Subir o monte com meu pai foi o dia mais importante da minha vida.",
+        "Confie: Deus vê antes de a gente ver."
+      ]
+    },
+    {
+      "sheet": "rebeca",
+      "x": 7,
+      "y": 16,
+      "dir": 0,
+      "talk": [
+        "Dar água a dez camelos cansa, mas ajudar faz bem!",
+        "Quando Deus guia, a gente pode dizer: \"Irei.\"",
+        "Já ofereceu ajuda a alguém hoje?"
+      ]
+    },
+    {
+      "sheet": "anjos_caidos",
+      "x": 24,
+      "y": 10,
+      "dir": 0,
+      "talk": [
+        "Deus esqueceu a promessa... desista!",
+        "Pra que confiar? Faça do seu jeito.",
+        "Ninguém vê se você ficar com raiva de Deus."
+      ],
+      "variant": 2,
+      "tempter": true,
+      "resist": {
+        "text": "Deus nunca esquece: Ele vê e providencia.",
+        "verse": "Gênesis 22:14"
+      }
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap7_s1",
+      "title": "Deus prova Abraão",
+      "x": 6,
+      "y": 6,
+      "verse": "Gênesis 22:1-8",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Depois de algum tempo, Deus provou a fé de Abraão. Pediu que ele subisse o monte Moriá e oferecesse ali o filho, Isaque."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Era o pedido mais difícil da vida de Abraão. Mesmo assim, ele confiou: Deus é bom e sempre cumpre o que promete."
+        },
+        {
+          "speaker": "isaque",
+          "text": "Pai, temos o fogo e a lenha, mas onde está o cordeiro?"
+        },
+        {
+          "speaker": "abraao",
+          "text": "Deus mesmo vai providenciar o cordeiro, meu filho."
+        },
+        {
+          "speaker": "narrador",
+          "text": "E os dois continuaram subindo juntos."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "Para onde Deus mandou Abraão ir?",
+              "options": [
+                "Ao monte Moriá",
+                "Ao Egito",
+                "A Babel"
+              ],
+              "answer": 0,
+              "explain": "Lá a fé de Abraão seria provada.",
+              "verse": "Gênesis 22:2"
+            },
+            {
+              "q": "O que Isaque carregava subindo o monte?",
+              "options": [
+                "A lenha",
+                "Uma ovelha",
+                "Uma espada"
+              ],
+              "answer": 0,
+              "explain": "Isaque carregou a lenha nas costas.",
+              "verse": "Gênesis 22:6"
+            },
+            {
+              "q": "O que Isaque perguntou ao pai?",
+              "options": [
+                "\"Onde está o cordeiro?\"",
+                "\"Quando vamos comer?\"",
+                "\"Por que estamos aqui?\""
+              ],
+              "answer": 0,
+              "explain": "Isaque percebeu que faltava o cordeiro.",
+              "verse": "Gênesis 22:7"
+            },
+            {
+              "q": "O que Abraão respondeu?",
+              "options": [
+                "\"Deus mesmo vai providenciar\"",
+                "\"Eu não sei\"",
+                "\"Vamos comprar um\""
+              ],
+              "answer": 0,
+              "explain": "Abraão confiou que Deus proveria.",
+              "verse": "Gênesis 22:8"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap7_s2",
+      "title": "O Senhor proverá",
+      "x": 14,
+      "y": 11,
+      "verse": "Gênesis 22:9-14",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "No alto do monte, Abraão preparou o altar. Quando ia cumprir o que Deus pediu, ouviu uma voz do céu."
+        },
+        {
+          "speaker": "deus",
+          "text": "Abraão, Abraão! Não faça nada ao menino. Agora sei que você teme a Deus, porque não me negou o seu filho."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Abraão olhou e viu um carneiro preso pelos chifres num arbusto. Deus tinha providenciado!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Abraão chamou aquele lugar de \"O Senhor proverá\"."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Muitos anos depois, Deus daria o seu próprio Filho, Jesus, por amor a nós."
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "No monte Moriá",
+          "ref": "Gênesis 22:1-14",
+          "count": 5,
+          "items": [
+            "Deus pede a Abraão que suba o monte Moriá",
+            "Isaque carrega a lenha",
+            "Isaque pergunta: \"Onde está o cordeiro?\"",
+            "O Anjo do Senhor chama: \"Abraão, Abraão!\"",
+            "Abraão vê um carneiro preso no arbusto",
+            "O lugar se chama \"O Senhor proverá\""
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap7_s3",
+      "title": "A oração no poço",
+      "x": 23,
+      "y": 6,
+      "verse": "Gênesis 24:1-21",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Isaque cresceu, e Abraão mandou seu servo mais velho buscar uma esposa para o filho, na terra dos seus parentes."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O servo chegou com dez camelos a um poço, no fim da tarde, e orou:"
+        },
+        {
+          "speaker": "narrador",
+          "text": "\"Senhor, que a moça que me der água e oferecer água também aos camelos seja a escolhida.\""
+        },
+        {
+          "speaker": "narrador",
+          "text": "Antes que ele terminasse de orar, chegou Rebeca com um cântaro no ombro. Ela deu água ao servo e correu para dar água a todos os camelos!"
+        },
+        {
+          "speaker": "rebeca",
+          "text": "Vou tirar água também para os seus camelos, até que todos bebam."
+        }
+      ],
+      "challenge": {
+        "type": "vf",
+        "config": {
+          "count": 6,
+          "seconds": 8,
+          "items": [
+            {
+              "s": "O servo de Abraão orou junto ao poço.",
+              "ok": true,
+              "ref": "Gênesis 24:12"
+            },
+            {
+              "s": "Rebeca deu água só para o servo.",
+              "ok": false,
+              "ref": "Gênesis 24:19"
+            },
+            {
+              "s": "O servo levou dez camelos.",
+              "ok": true,
+              "ref": "Gênesis 24:10"
+            },
+            {
+              "s": "Rebeca chegou antes de o servo terminar a oração.",
+              "ok": true,
+              "ref": "Gênesis 24:15"
+            },
+            {
+              "s": "Isaque foi sozinho buscar uma esposa.",
+              "ok": false,
+              "ref": "Gênesis 24:4"
+            },
+            {
+              "s": "O servo agradeceu a Deus quando viu a resposta.",
+              "ok": true,
+              "ref": "Gênesis 24:26-27"
+            },
+            {
+              "s": "Abraão viu um carneiro preso num arbusto.",
+              "ok": true,
+              "ref": "Gênesis 22:13"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap7_s4",
+      "title": "Rebeca diz \"Irei\"",
+      "x": 25,
+      "y": 15,
+      "verse": "Gênesis 24:50-67",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "O servo contou tudo à família de Rebeca, e todos viram que aquilo vinha do Senhor."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Perguntaram a Rebeca se ela queria partir com o servo."
+        },
+        {
+          "speaker": "rebeca",
+          "text": "Irei."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Rebeca viajou até Canaã. Isaque a recebeu, ela se tornou sua esposa, e Isaque amou Rebeca."
+        },
+        {
+          "speaker": "isaque",
+          "text": "Deus guiou cada passo deste caminho."
+        }
+      ],
+      "challenge": {
+        "type": "puzzle",
+        "config": {
+          "image": "puzzle.rebeca"
+        }
+      },
+      "rewards": {
+        "xp": 100
+      }
+    }
+  ]
+}

@@ -103,6 +103,12 @@
    "id": "atalaia",
    "name": "Atalaia",
    "rarity": "comum"
+  },
+  {
+   "id": "mestre_genesis",
+   "name": "Mestre de Gênesis",
+   "rarity": "lendário",
+   "hidden": true
   }
  ],
  "frames": [

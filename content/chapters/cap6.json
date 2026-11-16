@@ -1,0 +1,284 @@
+{
+  "id": "cap6",
+  "number": 6,
+  "title": "O chamado de Abraão",
+  "map": "cana",
+  "intro": "Muitos anos depois de Babel, Deus chamou um homem chamado Abrão para uma grande aventura de fé.",
+  "unlocks": [
+    "abraao",
+    "sara"
+  ],
+  "medal": "capitulo_6",
+  "npcs": [
+    {
+      "sheet": "abraao",
+      "x": 12,
+      "y": 8,
+      "dir": 0,
+      "talk": [
+        "Deus me chamou e eu vim, mesmo sem saber o caminho.",
+        "Já tentou contar as estrelas? Deus prometeu uma família assim!",
+        "Confiar em Deus é a melhor aventura."
+      ]
+    },
+    {
+      "sheet": "sara",
+      "x": 15,
+      "y": 8,
+      "dir": 0,
+      "talk": [
+        "Eu ri quando ouvi a promessa... mas Deus cumpriu!",
+        "Nada é difícil demais para o Senhor.",
+        "Quer um pão quentinho? Acabei de assar."
+      ]
+    },
+    {
+      "sheet": "lucifer",
+      "x": 3,
+      "y": 13,
+      "dir": 0,
+      "talk": [
+        "Psiu... fique onde está, é mais seguro.",
+        "E se Deus não cumprir a promessa? Melhor desistir.",
+        "Vocês são velhos demais. Esquece esse sonho!"
+      ],
+      "tempter": true,
+      "resist": {
+        "text": "Deus é fiel: o que Ele promete, Ele cumpre.",
+        "verse": "Hebreus 10:23"
+      }
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap6_s1",
+      "title": "Sai da tua terra",
+      "x": 6,
+      "y": 6,
+      "verse": "Gênesis 12:1-7",
+      "story": [
+        {
+          "speaker": "deus",
+          "text": "Abrão, saia da sua terra, deixe a casa do seu pai e vá para a terra que eu vou lhe mostrar."
+        },
+        {
+          "speaker": "deus",
+          "text": "Farei de você uma grande nação. Vou abençoar você, e por meio de você todas as famílias da Terra serão abençoadas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Abrão tinha setenta e cinco anos. Ele não sabia para onde ia, mas confiou em Deus e partiu."
+        },
+        {
+          "speaker": "abraao",
+          "text": "Sarai, vamos arrumar as tendas. Deus vai nos guiar pelo caminho."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Ao chegar a Canaã, Abrão construiu um altar e adorou ao Senhor."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "O que Deus pediu a Abrão?",
+              "options": [
+                "Que saísse da sua terra e fosse para onde Deus mostrasse",
+                "Que construísse uma torre",
+                "Que voltasse para o Éden"
+              ],
+              "answer": 0,
+              "explain": "Abrão obedeceu sem saber para onde ia.",
+              "verse": "Gênesis 12:1"
+            },
+            {
+              "q": "Quantos anos Abrão tinha quando partiu?",
+              "options": [
+                "75 anos",
+                "20 anos",
+                "120 anos"
+              ],
+              "answer": 0,
+              "explain": "Nunca é tarde para obedecer a Deus.",
+              "verse": "Gênesis 12:4"
+            },
+            {
+              "q": "Por meio de Abrão, quem seria abençoado?",
+              "options": [
+                "Todas as famílias da Terra",
+                "Só a família dele",
+                "Só os reis"
+              ],
+              "answer": 0,
+              "explain": "Dessa família viria Jesus, a bênção para o mundo todo.",
+              "verse": "Gênesis 12:3"
+            },
+            {
+              "q": "O que Abrão fez ao chegar a Canaã?",
+              "options": [
+                "Construiu um altar ao Senhor",
+                "Construiu uma cidade",
+                "Voltou para casa"
+              ],
+              "answer": 0,
+              "explain": "Onde Abrão parava, ele adorava a Deus.",
+              "verse": "Gênesis 12:7"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap6_s2",
+      "title": "Conta as estrelas",
+      "x": 14,
+      "y": 11,
+      "verse": "Gênesis 15:1-6",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Os anos passavam, e Abrão e Sarai ainda não tinham filhos."
+        },
+        {
+          "speaker": "abraao",
+          "text": "Senhor, de que vale tudo isso se eu não tenho um filho?"
+        },
+        {
+          "speaker": "deus",
+          "text": "Olhe para o céu e conte as estrelas, se puder. Assim será a sua descendência."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Abrão creu no Senhor, e Deus considerou isso como justiça."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Fé é confiar em Deus mesmo quando a gente ainda não vê como Ele vai cumprir."
+        }
+      ],
+      "challenge": {
+        "type": "versiculo",
+        "config": {
+          "count": 3,
+          "verses": [
+            {
+              "text": "Abrão creu no Senhor, e isso lhe foi creditado como justiça.",
+              "ref": "Gênesis 15:6"
+            },
+            {
+              "text": "Olhe para o céu e conte as estrelas, se puder.",
+              "ref": "Gênesis 15:5"
+            },
+            {
+              "text": "Farei de você uma grande nação e abençoarei você.",
+              "ref": "Gênesis 12:2"
+            },
+            {
+              "text": "Existe alguma coisa difícil demais para o Senhor?",
+              "ref": "Gênesis 18:14"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap6_s3",
+      "title": "Três visitantes",
+      "x": 23,
+      "y": 6,
+      "verse": "Gênesis 18:1-15",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Deus tinha mudado o nome de Abrão para Abraão, \"pai de muitos povos\", e o de Sarai para Sara."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Num dia muito quente, Abraão estava sentado na entrada da tenda, perto dos carvalhos de Manre. De repente, viu três homens em pé ali perto."
+        },
+        {
+          "speaker": "abraao",
+          "text": "Por favor, não passem sem descansar! Vou buscar água para os pés de vocês e um pouco de pão."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Abraão correu, pediu a Sara que fizesse pães e preparou uma refeição caprichada. Eram mensageiros do Senhor."
+        },
+        {
+          "speaker": "deus",
+          "text": "Daqui a um ano voltarei, e Sara, sua mulher, terá um filho."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Sara, ouvindo atrás da tenda, riu baixinho: \"Na minha idade?\""
+        },
+        {
+          "speaker": "deus",
+          "text": "Por que Sara riu? Existe alguma coisa difícil demais para o Senhor?"
+        }
+      ],
+      "challenge": {
+        "type": "memory",
+        "config": {
+          "pairs": [
+            "abraao",
+            "sara",
+            {
+              "sheet": "anjos_fieis",
+              "label": "Mensageiros"
+            },
+            "noe",
+            "peregrino",
+            "gabriel"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap6_s4",
+      "title": "O riso de Sara",
+      "x": 25,
+      "y": 15,
+      "verse": "Gênesis 21:1-7",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "O Senhor cumpriu exatamente o que tinha prometido. Sara ficou grávida e teve um filho."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Abraão tinha cem anos! E deu ao menino o nome de Isaque, que quer dizer \"ele ri\"."
+        },
+        {
+          "speaker": "sara",
+          "text": "Deus me fez rir de alegria! Todos que ouvirem esta história vão rir comigo."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O riso de dúvida virou riso de alegria. Deus sempre cumpre o que promete, no tempo dEle."
+        }
+      ],
+      "challenge": {
+        "type": "tictactoe",
+        "config": {
+          "difficulty": 0.55
+        }
+      },
+      "rewards": {
+        "xp": 100
+      }
+    }
+  ]
+}

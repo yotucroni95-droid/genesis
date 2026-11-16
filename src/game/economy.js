@@ -300,6 +300,11 @@ export function rewardStop(save, chapter, stop, result, isFirstTime) {
 
 /** A chapter finished: a guaranteed rare box (epic for the last one). */
 export function rewardChapter(save, chapter) {
+  if (chapter.finalReward) { // the end of Genesis: legendary box and a special title
+    addBox(save, chapter.finalReward.box, 'fim de Gênesis');
+    if (chapter.finalReward.title) save.update((s) => { s.titles = { ...s.titles, [chapter.finalReward.title]: new Date().toISOString() }; });
+    return chapter.finalReward.box;
+  }
   const rarity = rollUpgrade(save, chapter.number >= 4 ? 'épico' : 'raro');
   addBox(save, rarity, 'capítulo');
   return rarity;

@@ -106,6 +106,72 @@
    "color": "#f3e9b5"
   },
   {
+   "id": "abraao",
+   "name": "Abraão",
+   "playable": true,
+   "base": false,
+   "color": "#b8875a",
+   "virtue": "Fé",
+   "passage": "Gênesis 15:6",
+   "description": "Deixou sua terra sem saber para onde ia, porque confiou em Deus. É chamado de pai da fé.",
+   "unlockedIn": 6
+  },
+  {
+   "id": "sara",
+   "name": "Sara",
+   "playable": true,
+   "base": false,
+   "color": "#b58fd6",
+   "virtue": "Esperança",
+   "passage": "Gênesis 21:1-7",
+   "description": "Riu da promessa, mas viu Deus cumprir: teve Isaque já bem idosa.",
+   "unlockedIn": 6
+  },
+  {
+   "id": "isaque",
+   "name": "Isaque",
+   "playable": true,
+   "base": false,
+   "color": "#7fb2e5",
+   "virtue": "Confiança",
+   "passage": "Gênesis 22:7-8",
+   "description": "O filho da promessa. Subiu o monte com o pai e viu Deus providenciar.",
+   "unlockedIn": 7
+  },
+  {
+   "id": "rebeca",
+   "name": "Rebeca",
+   "playable": true,
+   "base": false,
+   "color": "#5fc7b8",
+   "virtue": "Bondade",
+   "passage": "Gênesis 24:18-20",
+   "description": "Deu água ao servo e a dez camelos. Disse \"Irei\" e foi ao encontro de Isaque.",
+   "unlockedIn": 7
+  },
+  {
+   "id": "jaco",
+   "name": "Jacó",
+   "playable": true,
+   "base": false,
+   "color": "#6f9a4f",
+   "virtue": "Transformação",
+   "passage": "Gênesis 32:28",
+   "description": "Fugiu, sonhou com a escada de Betel, lutou com Deus e recebeu o nome Israel.",
+   "unlockedIn": 8
+  },
+  {
+   "id": "jose",
+   "name": "José",
+   "playable": true,
+   "base": false,
+   "color": "#e0a33a",
+   "virtue": "Perdão",
+   "passage": "Gênesis 50:20",
+   "description": "Vendido pelos irmãos, foi fiel no Egito, virou governador e perdoou a todos.",
+   "unlockedIn": 9
+  },
+  {
    "id": "rute",
    "name": "Rute",
    "playable": true,

@@ -1,0 +1,290 @@
+{
+  "id": "cap5",
+  "number": 5,
+  "title": "A Torre de Babel",
+  "map": "babel",
+  "intro": "Depois do dilúvio, a família de Noé cresceu. Mas um grupo teve uma ideia orgulhosa... Descubra o que aconteceu em Babel.",
+  "unlocks": [],
+  "medal": "capitulo_5",
+  "npcs": [
+    {
+      "sheet": "povo",
+      "x": 12,
+      "y": 9,
+      "dir": 0,
+      "talk": [
+        "Mais tijolos! Mais rápido! A torre tem que subir!",
+        "Dizem que essa torre vai chegar até o céu...",
+        "Meu bisavô Noé dizia para confiar em Deus. Será que estamos certos?"
+      ],
+      "variant": 0
+    },
+    {
+      "sheet": "povo",
+      "x": 17,
+      "y": 9,
+      "dir": 0,
+      "talk": [
+        "Betume aqui, tijolo ali... que trabalheira!",
+        "Pra que se espalhar pelo mundo se aqui está tão bom?",
+        "Ei, você também veio ajudar na torre?"
+      ],
+      "variant": 1
+    },
+    {
+      "sheet": "noe",
+      "x": 4,
+      "y": 12,
+      "dir": 0,
+      "talk": [
+        "Depois do dilúvio, Deus pediu que enchêssemos a Terra.",
+        "Lembre do arco-íris: Deus cumpre o que promete.",
+        "Orgulho não leva ninguém até o céu, meu filho."
+      ]
+    },
+    {
+      "sheet": "povo",
+      "x": 21,
+      "y": 12,
+      "dir": 0,
+      "talk": [
+        "Vamos ficar famosos! Ninguém vai esquecer o nosso nome!",
+        "Pra que precisar de Deus? Nós mesmos chegamos ao céu!",
+        "Seja grande! Mostre que você é melhor que todo mundo!"
+      ],
+      "variant": 2,
+      "tempter": true,
+      "resist": {
+        "text": "Prefiro honrar o nome de Deus, não o meu.",
+        "verse": "Tiago 4:6"
+      }
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap5_s1",
+      "title": "Uma só língua",
+      "x": 6,
+      "y": 6,
+      "verse": "Gênesis 11:1-2",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Depois do dilúvio, os descendentes de Noé se multiplicaram. Todos falavam a mesma língua e usavam as mesmas palavras."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Viajando para o leste, encontraram uma grande planície na terra de Sinar e resolveram morar ali."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus tinha pedido que eles enchessem a Terra. Mas eles preferiram ficar todos juntos, num lugar só."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "Quantas línguas o povo falava antes de Babel?",
+              "options": [
+                "Uma só",
+                "Duas",
+                "Muitas"
+              ],
+              "answer": 0,
+              "explain": "Todos se entendiam perfeitamente.",
+              "verse": "Gênesis 11:1"
+            },
+            {
+              "q": "Onde o povo resolveu morar?",
+              "options": [
+                "Numa planície na terra de Sinar",
+                "No monte Ararate",
+                "No Egito"
+              ],
+              "answer": 0,
+              "explain": "Era uma planície grande, boa para construir.",
+              "verse": "Gênesis 11:2"
+            },
+            {
+              "q": "O que Deus tinha pedido à família de Noé?",
+              "options": [
+                "Que enchessem a Terra",
+                "Que construíssem uma torre",
+                "Que voltassem para o Éden"
+              ],
+              "answer": 0,
+              "explain": "Deus queria a humanidade espalhada, cuidando de toda a Terra.",
+              "verse": "Gênesis 9:1"
+            },
+            {
+              "q": "De quem descendia esse povo?",
+              "options": [
+                "Da família de Noé",
+                "De Caim",
+                "Dos anjos"
+              ],
+              "answer": 0,
+              "explain": "Todos vinham dos filhos de Noé: Sem, Cam e Jafé.",
+              "verse": "Gênesis 10:32"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap5_s2",
+      "title": "Tijolos e orgulho",
+      "x": 14,
+      "y": 11,
+      "verse": "Gênesis 11:3-4",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Eles disseram uns aos outros: \"Vamos fazer tijolos e queimá-los bem no fogo!\" Usaram tijolos no lugar de pedras e betume no lugar de massa."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Depois tiveram uma ideia ainda maior: \"Vamos construir uma cidade e uma torre que chegue até o céu.\""
+        },
+        {
+          "speaker": "narrador",
+          "text": "\"Assim vamos ficar famosos e não seremos espalhados pela Terra.\" Eles queriam fazer um nome para si mesmos, e não honrar o nome de Deus."
+        },
+        {
+          "speaker": "narrador",
+          "text": "É o mesmo orgulho que derrubou Lúcifer: querer subir sozinho, sem Deus."
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "Construindo Babel",
+          "ref": "Gênesis 11:1-4",
+          "count": 5,
+          "items": [
+            "Todos falam a mesma língua",
+            "O povo vai morar na planície de Sinar",
+            "Eles fazem tijolos e queimam no fogo",
+            "Começam a construir a cidade e a torre",
+            "Querem ficar famosos e não se espalhar"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap5_s3",
+      "title": "Deus desce para ver",
+      "x": 23,
+      "y": 6,
+      "verse": "Gênesis 11:5-7",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "O Senhor desceu para ver a cidade e a torre que estavam construindo."
+        },
+        {
+          "speaker": "deus",
+          "text": "Eles são um só povo e falam uma só língua. Se começaram a fazer isso, nada vai detê-los no que planejarem."
+        },
+        {
+          "speaker": "deus",
+          "text": "Vamos descer e confundir a língua deles, para que um não entenda o que o outro diz."
+        },
+        {
+          "speaker": "narrador",
+          "text": "A torre que deveria \"chegar ao céu\" era tão pequena diante de Deus que Ele precisou descer para vê-la!"
+        }
+      ],
+      "challenge": {
+        "type": "vf",
+        "config": {
+          "count": 6,
+          "seconds": 8,
+          "items": [
+            {
+              "s": "Deus desceu para ver a cidade e a torre.",
+              "ok": true,
+              "ref": "Gênesis 11:5"
+            },
+            {
+              "s": "O povo construiu a torre para honrar a Deus.",
+              "ok": false,
+              "ref": "Gênesis 11:4"
+            },
+            {
+              "s": "Eles usaram tijolos no lugar de pedras.",
+              "ok": true,
+              "ref": "Gênesis 11:3"
+            },
+            {
+              "s": "Deus confundiu a língua das pessoas.",
+              "ok": true,
+              "ref": "Gênesis 11:7"
+            },
+            {
+              "s": "A torre chegou de verdade até o céu.",
+              "ok": false,
+              "ref": "Gênesis 11:8"
+            },
+            {
+              "s": "O povo queria ficar famoso.",
+              "ok": true,
+              "ref": "Gênesis 11:4"
+            },
+            {
+              "s": "Deus tinha pedido que eles enchessem a Terra.",
+              "ok": true,
+              "ref": "Gênesis 9:1"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap5_s4",
+      "title": "Espalhados pela Terra",
+      "x": 25,
+      "y": 15,
+      "verse": "Gênesis 11:8-9",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "De repente, ninguém mais entendia ninguém! Um pedia tijolo e recebia água. Outro pedia betume e ganhava uma pá."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Eles pararam de construir a cidade, e o Senhor os espalhou por toda a Terra."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Por isso a cidade se chamou Babel, que lembra \"confusão\"."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus resiste aos orgulhosos, mas dá graça aos humildes. O nome que importa não é o nosso: é o nome de Deus."
+        }
+      ],
+      "challenge": {
+        "type": "puzzle",
+        "config": {
+          "image": "puzzle.babel"
+        }
+      },
+      "rewards": {
+        "xp": 100
+      }
+    }
+  ]
+}

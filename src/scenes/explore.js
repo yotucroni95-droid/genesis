@@ -16,12 +16,13 @@ export function createExploreScene(game) {
       const grid = h('div', { class: 'maps' });
       index.forEach((entry, i) => {
         const chapter = loaded[i];
-        const open = chapter && isChapterOpen(save, i, loaded);
+        const waiting = Boolean(entry.waitingMap); // story written, map still being drawn
+        const open = chapter && !waiting && isChapterOpen(save, i, loaded);
         const prog = chapter ? chapterProgress(save, chapter) : { done: 0, total: 0 };
         const done = chapter && chapterDone(save, chapter);
         const mapId = chapter ? chapter.map : null;
         let status = 'Em breve';
-        if (chapter && !open) status = 'Complete o capítulo anterior';
+        if (chapter && !open) status = waiting ? 'Em breve: o mapa está sendo desenhado' : 'Complete o capítulo anterior';
         const st = chapter ? chapter.stops.reduce((n, sp) => n + ((save.state.stars || {})[sp.id] || 0), 0) : 0;
         if (open) status = `${done ? 'Concluído ✓ · ' : `${prog.done}/${prog.total} paradas · `}⭐ ${st}/${prog.total * 3}`;
         const card = (

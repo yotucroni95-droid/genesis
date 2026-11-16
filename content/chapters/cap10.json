@@ -1,0 +1,338 @@
+{
+  "id": "cap10",
+  "number": 10,
+  "title": "José governa o Egito",
+  "map": "egito",
+  "intro": "Dois anos depois, o Faraó teve sonhos que ninguém conseguia explicar. Chegou a hora de José!",
+  "unlocks": [],
+  "medal": "capitulo_10",
+  "finalReward": {
+    "box": "lendário",
+    "title": "mestre_genesis"
+  },
+  "npcs": [
+    {
+      "sheet": "povo",
+      "x": 14,
+      "y": 5,
+      "dir": 0,
+      "talk": [
+        "Não há ninguém tão sábio como José!",
+        "Graças ao Deus de José, o Egito tem pão.",
+        "Que sonhos estranhos eu tive..."
+      ],
+      "variant": 4
+    },
+    {
+      "sheet": "jose",
+      "x": 18,
+      "y": 8,
+      "dir": 0,
+      "talk": [
+        "Deus transformou o mal em bem.",
+        "Perdoar é mais forte que se vingar.",
+        "Venham, há pão para todos!"
+      ]
+    },
+    {
+      "sheet": "jaco",
+      "x": 6,
+      "y": 9,
+      "dir": 0,
+      "talk": [
+        "Meu filho José está vivo! Que alegria!",
+        "Deus cumpriu tudo o que prometeu a Abraão."
+      ]
+    },
+    {
+      "sheet": "povo",
+      "x": 9,
+      "y": 12,
+      "dir": 0,
+      "talk": [
+        "José é meu irmão! Ele nos perdoou!",
+        "Nunca pensei que veria meu irmão de novo."
+      ],
+      "variant": 7
+    },
+    {
+      "sheet": "lucifer",
+      "x": 27,
+      "y": 14,
+      "dir": 0,
+      "talk": [
+        "Agora você tem poder: vingue-se deles!",
+        "Eles venderam você! Não perdoe nunca!",
+        "Use seu poder só para você."
+      ],
+      "tempter": true,
+      "resist": {
+        "text": "Vou perdoar, como Deus me perdoou.",
+        "verse": "Efésios 4:32"
+      }
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap10_s1",
+      "title": "Os sonhos do Faraó",
+      "x": 6,
+      "y": 6,
+      "verse": "Gênesis 41:1-40",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "O Faraó sonhou com sete vacas gordas comidas por sete vacas magras, e com sete espigas cheias engolidas por sete espigas secas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Nenhum sábio do Egito conseguiu explicar. Então o copeiro lembrou de José, e o chamaram da prisão."
+        },
+        {
+          "speaker": "jose",
+          "text": "Não sou eu quem explica, mas Deus dará ao Faraó uma resposta de paz."
+        },
+        {
+          "speaker": "jose",
+          "text": "Virão sete anos de muita fartura e, depois, sete anos de fome. Guarde comida nos anos bons."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O Faraó disse: \"Não há ninguém tão sábio como você!\" E colocou José como governador de todo o Egito."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "Com o que o Faraó sonhou?",
+              "options": [
+                "Vacas e espigas",
+                "Leões e águias",
+                "Estrelas e luas"
+              ],
+              "answer": 0,
+              "explain": "Sete gordas e sete magras; sete cheias e sete secas.",
+              "verse": "Gênesis 41:1-7"
+            },
+            {
+              "q": "Quem lembrou de José?",
+              "options": [
+                "O copeiro do Faraó",
+                "O padeiro",
+                "Potifar"
+              ],
+              "answer": 0,
+              "explain": "O copeiro tinha esquecido José por dois anos.",
+              "verse": "Gênesis 41:9-13"
+            },
+            {
+              "q": "Segundo José, quem explicava os sonhos?",
+              "options": [
+                "Deus",
+                "Os magos",
+                "O próprio José"
+              ],
+              "answer": 0,
+              "explain": "José deu toda a glória a Deus.",
+              "verse": "Gênesis 41:16"
+            },
+            {
+              "q": "O que significavam as sete vacas gordas?",
+              "options": [
+                "Sete anos de fartura",
+                "Sete reis",
+                "Sete dias de festa"
+              ],
+              "answer": 0,
+              "explain": "Depois viriam sete anos de fome.",
+              "verse": "Gênesis 41:29-30"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap10_s2",
+      "title": "Os celeiros cheios",
+      "x": 14,
+      "y": 11,
+      "verse": "Gênesis 41:46-57",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Nos sete anos de fartura, José juntou tanto trigo que parecia areia do mar. Não dava nem para contar!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Depois vieram os sete anos de fome, em todas as terras. Mas no Egito havia pão."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Gente de todos os países vinha ao Egito comprar trigo de José."
+        },
+        {
+          "speaker": "jose",
+          "text": "Deus me fez esquecer o sofrimento e me fez prosperar na terra onde eu sofri."
+        }
+      ],
+      "challenge": {
+        "type": "cacapalavras",
+        "config": {
+          "words": [
+            "JOSE",
+            "FARAO",
+            "TRIGO",
+            "EGITO",
+            "SONHO",
+            "CELEIRO",
+            "NILO",
+            "FOME"
+          ],
+          "count": 5,
+          "size": 8
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap10_s3",
+      "title": "Os irmãos se curvam",
+      "x": 23,
+      "y": 6,
+      "verse": "Gênesis 42:1-24",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "A fome chegou também a Canaã. Jacó mandou dez filhos ao Egito comprar trigo, mas deixou Benjamim em casa."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Os irmãos chegaram diante do governador e se curvaram até o chão. Não sabiam que era José!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "José os reconheceu na hora e lembrou dos seus sonhos. Ele falou duro com eles, para ver se o coração deles tinha mudado."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Os irmãos disseram uns aos outros: \"Estamos sofrendo por causa do que fizemos com nosso irmão.\" José se afastou e chorou."
+        }
+      ],
+      "challenge": {
+        "type": "tictactoe",
+        "config": {
+          "difficulty": 0.7
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap10_s4",
+      "title": "\"Eu sou José\"",
+      "x": 25,
+      "y": 15,
+      "verse": "Gênesis 44:33 – 45:15",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Na segunda viagem, Judá se ofereceu para ficar preso no lugar de Benjamim. José viu que os irmãos tinham mudado."
+        },
+        {
+          "speaker": "jose",
+          "text": "Eu sou José, o irmão de vocês, aquele que vocês venderam!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Os irmãos ficaram apavorados. Mas José falou com carinho."
+        },
+        {
+          "speaker": "jose",
+          "text": "Não fiquem tristes nem com raiva de si mesmos. Foi Deus quem me mandou na frente, para salvar muitas vidas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "José abraçou Benjamim e todos os irmãos, chorando. E a família de Jacó foi morar no Egito."
+        }
+      ],
+      "challenge": {
+        "type": "puzzle",
+        "config": {
+          "image": "puzzle.abraco"
+        }
+      },
+      "rewards": {
+        "xp": 100
+      }
+    },
+    {
+      "id": "cap10_s5",
+      "title": "Deus transformou o mal em bem",
+      "x": 9,
+      "y": 15,
+      "verse": "Gênesis 50:15-21",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Anos depois, quando Jacó morreu, os irmãos tiveram medo de que José finalmente se vingasse."
+        },
+        {
+          "speaker": "jose",
+          "text": "Não tenham medo. Por acaso estou no lugar de Deus?"
+        },
+        {
+          "speaker": "jose",
+          "text": "Vocês planejaram o mal contra mim, mas Deus transformou tudo em bem, para salvar muitas vidas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "José cuidou dos irmãos e das suas famílias. Assim termina o livro de Gênesis: com perdão, e com a certeza de que Deus cumpre as suas promessas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Parabéns, peregrino! Você caminhou pelo livro inteiro de Gênesis. Continue lendo a Bíblia: a história de Deus com a gente não acaba aqui!"
+        }
+      ],
+      "challenge": {
+        "type": "versiculo",
+        "config": {
+          "count": 3,
+          "verses": [
+            {
+              "text": "Vocês planejaram o mal contra mim, mas Deus o transformou em bem.",
+              "ref": "Gênesis 50:20"
+            },
+            {
+              "text": "O Senhor estava com José, e tudo o que ele fazia prosperava.",
+              "ref": "Gênesis 39:2"
+            },
+            {
+              "text": "Não sou eu; Deus dará ao Faraó uma resposta de paz.",
+              "ref": "Gênesis 41:16"
+            },
+            {
+              "text": "Estou com você e vou protegê-lo por onde você for.",
+              "ref": "Gênesis 28:15"
+            },
+            {
+              "text": "Sejam bondosos e perdoem uns aos outros, como Deus perdoou vocês em Cristo.",
+              "ref": "Efésios 4:32"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 120
+      }
+    }
+  ]
+}

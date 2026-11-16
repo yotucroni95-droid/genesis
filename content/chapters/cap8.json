@@ -1,0 +1,269 @@
+{
+  "id": "cap8",
+  "number": 8,
+  "title": "Jacó e Esaú",
+  "map": "betel",
+  "intro": "Isaque e Rebeca tiveram gêmeos: Esaú e Jacó. Uma história de briga, fuga, um sonho e um abraço.",
+  "unlocks": [
+    "jaco"
+  ],
+  "medal": "capitulo_8",
+  "npcs": [
+    {
+      "sheet": "povo",
+      "x": 20,
+      "y": 13,
+      "dir": 0,
+      "talk": [
+        "Eu estava com tanta fome... troquei algo precioso por um prato de comida.",
+        "Fiquei com muita raiva do meu irmão. Mas o tempo e Deus mudaram meu coração.",
+        "Já fez as pazes com alguém hoje?"
+      ],
+      "variant": 3
+    },
+    {
+      "sheet": "jaco",
+      "x": 11,
+      "y": 7,
+      "dir": 0,
+      "talk": [
+        "Deus estava comigo até quando eu fugia.",
+        "Betel quer dizer \"casa de Deus\". Que noite!",
+        "Meu novo nome é Israel!"
+      ]
+    },
+    {
+      "sheet": "rebeca",
+      "x": 5,
+      "y": 10,
+      "dir": 0,
+      "talk": [
+        "Meus meninos brigavam desde a barriga!",
+        "Que Deus traga paz para a nossa família."
+      ]
+    },
+    {
+      "sheet": "anjos_caidos",
+      "x": 26,
+      "y": 4,
+      "dir": 0,
+      "talk": [
+        "Troque o que é de Deus por algo agora. Que mal tem?",
+        "Engane só um pouquinho, ninguém vai saber.",
+        "Nunca perdoe seu irmão! Ele não merece."
+      ],
+      "variant": 0,
+      "tempter": true,
+      "resist": {
+        "text": "Prefiro a bênção de Deus a qualquer prato de comida.",
+        "verse": "Hebreus 12:16"
+      }
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap8_s1",
+      "title": "O prato de lentilhas",
+      "x": 6,
+      "y": 6,
+      "verse": "Gênesis 25:27-34; 27:41-43",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Isaque e Rebeca tiveram gêmeos. Esaú, o primeiro, era ruivo e peludo, um caçador. Jacó era tranquilo e gostava de ficar nas tendas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Um dia, Esaú chegou do campo morrendo de fome. Jacó estava cozinhando um ensopado de lentilhas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "\"Me dá um pouco desse ensopado vermelho!\", pediu Esaú. \"Primeiro me venda o seu direito de filho mais velho\", respondeu Jacó."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Esaú trocou a bênção de primogênito por um prato de comida. Ele desprezou aquilo que tinha valor para Deus."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Depois, Jacó ainda enganou o pai para receber a bênção. A família ficou dividida, e Jacó teve que fugir."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "Quem era o caçador?",
+              "options": [
+                "Esaú",
+                "Jacó",
+                "Isaque"
+              ],
+              "answer": 0,
+              "explain": "Esaú gostava do campo; Jacó, das tendas.",
+              "verse": "Gênesis 25:27"
+            },
+            {
+              "q": "O que Jacó estava cozinhando?",
+              "options": [
+                "Ensopado de lentilhas",
+                "Peixe assado",
+                "Pão de trigo"
+              ],
+              "answer": 0,
+              "explain": "Um ensopado vermelho de lentilhas.",
+              "verse": "Gênesis 25:29-34"
+            },
+            {
+              "q": "O que Esaú trocou pelo prato de comida?",
+              "options": [
+                "Seu direito de filho mais velho",
+                "Suas ovelhas",
+                "Sua casa"
+              ],
+              "answer": 0,
+              "explain": "Esaú desprezou algo precioso por uma vontade de momento.",
+              "verse": "Gênesis 25:33-34"
+            },
+            {
+              "q": "Por que Jacó precisou fugir?",
+              "options": [
+                "Esaú ficou com muita raiva dele",
+                "Veio um dilúvio",
+                "Ele se perdeu no deserto"
+              ],
+              "answer": 0,
+              "explain": "Engano sempre traz consequências.",
+              "verse": "Gênesis 27:41-43"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap8_s2",
+      "title": "A escada de Betel",
+      "x": 14,
+      "y": 11,
+      "verse": "Gênesis 28:10-22",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Fugindo, Jacó viajou sozinho. Quando o sol se pôs, pegou uma pedra como travesseiro e dormiu ao ar livre."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Ele sonhou com uma escada que ia da terra até o céu. Os anjos de Deus subiam e desciam por ela."
+        },
+        {
+          "speaker": "deus",
+          "text": "Eu sou o Senhor, o Deus de Abraão e de Isaque. Estou com você e vou protegê-lo por onde você for."
+        },
+        {
+          "speaker": "jaco",
+          "text": "O Senhor está neste lugar, e eu não sabia! Isto aqui é a casa de Deus, a porta do céu."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Jacó chamou o lugar de Betel, que quer dizer \"casa de Deus\"."
+        }
+      ],
+      "challenge": {
+        "type": "puzzle",
+        "config": {
+          "image": "puzzle.escada"
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap8_s3",
+      "title": "A luta no Jaboque",
+      "x": 23,
+      "y": 6,
+      "verse": "Gênesis 32:22-30",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Vinte anos depois, Jacó voltava para casa com sua família. Mas tinha medo: Esaú vinha ao seu encontro com quatrocentos homens."
+        },
+        {
+          "speaker": "jaco",
+          "text": "Senhor, livra-me do meu irmão. Eu não mereço todo o bem que tens feito por mim."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Naquela noite, junto ao riacho Jaboque, um homem lutou com Jacó até o amanhecer. Jacó percebeu que estava diante de Deus."
+        },
+        {
+          "speaker": "jaco",
+          "text": "Não te deixarei ir, se não me abençoares!"
+        },
+        {
+          "speaker": "deus",
+          "text": "Seu nome não será mais Jacó, mas Israel, porque você lutou com Deus e com os homens, e venceu."
+        }
+      ],
+      "challenge": {
+        "type": "tictactoe",
+        "config": {
+          "difficulty": 0.6
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap8_s4",
+      "title": "O abraço dos irmãos",
+      "x": 25,
+      "y": 15,
+      "verse": "Gênesis 33:1-4",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "De manhã, Jacó viu Esaú chegando. Ele foi na frente da família e se curvou até o chão sete vezes."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Mas Esaú correu ao encontro de Jacó, abraçou-o, beijou-o, e os dois choraram."
+        },
+        {
+          "speaker": "jaco",
+          "text": "Ver o seu rosto é como ver o rosto de Deus, porque você me recebeu bem."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus mudou o coração dos dois. O perdão é mais forte que qualquer briga."
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "A história de Jacó",
+          "ref": "Gênesis 25–33",
+          "count": 5,
+          "items": [
+            "Esaú troca o direito de primogênito por lentilhas",
+            "Jacó foge de casa",
+            "Jacó sonha com a escada em Betel",
+            "Jacó luta até o amanhecer no Jaboque",
+            "Deus muda o nome de Jacó para Israel",
+            "Esaú e Jacó se abraçam"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 100
+      }
+    }
+  ]
+}

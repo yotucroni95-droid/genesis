@@ -2109,6 +2109,495 @@
    "label": "Jesus",
    "group": "Retratos raros",
    "pending": true
+  },
+  {
+   "id": "sheet.abraao",
+   "src": "characters/abraao_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#b8875a",
+   "label": "Abraão",
+   "group": "Personagens de Gênesis (temporada 2)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.abraao",
+   "src": "portraits/abraao.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#b8875a",
+   "label": "Abraão",
+   "group": "Retratos (temporada 2)",
+   "pending": true
+  },
+  {
+   "id": "sheet.sara",
+   "src": "characters/sara_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#b58fd6",
+   "label": "Sara",
+   "group": "Personagens de Gênesis (temporada 2)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.sara",
+   "src": "portraits/sara.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#b58fd6",
+   "label": "Sara",
+   "group": "Retratos (temporada 2)",
+   "pending": true
+  },
+  {
+   "id": "sheet.isaque",
+   "src": "characters/isaque_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#7fb2e5",
+   "label": "Isaque",
+   "group": "Personagens de Gênesis (temporada 2)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.isaque",
+   "src": "portraits/isaque.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#7fb2e5",
+   "label": "Isaque",
+   "group": "Retratos (temporada 2)",
+   "pending": true
+  },
+  {
+   "id": "sheet.rebeca",
+   "src": "characters/rebeca_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#5fc7b8",
+   "label": "Rebeca",
+   "group": "Personagens de Gênesis (temporada 2)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.rebeca",
+   "src": "portraits/rebeca.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#5fc7b8",
+   "label": "Rebeca",
+   "group": "Retratos (temporada 2)",
+   "pending": true
+  },
+  {
+   "id": "sheet.jaco",
+   "src": "characters/jaco_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#6f9a4f",
+   "label": "Jacó",
+   "group": "Personagens de Gênesis (temporada 2)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.jaco",
+   "src": "portraits/jaco.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#6f9a4f",
+   "label": "Jacó",
+   "group": "Retratos (temporada 2)",
+   "pending": true
+  },
+  {
+   "id": "sheet.jose",
+   "src": "characters/jose_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#e0a33a",
+   "label": "José",
+   "group": "Personagens de Gênesis (temporada 2)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.jose",
+   "src": "portraits/jose.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#e0a33a",
+   "label": "José",
+   "group": "Retratos (temporada 2)",
+   "pending": true
+  },
+  {
+   "id": "sheet.povo",
+   "src": "characters/povo_sheet.png",
+   "kind": "sheet",
+   "frame": 48,
+   "color": "#c9a46a",
+   "label": "Personagens dos mapas (8 variações)",
+   "group": "Personagens (andando)",
+   "w": 384,
+   "h": 48,
+   "cols": 8,
+   "rows": 1,
+   "anim": {
+    "idle": [
+     0
+    ]
+   },
+   "variants": true,
+   "pending": true
+  },
+  {
+   "id": "medal.capitulo_5",
+   "src": "medals/capitulo_5.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#c08a4a",
+   "label": "Humilde de Coração",
+   "group": "Medalhas",
+   "pending": true
+  },
+  {
+   "id": "medal.capitulo_6",
+   "src": "medals/capitulo_6.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#d9b25a",
+   "label": "Amigo de Deus",
+   "group": "Medalhas",
+   "pending": true
+  },
+  {
+   "id": "medal.capitulo_7",
+   "src": "medals/capitulo_7.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#8ab06a",
+   "label": "O Senhor Proverá",
+   "group": "Medalhas",
+   "pending": true
+  },
+  {
+   "id": "medal.capitulo_8",
+   "src": "medals/capitulo_8.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#7aa0d8",
+   "label": "Casa de Deus",
+   "group": "Medalhas",
+   "pending": true
+  },
+  {
+   "id": "medal.capitulo_9",
+   "src": "medals/capitulo_9.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#d98a3a",
+   "label": "Sonhador Fiel",
+   "group": "Medalhas",
+   "pending": true
+  },
+  {
+   "id": "medal.capitulo_10",
+   "src": "medals/capitulo_10.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#ffd36e",
+   "label": "Gênesis Completo",
+   "group": "Medalhas",
+   "pending": true
+  },
+  {
+   "id": "puzzle.babel",
+   "src": "puzzles/babel.png",
+   "kind": "puzzle",
+   "w": 288,
+   "h": 192,
+   "color": "#b07a4a",
+   "label": "A Torre de Babel",
+   "group": "Imagens do quebra-cabeça",
+   "pending": true
+  },
+  {
+   "id": "puzzle.estrelas",
+   "src": "puzzles/estrelas.png",
+   "kind": "puzzle",
+   "w": 288,
+   "h": 192,
+   "color": "#30407a",
+   "label": "Abraão e as estrelas",
+   "group": "Imagens do quebra-cabeça",
+   "pending": true
+  },
+  {
+   "id": "puzzle.rebeca",
+   "src": "puzzles/rebeca.png",
+   "kind": "puzzle",
+   "w": 288,
+   "h": 192,
+   "color": "#5fa7b8",
+   "label": "Rebeca no poço",
+   "group": "Imagens do quebra-cabeça",
+   "pending": true
+  },
+  {
+   "id": "puzzle.escada",
+   "src": "puzzles/escada.png",
+   "kind": "puzzle",
+   "w": 288,
+   "h": 192,
+   "color": "#c9b26a",
+   "label": "A escada de Jacó",
+   "group": "Imagens do quebra-cabeça",
+   "pending": true
+  },
+  {
+   "id": "puzzle.tunica",
+   "src": "puzzles/tunica.png",
+   "kind": "puzzle",
+   "w": 288,
+   "h": 192,
+   "color": "#d98a3a",
+   "label": "José e a túnica",
+   "group": "Imagens do quebra-cabeça",
+   "pending": true
+  },
+  {
+   "id": "puzzle.abraco",
+   "src": "puzzles/abraco.png",
+   "kind": "puzzle",
+   "w": 288,
+   "h": 192,
+   "color": "#c06a5a",
+   "label": "José perdoa os irmãos",
+   "group": "Imagens do quebra-cabeça",
+   "pending": true
+  },
+  {
+   "id": "map.babel",
+   "src": "maps/babel.jpg",
+   "kind": "map",
+   "color": "#b08a5a",
+   "label": "Planície de Sinar",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640,
+   "pending": true
+  },
+  {
+   "id": "map.cana",
+   "src": "maps/cana.jpg",
+   "kind": "map",
+   "color": "#7aa05a",
+   "label": "Canaã (Manre)",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640,
+   "pending": true
+  },
+  {
+   "id": "map.moria",
+   "src": "maps/moria.jpg",
+   "kind": "map",
+   "color": "#9a8a6a",
+   "label": "Monte Moriá",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640,
+   "pending": true
+  },
+  {
+   "id": "map.betel",
+   "src": "maps/betel.jpg",
+   "kind": "map",
+   "color": "#6a8a7a",
+   "label": "Betel e o Jaboque",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640,
+   "pending": true
+  },
+  {
+   "id": "map.dota",
+   "src": "maps/dota.jpg",
+   "kind": "map",
+   "color": "#b0a05a",
+   "label": "Dotã e o caminho do Egito",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640,
+   "pending": true
+  },
+  {
+   "id": "map.egito",
+   "src": "maps/egito.jpg",
+   "kind": "map",
+   "color": "#d0b070",
+   "label": "Egito",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640,
+   "pending": true
+  },
+  {
+   "id": "arena.bronze",
+   "src": "arenas/bronze.jpg",
+   "kind": "ui",
+   "color": "#30305a",
+   "label": "Arena bronze",
+   "group": "Arenas",
+   "w": 960,
+   "h": 540,
+   "pending": true
+  },
+  {
+   "id": "arena.prata",
+   "src": "arenas/prata.jpg",
+   "kind": "ui",
+   "color": "#30305a",
+   "label": "Arena prata",
+   "group": "Arenas",
+   "w": 960,
+   "h": 540,
+   "pending": true
+  },
+  {
+   "id": "arena.ouro",
+   "src": "arenas/ouro.jpg",
+   "kind": "ui",
+   "color": "#30305a",
+   "label": "Arena ouro",
+   "group": "Arenas",
+   "w": 960,
+   "h": 540,
+   "pending": true
+  },
+  {
+   "id": "arena.diamante",
+   "src": "arenas/diamante.jpg",
+   "kind": "ui",
+   "color": "#30305a",
+   "label": "Arena diamante",
+   "group": "Arenas",
+   "w": 960,
+   "h": 540,
+   "pending": true
+  },
+  {
+   "id": "arena.lendario",
+   "src": "arenas/lendario.jpg",
+   "kind": "ui",
+   "color": "#30305a",
+   "label": "Arena lendario",
+   "group": "Arenas",
+   "w": 960,
+   "h": 540,
+   "pending": true
   }
  ]
 }

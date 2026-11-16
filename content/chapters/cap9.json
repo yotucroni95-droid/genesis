@@ -1,0 +1,318 @@
+{
+  "id": "cap9",
+  "number": 9,
+  "title": "José, o sonhador",
+  "map": "dota",
+  "intro": "Jacó teve doze filhos. José era o preferido... e isso trouxe muita confusão. Siga José dos campos até o Egito.",
+  "unlocks": [
+    "jose"
+  ],
+  "medal": "capitulo_9",
+  "npcs": [
+    {
+      "sheet": "jose",
+      "x": 8,
+      "y": 7,
+      "dir": 0,
+      "talk": [
+        "Mesmo longe de casa, Deus está comigo.",
+        "Fazer o certo vale a pena, mesmo quando ninguém vê.",
+        "Os sonhos pertencem a Deus."
+      ]
+    },
+    {
+      "sheet": "povo",
+      "x": 5,
+      "y": 12,
+      "dir": 0,
+      "talk": [
+        "Eu sou Rúben, o mais velho. Não quero que façam mal a José.",
+        "A inveja está estragando a nossa família..."
+      ],
+      "variant": 5
+    },
+    {
+      "sheet": "povo",
+      "x": 3,
+      "y": 9,
+      "dir": 0,
+      "talk": [
+        "Eu sou Benjamim, o caçula. Sinto falta do meu irmão José!",
+        "Meu pai ficou muito triste..."
+      ],
+      "variant": 7
+    },
+    {
+      "sheet": "povo",
+      "x": 12,
+      "y": 14,
+      "dir": 0,
+      "talk": [
+        "Ele é o preferido... ele merece sofrer!",
+        "Inveja? Que nada, é justiça!",
+        "Deixa ele lá. Ninguém precisa saber."
+      ],
+      "variant": 6,
+      "tempter": true,
+      "resist": {
+        "text": "Não vou deixar a inveja mandar em mim.",
+        "verse": "Provérbios 14:30"
+      }
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap9_s1",
+      "title": "A túnica colorida",
+      "x": 6,
+      "y": 6,
+      "verse": "Gênesis 37:1-4",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Jacó, agora chamado Israel, teve doze filhos. Ele amava José mais do que os outros, porque era o filho da sua velhice."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Jacó deu a José uma túnica longa, linda, cheia de cores."
+        },
+        {
+          "speaker": "jose",
+          "text": "Olhem minha túnica nova! Foi presente do meu pai!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Os irmãos viram que o pai amava mais a José e começaram a odiá-lo. Não conseguiam nem falar com ele com educação."
+        }
+      ],
+      "challenge": {
+        "type": "memory",
+        "config": {
+          "pairs": [
+            "jose",
+            "jaco",
+            "isaque",
+            "abraao",
+            {
+              "sheet": "povo",
+              "variant": 5,
+              "label": "Rúben"
+            },
+            {
+              "sheet": "povo",
+              "variant": 7,
+              "label": "Benjamim"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap9_s2",
+      "title": "Os sonhos de José",
+      "x": 14,
+      "y": 11,
+      "verse": "Gênesis 37:5-11",
+      "story": [
+        {
+          "speaker": "jose",
+          "text": "Escutem o sonho que eu tive! Estávamos amarrando feixes de trigo no campo. O meu feixe ficou de pé, e os feixes de vocês se curvaram diante dele."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Os irmãos ficaram furiosos: \"Você acha que vai mandar na gente?\""
+        },
+        {
+          "speaker": "jose",
+          "text": "Tive outro sonho: o sol, a lua e onze estrelas se curvavam diante de mim."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Até Jacó repreendeu José, mas guardou aquilo no coração. E os irmãos ficaram com mais inveja ainda."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "O que Jacó deu a José?",
+              "options": [
+                "Uma túnica colorida",
+                "Uma espada",
+                "Um camelo"
+              ],
+              "answer": 0,
+              "explain": "Um presente especial que despertou ciúmes.",
+              "verse": "Gênesis 37:3"
+            },
+            {
+              "q": "Quantos filhos Jacó teve?",
+              "options": [
+                "Doze",
+                "Dois",
+                "Sete"
+              ],
+              "answer": 0,
+              "explain": "Os doze filhos de Jacó deram origem às doze tribos de Israel.",
+              "verse": "Gênesis 35:22-26"
+            },
+            {
+              "q": "No sonho, o que se curvava diante do feixe de José?",
+              "options": [
+                "Os feixes dos irmãos",
+                "As árvores",
+                "Os camelos"
+              ],
+              "answer": 0,
+              "explain": "Um dia, os irmãos se curvariam de verdade.",
+              "verse": "Gênesis 37:7"
+            },
+            {
+              "q": "No segundo sonho, o que se curvava diante de José?",
+              "options": [
+                "O sol, a lua e onze estrelas",
+                "Doze leões",
+                "Uma montanha"
+              ],
+              "answer": 0,
+              "explain": "Jacó guardou esse sonho no coração.",
+              "verse": "Gênesis 37:9-11"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 80
+      }
+    },
+    {
+      "id": "cap9_s3",
+      "title": "Vendido pelos irmãos",
+      "x": 23,
+      "y": 6,
+      "verse": "Gênesis 37:12-28",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Um dia, Jacó mandou José ver como estavam os irmãos, que cuidavam dos rebanhos perto de Dotã."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Quando o viram de longe, disseram: \"Lá vem o sonhador!\" E planejaram acabar com ele."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Rúben, o mais velho, convenceu os outros a só jogar José numa cisterna seca, pensando em salvá-lo depois."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Tiraram a túnica colorida de José e o jogaram na cisterna. Quando passou uma caravana a caminho do Egito, Judá sugeriu vender o irmão."
+        },
+        {
+          "speaker": "narrador",
+          "text": "José foi vendido por vinte moedas de prata. Mas Deus continuava com ele."
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "José é vendido",
+          "ref": "Gênesis 37:12-28",
+          "count": 5,
+          "items": [
+            "Jacó manda José ver os irmãos",
+            "Os irmãos dizem: \"Lá vem o sonhador!\"",
+            "Rúben pede que não matem José",
+            "José é jogado numa cisterna seca",
+            "Passa uma caravana a caminho do Egito",
+            "José é vendido por vinte moedas de prata"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap9_s4",
+      "title": "Fiel na prisão",
+      "x": 25,
+      "y": 15,
+      "verse": "Gênesis 39:1-6, 20-23; 40:1-23",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "No Egito, José foi comprado por Potifar, um oficial do Faraó. O Senhor estava com José, e tudo o que ele fazia dava certo."
+        },
+        {
+          "speaker": "narrador",
+          "text": "José foi acusado injustamente de algo que não fez e acabou na prisão. Mesmo assim, não ficou amargurado."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O Senhor continuou com José, e o carcereiro deixou a prisão inteira aos cuidados dele."
+        },
+        {
+          "speaker": "jose",
+          "text": "As explicações dos sonhos pertencem a Deus. Contem para mim o que vocês sonharam."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Na prisão, José explicou os sonhos do copeiro e do padeiro do Faraó, e tudo aconteceu como ele disse."
+        }
+      ],
+      "challenge": {
+        "type": "vf",
+        "config": {
+          "count": 6,
+          "seconds": 8,
+          "items": [
+            {
+              "s": "O Senhor estava com José no Egito.",
+              "ok": true,
+              "ref": "Gênesis 39:2"
+            },
+            {
+              "s": "José ficou amargurado e desistiu de Deus na prisão.",
+              "ok": false,
+              "ref": "Gênesis 39:21-23"
+            },
+            {
+              "s": "Potifar era um oficial do Faraó.",
+              "ok": true,
+              "ref": "Gênesis 39:1"
+            },
+            {
+              "s": "José disse que a explicação dos sonhos pertence a Deus.",
+              "ok": true,
+              "ref": "Gênesis 40:8"
+            },
+            {
+              "s": "José foi vendido por cem moedas de ouro.",
+              "ok": false,
+              "ref": "Gênesis 37:28"
+            },
+            {
+              "s": "Rúben quis salvar José.",
+              "ok": true,
+              "ref": "Gênesis 37:21-22"
+            },
+            {
+              "s": "O carcereiro confiou a prisão aos cuidados de José.",
+              "ok": true,
+              "ref": "Gênesis 39:22"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 100
+      }
+    }
+  ]
+}
