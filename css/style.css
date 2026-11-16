@@ -1061,3 +1061,8 @@ button { touch-action: manipulation; }
 .boxcard .btn { display: inline-flex; align-items: center; justify-content: center; }
 /* every tappable thing: no double-tap zoom delay, no text selection, no grey flash */
 button, .btn, [role="button"], .boxcard, .map-card, .lobby__btn { touch-action: manipulation; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
+/* lobby top bar: on small phones the rank shrinks first, the sound and share buttons always stay on screen */
+.lobby__top { min-width: 0; }
+.lobby__top > * { flex-shrink: 0; }
+.lobby__top .lobby__rank, .lobby__top .lobby__me { flex: 0 1 auto; min-width: 0; overflow: hidden; }
+@media (max-width: 780px) { .lobby__top { gap: 8px; } .lobby__top .rankbar { display: none; } .lobby__top .currency { gap: 6px; } }
