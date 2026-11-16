@@ -3,7 +3,8 @@
 const NEAR = 30; // pixels: how close the player must be to enter
 
 export class Stops {
-  constructor(chapter, map, assets, save) {
+  constructor(chapter, map, assets, save, { hero = false } = {}) {
+    this.hero = hero; // Modo Herói: red lights until beaten as a hero
     this.assets = assets;
     this.save = save;
     this.marker = assets.entry('ui.stop_marker');
@@ -43,14 +44,15 @@ export class Stops {
   /** Things drawn on the ground (under characters). */
   drawGround(ctx) {
     for (const s of this.stops) {
-      const done = this.save.isStopDone(s.id);
+      const key = this.hero ? `${s.id}#heroi` : s.id;
+      const done = this.hero ? Boolean((this.save.state.stars || {})[key]) : this.save.isStopDone(s.id);
       const pulse = 0.5 + 0.5 * Math.sin(this.time * 3 + s.x);
       // light pillar
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
       const r = done ? 14 : 20 + pulse * 6;
       const g = ctx.createRadialGradient(s.px, s.py, 0, s.px, s.py, r);
-      const col = done ? '124,240,166' : '255,214,110';
+      const col = done ? '124,240,166' : this.hero ? '255,90,70' : '255,214,110';
       g.addColorStop(0, `rgba(${col},${done ? 0.35 : 0.75})`);
       g.addColorStop(1, `rgba(${col},0)`);
       ctx.fillStyle = g;
@@ -60,7 +62,7 @@ export class Stops {
         ctx.fillRect(Math.round(s.px - 2), Math.round(s.py - 34 - pulse * 4), 4, 30);
       }
       ctx.restore();
-      const st = done ? ((this.save.state.stars || {})[s.id] || 0) : 0;
+      const st = done ? ((this.save.state.stars || {})[key] || 0) : 0;
       for (let k = 0; k < 3; k++) {
         if (!done) break;
         ctx.fillStyle = k < st ? '#ffd36e' : 'rgba(255,255,255,.25)';

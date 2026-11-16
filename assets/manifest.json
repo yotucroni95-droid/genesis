@@ -1353,6 +1353,762 @@
    "color": "#ffd36e",
    "label": "Moldura Luz Divina",
    "group": "Molduras do perfil (128×128)"
+  },
+  {
+   "id": "sheet.rute",
+   "src": "characters/rute_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#e8c25a",
+   "label": "Rute",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.rute",
+   "src": "portraits/rute.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#e8c25a",
+   "label": "Rute",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.jonas",
+   "src": "characters/jonas_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#3a5f9e",
+   "label": "Jonas",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.jonas",
+   "src": "portraits/jonas.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#3a5f9e",
+   "label": "Jonas",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.marta",
+   "src": "characters/marta_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#9b3b4f",
+   "label": "Marta",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.marta",
+   "src": "portraits/marta.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#9b3b4f",
+   "label": "Marta",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.gideao",
+   "src": "characters/gideao_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#9a6b3c",
+   "label": "Gideão",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.gideao",
+   "src": "portraits/gideao.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#9a6b3c",
+   "label": "Gideão",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.zaqueu",
+   "src": "characters/zaqueu_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#3f9a4f",
+   "label": "Zaqueu",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.zaqueu",
+   "src": "portraits/zaqueu.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#3f9a4f",
+   "label": "Zaqueu",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.timoteo",
+   "src": "characters/timoteo_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#4f7fd0",
+   "label": "Timóteo",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.timoteo",
+   "src": "portraits/timoteo.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#4f7fd0",
+   "label": "Timóteo",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.sansao",
+   "src": "characters/sansao_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#a0522d",
+   "label": "Sansão",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.sansao",
+   "src": "portraits/sansao.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#a0522d",
+   "label": "Sansão",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.ester",
+   "src": "characters/ester_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#8a3fc0",
+   "label": "Ester",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.ester",
+   "src": "portraits/ester.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#8a3fc0",
+   "label": "Ester",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.elias",
+   "src": "characters/elias_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#7a5230",
+   "label": "Elias",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.elias",
+   "src": "portraits/elias.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#7a5230",
+   "label": "Elias",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.pedro",
+   "src": "characters/pedro_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#d0742c",
+   "label": "Pedro",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.pedro",
+   "src": "portraits/pedro.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#d0742c",
+   "label": "Pedro",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.debora",
+   "src": "characters/debora_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#6b8e23",
+   "label": "Débora",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.debora",
+   "src": "portraits/debora.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#6b8e23",
+   "label": "Débora",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.moises",
+   "src": "characters/moises_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#c0392b",
+   "label": "Moisés",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.moises",
+   "src": "portraits/moises.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#c0392b",
+   "label": "Moisés",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.davi",
+   "src": "characters/davi_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#d9632b",
+   "label": "Davi",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.davi",
+   "src": "portraits/davi.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#d9632b",
+   "label": "Davi",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.daniel",
+   "src": "characters/daniel_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#2d5fb3",
+   "label": "Daniel",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.daniel",
+   "src": "portraits/daniel.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#2d5fb3",
+   "label": "Daniel",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.josue",
+   "src": "characters/josue_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#b08d3c",
+   "label": "Josué",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.josue",
+   "src": "portraits/josue.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#b08d3c",
+   "label": "Josué",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.samuel",
+   "src": "characters/samuel_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#e8e4d0",
+   "label": "Samuel",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.samuel",
+   "src": "portraits/samuel.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#e8e4d0",
+   "label": "Samuel",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.paulo",
+   "src": "characters/paulo_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#8b1e2e",
+   "label": "Paulo",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.paulo",
+   "src": "portraits/paulo.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#8b1e2e",
+   "label": "Paulo",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.joao_batista",
+   "src": "characters/joao_batista_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#8d6e4f",
+   "label": "João Batista",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.joao_batista",
+   "src": "portraits/joao_batista.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#8d6e4f",
+   "label": "João Batista",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.salomao",
+   "src": "characters/salomao_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#7b3fa0",
+   "label": "Salomão",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.salomao",
+   "src": "portraits/salomao.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#7b3fa0",
+   "label": "Salomão",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.maria",
+   "src": "characters/maria_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#3c6fc8",
+   "label": "Maria",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.maria",
+   "src": "portraits/maria.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#3c6fc8",
+   "label": "Maria",
+   "group": "Retratos raros",
+   "pending": true
+  },
+  {
+   "id": "sheet.jesus",
+   "src": "characters/jesus_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#fff1b8",
+   "label": "Jesus",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   },
+   "pending": true
+  },
+  {
+   "id": "portrait.jesus",
+   "src": "portraits/jesus.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#fff1b8",
+   "label": "Jesus",
+   "group": "Retratos raros",
+   "pending": true
   }
  ]
 }

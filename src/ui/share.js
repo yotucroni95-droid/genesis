@@ -16,7 +16,8 @@ function roundRect(ctx, x, y, w, h, r) {
   ctx.closePath();
 }
 
-export async function shareCard(game, { headline } = {}) {
+export async function shareCard(game, { headline, link = '' } = {}) {
+  const url = GAME_URL + link;
   const s = game.save.state;
   const rank = rankFor(s.trophies || 0);
   const W = 1080;
@@ -58,14 +59,14 @@ export async function shareCard(game, { headline } = {}) {
   ctx.fillText(`Patente ${rank.name}`, W / 2, 860);
   ctx.fillStyle = '#ffffff';
   ctx.font = '40px "Pixelify Sans", sans-serif';
-  ctx.fillText(`🏆 ${s.trophies || 0}   ⭐ ${totalStars(game.save)}   ⚡ ${s.arenaBest || 0}   🧑 ${Object.keys(s.unlocked).length}/7`, W / 2, 930);
+  ctx.fillText(`🏆 ${s.trophies || 0}   ⭐ ${totalStars(game.save)}   ⚡ ${s.arenaBest || 0}   🧑 ${Object.keys(s.unlocked).length}`, W / 2, 930);
   ctx.fillStyle = '#a9b0d6';
   ctx.font = '34px "Pixelify Sans", sans-serif';
   ctx.fillText(headline || 'Consegue me alcançar? Jogue o Gênesis!', W / 2, 1000);
   ctx.font = '28px sans-serif';
   ctx.fillText(GAME_URL.replace('https://', ''), W / 2, 1050);
 
-  const text = `${headline || 'Estou jogando o Gênesis!'} Cheguei na patente ${rank.name} com ${s.trophies || 0} troféus 🏆. Consegue me alcançar? ${GAME_URL}`;
+  const text = `${headline || 'Estou jogando o Gênesis!'} Cheguei na patente ${rank.name} com ${s.trophies || 0} troféus 🏆. ${link ? 'Aceita o desafio? Toque no link e responda as mesmas perguntas:' : 'Consegue me alcançar?'} ${url}`;
   const blob = await new Promise((r) => c.toBlob(r, 'image/png'));
   const file = blob && new File([blob], 'genesis.png', { type: 'image/png' });
   try {
@@ -73,7 +74,7 @@ export async function shareCard(game, { headline } = {}) {
       await navigator.share({ files: [file], text, title: 'Gênesis' });
       return;
     }
-    if (navigator.share) { await navigator.share({ text, title: 'Gênesis', url: GAME_URL }); return; }
+    if (navigator.share) { await navigator.share({ text, title: 'Gênesis' }); return; }
   } catch (e) {
     if (e && e.name === 'AbortError') return; // the player closed the menu
   }

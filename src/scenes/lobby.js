@@ -9,6 +9,7 @@ import { startDay, pendingMissions, freeBoxReadyIn } from '../game/economy.js';
 import { muteButton } from '../ui/mute-button.js';
 import { shareCard } from '../ui/share.js';
 import { dailyDone } from './daily.js';
+import { pendingWeekly, pendingPass, pass } from '../game/meta.js';
 
 let greeted = false;
 
@@ -28,8 +29,8 @@ export function createLobbyScene(game) {
       if (!greeted) {
         greeted = true;
         for (const e of events) {
-          if (e.type === 'streak') toast(`🔥 ${e.count} ${e.count === 1 ? 'dia' : 'dias'} seguidos! +${e.coins} talentos`, { ms: 3500 });
-          if (e.type === 'box') setTimeout(() => toast('🎁 7 dias seguidos: você ganhou um baú Épico!', { ms: 3500 }), 1200);
+          if (e.type === 'oilUsed') toast(`🫙 Você ficou ${e.missed} ${e.missed === 1 ? 'dia' : 'dias'} sem jogar, mas o azeite manteve sua lamparina acesa (${e.count} dias)!`, { ms: 5000 });
+          if (e.type === 'lampOut') toast(`Sua lamparina de ${e.was} ${e.was === 1 ? 'dia' : 'dias'} apagou... Jogue hoje para acender de novo! 🪔`, { ms: 5000 });
         }
       }
       const s = save.state;
@@ -58,7 +59,7 @@ export function createLobbyScene(game) {
             ),
           ),
           h('button', { class: 'lobby__rank', onClick: go('profile') }, rankBadge(s.trophies || 0), rankProgress(s.trophies || 0)),
-          currencyBar(game, { onCoins: go('shop') }),
+          currencyBar(game, { onCoins: go('shop'), onLamp: go('missions') }),
           h('button', { class: 'btn btn--ghost btn--icon', title: 'Compartilhar no WhatsApp', 'aria-label': 'Compartilhar no WhatsApp', onClick: () => shareCard(game) }, ico('icon.whatsapp', '📲')),
           muteButton(),
         ),
@@ -70,7 +71,8 @@ export function createLobbyScene(game) {
         ),
         stage,
         h('div', { class: 'lobby__right' },
-          side(ico('icon.missoes', '📅', 'lobby__icon'), 'Missões', go('missions'), pendingMissions(save)),
+          side(ico('icon.passe', '🎖️', 'lobby__icon'), 'Passe da Fé', go('pass'), pendingPass(save), h('small', { class: 'lobby__free lobby__pass', text: `Nível ${pass(save).level}` })),
+          side(ico('icon.missoes', '📅', 'lobby__icon'), 'Missões', go('missions'), pendingMissions(save) + pendingWeekly(save)),
           side(ico('icon.baus', '🎁', 'lobby__icon'), 'Baús', go('boxes'), boxesCount, freeLabel),
           side(ico('icon.loja', '🛒', 'lobby__icon'), 'Loja', go('shop')),
         ),
@@ -86,9 +88,22 @@ export function createLobbyScene(game) {
       if ((s.boxes || []).length) {
         const preview = chest(s.boxes[s.boxes.length - 1].rarity, { size: 34 });
         preview.classList.add('lobby__chestpeek');
-        ui.querySelector('.lobby__right .lobby__btn:nth-child(2)').appendChild(preview);
+        ui.querySelector('.lobby__right .lobby__btn:nth-child(3)').appendChild(preview);
       }
-      if (!save.seenTip('lobby')) {
+      if (game.duel) {
+        const duel = game.duel;
+        game.duel = null;
+        const modal = h('div', { class: 'modal' }, h('div', { class: 'modal__box duel' },
+          ico('icon.desafio', '🥊', 'duel__ico'),
+          h('h2', { text: `@${duel.nick} te desafiou!` }),
+          h('p', { text: `Fez ${duel.score} pontos na Arena. Você responde as mesmas perguntas. Consegue bater?` }),
+          h('div', { style: { display: 'flex', gap: '10px', justifyContent: 'center' } },
+            h('button', { class: 'btn btn--play', onClick: () => game.scenes.go('arena', { duel }) }, h('b', { text: 'ACEITAR' })),
+            h('button', { class: 'btn btn--ghost', text: 'Agora não', onClick: () => modal.remove() }),
+          ),
+        ));
+        ui.appendChild(modal);
+      } else if (!save.seenTip('lobby')) {
         save.markTip('lobby');
         setTimeout(() => toast('Toque em JOGAR para começar a jornada. Ganhe estrelas, talentos e baús!', { ms: 5000 }), 600);
       }

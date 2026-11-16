@@ -17,6 +17,25 @@ function rewardView(game, it) {
       h('b', { class: 'verse-card__ref', text: it.card.ref }),
     );
   }
+  if (it.type === 'denarios') return h('div', { class: 'loot loot--coins' }, ico('icon.denario', '🥈', 'loot__ico'), h('b', { text: `+${it.amount}` }), h('small', { text: 'denários' }));
+  if (it.type === 'jesus') {
+    return h('div', { class: 'loot loot--jesus', style: { '--r': '#fff1b8' } },
+      h('span', { class: 'loot__new', text: 'ÚNICO!' }),
+      h('img', { class: 'pixel loot__face', src: game.assets.url('portrait.jesus'), alt: '' }),
+      h('b', { text: 'JESUS' }), h('small', { text: 'O personagem mais raro do jogo!' }));
+  }
+  if (it.type === 'fragments') {
+    const c = it.character;
+    return h('div', { class: 'loot', style: { '--r': RARITY_COLOR[c.rarity] } },
+      it.unlocked ? h('span', { class: 'loot__new', text: 'LIBERADO!' }) : null,
+      h('img', { class: 'pixel loot__face', src: game.assets.url(`portrait.${c.id}`), alt: '' }),
+      h('b', { text: `+${it.amount} 🧩 ${c.name}` }),
+      h('small', { text: it.unlocked ? 'Personagem liberado!' : it.converted ? `Já tinha: +${it.converted} denários` : `${it.have}/10 fragmentos · ${RARITY_LABEL[c.rarity]}` }));
+  }
+  if (it.type === 'trail') {
+    return h('div', { class: 'loot', style: { '--r': RARITY_COLOR[it.item.rarity] } },
+      h('span', { class: 'offer__trail', style: { '--c': it.item.color } }, '✦ ✦ ✦'), h('small', { text: 'Novo rastro' }), h('b', { text: it.item.name }));
+  }
   const label = it.type === 'title' ? 'Novo título' : 'Nova moldura';
   return h('div', { class: 'loot', style: { '--r': RARITY_COLOR[it.item.rarity] } },
     it.type === 'frame' ? frameView(it.item.id, 84, game.assets.url(`portrait.${game.save.state.avatarId}`)) : ico('icon.titulo', '🏷️', 'loot__ico'),

@@ -6,12 +6,13 @@ import { getChallenge } from '../challenges/index.js';
 import { completeStop } from '../content/progression.js';
 import { findStop } from './story.js';
 import { Starfield } from './starfield.js';
-import { rewardStop, rewardChapter, RARITY_LABEL } from '../game/economy.js';
+import { rewardStop, rewardChapter, RARITY_LABEL, addBox, heroKey } from '../game/economy.js';
+import { planChallenge, countPlay, TITLES, NEW_GAMES } from '../game/variety.js';
+import { grantCosmetic } from '../game/meta.js';
 import { vibrate, rankBadge, ico, hasArt } from '../ui/game-ui.js';
 import { celebrate } from '../ui/celebrate.js';
 import { sfx } from '../audio/audio.js';
 
-const TITLES = { quiz: 'Quiz', memory: 'Jogo da memória', tictactoe: 'Jogo da velha', puzzle: 'Quebra-cabeça' };
 
 export function createChallengeScene(game) {
   const stars = new Starfield(70);
@@ -19,31 +20,45 @@ export function createChallengeScene(game) {
     async enter(params, ui) {
       this.params = params;
       const { chapter, stop } = await findStop(game, params.chapterId, params.stopId);
+      const plan = await planChallenge(game, chapter, stop, { hero: params.hero });
+      this.plan = plan;
       const back = () => game.scenes.go('world', params.back);
       const area = h('div', { class: 'challenge__area' });
       ui.appendChild(h('section', { class: 'screen challenge' },
         h('header', { class: 'screen__head' },
           iconButton(game.assets, 'icon.voltar', 'Voltar ao mapa', back, '←'),
-          h('h1', { text: `${TITLES[stop.challenge.type] || 'Desafio'} · ${stop.title}` }),
+          h('h1', { text: `${params.hero ? '⚔️ Herói · ' : ''}${TITLES[plan.type] || 'Desafio'} · ${stop.title}` }),
         ),
         h('div', { class: 'screen__body' }, area),
       ));
 
       // Do not wait here: the scene must finish entering so buttons (like
       // "Voltar") keep working while the challenge is being played.
-      getChallenge(stop.challenge.type)
-        .start(stop.challenge.config || {}, { root: area, assets: game.assets, verse: stop.verse, sfx })
+      getChallenge(plan.type)
+        .start(plan.config || {}, { root: area, assets: game.assets, verse: stop.verse, sfx })
         .then((result) => this.finish(result, { chapter, stop, area, back }));
     },
 
     finish(result, { chapter, stop, area, back }) {
       if (game.scenes.currentName !== 'challenge') return; // player already left
       if (!result.success) { back(); return; }
+      const hero = Boolean(this.params.hero);
+      Object.assign(result, { hero, type: this.plan.type, newGame: NEW_GAMES.includes(this.plan.type) });
+      countPlay(game.save, stop.id);
 
-      const wasDone = game.save.isStopDone(stop.id);
-      const events = completeStop(game.save, chapter, stop, result.score);
+      const wasDone = hero ? true : game.save.isStopDone(stop.id);
+      const events = hero ? [] : completeStop(game.save, chapter, stop, result.score);
       const loot = rewardStop(game.save, chapter, stop, result, !wasDone);
       const chapterBox = events.some((e) => e.type === 'chapter') ? rewardChapter(game.save, chapter) : null;
+      // Modo Herói: every stop of the chapter beaten = epic box + title (once)
+      let heroChapter = false;
+      if (hero && !(game.save.state.heroDone || {})[chapter.id] && chapter.stops.every((sp) => (game.save.state.stars || {})[heroKey(sp.id)])) {
+        game.save.update((st) => { st.heroDone = { ...(st.heroDone || {}), [chapter.id]: new Date().toISOString() }; });
+        addBox(game.save, 'épico', 'Modo Herói');
+        grantCosmetic(game.save, 'titles', 'heroi');
+        heroChapter = true;
+        setTimeout(() => celebrate({ title: 'Herói do capítulo!', subtitle: `Você venceu o Modo Herói de "${chapter.title}". Ganhou um baú Épico e o título Herói de Gênesis!`, image: game.assets.url(`medal.${chapter.medal}`) }), 1800);
+      }
       const starInfo = loot.find((x) => x.type === 'stars');
       vibrate(starInfo.stars === 3 ? [60, 40, 60, 40, 120] : 80);
       [0, 1, 2].slice(0, starInfo.stars).forEach((k) => setTimeout(() => sfx('star'), 300 + k * 250));
@@ -63,6 +78,7 @@ export function createChallengeScene(game) {
       const items = [];
       for (const x of loot) {
         if (x.type === 'coins') items.push(h('div', { class: 'reward' }, ico('icon.moeda', '🪙'), h('span', { text: `+${x.amount} talentos` })));
+        if (x.type === 'denarios') items.push(h('div', { class: 'reward' }, ico('icon.denario', '🥈'), h('span', { text: `+${x.amount} denários` })));
         if (x.type === 'trophies') items.push(h('div', { class: 'reward' }, ico('icon.trofeu', '🏆'), h('span', { text: `+${x.amount} troféus` })));
         if (x.type === 'rank') items.push(h('div', { class: 'reward reward--big' }, ico('icon.subir', '⬆️'), h('span', { text: `Nova patente: ${x.rank.name}! Ganhou um baú.` })));
       }
@@ -85,12 +101,12 @@ export function createChallengeScene(game) {
           return el;
         })),
         starInfo.stars < 3 ? h('small', { class: 'screen__note', text: 'Jogue de novo para tentar 3 estrelas!' }) : null,
-        h('h2', { class: 'quiz__q', text: chapterDone ? `Capítulo ${chapter.number} concluído!` : wasDone ? 'Você jogou de novo!' : 'Parada concluída!' }),
+        h('h2', { class: 'quiz__q', text: heroChapter ? 'HERÓI DO CAPÍTULO! ⚔️' : chapterDone ? `Capítulo ${chapter.number} concluído!` : hero ? 'Desafio de herói vencido! ⚔️' : wasDone ? 'Você jogou de novo!' : 'Parada concluída!' }),
         h('p', { class: 'screen__note', text: `Não esqueça de ler ${stop.verse} na sua Bíblia.` }),
         h('div', { class: 'rewards' }, ...items),
         h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' } },
           h('button', { class: 'btn', text: chapterDone ? 'Ver capítulos' : 'Voltar ao mapa', onClick: () => (chapterDone ? game.scenes.go('explore') : back()) }),
-          starInfo.stars < 3 ? h('button', { class: 'btn btn--ghost', text: 'Tentar de novo', onClick: () => game.scenes.go('challenge', this.params) }) : null,
+          h('button', { class: 'btn btn--ghost', text: starInfo.stars < 3 ? 'Tentar de novo' : 'Jogar outro desafio', onClick: () => game.scenes.go('challenge', this.params) }),
         ),
       ));
     },

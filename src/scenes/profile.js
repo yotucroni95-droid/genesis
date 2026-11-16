@@ -16,20 +16,23 @@ export function createProfileScene(game) {
       const save = game.save;
       const s = save.state;
       const totalStops = 17;
+      const slot = { titles: 'title', frames: 'frame', trails: 'trail' };
       const stat = (label, value) => h('div', { class: 'stat' }, h('b', { text: String(value) }), h('small', { text: label }));
       const picker = (kind, list) => h('div', { class: 'picker' }, ...list.map((c) => {
-        const owned = s[kind][c.id];
-        const on = s.equipped[kind === 'titles' ? 'title' : 'frame'] === c.id;
+        const owned = (s[kind] || {})[c.id];
+        const on = (s.equipped[slot[kind]] || 'nenhum') === c.id;
         return h('button', {
           class: `pick${on ? ' is-on' : ''}${owned ? '' : ' is-locked'}`,
           style: { '--r': RARITY_COLOR[c.rarity] },
           onClick: () => {
-            if (!owned) { toast('Encontre em baús para liberar!'); return; }
-            save.update((st) => { st.equipped = { ...st.equipped, [kind === 'titles' ? 'title' : 'frame']: c.id }; });
+            if (!owned) { toast(c.hidden ? 'Prêmio especial: lamparina, Passe da Fé ou Modo Herói.' : 'Encontre em baús ou na Loja!'); return; }
+            save.update((st) => { st.equipped = { ...st.equipped, [slot[kind]]: c.id }; });
             game.scenes.go('profile');
           },
         },
-        kind === 'frames' ? frameView(c.id, 48, game.assets.url(`portrait.${s.avatarId}`)) : ico('icon.titulo', '🏷️'),
+        kind === 'frames' ? frameView(c.id, 48, game.assets.url(`portrait.${s.avatarId}`))
+          : kind === 'trails' ? h('span', { class: 'offer__trail', style: { '--c': c.color || '#555' } }, c.color ? '✦✦✦' : '—')
+            : ico('icon.titulo', '🏷️'),
         h('span', { text: owned ? c.name : '???' }));
       }));
       ui.appendChild(gameScreen(game, 'Perfil', h('div', { class: 'profile-page' },
@@ -47,11 +50,12 @@ export function createProfileScene(game) {
         ),
         h('div', { class: 'stats' },
           stat('Nível', s.level), stat('Troféus', s.trophies || 0), stat('Estrelas', `${totalStars(save)}/${totalStops * 3}`),
-          stat('Talentos', s.coins || 0), stat('Recorde Arena', s.arenaBest || 0), stat('Dias seguidos', s.streak.count || 0),
+          stat('Talentos', s.coins || 0), stat('Recorde Arena', s.arenaBest || 0), stat('Lamparina', `${(s.lamp || s.streak).count || 0} dias`), stat('Denários', s.denarios || 0),
           stat('Cartas', `${Object.keys(s.verses || {}).length}/${game.extras.verses.length}`), stat('Personagens', Object.keys(s.unlocked).length),
         ),
         h('h3', { text: 'Títulos' }), picker('titles', game.extras.cosmetics.titles),
         h('h3', { text: 'Molduras' }), picker('frames', game.extras.cosmetics.frames),
+        h('h3', { text: 'Rastro ao andar no mapa' }), picker('trails', game.extras.cosmetics.trails || []),
         h('h3', { text: 'Patentes' }),
         h('div', { class: 'ranks' }, ...RANKS.map((r) => h('div', { class: `ranks__item${(s.trophies || 0) >= r.min ? ' is-on' : ''}` }, rankBadge(r.min), h('small', { text: `${r.min} 🏆` })))),
         h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '12px' } },

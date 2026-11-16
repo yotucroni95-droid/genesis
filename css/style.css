@@ -941,3 +941,106 @@ button.chip { cursor: pointer; touch-action: manipulation; }
 .reward .ico { width: 32px; height: 32px; }
 
 button { touch-action: manipulation; }
+
+/* ---------- Temporada 2: molduras novas (enquanto a arte não chega) ---------- */
+.frame--oliveira { background: linear-gradient(135deg, #a8c66c, #4f6b2a); }
+.frame--trigo { background: linear-gradient(135deg, #ffe7a0, #d9a63c); }
+.frame--mar_vermelho { background: linear-gradient(180deg, #8fd3ff, #1f5fbf, #8fd3ff); box-shadow: 0 0 12px rgba(80,160,255,.7); }
+.frame--harpa { background: repeating-linear-gradient(90deg, #ffd36e 0 3px, #8a5a1e 3px 7px); }
+.frame--peitoral { background: conic-gradient(#ff6b6b, #ffd36e, #7cf0a6, #6fe7ff, #b56dff, #ff6b6b); box-shadow: 0 0 14px rgba(255,211,110,.8); }
+.frame--estrela_belem { background: radial-gradient(circle at 50% 0%, #fffbe6, #6fa0ff 45%, #141d55); box-shadow: 0 0 16px rgba(160,200,255,.9); animation: glow 2s ease-in-out infinite; }
+.frame--salomao { background: linear-gradient(135deg, #ffe39a, #e39b2d 40%, #6a2fb0); box-shadow: 0 0 14px rgba(255,211,110,.8); }
+.frame--luz_celestial { background: radial-gradient(circle, #ffffff, #fff3c4 55%, #ffd36e); box-shadow: 0 0 24px rgba(255,255,255,.95); animation: glow 1.6s ease-in-out infinite; }
+.chip--den { border-color: #c6d2e0; }
+.chip--lamp { border-color: #ffb347; }
+.chip--lamp.is-waiting { border-color: #5a5f7a; opacity: .85; animation: lamp-wait 1.6s ease-in-out infinite; }
+.chip--lamp1 { box-shadow: 0 0 10px rgba(255,179,71,.6); }
+.chip--lamp2 { border-color: #6fb8ff; box-shadow: 0 0 12px rgba(111,184,255,.7); }
+.chip--lamp3 { border-color: #fff; box-shadow: 0 0 14px rgba(255,255,255,.85); }
+@keyframes lamp-wait { 50% { transform: scale(1.06); } }
+@media (max-height: 420px) { .lobby__top .chip--trophy { display: none; } }
+.lobby__pass { color: var(--gold); }
+/* Passe da Fé */
+.pass__head { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border: 2px solid var(--gold-deep); border-radius: 16px; background: linear-gradient(90deg, rgba(120,60,10,.5), rgba(14,20,51,.9)); }
+.pass__badge { width: 48px; height: 48px; font-size: 38px; }
+.pass__info { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.pass__info b { color: var(--gold); }
+.pass__info small { color: var(--ink-dim); }
+.pass { display: flex; gap: 8px; overflow-x: auto; padding: 10px 2px 14px; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; touch-action: pan-x; }
+.pass__lvl { flex: 0 0 104px; scroll-snap-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 6px; border: 2px solid var(--panel-edge); border-radius: 14px; background: rgba(7,10,28,.8); opacity: .65; text-align: center; }
+.pass__lvl small { font-size: 11px; color: var(--ink-dim); min-height: 28px; }
+.pass__lvl.is-on { opacity: 1; border-color: var(--gold); }
+.pass__lvl.is-claimed { opacity: .55; border-color: var(--ok); }
+.pass__lvl.is-big { background: linear-gradient(180deg, rgba(120,70,10,.6), rgba(7,10,28,.9)); }
+.pass__num { font-size: 18px; color: var(--gold); }
+.pass__icon { height: 46px; display: flex; align-items: center; justify-content: center; font-size: 30px; }
+.pass__icon .ico { width: 40px; height: 40px; }
+/* Lamparina e missões da semana */
+.lamp-card { display: flex; align-items: center; gap: 14px; padding: 10px 14px; border: 2px solid #ffb347; border-radius: 16px; background: linear-gradient(90deg, rgba(120,70,10,.45), rgba(14,20,51,.9)); margin-bottom: 10px; }
+.lamp-card.is-off { border-color: #5a5f7a; background: rgba(14,20,51,.9); }
+.lamp-card__icon { font-size: 44px; width: 56px; height: 56px; filter: drop-shadow(0 0 10px rgba(255,180,70,.8)); }
+.lamp-card.is-off .lamp-card__icon { filter: grayscale(1) opacity(.6); }
+.lamp-card b { font-size: 20px; color: var(--gold); }
+.lamp-card p { margin: 2px 0 0; font-size: 13px; color: var(--ink-dim); }
+.tabs { display: flex; gap: 8px; margin: 6px 0 10px; }
+.tabs button { flex: 1; min-height: 40px; border: 2px solid var(--panel-edge); border-radius: 12px; background: rgba(7,10,28,.75); color: var(--ink-dim); font: 600 15px var(--font); cursor: pointer; }
+.tabs button.is-on { border-color: var(--gold); color: var(--gold); background: rgba(80,50,10,.5); }
+/* Loja: ofertas */
+.shop__title { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.shop__title small { color: var(--ok); }
+.offers { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.offer { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 8px; border: 2px solid var(--r, var(--panel-edge)); border-radius: 14px; background: linear-gradient(180deg, rgba(43,58,122,.6), rgba(7,10,28,.9)); text-align: center; box-shadow: 0 0 12px color-mix(in srgb, var(--r, #000) 35%, transparent); }
+.offer b { font-size: 14px; }
+.offer small { font-size: 11px; color: var(--ink-dim); }
+.offer.is-sold { opacity: .55; }
+.offer__buy { display: inline-flex; align-items: center; gap: 6px; }
+.offer__buy .ico { width: 22px; height: 22px; font-size: 18px; }
+.offer__ico { width: 56px; height: 56px; font-size: 42px; display: flex; align-items: center; justify-content: center; }
+.offer__ico--big { width: 64px; height: 64px; font-size: 48px; }
+.offer__face { position: relative; width: 64px; height: 64px; border: 3px solid var(--r); border-radius: 12px; overflow: visible; background: rgba(0,0,0,.4); }
+.offer__face img { width: 100%; height: 100%; border-radius: 9px; }
+.offer__frag { position: absolute; left: 50%; bottom: -10px; transform: translateX(-50%); white-space: nowrap; padding: 1px 6px; border-radius: 10px; background: #0b0f2a; border: 1px solid var(--r); font-size: 11px; }
+.offer__trail { font-size: 22px; color: var(--c); text-shadow: 0 0 8px var(--c); height: 56px; display: flex; align-items: center; }
+.offer--pack { flex-direction: row; justify-content: space-between; gap: 14px; padding: 12px 16px; border-color: var(--gold); background: linear-gradient(90deg, rgba(120,70,10,.55), rgba(14,20,51,.95)); text-align: left; }
+.offer__packtext { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.offer__packtext b { color: var(--gold); font-size: 17px; }
+.loot__face { width: 72px; height: 72px; border-radius: 10px; border: 3px solid var(--r); }
+.loot--jesus { box-shadow: 0 0 30px rgba(255,241,184,.95); animation: glow 1.6s ease-in-out infinite; }
+/* cartas de personagens raros */
+.cc--rare { border: 3px solid var(--rar) !important; box-shadow: 0 0 10px color-mix(in srgb, var(--rar) 50%, transparent); }
+.cc__rarity { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); z-index: 2; padding: 0 6px; border-radius: 8px; background: var(--rar); color: #120c22; font: 700 10px var(--font); letter-spacing: .5px; }
+.cc--lendario:not(.is-locked) { animation: glow 2.2s ease-in-out infinite; }
+.cc--unico { border-width: 3px; box-shadow: 0 0 22px rgba(255,241,184,.9); animation: glow 1.6s ease-in-out infinite; }
+.album-detail__power { color: var(--cyan); font-size: 14px; }
+/* Arena: poderes, dica, fundos por patente, desafio de amigo */
+.is-hidden-opt { visibility: hidden; }
+.arena__hint { margin-top: 8px; }
+.arena__power { color: var(--cyan); font-size: 14px; }
+.arena-bg { background-size: cover; background-position: center; }
+.arena-bg--bronze { background-image: linear-gradient(180deg, #2a1608, #0b0712); }
+.arena-bg--prata { background-image: linear-gradient(180deg, #2b3242, #0a0d18); }
+.arena-bg--ouro { background-image: linear-gradient(180deg, #4a3208, #120b04); }
+.arena-bg--diamante { background-image: linear-gradient(180deg, #0b3a5a, #06121f); }
+.arena-bg--lendario { background-image: linear-gradient(180deg, #5a2a52, #120818); }
+.duel { text-align: center; max-width: 420px; }
+.duel__ico { width: 64px; height: 64px; font-size: 52px; }
+/* Jogos novos */
+.ordem__done { margin: 0 auto; padding-left: 24px; text-align: left; color: var(--ok); font-size: 15px; display: flex; flex-direction: column; gap: 4px; }
+.ordem__done:empty { display: none; }
+.is-shake { animation: shake .35s; }
+@keyframes shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.vf__btn { font-size: 18px; min-height: 56px; }
+.vf__btn--v { border-color: #3c9a62; }
+.vf__btn--f { border-color: #a5404c; }
+.caca__layout { display: flex; gap: 14px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+.caca__grid { display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 3px; width: min(92vw, 62vh, 380px); }
+.caca__cell { aspect-ratio: 1; border: 1px solid var(--panel-edge); border-radius: 6px; background: rgba(7,10,28,.85); color: var(--ink); font: 700 clamp(12px, 3.6vh, 18px) var(--font); padding: 0; cursor: pointer; touch-action: manipulation; }
+.caca__cell.is-sel { background: var(--gold); color: #2a1600; }
+.caca__cell.is-found { background: rgba(124,240,166,.35); border-color: var(--ok); }
+.caca__words { display: flex; flex-direction: column; gap: 6px; min-width: 120px; }
+.caca__words span { padding: 4px 10px; border-radius: 10px; background: rgba(255,255,255,.06); font-weight: 700; letter-spacing: 1px; }
+.caca__words span.is-found { text-decoration: line-through; color: var(--ok); }
+.map-card__wrap { display: flex; flex-direction: column; gap: 6px; }
+.map-card__wrap .map-card { flex: 1; }
+.map-card__hero { background: linear-gradient(180deg, #ff8a6e, #c0392b); color: #fff; box-shadow: 0 3px 0 #6d1d14; font-size: 13px; }
+.map-card__hero.is-done { background: linear-gradient(180deg, #7cf0a6, #2f9a5a); box-shadow: 0 3px 0 #1d5a35; }

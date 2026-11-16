@@ -59,6 +59,50 @@
    "id": "lenda_arca",
    "name": "Lenda da Arca",
    "rarity": "lendário"
+  },
+  {
+   "id": "lampada_acesa",
+   "name": "A Lâmpada Acesa",
+   "rarity": "lendário",
+   "hidden": true
+  },
+  {
+   "id": "heroi_fe",
+   "name": "Herói da Fé",
+   "rarity": "lendário",
+   "hidden": true
+  },
+  {
+   "id": "heroi",
+   "name": "Herói de Gênesis",
+   "rarity": "épico",
+   "hidden": true
+  },
+  {
+   "id": "colecionador",
+   "name": "Colecionador",
+   "rarity": "lendário",
+   "hidden": true
+  },
+  {
+   "id": "pescador",
+   "name": "Pescador de Gente",
+   "rarity": "raro"
+  },
+  {
+   "id": "valente",
+   "name": "Valente de Davi",
+   "rarity": "épico"
+  },
+  {
+   "id": "sabio",
+   "name": "Sábio como Salomão",
+   "rarity": "lendário"
+  },
+  {
+   "id": "atalaia",
+   "name": "Atalaia",
+   "rarity": "comum"
   }
  ],
  "frames": [
@@ -101,6 +145,81 @@
    "id": "luz_divina",
    "name": "Luz Divina",
    "rarity": "lendário"
+  },
+  {
+   "id": "oliveira",
+   "name": "Ramos de Oliveira",
+   "rarity": "comum"
+  },
+  {
+   "id": "trigo",
+   "name": "Trigo de Rute",
+   "rarity": "raro"
+  },
+  {
+   "id": "mar_vermelho",
+   "name": "Mar Vermelho",
+   "rarity": "épico"
+  },
+  {
+   "id": "harpa",
+   "name": "Harpa de Davi",
+   "rarity": "épico"
+  },
+  {
+   "id": "peitoral",
+   "name": "Pedras do Sacerdote",
+   "rarity": "lendário"
+  },
+  {
+   "id": "estrela_belem",
+   "name": "Estrela de Belém",
+   "rarity": "lendário",
+   "hidden": true
+  },
+  {
+   "id": "salomao",
+   "name": "Ouro de Salomão",
+   "rarity": "lendário"
+  },
+  {
+   "id": "luz_celestial",
+   "name": "Luz Celestial",
+   "rarity": "lendário",
+   "hidden": true
+  }
+ ],
+ "trails": [
+  {
+   "id": "nenhum",
+   "name": "Sem rastro",
+   "rarity": "comum",
+   "hidden": true,
+   "color": ""
+  },
+  {
+   "id": "folhas",
+   "name": "Folhas verdes",
+   "rarity": "comum",
+   "color": "#7ccf6a"
+  },
+  {
+   "id": "poeira_dourada",
+   "name": "Poeira dourada",
+   "rarity": "raro",
+   "color": "#ffd36e"
+  },
+  {
+   "id": "flores",
+   "name": "Pétalas",
+   "rarity": "épico",
+   "color": "#ff9ad5"
+  },
+  {
+   "id": "estrelas",
+   "name": "Estrelas",
+   "rarity": "lendário",
+   "color": "#fff6c8"
   }
  ]
 }

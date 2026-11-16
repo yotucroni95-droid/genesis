@@ -6,6 +6,7 @@ import { iconButton } from '../ui/icon-button.js';
 import { toast } from '../ui/toast.js';
 import { characterCard, playableCharacters } from '../ui/character-card.js';
 import { Starfield } from './starfield.js';
+import { powerLines } from '../game/meta.js';
 
 export function createAlbumScene(game) {
   const stars = new Starfield(80);
@@ -19,9 +20,12 @@ export function createAlbumScene(game) {
       const open = (c) => {
         const unlocked = save.isUnlocked(c.id);
         if (!unlocked) {
-          toast(c.unlockedIn != null ? `Conclua o Capítulo ${c.unlockedIn} para liberar este personagem.` : 'Continue jogando para liberar!');
+          if (c.rarity === 'único') toast('Jesus é único: só aparece muito raramente num baú Lendário, ou de presente para quem juntar todos os outros personagens.', { ms: 6000 });
+          else if (c.rarity) toast(`Junte 10 fragmentos de ${c.name} em baús, no Passe da Fé e na Loja. Você tem ${(save.state.fragments || {})[c.id] || 0}.`, { ms: 4500 });
+          else toast(c.unlockedIn != null ? `Conclua o Capítulo ${c.unlockedIn} para liberar este personagem.` : 'Continue jogando para liberar!');
           return;
         }
+        const powers = powerLines(c);
         const isAvatar = save.state.avatarId === c.id;
         detail.replaceChildren(h('div', { class: 'modal__box album-detail' },
           characterCard(game.assets, c, true, { selected: isAvatar }),
@@ -29,6 +33,7 @@ export function createAlbumScene(game) {
             h('h2', { text: c.name }),
             h('p', { class: 'album-detail__virtue', text: `Virtude: ${c.virtue}` }),
             h('p', { text: c.description || '' }),
+            powers.length ? h('p', { class: 'album-detail__power', text: `⚡ Poder quando você joga com ${c.name}: ${powers.join(' · ')}` }) : null,
             h('span', { class: 'verse verse--dark' }, h('img', { class: 'pixel', src: game.assets.url('icon.livro'), alt: '' }), `Leia: ${c.passage}`),
             h('div', { class: 'album-detail__buttons' },
               isAvatar ? h('span', { class: 'tag tag--final', text: 'Você está jogando com este personagem' })
@@ -40,7 +45,14 @@ export function createAlbumScene(game) {
         detail.hidden = false;
       };
 
-      const grid = h('div', { class: 'album' }, ...list.map((c) => characterCard(game.assets, c, save.isUnlocked(c.id), { onClick: () => open(c), selected: save.state.avatarId === c.id })));
+      const card = (c) => characterCard(game.assets, c, save.isUnlocked(c.id), { onClick: () => open(c), selected: save.state.avatarId === c.id, fragments: (save.state.fragments || {})[c.id] || 0 });
+      const genesis = list.filter((c) => !c.rarity);
+      const groups = [['Personagens de Gênesis', genesis]];
+      for (const [r, label] of [['único', 'Único'], ['lendário', 'Lendários'], ['épico', 'Épicos'], ['raro', 'Raros'], ['comum', 'Comuns']]) {
+        const g = list.filter((c) => c.rarity === r);
+        if (g.length) groups.push([`${label} · ${g.filter((c) => save.isUnlocked(c.id)).length}/${g.length}`, g]);
+      }
+      const grid = h('div', {}, ...groups.map(([title, g]) => h('div', {}, h('h3', { text: title }), h('div', { class: 'album' }, ...g.map(card)))));
       ui.appendChild(h('section', { class: 'screen' },
         h('header', { class: 'screen__head' },
           iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go(params.backScene || 'lobby', params.back || {}), '←'),
@@ -48,7 +60,7 @@ export function createAlbumScene(game) {
           h('span', { class: 'head-count', text: `${have} de ${list.length} cartas` }),
         ),
         h('div', { class: 'screen__body' },
-          h('p', { class: 'screen__note', text: 'Complete capítulos para revelar as cartas. Toque numa carta liberada para ver a história do personagem e jogar com ele.' }),
+          h('p', { class: 'screen__note', text: 'Os de Gênesis vêm dos capítulos. Os outros personagens da Bíblia saem por fragmentos (10 liberam o personagem) em baús, no Passe da Fé e na Loja. Cada um tem um poder!' }),
           grid,
         ),
         detail,

@@ -8,8 +8,12 @@ import * as memory from './memory.js';
 import * as tictactoe from './tictactoe.js';
 import * as puzzle from './puzzle.js';
 import * as soon from './coming-soon.js';
+import * as ordem from './ordem.js';
+import * as vf from './vf.js';
+import * as versiculo from './versiculo.js';
+import * as cacapalavras from './cacapalavras.js';
 
-const REGISTRY = { quiz, memory, tictactoe, puzzle };
+const REGISTRY = { quiz, memory, tictactoe, puzzle, ordem, vf, versiculo, cacapalavras };
 
 export function getChallenge(type) {
   return REGISTRY[type] || soon;

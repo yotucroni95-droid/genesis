@@ -1,109 +1,410 @@
 {
-  "characters": [
-    {
-      "id": "peregrino",
-      "name": "Peregrino",
-      "playable": true,
-      "base": true,
-      "color": "#4f8cff",
-      "virtue": "Curiosidade",
-      "passage": "Salmos 119:105",
-      "description": "Um jovem viajante que atravessa o tempo para conhecer o princípio de tudo.",
-      "unlockedIn": null
-    },
-    {
-      "id": "miguel",
-      "name": "Arcanjo Miguel",
-      "playable": true,
-      "base": false,
-      "color": "#e8c04a",
-      "virtue": "Coragem",
-      "passage": "Apocalipse 12:7-9",
-      "description": "Seu nome quer dizer \"Quem é como Deus?\". Lidera os anjos fiéis na batalha contra o mal.",
-      "unlockedIn": 0
-    },
-    {
-      "id": "gabriel",
-      "name": "Arcanjo Gabriel",
-      "playable": true,
-      "base": false,
-      "color": "#9fd8ff",
-      "virtue": "Fidelidade",
-      "passage": "Lucas 1:19",
-      "description": "O mensageiro que está na presença de Deus e leva as Suas notícias aos homens.",
-      "unlockedIn": 0
-    },
-    {
-      "id": "adao",
-      "name": "Adão",
-      "playable": true,
-      "base": false,
-      "color": "#5fb35a",
-      "virtue": "Cuidado",
-      "passage": "Gênesis 2:15",
-      "description": "O primeiro homem, formado do pó da terra para cuidar do jardim de Deus.",
-      "unlockedIn": 1
-    },
-    {
-      "id": "eva",
-      "name": "Eva",
-      "playable": true,
-      "base": false,
-      "color": "#7fd07a",
-      "virtue": "Esperança",
-      "passage": "Gênesis 3:20",
-      "description": "A primeira mulher, mãe de todos os viventes, que ouviu a primeira promessa de salvação.",
-      "unlockedIn": 1
-    },
-    {
-      "id": "abel",
-      "name": "Abel",
-      "playable": true,
-      "base": false,
-      "color": "#d9a066",
-      "virtue": "Fé",
-      "passage": "Hebreus 11:4",
-      "description": "Pastor de ovelhas que ofereceu a Deus o melhor que tinha, com fé.",
-      "unlockedIn": 3
-    },
-    {
-      "id": "noe",
-      "name": "Noé",
-      "playable": true,
-      "base": false,
-      "color": "#b08cdb",
-      "virtue": "Obediência",
-      "passage": "Gênesis 6:22",
-      "description": "Andava com Deus e fez tudo exatamente como Ele mandou, mesmo quando ninguém acreditava.",
-      "unlockedIn": 4
-    },
-    {
-      "id": "lucifer",
-      "name": "Lúcifer",
-      "playable": false,
-      "base": false,
-      "color": "#4a3a6b"
-    },
-    {
-      "id": "serpente",
-      "name": "Serpente",
-      "playable": false,
-      "base": false,
-      "color": "#3f7f4f"
-    },
-    {
-      "id": "caim",
-      "name": "Caim",
-      "playable": false,
-      "base": false,
-      "color": "#8a5a3a"
-    },
-    {
-      "id": "querubim",
-      "name": "Querubim",
-      "playable": false,
-      "base": false,
-      "color": "#f3e9b5"
-    }
-  ]
+ "characters": [
+  {
+   "id": "peregrino",
+   "name": "Peregrino",
+   "playable": true,
+   "base": true,
+   "color": "#4f8cff",
+   "virtue": "Curiosidade",
+   "passage": "Salmos 119:105",
+   "description": "Um jovem viajante que atravessa o tempo para conhecer o princípio de tudo.",
+   "unlockedIn": null
+  },
+  {
+   "id": "miguel",
+   "name": "Arcanjo Miguel",
+   "playable": true,
+   "base": false,
+   "color": "#e8c04a",
+   "virtue": "Coragem",
+   "passage": "Apocalipse 12:7-9",
+   "description": "Seu nome quer dizer \"Quem é como Deus?\". Lidera os anjos fiéis na batalha contra o mal.",
+   "unlockedIn": 0
+  },
+  {
+   "id": "gabriel",
+   "name": "Arcanjo Gabriel",
+   "playable": true,
+   "base": false,
+   "color": "#9fd8ff",
+   "virtue": "Fidelidade",
+   "passage": "Lucas 1:19",
+   "description": "O mensageiro que está na presença de Deus e leva as Suas notícias aos homens.",
+   "unlockedIn": 0
+  },
+  {
+   "id": "adao",
+   "name": "Adão",
+   "playable": true,
+   "base": false,
+   "color": "#5fb35a",
+   "virtue": "Cuidado",
+   "passage": "Gênesis 2:15",
+   "description": "O primeiro homem, formado do pó da terra para cuidar do jardim de Deus.",
+   "unlockedIn": 1
+  },
+  {
+   "id": "eva",
+   "name": "Eva",
+   "playable": true,
+   "base": false,
+   "color": "#7fd07a",
+   "virtue": "Esperança",
+   "passage": "Gênesis 3:20",
+   "description": "A primeira mulher, mãe de todos os viventes, que ouviu a primeira promessa de salvação.",
+   "unlockedIn": 1
+  },
+  {
+   "id": "abel",
+   "name": "Abel",
+   "playable": true,
+   "base": false,
+   "color": "#d9a066",
+   "virtue": "Fé",
+   "passage": "Hebreus 11:4",
+   "description": "Pastor de ovelhas que ofereceu a Deus o melhor que tinha, com fé.",
+   "unlockedIn": 3
+  },
+  {
+   "id": "noe",
+   "name": "Noé",
+   "playable": true,
+   "base": false,
+   "color": "#b08cdb",
+   "virtue": "Obediência",
+   "passage": "Gênesis 6:22",
+   "description": "Andava com Deus e fez tudo exatamente como Ele mandou, mesmo quando ninguém acreditava.",
+   "unlockedIn": 4
+  },
+  {
+   "id": "lucifer",
+   "name": "Lúcifer",
+   "playable": false,
+   "base": false,
+   "color": "#4a3a6b"
+  },
+  {
+   "id": "serpente",
+   "name": "Serpente",
+   "playable": false,
+   "base": false,
+   "color": "#3f7f4f"
+  },
+  {
+   "id": "caim",
+   "name": "Caim",
+   "playable": false,
+   "base": false,
+   "color": "#8a5a3a"
+  },
+  {
+   "id": "querubim",
+   "name": "Querubim",
+   "playable": false,
+   "base": false,
+   "color": "#f3e9b5"
+  },
+  {
+   "id": "rute",
+   "name": "Rute",
+   "playable": true,
+   "base": false,
+   "color": "#e8c25a",
+   "virtue": "Lealdade",
+   "passage": "Rute 1:16",
+   "description": "Estrangeira que escolheu ficar com a sogra Noemi e com o Deus de Israel. Virou bisavó do rei Davi.",
+   "rarity": "comum",
+   "power": {
+    "coins": 10
+   }
+  },
+  {
+   "id": "jonas",
+   "name": "Jonas",
+   "playable": true,
+   "base": false,
+   "color": "#3a5f9e",
+   "virtue": "Segunda chance",
+   "passage": "Jonas 2:1-10",
+   "description": "Fugiu de Deus, foi engolido por um grande peixe e ganhou uma nova chance de obedecer.",
+   "rarity": "comum",
+   "power": {
+    "fe": 10
+   }
+  },
+  {
+   "id": "marta",
+   "name": "Marta",
+   "playable": true,
+   "base": false,
+   "color": "#9b3b4f",
+   "virtue": "Serviço",
+   "passage": "João 11:20-27",
+   "description": "Amiga de Jesus, trabalhadora e hospitaleira. Declarou que Jesus é o Cristo, o Filho de Deus.",
+   "rarity": "comum",
+   "power": {
+    "coins": 10
+   }
+  },
+  {
+   "id": "gideao",
+   "name": "Gideão",
+   "playable": true,
+   "base": false,
+   "color": "#9a6b3c",
+   "virtue": "Confiança",
+   "passage": "Juízes 7:19-22",
+   "description": "Com apenas 300 homens, tochas e trombetas, venceu um exército enorme confiando em Deus.",
+   "rarity": "comum",
+   "power": {
+    "arenaCoins": 15
+   }
+  },
+  {
+   "id": "zaqueu",
+   "name": "Zaqueu",
+   "playable": true,
+   "base": false,
+   "color": "#3f9a4f",
+   "virtue": "Arrependimento",
+   "passage": "Lucas 19:1-10",
+   "description": "Baixinho que subiu numa árvore para ver Jesus. Mudou de vida e devolveu tudo o que tinha tirado.",
+   "rarity": "comum",
+   "power": {
+    "coins": 15
+   }
+  },
+  {
+   "id": "timoteo",
+   "name": "Timóteo",
+   "playable": true,
+   "base": false,
+   "color": "#4f7fd0",
+   "virtue": "Fidelidade",
+   "passage": "2 Timóteo 1:5",
+   "description": "Jovem que aprendeu a fé com a mãe e a avó. Paulo o chamava de filho na fé.",
+   "rarity": "comum",
+   "power": {
+    "fe": 15
+   }
+  },
+  {
+   "id": "sansao",
+   "name": "Sansão",
+   "playable": true,
+   "base": false,
+   "color": "#a0522d",
+   "virtue": "Força",
+   "passage": "Juízes 16:28-30",
+   "description": "Recebeu de Deus uma força enorme. No fim da vida, pediu forças mais uma vez a Deus.",
+   "rarity": "raro",
+   "power": {
+    "arenaLife": 1
+   }
+  },
+  {
+   "id": "ester",
+   "name": "Ester",
+   "playable": true,
+   "base": false,
+   "color": "#8a3fc0",
+   "virtue": "Coragem",
+   "passage": "Ester 4:14-16",
+   "description": "Rainha que arriscou a vida para salvar o seu povo. \"Para um momento como este.\"",
+   "rarity": "raro",
+   "power": {
+    "trophies": 15
+   }
+  },
+  {
+   "id": "elias",
+   "name": "Elias",
+   "playable": true,
+   "base": false,
+   "color": "#7a5230",
+   "virtue": "Zelo",
+   "passage": "1 Reis 18:36-39",
+   "description": "Profeta que orou e Deus mandou fogo do céu no monte Carmelo.",
+   "rarity": "raro",
+   "power": {
+    "arenaTime": 2
+   }
+  },
+  {
+   "id": "pedro",
+   "name": "Pedro",
+   "playable": true,
+   "base": false,
+   "color": "#d0742c",
+   "virtue": "Recomeço",
+   "passage": "Mateus 16:16-18",
+   "description": "Pescador que virou pescador de gente. Errou, foi perdoado e liderou a igreja.",
+   "rarity": "raro",
+   "power": {
+    "arenaCoins": 20
+   }
+  },
+  {
+   "id": "debora",
+   "name": "Débora",
+   "playable": true,
+   "base": false,
+   "color": "#6b8e23",
+   "virtue": "Sabedoria",
+   "passage": "Juízes 4:4-9",
+   "description": "Profetisa e juíza de Israel. Liderou o povo com coragem e sabedoria.",
+   "rarity": "raro",
+   "power": {
+    "fe": 20
+   }
+  },
+  {
+   "id": "moises",
+   "name": "Moisés",
+   "playable": true,
+   "base": false,
+   "color": "#c0392b",
+   "virtue": "Liderança",
+   "passage": "Êxodo 14:21-22",
+   "description": "Tirou o povo de Israel do Egito. Deus abriu o Mar Vermelho por meio dele.",
+   "rarity": "épico",
+   "power": {
+    "hint": 1
+   }
+  },
+  {
+   "id": "davi",
+   "name": "Davi",
+   "playable": true,
+   "base": false,
+   "color": "#d9632b",
+   "virtue": "Fé corajosa",
+   "passage": "1 Samuel 17:45-47",
+   "description": "Jovem pastor que venceu o gigante Golias com uma funda e a confiança em Deus.",
+   "rarity": "épico",
+   "power": {
+    "arenaCoins": 25
+   }
+  },
+  {
+   "id": "daniel",
+   "name": "Daniel",
+   "playable": true,
+   "base": false,
+   "color": "#2d5fb3",
+   "virtue": "Firmeza",
+   "passage": "Daniel 6:21-22",
+   "description": "Continuou orando mesmo proibido. Deus fechou a boca dos leões.",
+   "rarity": "épico",
+   "power": {
+    "arenaTime": 5
+   }
+  },
+  {
+   "id": "josue",
+   "name": "Josué",
+   "playable": true,
+   "base": false,
+   "color": "#b08d3c",
+   "virtue": "Obediência",
+   "passage": "Josué 6:20",
+   "description": "Liderou o povo na terra prometida. As muralhas de Jericó caíram ao som das trombetas.",
+   "rarity": "épico",
+   "power": {
+    "trophies": 25
+   }
+  },
+  {
+   "id": "samuel",
+   "name": "Samuel",
+   "playable": true,
+   "base": false,
+   "color": "#e8e4d0",
+   "virtue": "Escuta",
+   "passage": "1 Samuel 3:10",
+   "description": "Ainda menino ouviu Deus chamar e respondeu: \"Fala, que o teu servo ouve.\"",
+   "rarity": "épico",
+   "power": {
+    "fe": 25
+   }
+  },
+  {
+   "id": "paulo",
+   "name": "Paulo",
+   "playable": true,
+   "base": false,
+   "color": "#8b1e2e",
+   "virtue": "Missão",
+   "passage": "Filipenses 4:13",
+   "description": "Perseguia os cristãos até encontrar Jesus. Levou o evangelho a muitos povos e escreveu muitas cartas.",
+   "rarity": "lendário",
+   "power": {
+    "fe": 40,
+    "coins": 20
+   }
+  },
+  {
+   "id": "joao_batista",
+   "name": "João Batista",
+   "playable": true,
+   "base": false,
+   "color": "#8d6e4f",
+   "virtue": "Humildade",
+   "passage": "João 1:29",
+   "description": "Preparou o caminho e apresentou Jesus: \"Eis o Cordeiro de Deus.\"",
+   "rarity": "lendário",
+   "power": {
+    "hint": 1,
+    "arenaTime": 3
+   }
+  },
+  {
+   "id": "salomao",
+   "name": "Salomão",
+   "playable": true,
+   "base": false,
+   "color": "#7b3fa0",
+   "virtue": "Sabedoria",
+   "passage": "1 Reis 3:9-12",
+   "description": "Pediu a Deus sabedoria em vez de riquezas. Construiu o Templo.",
+   "rarity": "lendário",
+   "power": {
+    "coins": 40
+   }
+  },
+  {
+   "id": "maria",
+   "name": "Maria",
+   "playable": true,
+   "base": false,
+   "color": "#3c6fc8",
+   "virtue": "Obediência",
+   "passage": "Lucas 1:38",
+   "description": "Escolhida para ser a mãe de Jesus. Respondeu: \"Aqui está a serva do Senhor.\"",
+   "rarity": "lendário",
+   "power": {
+    "fe": 30,
+    "arenaLife": 1
+   }
+  },
+  {
+   "id": "jesus",
+   "name": "Jesus",
+   "playable": true,
+   "base": false,
+   "color": "#fff1b8",
+   "virtue": "Amor",
+   "passage": "João 3:16",
+   "description": "O Filho de Deus, o Salvador. Deu a vida por amor a todos nós e ressuscitou.",
+   "rarity": "único",
+   "power": {
+    "coins": 50,
+    "fe": 50,
+    "arenaLife": 1,
+    "arenaTime": 5,
+    "hint": 1
+   }
+  }
+ ]
 }

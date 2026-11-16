@@ -3,6 +3,7 @@
 
 import { h } from './dom.js';
 import { rankFor, nextRank, RARITY_COLOR } from '../game/economy.js';
+import { lamp, lampStage } from '../game/meta.js';
 
 // Icons: when the artist's PNG exists it is used, otherwise the emoji.
 let A = null;
@@ -53,11 +54,25 @@ export function chip(icon, value, opts = {}) {
   );
 }
 
-export function currencyBar(game, { onCoins } = {}) {
+const LAMP_ICON = ['icon.lamparina_apagada', 'icon.lamparina', 'icon.lamparina_azul', 'icon.lamparina_branca'];
+
+/** The lamp (ofensiva): lit today or still waiting, with the number of days. */
+export function lampChip(game, onClick) {
+  const l = lamp(game.save);
+  const stage = l.litToday ? lampStage(l.count) : 0;
+  return chip(ico(LAMP_ICON[stage], '🪔', 'chip__ico'), l.count, {
+    title: l.litToday ? 'Lamparina acesa hoje!' : 'Jogue hoje para acender sua lamparina',
+    onClick, cls: `chip--lamp chip--lamp${stage}${l.litToday ? '' : ' is-waiting'}`,
+  });
+}
+
+export function currencyBar(game, { onCoins, onLamp } = {}) {
   const s = game.save.state;
   return h('div', { class: 'currency' },
-    chip(ico('icon.trofeu', '🏆', 'chip__ico'), s.trophies || 0, { title: 'Troféus' }),
+    onLamp ? lampChip(game, onLamp) : null,
+    chip(ico('icon.trofeu', '🏆', 'chip__ico'), s.trophies || 0, { title: 'Troféus', cls: 'chip--trophy' }),
     chip(ico('icon.moeda', '🪙', 'chip__ico'), s.coins || 0, { title: 'Talentos (moedas)', onClick: onCoins, cls: 'chip--coins' }),
+    chip(ico('icon.denario', '🥈', 'chip__ico'), s.denarios || 0, { title: 'Denários (moeda rara)', onClick: onCoins, cls: 'chip--den' }),
   );
 }
 
@@ -111,5 +126,6 @@ export function vibrate(pattern) {
 export function formatWait(ms) {
   const m = Math.ceil(ms / 60000);
   const hh = Math.floor(m / 60);
+  if (hh >= 48) return `${Math.floor(hh / 24)} dias`;
   return hh ? `${hh}h ${m % 60}min` : `${m}min`;
 }

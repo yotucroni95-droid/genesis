@@ -24,7 +24,7 @@ export function createExploreScene(game) {
         if (chapter && !open) status = 'Complete o capítulo anterior';
         const st = chapter ? chapter.stops.reduce((n, sp) => n + ((save.state.stars || {})[sp.id] || 0), 0) : 0;
         if (open) status = `${done ? 'Concluído ✓ · ' : `${prog.done}/${prog.total} paradas · `}⭐ ${st}/${prog.total * 3}`;
-        grid.appendChild(
+        const card = (
           h('button', {
             class: `map-card${open ? '' : ' is-locked'}${done ? ' is-done' : ''}`,
             onClick: () => (open ? game.scenes.go('world', { chapterId: entry.id }) : toast(status)),
@@ -38,8 +38,15 @@ export function createExploreScene(game) {
               h('span', { text: entry.title }),
               h('em', { text: status }),
             ),
-          ),
+          )
         );
+        if (done) {
+          const heroStars = chapter.stops.reduce((n, sp) => n + ((save.state.stars || {})[`${sp.id}#heroi`] || 0), 0);
+          const heroDone = (save.state.heroDone || {})[chapter.id];
+          grid.appendChild(h('div', { class: 'map-card__wrap' }, card,
+            h('button', { class: `btn btn--small map-card__hero${heroDone ? ' is-done' : ''}`, onClick: () => game.scenes.go('world', { chapterId: entry.id, hero: true }) },
+              `⚔️ Modo Herói ${heroDone ? '✓' : ''} · ⭐ ${heroStars}/${chapter.stops.length * 3}`)));
+        } else grid.appendChild(card);
       });
       const st = save.state;
       const totalStops = loaded.filter(Boolean).reduce((n, c) => n + c.stops.length, 0);

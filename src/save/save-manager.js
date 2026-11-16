@@ -23,7 +23,15 @@ function emptySave() {
     verses: {},        // verse card id -> how many
     titles: { aprendiz: now },
     frames: { madeira: now },
-    equipped: { title: 'aprendiz', frame: 'madeira' },
+    equipped: { title: 'aprendiz', frame: 'madeira', trail: 'nenhum' },
+    trails: { nenhum: now },
+    // ---- Temporada 2 ----
+    denarios: 0,       // rare coin
+    fragments: {},     // characterId -> pieces (10 unlock the character)
+    oil: 0,            // olive oil flasks: each saves the lamp for one missed day
+    lamp: null,        // { count, last, best } the ofensiva
+    weekly: null,      // weekly missions
+    pass: null,        // { season, fe, claimed }
     arenaBest: 0,
     daily: null,       // { date, missions: [...], bonusClaimed }
     streak: { count: 0, last: '' },
@@ -65,6 +73,8 @@ export class SaveManager {
         unlocked: { peregrino: data.createdAt || base.createdAt, ...(data.unlocked || {}) },
         titles: { ...base.titles, ...(data.titles || {}) },
         frames: { ...base.frames, ...(data.frames || {}) },
+        trails: { ...base.trails, ...(data.trails || {}) },
+        fragments: { ...(data.fragments || {}) },
         equipped: { ...base.equipped, ...(data.equipped || {}) },
         streak: { ...base.streak, ...(data.streak || {}) },
       };

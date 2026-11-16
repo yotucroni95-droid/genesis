@@ -40,6 +40,9 @@ export function createWorldScene(game) {
   let scrolls = null;
   let scrollChip = null;
   let stepT = 0;
+  let hero = false;
+  let trailColor = '';
+  const trail = []; // sparkles left behind by the player's equipped trail
 
   function refreshCharButton() {
     charButton.querySelector('img').src = game.assets.url(`portrait.${player.characterId}`);
@@ -55,6 +58,10 @@ export function createWorldScene(game) {
     if (!currentStop || leaving) return;
     leaving = true;
     sfx('enter');
+    if (hero) { // heroes already know the story: straight to the hard challenge
+      game.scenes.go('challenge', { chapterId: chapter.id, stopId: currentStop.id, hero: true, back: { chapterId: chapter.id, hero: true, at: { x: player.x, y: player.y } } });
+      return;
+    }
     game.scenes.go('story', {
       chapterId: chapter.id,
       stopId: currentStop.id,
@@ -65,6 +72,7 @@ export function createWorldScene(game) {
   return {
     async enter(params, ui) {
       leaving = false;
+      hero = Boolean(params.hero);
       map = null; // nothing moves or draws until everything below is ready
       input = null;
       if (params.chapterId) {
@@ -79,13 +87,13 @@ export function createWorldScene(game) {
       const at = params.at || { x: (map.spawn.x + 0.5) * map.tileW, y: (map.spawn.y + 1) * map.tileH - 4 };
       player = new Player(game.assets, game.save.state.avatarId || 'peregrino', at.x, at.y);
       ambient = new Ambient(map);
-      stops = chapter ? new Stops(chapter, map, game.assets, game.save) : null;
+      stops = chapter ? new Stops(chapter, map, game.assets, game.save, { hero }) : null;
       firstFrame = true;
       if (DEBUG) window.__world = { map, player, camera, stops }; // only with ?debug=1, for testing
 
       charButton = h('button', { class: 'hud__char', 'aria-label': 'Trocar personagem', title: 'Trocar personagem', onClick: chooseAvatar },
         h('img', { class: 'pixel', alt: '' }));
-      const title = chapter ? `Capítulo ${chapter.number} · ${chapter.title}` : map.name;
+      const title = chapter ? `${hero ? '⚔️ Modo Herói · ' : ''}Capítulo ${chapter.number} · ${chapter.title}` : map.name;
       ui.appendChild(h('div', { class: 'hud' },
         iconButton(game.assets, 'icon.voltar', 'Voltar', () => game.scenes.go('explore'), '←'),
         h('div', { class: 'hud__title', text: title }),
@@ -110,6 +118,9 @@ export function createWorldScene(game) {
           celebrate({ title: 'Achou os 5 pergaminhos!', subtitle: `Você ganhou um baú ${RARITY_LABEL[rarity]}. Amanhã eles estarão em outros lugares!`, image: game.assets.url('icon.album') });
         });
       }
+      const tr = ((game.extras && game.extras.cosmetics.trails) || []).find((t) => t.id === game.save.state.equipped.trail);
+      trailColor = tr ? tr.color : '';
+      trail.length = 0;
       input = new Input(ui, game.assets);
       if (!game.save.seenTip('joystick')) {
         joyHint = h('div', { class: 'joy-hint' }, h('span', { text: 'Arraste o polegar aqui para andar' }));
@@ -117,7 +128,8 @@ export function createWorldScene(game) {
       }
       onKey = (e) => { if ((e.code === 'Enter' || e.code === 'Space') && currentStop) { e.preventDefault(); enterStop(); } };
       window.addEventListener('keydown', onKey);
-      if (chapter && !params.at && chapter.intro) toast(chapter.intro, { ms: 5000 });
+      if (chapter && !params.at && hero) toast('Modo Herói: desafios difíceis, sem história, com o dobro de talentos e denários. Vença as luzes vermelhas!', { ms: 5000 });
+      else if (chapter && !params.at && chapter.intro) toast(chapter.intro, { ms: 5000 });
     },
 
     exit() {
@@ -134,6 +146,11 @@ export function createWorldScene(game) {
       const vec = leaving ? { x: 0, y: 0 } : input.vector();
       player.update(dt, vec, map);
       if (player.moving) { stepT += dt; if (stepT > 0.32) { stepT = 0; sfx('step'); } }
+      if (trailColor && player.moving && Math.random() < dt * 22) {
+        trail.push({ x: player.x + (Math.random() - 0.5) * 10, y: player.y - Math.random() * 4, vy: -6 - Math.random() * 10, life: 0.9 });
+      }
+      for (const p of trail) { p.y += p.vy * dt; p.life -= dt; }
+      while (trail.length && trail[0].life <= 0) trail.shift();
       if (talk) talk.update(player);
       if (scrolls) {
         scrolls.update(dt, player);
@@ -154,7 +171,7 @@ export function createWorldScene(game) {
           currentStop = near;
           enterBox.hidden = !near;
           if (near) {
-            const done = game.save.isStopDone(near.id);
+            const done = hero ? Boolean((game.save.state.stars || {})[`${near.id}#heroi`]) : game.save.isStopDone(near.id);
             enterBox.querySelector('.enter__title').textContent = `${near.title}${done ? ' ✓' : ''}`;
           }
         }
@@ -174,6 +191,12 @@ export function createWorldScene(game) {
       ambient.drawBelow(ctx, view);
       if (stops) stops.drawGround(ctx);
       if (scrolls) scrolls.draw(ctx);
+      if (trail.length) {
+        ctx.save();
+        ctx.fillStyle = trailColor;
+        for (const p of trail) { ctx.globalAlpha = Math.max(0, p.life / 0.9); ctx.fillRect(Math.round(p.x), Math.round(p.y), p.life > 0.6 ? 2 : 1, p.life > 0.6 ? 2 : 1); }
+        ctx.restore();
+      }
       // characters sorted by depth, so whoever is lower on screen is in front
       const list = stops ? stops.drawables() : [];
       list.push({ y: player.y, draw: (c) => player.draw(c) });

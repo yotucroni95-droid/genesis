@@ -1,3 +1,5 @@
+import { checkLamp, lightLamp, trackWeekly, addFe, boxFragments, power, addDenarios } from './meta.js';
+
 // Game economy: stars, coins ("talentos"), trophies, ranks, boxes, daily
 // missions and login streak. Only game currency — no real money anywhere.
 
@@ -71,7 +73,7 @@ export function starsFor(score) {
 }
 
 export function totalStars(save) {
-  return Object.values(save.state.stars || {}).reduce((a, b) => a + b, 0);
+  return Object.entries(save.state.stars || {}).reduce((a, [k, b]) => a + (k.includes('#') ? 0 : b), 0);
 }
 
 // ---------- boxes ----------
@@ -145,13 +147,13 @@ export function openBox(save, uid, content) {
 
   const cosmeticChance = { comum: 0.05, raro: 0.15, 'épico': 0.35, 'lendário': 1 }[rarity];
   if (Math.random() < cosmeticChance) {
-    const kind = Math.random() < 0.5 ? 'titles' : 'frames';
+    const kind = pick(['titles', 'frames', 'trails']);
     const minI = Math.max(0, RARITIES.indexOf(rarity) - 1);
-    const pool = content.cosmetics[kind].filter((c) => RARITIES.indexOf(c.rarity) >= minI && !save.state[kind][c.id]);
+    const pool = content.cosmetics[kind].filter((c) => RARITIES.indexOf(c.rarity) >= minI && !(save.state[kind] || {})[c.id]);
     if (pool.length) {
       const c = pick(pool);
-      save.state[kind][c.id] = new Date().toISOString();
-      items.push({ type: kind === 'titles' ? 'title' : 'frame', item: c });
+      save.state[kind] = { ...(save.state[kind] || {}), [c.id]: new Date().toISOString() };
+      items.push({ type: { titles: 'title', frames: 'frame', trails: 'trail' }[kind], item: c });
     }
   }
 
@@ -159,6 +161,7 @@ export function openBox(save, uid, content) {
     s.coins = (s.coins || 0) + coins;
     s.boxes = s.boxes.filter((b) => b.uid !== uid);
   });
+  items.push(...boxFragments(save, rarity));
   track(save, 'openBox', 1);
   return { rarity, items };
 }
@@ -198,21 +201,19 @@ export function startDay(save) {
   if (!save.state.daily || save.state.daily.date !== d) {
     save.update((s) => { s.daily = { date: d, missions: newMissions(), bonusClaimed: false }; });
   }
-  const st = save.state.streak || { count: 0, last: '' };
-  if (st.last !== d) {
-    const yesterday = new Date(Date.now() - 864e5).toLocaleDateString('sv-SE');
-    const count = st.last === yesterday ? st.count + 1 : 1;
-    const coins = 20 * Math.min(count, 7);
-    save.update((s) => { s.streak = { count, last: d }; });
-    addCoins(save, coins);
-    events.push({ type: 'streak', count, coins });
-    if (count % 7 === 0) { addBox(save, 'épico', 'sequência'); events.push({ type: 'box', rarity: 'épico' }); }
-  }
+  const lampEvent = checkLamp(save); // the lamp (ofensiva) goes out if days were missed
+  if (lampEvent) events.push(lampEvent);
   return events;
 }
 
-/** Records progress for daily missions. */
+const LIGHTS_LAMP = new Set(['stops', 'arenaPlay', 'daily']);
+const FE_FOR = { stops: 20, threeStars: 10, arenaPlay: 15, daily: 15, openBox: 5 };
+
+/** Records progress for daily and weekly missions, the lamp and the pass. */
 export function track(save, type, amount = 1) {
+  if (LIGHTS_LAMP.has(type) && lightLamp(save)) trackWeekly(save, 'lampDays', 1);
+  if (FE_FOR[type]) addFe(save, FE_FOR[type]);
+  trackWeekly(save, type, amount);
   const daily = save.state.daily;
   if (!daily) return;
   let changed = false;
@@ -232,6 +233,8 @@ export function claimMission(save, index) {
   m.claimed = true;
   save.update(() => {});
   addCoins(save, m.reward);
+  addFe(save, 25);
+  trackWeekly(save, 'dailyMissions', 1);
   const rankUp = addTrophies(save, 5);
   let bonus = null;
   if (save.state.daily.missions.every((x) => x.claimed) && !save.state.daily.bonusClaimed) {
@@ -249,6 +252,8 @@ export function pendingMissions(save) {
 
 // ---------- rewards after a stop ----------
 
+export const heroKey = (stopId) => `${stopId}#heroi`;
+
 /**
  * Gives stars, coins and trophies for a finished stop and updates missions.
  * Returns a list of things to celebrate.
@@ -256,28 +261,40 @@ export function pendingMissions(save) {
 export function rewardStop(save, chapter, stop, result, isFirstTime) {
   const out = [];
   const stars = starsFor(result.score);
-  const prev = (save.state.stars || {})[stop.id] || 0;
+  const key = result.hero ? heroKey(stop.id) : stop.id; // Modo Herói keeps its own stars
+  const prev = (save.state.stars || {})[key] || 0;
   const newStars = Math.max(0, stars - prev);
-  if (newStars) save.update((s) => { s.stars = { ...s.stars, [stop.id]: stars }; });
+  if (newStars) save.update((s) => { s.stars = { ...s.stars, [key]: stars }; });
   out.push({ type: 'stars', stars, newStars });
 
-  const coins = (isFirstTime ? 30 : 5) + newStars * 20;
+  const hero = Boolean(result.hero);
+  const base = ((isFirstTime ? 30 : 5) + newStars * 20) * (hero ? 2 : 1) + (hero ? 20 : 0);
+  const coins = Math.round(base * (1 + power(save, 'coins') / 100));
   addCoins(save, coins);
   out.push({ type: 'coins', amount: coins });
 
-  if (newStars) {
-    const rankUp = addTrophies(save, newStars * 10);
-    out.push({ type: 'trophies', amount: newStars * 10 });
+  const trophyBase = newStars * 10 + (hero ? 5 : 0);
+  if (trophyBase) {
+    const t = Math.round(trophyBase * (1 + power(save, 'trophies') / 100));
+    const rankUp = addTrophies(save, t);
+    out.push({ type: 'trophies', amount: t });
     if (rankUp) out.push({ type: 'rank', rank: rankUp });
   }
+  if (hero) {
+    const den = stars === 3 ? 3 : 1;
+    addDenarios(save, den);
+    out.push({ type: 'denarios', amount: den });
+    track(save, 'hero', 1);
+  }
+  if (result.newGame) track(save, 'newGames', 1);
 
   track(save, 'stops', 1);
   if (stars === 3) track(save, 'threeStars', 1);
-  const t = stop.challenge.type;
+  const t = result.type || stop.challenge.type;
   if (t === 'tictactoe') track(save, 'tttWin', 1);
   if (t === 'memory') track(save, 'memory', 1);
   if (t === 'puzzle') track(save, 'puzzle', 1);
-  if (t === 'quiz' && result.correct) track(save, 'correct', result.correct);
+  if (result.correct) track(save, 'correct', result.correct);
   return out;
 }
 

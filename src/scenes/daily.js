@@ -4,7 +4,7 @@
 import { h } from '../ui/dom.js';
 import { gameScreen } from '../ui/screen.js';
 import { loadExtras } from '../ui/game-ui.js';
-import { addCoins } from '../game/economy.js';
+import { addCoins, track } from '../game/economy.js';
 import { shuffle } from '../challenges/shared.js';
 import { sfx } from '../audio/audio.js';
 import { speak, loadRecorded, stopSpeaking } from '../audio/narrator.js';
@@ -62,6 +62,7 @@ export function createDailyScene(game) {
               e.currentTarget.classList.add('is-right');
               save.update((s) => { s.dailyVerse = new Date().toLocaleDateString('sv-SE'); s.verses[v.id] = (s.verses[v.id] || 0) + 1; });
               addCoins(save, 25);
+              track(save, 'daily', 1);
               setTimeout(() => { sfx('coin'); area.replaceChildren(card, h('h2', { class: 'quiz__q', text: 'Muito bem! +25 talentos 🪙' }), h('p', { class: 'screen__note', text: 'A carta deste versículo entrou na sua coleção.' }), h('button', { class: 'btn', text: 'Voltar ao lobby', onClick: () => game.scenes.go('lobby') })); }, 600);
             } else {
               sfx('wrong');

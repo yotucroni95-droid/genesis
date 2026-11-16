@@ -11,6 +11,15 @@ import { sfx } from '../audio/audio.js';
 import { celebrate } from '../ui/celebrate.js';
 import { rankBadge, ico } from '../ui/game-ui.js';
 import { shareCard } from '../ui/share.js';
+import { power, seeded, charById } from '../game/meta.js';
+import { rankFor } from '../game/economy.js';
+
+function seededShuffle(list, seed) {
+  const rnd = seeded(seed);
+  const a = list.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
 
 const SECONDS = 10;
 
@@ -18,26 +27,39 @@ export function createArenaScene(game) {
   const stars = new Starfield(140);
   let raf = 0;
   return {
-    async enter(_p, ui) {
+    async enter(params, ui) {
       game.extras = game.extras || await loadExtras(game.assets);
       const save = game.save;
+      const duel = params && params.duel; // { seed, score, nick } from a friend's link
       const area = h('div', { class: 'arena' });
-      ui.appendChild(gameScreen(game, 'Arena ⚡', area));
+      const screen = gameScreen(game, duel ? `Desafio de @${duel.nick} ⚡` : 'Arena ⚡', area);
+      // each rank has its own arena background
+      screen.classList.add('arena-bg', `arena-bg--${rankFor(save.state.trophies || 0).id.replace(/\d$/, '')}`);
+      const bgArt = game.assets.entry(`arena.${rankFor(save.state.trophies || 0).id.replace(/\d$/, '')}`);
+      if (bgArt && bgArt.image && !bgArt.placeholder) screen.style.backgroundImage = `linear-gradient(rgba(5,7,26,.55), rgba(5,7,26,.75)), url("${game.assets.url(bgArt.id)}")`;
+      ui.appendChild(screen);
+      const SECS = SECONDS + power(save, 'arenaTime');
+      const LIVES = 3 + power(save, 'arenaLife');
+      const me = charById(save.state.avatarId);
+      const powerNote = me && me.power ? `Poder de ${me.name} ativo!` : '';
 
       const intro = () => {
         area.replaceChildren(h('div', { class: 'quiz__result' },
           h('div', { class: 'arena__logo' }, ico('icon.arena', '⚡', 'arena__logoimg')),
-          h('h2', { class: 'quiz__q', text: 'Desafio Relâmpago' }),
-          h('p', { class: 'screen__note', text: `Responda o mais rápido que puder: ${SECONDS} segundos por pergunta e 3 vidas. Acerte em sequência para multiplicar os pontos!` }),
+          h('h2', { class: 'quiz__q', text: duel ? `@${duel.nick} fez ${duel.score} pontos. Consegue bater?` : 'Desafio Relâmpago' }),
+          h('p', { class: 'screen__note', text: `${duel ? 'Vocês respondem as MESMAS perguntas. ' : ''}Responda o mais rápido que puder: ${SECS} segundos por pergunta e ${LIVES} vidas. Acerte em sequência para multiplicar os pontos!` }),
+          powerNote ? h('p', { class: 'arena__power', text: `⚡ ${powerNote}` }) : null,
           h('p', { class: 'arena__best', text: save.state.arenaBest ? `Seu recorde: ${save.state.arenaBest} pontos` : 'Ainda sem recorde. Bora!' }),
           h('button', { class: 'btn btn--play', onClick: play }, h('b', { text: 'COMEÇAR' })),
         ));
       };
 
       const play = () => {
-        const deck = shuffle(game.extras.arena);
+        const seed = duel ? duel.seed : 1 + Math.floor(Math.random() * 999999);
+        const deck = seededShuffle(game.extras.arena, seed);
         let i = 0;
-        let lives = 3;
+        let lives = LIVES;
+        let hints = power(save, 'hint');
         let score = 0;
         let combo = 0;
         let correct = 0;
@@ -52,7 +74,7 @@ export function createArenaScene(game) {
         const paintHud = () => {
           const mult = combo >= 6 ? 3 : combo >= 3 ? 2 : 1;
           hud.replaceChildren(
-            h('span', { class: 'arena__lives' }, ...[0, 1, 2].map((k) => (k < lives ? ico('icon.coracao', '❤️') : ico('icon.coracao_vazio', '🖤')))),
+            h('span', { class: 'arena__lives' }, ...Array.from({ length: LIVES }, (_, k) => (k < lives ? ico('icon.coracao', '❤️') : ico('icon.coracao_vazio', '🖤')))),
             h('b', { class: 'arena__score', text: `${score} pts` }),
             h('span', { class: `arena__combo${mult > 1 ? ' is-hot' : ''}`, text: mult > 1 ? `COMBO x${mult} 🔥` : `Sequência ${combo}` }),
           );
@@ -60,7 +82,7 @@ export function createArenaScene(game) {
 
         const tick = () => {
           const left = Math.max(0, deadline - performance.now());
-          timerBar.firstChild.style.width = `${(left / (SECONDS * 1000)) * 100}%`;
+          timerBar.firstChild.style.width = `${(left / (SECS * 1000)) * 100}%`;
           timerBar.classList.toggle('is-low', left < 3000);
           if (left <= 0 && !locked) answer(-1, null);
           else raf = requestAnimationFrame(tick);
@@ -73,9 +95,16 @@ export function createArenaScene(game) {
           current = deck[i++];
           const opts = shuffle(current.options.map((text, k) => ({ text, ok: k === current.answer })));
           buttons = opts.map((o, k) => h('button', { class: 'quiz__opt', onClick: () => answer(k, opts) }, o.text));
-          box.replaceChildren(h('h2', { class: 'quiz__q', text: current.q }), h('div', { class: 'quiz__opts' }, ...buttons));
+          const hintBtn = hints > 0 ? h('button', { class: 'btn btn--ghost btn--small arena__hint', text: `💡 Dica (${hints})`, onClick: () => {
+            if (locked || hints <= 0) return;
+            hints -= 1;
+            const wrong = opts.map((o, k) => (o.ok || buttons[k].disabled ? -1 : k)).filter((k) => k >= 0);
+            if (wrong.length) { const k = wrong[Math.floor(Math.random() * wrong.length)]; buttons[k].disabled = true; buttons[k].classList.add('is-hidden-opt'); }
+            hintBtn.remove();
+          } }) : null;
+          box.replaceChildren(h('h2', { class: 'quiz__q', text: current.q }), h('div', { class: 'quiz__opts' }, ...buttons), hintBtn);
           locked = false;
-          deadline = performance.now() + SECONDS * 1000;
+          deadline = performance.now() + SECS * 1000;
           cancelAnimationFrame(raf);
           raf = requestAnimationFrame(tick);
         };
@@ -110,8 +139,9 @@ export function createArenaScene(game) {
         function finish() {
           const best = save.state.arenaBest || 0;
           const record = score > best;
-          const coins = Math.floor(score / 10);
-          const trophies = Math.min(15, Math.floor(score / 50)) + (record && score > 0 ? 5 : 0);
+          const won = duel ? score > duel.score : false;
+          const coins = Math.floor((score / 10) * (1 + power(save, 'arenaCoins') / 100)) + (won ? 30 : 0);
+          const trophies = Math.round((Math.min(15, Math.floor(score / 50)) + (record && score > 0 ? 5 : 0) + (won ? 5 : 0)) * (1 + power(save, 'trophies') / 100));
           if (record) save.update((s) => { s.arenaBest = score; });
           addCoins(save, coins);
           const rankUp = trophies ? addTrophies(save, trophies) : null;
@@ -122,7 +152,7 @@ export function createArenaScene(game) {
           track(save, 'correct', correct);
           area.replaceChildren(h('div', { class: 'quiz__result' },
             h('div', { class: 'quiz__score', text: `${score}` }),
-            h('h2', { class: 'quiz__q', text: record ? 'NOVO RECORDE! 🏆' : 'Fim de jogo!' }),
+            h('h2', { class: 'quiz__q', text: duel ? (won ? `VOCÊ VENCEU @${duel.nick}! 🏆` : score === duel.score ? 'EMPATE!' : `@${duel.nick} ganhou desta vez...`) : record ? 'NOVO RECORDE! 🏆' : 'Fim de jogo!' }),
             h('p', { class: 'screen__note', text: `${correct} acertos · recorde: ${Math.max(best, score)}` }),
             h('div', { class: 'rewards' },
               h('div', { class: 'reward' }, h('span', { class: 'chip__emoji', text: '🪙' }), h('span', { text: `+${coins} talentos` })),
@@ -130,8 +160,11 @@ export function createArenaScene(game) {
               rankUp ? h('div', { class: 'reward reward--big' }, h('span', { class: 'chip__emoji', text: '⬆️' }), h('span', { text: `Nova patente: ${rankUp.name}! Ganhou um baú.` })) : null,
             ),
             h('div', { style: { display: 'flex', gap: '10px' } },
-              h('button', { class: 'btn', text: 'Jogar de novo', onClick: play }),
-              h('button', { class: 'btn btn--share', text: '📲 Desafiar amigos', onClick: () => shareCard(game, { headline: `Fiz ${score} pontos na Arena do Gênesis! Duvido você bater!` }) }),
+              h('button', { class: 'btn', text: duel ? 'Revanche' : 'Jogar de novo', onClick: play }),
+              h('button', { class: 'btn btn--share', text: '📲 Desafiar amigos', onClick: () => shareCard(game, {
+                headline: `Fiz ${score} pontos na Arena do Gênesis! Duvido você bater!`,
+                link: `?desafio=${seed}.${score}.${encodeURIComponent(save.state.nick)}`,
+              }) }),
               h('button', { class: 'btn btn--ghost', text: 'Lobby', onClick: () => game.scenes.go('lobby') }),
             ),
           ));

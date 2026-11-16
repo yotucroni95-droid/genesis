@@ -24,9 +24,13 @@ import { createArenaScene } from './scenes/arena.js';
 import { createCollectionScene } from './scenes/collection.js';
 import { createProfileScene } from './scenes/profile.js';
 import { createDailyScene } from './scenes/daily.js';
+import { createPassScene } from './scenes/pass.js';
 import { SaveManager } from './save/save-manager.js';
 import { unlockAudio, playMusic, sfx } from './audio/audio.js';
 import { setUiAssets } from './ui/game-ui.js';
+import { setCharacters, onMetaEvent, charById } from './game/meta.js';
+import { toast } from './ui/toast.js';
+import { celebrate } from './ui/celebrate.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -58,6 +62,13 @@ async function boot() {
   const display = new Display(document.getElementById('screen'), { targetShortSide: CONFIG.viewShortSide });
   const assets = new Assets();
   const game = { config: CONFIG, display, assets, save: new SaveManager(), scenes: null };
+  // a friend's Arena challenge link: ?desafio=seed.score.nick
+  const duelParam = new URLSearchParams(location.search).get('desafio');
+  if (duelParam) {
+    const [seed, score, ...nick] = duelParam.split('.');
+    if (Number(seed) > 0) game.duel = { seed: Number(seed), score: Number(score) || 0, nick: decodeURIComponent(nick.join('.')).slice(0, 16) || 'amigo' };
+    history.replaceState(null, '', location.pathname); // do not repeat it on reload
+  }
   game.scenes = new SceneManager(game, document.getElementById('ui'));
 
   try {
@@ -73,6 +84,22 @@ async function boot() {
   }
 
   setUiAssets(assets);
+  setCharacters(assets.json('characters.json').characters);
+  onMetaEvent((e) => {
+    if (e.type === 'unlockChar') {
+      const c = charById(e.id) || { name: e.id };
+      if (e.jesus) {
+        sfx('fanfare');
+        celebrate({ title: 'JESUS!', subtitle: 'Você conseguiu o personagem único do jogo. Pouquíssimos conseguem isso. Fora de série!', image: assets.url('portrait.jesus') });
+      } else {
+        celebrate({ title: 'Personagem liberado!', subtitle: `${c.name} (${c.rarity}) agora está no seu álbum. Jogue com ele!`, image: assets.url(`portrait.${e.id}`) });
+      }
+    }
+    if (e.type === 'lampLit') {
+      toast(`🪔 Lamparina acesa: ${e.count} ${e.count === 1 ? 'dia' : 'dias'}! +${e.coins} talentos${e.prizes.length ? ` e ${e.prizes.join(', ')}!` : ''}`, { ms: 4000 });
+    }
+    if (e.type === 'passLevel') toast(`✨ Passe da Fé: nível ${e.level}! Resgate o prêmio no lobby.`, { ms: 3500 });
+  });
   game.scenes.register('title', createTitleScene);
   game.scenes.register('credits', createCreditsScene);
   game.scenes.register('gallery', createGalleryScene);
@@ -84,7 +111,7 @@ async function boot() {
   game.scenes.register('album', createAlbumScene);
   game.scenes.register('medals', createMedalsScene);
   game.scenes.register('avatar', createAvatarScene);
-  for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, collection: createCollectionScene, profile: createProfileScene, daily: createDailyScene })) game.scenes.register(name, f);
+  for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, collection: createCollectionScene, profile: createProfileScene, daily: createDailyScene, pass: createPassScene })) game.scenes.register(name, f);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),
@@ -127,6 +154,17 @@ async function boot() {
 boot();
 
 // Offline support and always-fresh updates (not on the local test server).
-if ('serviceWorker' in navigator && location.protocol === 'https:') {
-  navigator.serviceWorker.register('sw.js').catch(() => {});
+if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.search.includes('sw=1'))) { // sw=1: test offline locally
+  navigator.serviceWorker.register('sw.js').then(async () => {
+    // download everything (sounds and voices too) so the game works offline
+    const reg = await navigator.serviceWorker.ready;
+    if (reg.active) reg.active.postMessage('precache');
+  }).catch(() => {});
+  navigator.serviceWorker.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'offline-ready') {
+      try {
+        if (!localStorage.getItem('genesis.offline')) { localStorage.setItem('genesis.offline', '1'); toast('✈️ Pronto! Agora o Gênesis funciona até sem internet.', { ms: 4000 }); }
+      } catch { /* storage blocked */ }
+    }
+  });
 }

@@ -12,9 +12,11 @@ export function createAvatarScene(game) {
       const save = game.save;
       const back = () => game.scenes.go(params.backScene || 'world', params.back || {});
       const list = playableCharacters(game.assets);
-      const grid = h('div', { class: 'album' }, ...list.map((c) => {
+      const sorted = [...list.filter((c) => save.isUnlocked(c.id)), ...list.filter((c) => !save.isUnlocked(c.id))];
+      const grid = h('div', { class: 'album' }, ...sorted.map((c) => {
         const unlocked = save.isUnlocked(c.id);
         return characterCard(game.assets, c, unlocked, {
+          fragments: (save.state.fragments || {})[c.id] || 0,
           selected: save.state.avatarId === c.id,
           onClick: () => { if (unlocked) { save.setAvatar(c.id); back(); } },
         });
