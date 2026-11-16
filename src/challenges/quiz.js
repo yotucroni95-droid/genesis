@@ -45,7 +45,7 @@ export function start(config, env) {
           const nextBtn = h('button', { class: 'btn', disabled: true, text: index < questions.length - 1 ? 'Próxima pergunta' : 'Ver resultado', onClick: () => { index += 1; if (index < questions.length) showQuestion(); else showResult(); } });
           feedback.replaceChildren(
             h('strong', { text: !o ? 'O tempo acabou!' : o.correct ? 'Isso mesmo!' : 'Quase!' }),
-            q.explain ? h('p', { text: q.explain }) : null,
+            ...(q.explain ? [h('p', { text: q.explain })] : []),
             h('span', { class: 'verse' }, h('img', { class: 'pixel', src: env.assets.url('icon.livro'), alt: '' }), q.verse),
             nextBtn,
           );
@@ -57,7 +57,7 @@ export function start(config, env) {
         h('div', { class: 'quiz__progress' },
           ...questions.map((_, i) => h('span', { class: i < index ? 'is-done' : i === index ? 'is-now' : '' }))),
         h('div', { class: 'quiz__count', text: `Pergunta ${index + 1} de ${questions.length}` }),
-        bar ? bar.el : null,
+        ...(bar ? [bar.el] : []),
         h('h2', { class: 'quiz__q', text: q.q }),
         h('div', { class: 'quiz__opts' }, ...buttons),
         feedback,
