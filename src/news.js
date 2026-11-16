@@ -25,7 +25,8 @@ export function showNews() {
   el.id = 'news';
   el.setAttribute('role', 'dialog');
   el.innerHTML = `
-    <div class="news__box">
+    <div class="news__box screen__body">
+      <button class="news__x" type="button" aria-label="Fechar">✕</button>
       <div class="news__icon">✨</div>
       <h1 class="news__title"></h1>
       <p class="news__intro"></p>
@@ -42,9 +43,14 @@ export function showNews() {
     li.textContent = f;
     list.appendChild(li);
   }
-  el.querySelector('.news__ok').addEventListener('click', () => {
+  // closes with the button, the ✕ or a tap outside the box (on short phone
+  // screens the box scrolls; the ✕ is always visible at the top)
+  const close = () => {
     try { localStorage.setItem(SEEN_KEY, NEWS.id); } catch { /* storage blocked */ }
     el.remove();
-  });
+  };
+  el.querySelector('.news__ok').addEventListener('click', close);
+  el.querySelector('.news__x').addEventListener('click', close);
+  el.addEventListener('click', (e) => { if (e.target === el) close(); });
   document.body.appendChild(el);
 }

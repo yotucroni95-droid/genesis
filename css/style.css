@@ -1078,10 +1078,12 @@ button, .btn, [role="button"], .boxcard, .map-card, .lobby__btn { touch-action: 
 #maintenance .maint__owner[hidden]{display:none}
 
 /* "nova versão" notice (src/news.js) */
-#news{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(8,6,20,.78);color:#fff;font-family:"Pixelify Sans",system-ui,sans-serif}
-#news .news__box{max-width:440px;max-height:90vh;overflow-y:auto;display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 18px;border-radius:14px;background:radial-gradient(circle at 50% 0%,#3a2f6b,#16112e);box-shadow:0 10px 40px rgba(0,0,0,.6);text-align:center}
+#news{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;padding:12px;background:rgba(8,6,20,.78);color:#fff;font-family:"Pixelify Sans",system-ui,sans-serif}
+#news .news__box{position:relative;max-width:440px;max-height:calc(100dvh - 24px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y;display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px 18px;border-radius:14px;background:radial-gradient(circle at 50% 0%,#3a2f6b,#16112e);box-shadow:0 10px 40px rgba(0,0,0,.6);text-align:center}
 #news .news__icon{font-size:44px;line-height:1}
 #news .news__title{margin:0;font-size:26px}
 #news .news__intro,#news .news__outro{margin:0;font-size:16px;line-height:1.35}
 #news .news__outro{opacity:.85}
 #news .news__list{margin:0;padding:0 0 0 20px;text-align:left;font-size:15px;line-height:1.35;display:flex;flex-direction:column;gap:6px}
+#news .news__x{position:sticky;top:0;align-self:flex-end;margin:-8px -6px -30px 0;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:20px;line-height:40px;cursor:pointer;z-index:1}
+@media (max-height:520px){#news .news__box{padding:12px 14px;gap:6px}#news .news__icon{font-size:28px}#news .news__title{font-size:20px}#news .news__intro,#news .news__outro{font-size:14px}#news .news__list{font-size:13px;gap:4px}}
