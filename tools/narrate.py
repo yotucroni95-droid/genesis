@@ -31,14 +31,23 @@ ROLES = {
     'mulher': (V['pf_dora'], 0.95, 0.45, 0.18),
     'sombra': (BLEND_DARK, 0.88, 0.55, 0.22),
     'anciao': (BLEND_OLD, 0.86, 0.6, 0.24),
+    # children and teens of the Acampamento: the adult voices raised in pitch
+    'menina': (V['pf_dora'], 0.98, 0.42, 0.16),
+    'menino': (V['pm_alex'], 1.0, 0.42, 0.16),
+    'jovem_f': (V['pf_dora'], 0.98, 0.45, 0.18),
+    'jovem_m': (V['pm_alex'], 0.97, 0.45, 0.18),
 }
+PITCH = {'menina': 1.2, 'menino': 1.32, 'jovem_f': 1.08, 'jovem_m': 1.14}  # >1 = higher voice
 SPEAKER_ROLE = {
     'narrador': 'narrador', 'deus': 'deus',
     'adao': 'homem', 'abel': 'homem', 'caim': 'homem', 'noe': 'homem', 'miguel': 'homem', 'gabriel': 'homem', 'peregrino': 'homem',
     'querubim': 'mulher', 'eva': 'mulher', 'anjos_fieis': 'mulher',
     'abraao': 'anciao', 'isaque': 'homem', 'jaco': 'homem', 'jose': 'homem', 'sara': 'mulher', 'rebeca': 'mulher',
     'lucifer': 'sombra', 'serpente': 'sombra', 'anjos_caidos': 'sombra',
+    'aventureira': 'menina', 'aventureiro': 'menino', 'desbravadora': 'jovem_f', 'desbravador': 'jovem_m',
 }
+# people of the Acampamento map, by picture: diretor, conselheira, instrutor, enfermeira, corneteiro, lanterninha
+VARIANT_ROLE = {'acampamento_povo': ['homem', 'mulher', 'anciao', 'mulher', 'jovem_m', 'menino']}
 
 UNITS = ['zero', 'um', 'dois', 'três', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove', 'dez', 'onze', 'doze', 'treze',
          'catorze', 'quinze', 'dezesseis', 'dezessete', 'dezoito', 'dezenove']
@@ -74,6 +83,8 @@ def silence(sec):
 
 def synth(text, role):
     style, speed, s_pause, c_pause = ROLES[role]
+    pitch = PITCH.get(role, 1.0)
+    speed = speed / pitch  # spoken slower, then sped up with the pitch: same pace, higher voice
     out = [silence(0.12)]
     for s in sentences(speakable(text)):
         sp = speed * random.uniform(0.96, 1.04)  # people never keep exactly the same pace
@@ -86,6 +97,9 @@ def synth(text, role):
         gap = 0.85 if end == '…' else 0.6 if end in '!?' else s_pause
         out.append(silence(gap * random.uniform(0.9, 1.15)))
     wav = np.concatenate(out)
+    if pitch != 1.0:
+        n = int(len(wav) / pitch)
+        wav = np.interp(np.linspace(0, len(wav) - 1, n), np.arange(len(wav)), wav).astype(np.float32)
     rms = np.sqrt(np.mean(wav ** 2)) or 1
     wav = wav * (0.085 / rms)  # same loudness for every clip
     peak = np.max(np.abs(wav))
@@ -122,7 +136,7 @@ def main():
             for i, line in enumerate(stop['story']):
                 write(f"{stop['id']}-{i}", line['text'], SPEAKER_ROLE.get(line['speaker'], 'homem'), files)
         for n in ch.get('npcs', []):
-            role = SPEAKER_ROLE.get(n['sheet'], 'homem')
+            role = VARIANT_ROLE[n['sheet']][n.get('variant', 0)] if n['sheet'] in VARIANT_ROLE else SPEAKER_ROLE.get(n['sheet'], 'homem')
             for i, t in enumerate(n.get('talk', [])):
                 write(f"talk-{ch['id']}-{n['sheet']}-{n['x']}-{n['y']}-{i}", t, role, files)
             if n.get('resist'):

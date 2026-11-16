@@ -5,7 +5,7 @@
 //   * on the first visit every file listed in precache.json is downloaded
 //   * iPhones ask for audio in pieces (Range): answered from the cache
 
-const VERSION = 22;
+const VERSION = 23;
 const CODE = `genesis-code-v${VERSION}`;
 const MEDIA = 'genesis-media'; // big files: not deleted when the code changes
 

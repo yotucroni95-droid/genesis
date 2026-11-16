@@ -24,6 +24,7 @@ export class TileMap {
     this.solid = collision ? collision.data : new Array(this.cols * this.rows).fill(0);
     this.triggers = (this.layers.triggers && this.layers.triggers.objects) || [];
     this.bridges = ext.bridges || [];
+    this.foreground = ext.foreground || []; // parts of the picture drawn over the characters (a gate they walk under)
     this.waterCell = 4;
     this.waterMask = null;
     if (this.background && ext.waterSolid !== false) this.waterMask = this.buildWaterMask();
@@ -165,6 +166,22 @@ export class TileMap {
     }
     if (this.tileset && this.tileset.image) {
       for (const name of ['ground', 'objects']) this.drawTileLayer(ctx, this.layers[name], x0, y0, w, h);
+    }
+  }
+
+  /** Parts of the background in front of the characters, e.g. the top beam of a gate. */
+  drawForeground(ctx) {
+    if (!this.background || !this.foreground.length) return;
+    for (const f of this.foreground) {
+      ctx.save();
+      ctx.beginPath();
+      f.poly.forEach(([x, y], i) => (i ? ctx.lineTo(x, y) : ctx.moveTo(x, y)));
+      ctx.closePath();
+      ctx.clip();
+      const xs = f.poly.map((p) => p[0]), ys = f.poly.map((p) => p[1]);
+      const x0 = Math.min(...xs), y0 = Math.min(...ys), w = Math.max(...xs) - x0, h = Math.max(...ys) - y0;
+      ctx.drawImage(this.background, x0, y0, w, h, x0, y0, w, h);
+      ctx.restore();
     }
   }
 

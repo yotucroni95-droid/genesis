@@ -202,6 +202,7 @@ export function createWorldScene(game) {
       const list = stops ? stops.drawables() : [];
       list.push({ y: player.y, draw: (c) => player.draw(c) });
       list.sort((a, b) => a.y - b.y).forEach((d) => d.draw(ctx));
+      map.drawForeground(ctx);
       ambient.drawAbove(ctx, view);
       if (DEBUG) map.drawDebug(ctx);
       ctx.restore();
