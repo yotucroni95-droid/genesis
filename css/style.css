@@ -142,7 +142,11 @@ img.pixel, canvas.pixel {
 @keyframes rotate-hint { 0%, 25% { transform: rotate(0deg); } 60%, 100% { transform: rotate(-90deg); } }
 @media (orientation: portrait) and (pointer: coarse) {
   .rotate { display: flex; }
+  html.play-upright .rotate { display: none; }
 }
+.rotate__help { max-width: 320px; line-height: 1.35; }
+.rotate__actions { display: flex; flex-direction: column; gap: 10px; width: min(300px, 90%); }
+.rotate__actions .btn { font-size: 16px; }
 
 /* ---------- Botões ---------- */
 .btn {
@@ -1087,3 +1091,13 @@ button, .btn, [role="button"], .boxcard, .map-card, .lobby__btn { touch-action: 
 #news .news__list{margin:0;padding:0 0 0 20px;text-align:left;font-size:15px;line-height:1.35;display:flex;flex-direction:column;gap:6px}
 #news .news__x{position:sticky;top:0;align-self:flex-end;margin:-8px -6px -30px 0;width:40px;height:40px;border:0;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:20px;line-height:40px;cursor:pointer;z-index:1}
 @media (max-height:520px){#news .news__box{padding:12px 14px;gap:6px}#news .news__icon{font-size:28px}#news .news__title{font-size:20px}#news .news__intro,#news .news__outro{font-size:14px}#news .news__list{font-size:13px;gap:4px}}
+/* lobby with the phone upright ("Jogar com o celular em pé"): two columns of buttons under the hero */
+@media (orientation: portrait) {
+  .lobby { grid-template-columns: 1fr 1fr; grid-template-rows: auto 1fr auto auto auto; grid-template-areas: "top top" "stage stage" "name name" "left right" "bottom bottom"; }
+  .lobby__top { flex-wrap: wrap; row-gap: 6px; }
+  .lobby__top > * { flex-shrink: 1; }
+  .lobby__left, .lobby__right { justify-content: flex-start; }
+  .lobby__btn { min-width: 0; width: 100%; }
+  .lobby__bottom { justify-content: stretch; }
+  .lobby__bottom > * { flex: 1; min-width: 0; }
+}

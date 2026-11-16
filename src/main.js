@@ -48,8 +48,36 @@ function blockBrowserGestures() {
   document.addEventListener('contextmenu', stop);
 }
 
+// "Gire o celular": some phones never turn (rotation lock, or the browser inside
+// WhatsApp/Instagram). "Girar a tela" tries full screen locked lying down
+// (Android); "Jogar em pé" plays upright, which the game also supports.
+function setupRotateNotice() {
+  const UPRIGHT = 'genesis.upright';
+  try { if (localStorage.getItem(UPRIGHT) === '1') document.documentElement.classList.add('play-upright'); } catch { /* storage blocked */ }
+  const el = document.getElementById('rotate');
+  if (!el) return;
+  el.querySelector('.rotate__stay').addEventListener('click', () => {
+    document.documentElement.classList.add('play-upright');
+    try { localStorage.setItem(UPRIGHT, '1'); } catch { /* storage blocked */ }
+  });
+  el.querySelector('.rotate__turn').addEventListener('click', async () => {
+    try {
+      const root = document.documentElement;
+      if (!document.fullscreenElement && root.requestFullscreen) await root.requestFullscreen({ navigationUI: 'hide' });
+      await screen.orientation.lock('landscape');
+    } catch {
+      el.querySelector('.rotate__help').textContent = 'Este celular não deixa girar sozinho. Destrave a rotação automática ou toque em "Jogar com o celular em pé".';
+    }
+  });
+  // lying down again: the upright choice is forgotten, so the notice works next time
+  const mq = window.matchMedia('(orientation: landscape)');
+  const onTurn = () => { if (mq.matches) { document.documentElement.classList.remove('play-upright'); try { localStorage.removeItem(UPRIGHT); } catch { /* storage blocked */ } } };
+  if (mq.addEventListener) mq.addEventListener('change', onTurn);
+}
+
 async function boot() {
   blockBrowserGestures();
+  setupRotateNotice();
   installReliableTaps();
   if (await checkMaintenance()) { document.getElementById('boot').style.display = 'none'; return; }
 

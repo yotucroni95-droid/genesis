@@ -13,6 +13,7 @@ export const NEWS = {
     'Todas as missões ficam em cima do caminho, fáceis de alcançar (Jacó e Esaú, Moriá e as missões do Acampamento).',
     'Os pergaminhos aparecem só na estrada, e são sempre 5 por mapa.',
     'O botão de voltar volta só uma tela por toque (antes, às vezes voltava duas).',
+    'Se o seu celular não gira a tela, agora dá para jogar com ele em pé.',
     'Acampamento: o Voto e a Lei do Aventureiro foram corrigidos com o texto oficial, e o jogo de colocar em ordem agora aceita a resposta certa.',
   ],
   outro: 'Em breve chegam mais atualizações, sempre buscando melhorias. Obrigado por jogar e por nos ajudar!',
