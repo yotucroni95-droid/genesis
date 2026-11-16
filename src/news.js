@@ -4,10 +4,11 @@
 const SEEN_KEY = 'genesis.newsSeen';
 
 export const NEWS = {
-  id: '2026-11-16c',
+  id: '2026-11-17',
   title: 'Nova versão do Gênesis!',
   intro: 'Você está jogando a versão nova. Resolvemos alguns problemas que vocês nos contaram:',
   fixes: [
+    'NOVO: sua conta agora fica salva na nuvem! Você recebe um código secreto (GEN-...). Copie e guarde: com ele você entra na sua conta em outro celular ou navegador, sem perder nada. Não mostre o código para ninguém.',
     'Arena: agora são 240 perguntas, e as que você já respondeu vão para o fim da fila. Chega de pergunta repetida!',
     'Ganhou um código num desafio? Resgate na Loja, no botão “Resgatar código”.',
     'Os caminhos de todos os mapas foram revisados: agora dá para passar em todo lugar, inclusive em Babel e na ponte do Éden.',

@@ -34,6 +34,8 @@ import { celebrate } from './ui/celebrate.js';
 import { installReliableTaps } from './ui/tap.js';
 import { checkMaintenance } from './maintenance.js';
 import { showNews } from './news.js';
+import { startSync } from './cloud/account.js';
+import { createWelcomeScene } from './cloud/account-ui.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -137,6 +139,7 @@ async function boot() {
     if (e.type === 'passLevel') toast(`✨ Passe da Fé: nível ${e.level}! Resgate o prêmio no lobby.`, { ms: 3500 });
   });
   game.scenes.register('title', createTitleScene);
+  game.scenes.register('welcome', createWelcomeScene);
   game.scenes.register('credits', createCreditsScene);
   game.scenes.register('gallery', createGalleryScene);
   game.scenes.register('explore', createExploreScene);
@@ -180,6 +183,9 @@ async function boot() {
     if (e.target.closest && e.target.closest('button')) sfx('click');
   }, true);
 
+  // cloud account: bring newer progress from another phone (gives up after 5 s offline)
+  const sync = await Promise.race([startSync(game.save).catch(() => ({})), new Promise((r) => setTimeout(() => r({}), 5000))]);
+  if (sync.pulled) setTimeout(() => toast('☁️ Progresso atualizado com a sua conta.', { ms: 3500 }), 1500);
   await game.scenes.go('title');
   loop.start();
   bootEl.classList.add('is-done');

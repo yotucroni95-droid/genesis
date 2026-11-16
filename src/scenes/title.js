@@ -1,6 +1,8 @@
 import { h } from '../ui/dom.js';
 import { signature } from '../ui/signature.js';
 import { Starfield } from './starfield.js';
+import { cloudOn, accountCode } from '../cloud/account.js';
+import { openAccountMenu } from '../cloud/account-ui.js';
 
 /**
  * On phones that allow it (most Android), open full screen and lock the
@@ -31,7 +33,9 @@ export function createTitleScene(game) {
 
       const start = () => {
         goLandscapeFullscreen();
-        game.scenes.go(game.save.hasNick ? 'lobby' : 'nickname', { next: 'lobby' });
+        if (game.save.hasNick) game.scenes.go('lobby');
+        else if (cloudOn() && !accountCode()) game.scenes.go('welcome'); // new phone: new player or existing account?
+        else game.scenes.go('nickname', { next: 'lobby' });
       };
 
       ui.appendChild(
@@ -47,6 +51,7 @@ export function createTitleScene(game) {
           h('div', { class: 'title__footer' },
             h('div', { class: 'title__tools' },
               h('button', { class: 'btn btn--ghost', onClick: (e) => { e.stopPropagation(); game.scenes.go('credits'); }, text: 'Créditos' }),
+              cloudOn() ? h('button', { class: 'btn btn--ghost', onClick: (e) => { e.stopPropagation(); openAccountMenu(game); }, text: '☁️ Minha conta' }) : null,
             ),
             signature(game.assets),
           ),

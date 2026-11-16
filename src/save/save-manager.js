@@ -1,4 +1,5 @@
-// Saves the player's progress on this phone (localStorage). No login, no server.
+// Saves the player's progress on this phone (localStorage). With a cloud
+// account (src/cloud/account.js) every write is also copied to the server.
 // Every change is written immediately, and writing the same thing twice is harmless.
 
 const KEY = 'genesis.save.v1';
@@ -85,11 +86,23 @@ export class SaveManager {
   }
 
   write() {
+    this.state.savedAt = Date.now(); // newest copy wins when the account is opened on another phone
     try {
       localStorage.setItem(KEY, JSON.stringify(this.state));
       this.storageOk = true;
     } catch {
       this.storageOk = false; // private mode or storage blocked: keeps working in memory
+    }
+    if (this.onWrite) this.onWrite();
+  }
+
+  /** Swaps the whole progress for another one (opening a cloud account). */
+  replace(data) {
+    try {
+      localStorage.setItem(KEY, JSON.stringify(data));
+      this.state = this.read(); // read() fills in anything an older save lacks
+    } catch {
+      this.state = { ...this.state, ...data }; // storage blocked: keep it in memory
     }
   }
 

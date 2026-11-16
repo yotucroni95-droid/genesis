@@ -2,6 +2,7 @@
 // coins, and buttons to play, enter the Arena, open boxes and more.
 
 import { h } from '../ui/dom.js';
+import { ensureAccount } from '../cloud/account-ui.js';
 import { toast } from '../ui/toast.js';
 import { Starfield } from './starfield.js';
 import { loadExtras, rankBadge, rankProgress, currencyBar, framedAvatar, titleName, badge, chest, formatWait, ico } from '../ui/game-ui.js';
@@ -90,6 +91,7 @@ export function createLobbyScene(game) {
         preview.classList.add('lobby__chestpeek');
         ui.querySelector('.lobby__right .lobby__btn:nth-child(3)').appendChild(preview);
       }
+      ensureAccount(game); // gives every player a cloud account and shows the code once
       if (game.duel) {
         const duel = game.duel;
         game.duel = null;
