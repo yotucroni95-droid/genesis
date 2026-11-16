@@ -41,7 +41,7 @@ export async function redeem(game, value) {
 }
 
 export function openRedeem(game) {
-  const input = h('input', { type: 'text', class: 'field__input', autocomplete: 'off', autocapitalize: 'characters', spellcheck: 'false', placeholder: 'DESAFIO-XXXX-XXXX' });
+  const input = h('input', { type: 'text', class: 'field__input', autocomplete: 'off', autocapitalize: 'characters', spellcheck: 'false', placeholder: 'Código' });
   const close = () => modal.remove();
   const go = async () => {
     const r = await redeem(game, input.value);
