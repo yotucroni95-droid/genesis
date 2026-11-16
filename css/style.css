@@ -1066,3 +1066,13 @@ button, .btn, [role="button"], .boxcard, .map-card, .lobby__btn { touch-action: 
 .lobby__top > * { flex-shrink: 0; }
 .lobby__top .lobby__rank, .lobby__top .lobby__me { flex: 0 1 auto; min-width: 0; overflow: hidden; }
 @media (max-width: 780px) { .lobby__top { gap: 8px; } .lobby__top .rankbar { display: none; } .lobby__top .currency { gap: 6px; } }
+
+/* maintenance screen (src/maintenance.js) */
+#maintenance{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;background:radial-gradient(circle at 50% 30%,#2b2350,#0e0b1f);color:#fff;text-align:center;font-family:"Pixelify Sans",system-ui,sans-serif}
+#maintenance .maint__box{max-width:420px;display:flex;flex-direction:column;align-items:center;gap:10px}
+#maintenance .maint__icon{font-size:56px;line-height:1}
+#maintenance .maint__title{margin:0;font-size:32px;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+#maintenance .maint__msg{margin:0;font-size:18px}
+#maintenance .maint__small{margin:0;font-size:14px;opacity:.75}
+#maintenance .maint__owner{display:flex;gap:8px;margin-top:8px}
+#maintenance .maint__owner[hidden]{display:none}

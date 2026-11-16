@@ -6,6 +6,7 @@
 "css/style.css",
 "src/config.js",
 "src/main.js",
+"src/maintenance.js",
 "src/ui/celebrate.js",
 "src/ui/character-card.js",
 "src/ui/dom.js",
