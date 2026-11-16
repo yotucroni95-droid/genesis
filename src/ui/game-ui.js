@@ -2,7 +2,7 @@
 // framed avatar, chest drawing and the content cache for verses/cosmetics.
 
 import { h } from './dom.js';
-import { rankFor, nextRank, RARITY_COLOR } from '../game/economy.js';
+import { rankFor, nextRank, rankArt, RARITY_COLOR } from '../game/economy.js';
 import { lamp, lampStage } from '../game/meta.js';
 
 // Icons: when the artist's PNG exists it is used, otherwise the emoji.
@@ -28,10 +28,10 @@ export async function loadExtras(assets) {
 export function rankBadge(trophies, { big = false } = {}) {
   const r = rankFor(trophies);
   const numeral = (r.name.match(/ (I{1,3})$/) || [])[1] || '★';
-  const art = `ui.patente_${r.id.replace(/\d$/, '')}`;
+  const art = `ui.patente_${rankArt(r)}`;
   return h('div', { class: `rank${big ? ' rank--big' : ''}`, style: { '--rank': r.color }, title: r.name },
     hasArt(art)
-      ? h('div', { class: 'rank__art' }, h('img', { class: 'pixel', src: A.url(art), alt: '' }), numeral !== '★' ? h('span', { text: numeral }) : null)
+      ? h('div', { class: 'rank__art' }, h('img', { class: 'pixel', src: A.url(art), alt: '', style: r.tint ? { filter: r.tint } : {} }), numeral !== '★' ? h('span', { text: numeral }) : null)
       : h('div', { class: 'rank__shield' }, h('span', { text: numeral })),
     h('div', { class: 'rank__name', text: r.name }),
   );

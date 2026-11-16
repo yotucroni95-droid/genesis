@@ -62,7 +62,7 @@ export function powerLines(c) {
 /** Gives fragments; unlocks the character when it has enough. Returns { id, amount, unlocked }. */
 export function addFragments(save, id, amount) {
   if (save.isUnlocked(id)) {
-    const comp = { comum: 2, raro: 4, 'épico': 8, 'lendário': 15 }[(charById(id) || {}).rarity] || 2;
+    const comp = { comum: 1, raro: 2, 'épico': 4, 'lendário': 8 }[(charById(id) || {}).rarity] || 2;
     addDenarios(save, comp);
     return { id, amount, unlocked: false, converted: comp };
   }
@@ -117,7 +117,7 @@ export function boxFragments(save, boxRarity) {
     const r = addFragments(save, c.id, amount);
     items.push({ type: 'fragments', character: c, ...r, have: (save.state.fragments || {})[c.id] || 0 });
   }
-  const den = { comum: 0, raro: 1, 'épico': rand(3, 6), 'lendário': rand(8, 15) }[boxRarity] || 0;
+  const den = { comum: 0, raro: 0, 'épico': rand(2, 4), 'lendário': rand(5, 9) }[boxRarity] || 0;
   if (den) { addDenarios(save, den); items.push({ type: 'denarios', amount: den }); }
   return items;
 }
@@ -215,7 +215,7 @@ export function weekly(save) {
     const pool = WEEKLY_POOL.slice();
     const missions = [];
     while (missions.length < 4) missions.push(pool.splice(Math.floor(rnd() * pool.length), 1)[0]);
-    save.update((s) => { s.weekly = { week: w, missions: missions.map((m) => ({ ...m, progress: 0, reward: 6 + Math.floor(rnd() * 5), claimed: false })), bonusClaimed: false }; });
+    save.update((s) => { s.weekly = { week: w, missions: missions.map((m) => ({ ...m, progress: 0, reward: 4 + Math.floor(rnd() * 3), claimed: false })), bonusClaimed: false }; });
   }
   return save.state.weekly;
 }
@@ -277,12 +277,12 @@ export function passReward(level) {
   if (level === 10) return { kind: 'box', rarity: 'épico', label: 'Baú Épico' };
   if (level % 5 === 0) return { kind: 'box', rarity: 'raro', label: 'Baú Raro' };
   const cycle = [
-    { kind: 'coins', amount: 60, label: '60 talentos' },
+    { kind: 'coins', amount: 40, label: '40 talentos' },
     { kind: 'frag', amount: 2, rarity: 'comum', label: '2 fragmentos' },
-    { kind: 'denarios', amount: 3, label: '3 denários' },
+    { kind: 'denarios', amount: 2, label: '2 denários' },
     { kind: 'oil', amount: 1, label: '1 frasco de azeite' },
     { kind: 'frag', amount: 2, rarity: 'raro', label: '2 fragmentos raros' },
-    { kind: 'coins', amount: 100, label: '100 talentos' },
+    { kind: 'coins', amount: 60, label: '60 talentos' },
   ];
   return cycle[level % cycle.length];
 }
@@ -336,25 +336,25 @@ export function dailyOffers(save, cosmetics) {
     if (c) offers.push({ kind: 'frag', id: c.id, amount, price, currency, label: `${amount} fragmentos de ${c.name}` });
   };
   fragOffer(rnd() < 0.6 ? 'comum' : 'raro', 3, 0, 'coins');
-  offers[0].price = charById(offers[0].id).rarity === 'comum' ? 120 : 220;
-  fragOffer('épico', 2, 12, 'denarios');
-  fragOffer('lendário', 1, 25, 'denarios');
-  offers.push({ kind: 'oil', amount: 1, price: 150, currency: 'coins', label: 'Frasco de azeite' });
+  offers[0].price = charById(offers[0].id).rarity === 'comum' ? 350 : 650;
+  fragOffer('épico', 2, 30, 'denarios');
+  fragOffer('lendário', 1, 55, 'denarios');
+  offers.push({ kind: 'oil', amount: 1, price: 400, currency: 'coins', label: 'Frasco de azeite' });
   const kinds = ['frames', 'titles', 'trails'];
   const kind = kinds[Math.floor(rnd() * kinds.length)];
   const list = (cosmetics[kind] || []).filter((c) => !c.hidden);
   if (list.length) {
     const c = list[Math.floor(rnd() * list.length)];
-    const price = { comum: 6, raro: 10, 'épico': 16, 'lendário': 24 }[c.rarity] || 10;
+    const price = { comum: 15, raro: 25, 'épico': 40, 'lendário': 70 }[c.rarity] || 25;
     offers.push({ kind: 'cosmetic', cosmeticKind: kind, id: c.id, price, currency: 'denarios', label: c.name, rarity: c.rarity });
   }
-  offers.push({ kind: 'box', rarity: 'raro', price: 100, currency: 'coins', label: 'Baú Raro (promoção)' });
+  offers.push({ kind: 'box', rarity: 'raro', price: 350, currency: 'coins', label: 'Baú Raro (promoção)' });
   const bought = (save.state.offers && save.state.offers.day === dayIndex()) ? save.state.offers.bought : {};
   return offers.map((o, i) => ({ ...o, i, bought: Boolean(bought[i]),
     owned: o.kind === 'cosmetic' ? Boolean((save.state[o.cosmeticKind] || {})[o.id]) : o.kind === 'frag' ? save.isUnlocked(o.id) : o.kind === 'oil' ? (save.state.oil || 0) >= OIL_MAX : false }));
 }
 
-export const WEEKLY_PACK = { price: 30, label: 'Pacote da semana', text: 'Baú Épico + 4 fragmentos épicos + 2 frascos de azeite' };
+export const WEEKLY_PACK = { price: 70, label: 'Pacote da semana', text: 'Baú Épico + 4 fragmentos épicos + 2 frascos de azeite' };
 
 function pay(save, price, currency) {
   const have = currency === 'denarios' ? save.state.denarios || 0 : save.state.coins || 0;

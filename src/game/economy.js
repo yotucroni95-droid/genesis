@@ -7,28 +7,43 @@ export const RARITIES = ['comum', 'raro', 'épico', 'lendário'];
 export const RARITY_LABEL = { comum: 'Comum', raro: 'Raro', 'épico': 'Épico', 'lendário': 'Lendário' };
 export const RARITY_COLOR = { comum: '#9fb3c8', raro: '#4fa3ff', 'épico': '#b56dff', 'lendário': '#ffc93c' };
 
+// Every rank has three steps; the trophies needed grow fast, so the top
+// ranks take months. `art` reuses a badge picture, `tint` recolours it.
 export const RANKS = [
   { id: 'bronze1', name: 'Bronze I', min: 0, color: '#c07a3c' },
-  { id: 'bronze2', name: 'Bronze II', min: 30, color: '#c07a3c' },
-  { id: 'bronze3', name: 'Bronze III', min: 60, color: '#c07a3c' },
-  { id: 'prata1', name: 'Prata I', min: 100, color: '#c6d2e0' },
-  { id: 'prata2', name: 'Prata II', min: 150, color: '#c6d2e0' },
-  { id: 'prata3', name: 'Prata III', min: 200, color: '#c6d2e0' },
-  { id: 'ouro1', name: 'Ouro I', min: 280, color: '#ffd36e' },
-  { id: 'ouro2', name: 'Ouro II', min: 360, color: '#ffd36e' },
-  { id: 'ouro3', name: 'Ouro III', min: 450, color: '#ffd36e' },
-  { id: 'diamante', name: 'Diamante', min: 560, color: '#6fe7ff' },
-  { id: 'lendario', name: 'Lendário', min: 700, color: '#ff8fd0' },
+  { id: 'bronze2', name: 'Bronze II', min: 60, color: '#c07a3c' },
+  { id: 'bronze3', name: 'Bronze III', min: 130, color: '#c07a3c' },
+  { id: 'prata1', name: 'Prata I', min: 220, color: '#c6d2e0' },
+  { id: 'prata2', name: 'Prata II', min: 320, color: '#c6d2e0' },
+  { id: 'prata3', name: 'Prata III', min: 440, color: '#c6d2e0' },
+  { id: 'ouro1', name: 'Ouro I', min: 600, color: '#ffd36e' },
+  { id: 'ouro2', name: 'Ouro II', min: 780, color: '#ffd36e' },
+  { id: 'ouro3', name: 'Ouro III', min: 980, color: '#ffd36e' },
+  { id: 'diamante1', name: 'Diamante I', min: 1220, color: '#6fe7ff' },
+  { id: 'diamante2', name: 'Diamante II', min: 1500, color: '#6fe7ff' },
+  { id: 'diamante3', name: 'Diamante III', min: 1820, color: '#6fe7ff' },
+  { id: 'lendario1', name: 'Lendário I', min: 2200, color: '#ff8fd0' },
+  { id: 'lendario2', name: 'Lendário II', min: 2650, color: '#ff8fd0' },
+  { id: 'lendario3', name: 'Lendário III', min: 3150, color: '#ff8fd0' },
+  { id: 'mestre1', name: 'Mestre I', min: 3750, color: '#b56dff', art: 'diamante', tint: 'hue-rotate(80deg) saturate(1.3)' },
+  { id: 'mestre2', name: 'Mestre II', min: 4450, color: '#b56dff', art: 'diamante', tint: 'hue-rotate(80deg) saturate(1.3)' },
+  { id: 'mestre3', name: 'Mestre III', min: 5250, color: '#b56dff', art: 'diamante', tint: 'hue-rotate(80deg) saturate(1.3)' },
+  { id: 'campeao1', name: 'Campeão da Fé I', min: 6200, color: '#ff5a46', art: 'lendario', tint: 'hue-rotate(-40deg) saturate(1.4)' },
+  { id: 'campeao2', name: 'Campeão da Fé II', min: 7300, color: '#ff5a46', art: 'lendario', tint: 'hue-rotate(-40deg) saturate(1.4)' },
+  { id: 'campeao3', name: 'Campeão da Fé III', min: 8600, color: '#ff5a46', art: 'lendario', tint: 'hue-rotate(-40deg) saturate(1.4)' },
+  { id: 'coroa', name: 'Coroa da Vida', min: 10000, color: '#fff1b8', art: 'lendario', tint: 'saturate(1.6) brightness(1.15) drop-shadow(0 0 6px #ffe27a)' },
 ];
+/** The picture of a rank's badge (ranks above Lendário reuse a recoloured one). */
+export const rankArt = (r) => r.art || r.id.replace(/\d$/, '');
 
 export const SHOP = [
-  { rarity: 'comum', price: 60 },
-  { rarity: 'raro', price: 150 },
-  { rarity: 'épico', price: 350 },
-  { rarity: 'lendário', price: 800 },
+  { rarity: 'comum', price: 180 },
+  { rarity: 'raro', price: 450 },
+  { rarity: 'épico', price: 1000 },
+  { rarity: 'lendário', price: 2200 },
 ];
 
-export const FREE_BOX_MS = 4 * 60 * 60 * 1000; // a free box every 4 hours
+export const FREE_BOX_MS = 6 * 60 * 60 * 1000; // a free box every 6 hours
 
 const today = () => new Date().toLocaleDateString('sv-SE'); // YYYY-MM-DD in local time
 const rand = (a, b) => a + Math.floor(Math.random() * (b - a + 1));
@@ -52,9 +67,12 @@ export function addTrophies(save, n) {
   save.update((s) => { s.trophies = Math.max(0, (s.trophies || 0) + n); });
   const after = rankFor(save.state.trophies);
   if (after.id !== before.id && after.min > before.min) {
-    // every new rank gives a box: better ranks, better boxes
+    // a rank gives its box only the first time it is reached
     const idx = RANKS.indexOf(after);
-    addBox(save, idx >= 9 ? 'lendário' : idx >= 6 ? 'épico' : idx >= 3 ? 'raro' : 'comum', 'patente');
+    if (idx > (save.state.rankBest ?? RANKS.indexOf(before))) {
+      save.update((s) => { s.rankBest = idx; });
+      addBox(save, idx >= 15 ? 'lendário' : idx >= 9 ? 'épico' : idx >= 3 ? 'raro' : 'comum', 'patente');
+    }
     return after;
   }
   return null;
@@ -87,7 +105,7 @@ export function addBox(save, rarity, from = '') {
 export function rollUpgrade(save, rarity) {
   const t = save.state.trophies || 0;
   let i = RARITIES.indexOf(rarity);
-  const chance = Math.min(0.45, 0.08 + t / 1600); // 8% at the start, up to 45%
+  const chance = Math.min(0.4, 0.06 + t / 6000); // 6% at the start, up to 40%
   while (i < RARITIES.length - 1 && Math.random() < chance) i += 1;
   return RARITIES[i];
 }
@@ -113,7 +131,7 @@ export function buyBox(save, rarity) {
 }
 
 const CARDS_BY_RARITY = { comum: 1, raro: 2, 'épico': 3, 'lendário': 4 };
-const COINS_BY_RARITY = { comum: [20, 40], raro: [50, 90], 'épico': [100, 160], 'lendário': [200, 300] };
+const COINS_BY_RARITY = { comum: [8, 15], raro: [20, 35], 'épico': [45, 70], 'lendário': [90, 140] };
 
 function pickCard(verses, minRarity) {
   // weighted draw, never below the minimum rarity
@@ -189,7 +207,7 @@ function newMissions() {
     const m = pick(MISSION_POOL);
     if (types.has(m.type)) continue;
     types.add(m.type);
-    chosen.push({ ...m, progress: 0, reward: rand(40, 60), claimed: false });
+    chosen.push({ ...m, progress: 0, reward: rand(20, 35), claimed: false });
   }
   return chosen;
 }
@@ -268,7 +286,8 @@ export function rewardStop(save, chapter, stop, result, isFirstTime) {
   out.push({ type: 'stars', stars, newStars });
 
   const hero = Boolean(result.hero);
-  const base = ((isFirstTime ? 30 : 5) + newStars * 20) * (hero ? 2 : 1) + (hero ? 20 : 0);
+  // first time pays; replays pay almost nothing unless they earn new stars
+  const base = ((isFirstTime ? 20 : 2) + newStars * 10) * (hero ? 2 : 1) + (hero ? 10 : 0);
   const coins = Math.round(base * (1 + power(save, 'coins') / 100));
   addCoins(save, coins);
   out.push({ type: 'coins', amount: coins });
@@ -281,7 +300,7 @@ export function rewardStop(save, chapter, stop, result, isFirstTime) {
     if (rankUp) out.push({ type: 'rank', rank: rankUp });
   }
   if (hero) {
-    const den = stars === 3 ? 3 : 1;
+    const den = stars === 3 ? 2 : 1;
     addDenarios(save, den);
     out.push({ type: 'denarios', amount: den });
     track(save, 'hero', 1);

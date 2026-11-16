@@ -54,7 +54,7 @@ O código do jogo não muda.
 
 - **Lobby:** personagem grande no centro, patente, troféus e talentos, botões JOGAR, Arena, Baús, Missões, Loja, Coleção e Personagens.
 - **Estrelas** (1 a 3) em cada parada, **talentos** (moeda do jogo, sem dinheiro de verdade), **troféus** e **patentes** (Bronze I até Lendário).
-- **Baús** Comum, Raro, Épico e Lendário com abertura animada; mais troféus = mais chance de baú raro. Baú grátis a cada 4 horas.
+- **Baús** Comum, Raro, Épico e Lendário com abertura animada; mais troféus = mais chance de baú raro. Baú grátis a cada 6 horas.
 - **Missões diárias** e **sequência de dias**; **Arena** (Desafio Relâmpago) com combo e recorde.
 - **Coleção** de 40 cartas de versículo, **títulos** e **molduras** para o perfil.
 - Regras em `src/game/economy.js`; conteúdo em `content/verses.json`, `content/cosmetics.json` e `content/arena.json`.

@@ -12,7 +12,7 @@ import { celebrate } from '../ui/celebrate.js';
 import { rankBadge, ico } from '../ui/game-ui.js';
 import { shareCard } from '../ui/share.js';
 import { power, seeded, charById } from '../game/meta.js';
-import { rankFor } from '../game/economy.js';
+import { rankFor, rankArt } from '../game/economy.js';
 
 function seededShuffle(list, seed) {
   const rnd = seeded(seed);
@@ -34,8 +34,8 @@ export function createArenaScene(game) {
       const area = h('div', { class: 'arena' });
       const screen = gameScreen(game, duel ? `Desafio de @${duel.nick} ⚡` : 'Arena ⚡', area);
       // each rank has its own arena background
-      screen.classList.add('arena-bg', `arena-bg--${rankFor(save.state.trophies || 0).id.replace(/\d$/, '')}`);
-      const bgArt = game.assets.entry(`arena.${rankFor(save.state.trophies || 0).id.replace(/\d$/, '')}`);
+      screen.classList.add('arena-bg', `arena-bg--${rankArt(rankFor(save.state.trophies || 0))}`);
+      const bgArt = game.assets.entry(`arena.${rankArt(rankFor(save.state.trophies || 0))}`);
       if (bgArt && bgArt.image && !bgArt.placeholder) screen.style.backgroundImage = `linear-gradient(rgba(5,7,26,.55), rgba(5,7,26,.75)), url("${game.assets.url(bgArt.id)}")`;
       ui.appendChild(screen);
       const SECS = SECONDS + power(save, 'arenaTime');
@@ -140,8 +140,13 @@ export function createArenaScene(game) {
           const best = save.state.arenaBest || 0;
           const record = score > best;
           const won = duel ? score > duel.score : false;
-          const coins = Math.floor((score / 10) * (1 + power(save, 'arenaCoins') / 100)) + (won ? 30 : 0);
-          const trophies = Math.round((Math.min(15, Math.floor(score / 50)) + (record && score > 0 ? 5 : 0) + (won ? 5 : 0)) * (1 + power(save, 'trophies') / 100));
+          // talentos fall after the first 5 games of the day, so the Arena cannot be farmed
+          const day = new Date().toLocaleDateString('sv-SE');
+          const played = save.state.arenaDay && save.state.arenaDay.date === day ? save.state.arenaDay.n : 0;
+          save.update((s) => { s.arenaDay = { date: day, n: played + 1 }; });
+          const tired = played < 5 ? 1 : played < 10 ? 0.4 : 0.1;
+          const coins = Math.floor(((score / 30) * (1 + power(save, 'arenaCoins') / 100) + (won ? 15 : 0)) * tired);
+          const trophies = Math.round((Math.min(12, Math.floor(score / 80)) + (record && score > 0 ? 5 : 0) + (won ? 5 : 0)) * (1 + power(save, 'trophies') / 100) * tired);
           if (record) save.update((s) => { s.arenaBest = score; });
           addCoins(save, coins);
           const rankUp = trophies ? addTrophies(save, trophies) : null;
