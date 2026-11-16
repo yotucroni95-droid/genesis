@@ -13,8 +13,8 @@
   "npcs": [
     {
       "sheet": "povo",
-      "x": 14,
-      "y": 7,
+      "x": 13,
+      "y": 6,
       "dir": 0,
       "talk": [
         "Não há ninguém tão sábio como José!",
@@ -26,7 +26,7 @@
     {
       "sheet": "jose",
       "x": 16,
-      "y": 7,
+      "y": 6,
       "dir": 0,
       "talk": [
         "Deus transformou o mal em bem.",
@@ -37,7 +37,7 @@
     {
       "sheet": "jaco",
       "x": 13,
-      "y": 13,
+      "y": 10,
       "dir": 0,
       "talk": [
         "Meu filho José está vivo! Que alegria!",
@@ -47,7 +47,7 @@
     {
       "sheet": "povo",
       "x": 16,
-      "y": 13,
+      "y": 10,
       "dir": 0,
       "talk": [
         "José é meu irmão! Ele nos perdoou!",
@@ -57,8 +57,8 @@
     },
     {
       "sheet": "lucifer",
-      "x": 23,
-      "y": 14,
+      "x": 24,
+      "y": 10,
       "dir": 0,
       "talk": [
         "Agora você tem poder: vingue-se deles!",

@@ -11,7 +11,7 @@
   "npcs": [
     {
       "sheet": "jose",
-      "x": 8,
+      "x": 9,
       "y": 7,
       "dir": 0,
       "talk": [
@@ -22,7 +22,7 @@
     },
     {
       "sheet": "povo",
-      "x": 4,
+      "x": 3,
       "y": 9,
       "dir": 0,
       "talk": [
@@ -33,8 +33,8 @@
     },
     {
       "sheet": "povo",
-      "x": 13,
-      "y": 9,
+      "x": 12,
+      "y": 7,
       "dir": 0,
       "talk": [
         "Eu sou Benjamim, o caçula. Sinto falta do meu irmão José!",
@@ -44,8 +44,8 @@
     },
     {
       "sheet": "povo",
-      "x": 12,
-      "y": 11,
+      "x": 9,
+      "y": 10,
       "dir": 0,
       "talk": [
         "Ele é o preferido... ele merece sofrer!",

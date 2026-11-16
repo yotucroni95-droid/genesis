@@ -218,6 +218,68 @@ def place_stops_on_road(walk, chapters, T, spawn):
     return moved
 
 
+def place_npcs_off_road(G, walk, water, chapters, T, frames, spawn):
+    """People stand beside the road, never on it (the user's rule): an NPC whose
+    body touches the path moves to the nearest tile where the body is off the
+    path and off the water, and the road is still within talking distance.
+    The voice files (named by position) are renamed with them."""
+    Hc, Wc = walk.shape
+    lab_, _ = ndimage.label(walk)
+    sx, sy = int(spawn[0] // C), int((spawn[1] - 4) // C)
+    ys, xs = np.nonzero(walk)
+    k = np.argmin((xs - sx) ** 2 + (ys - sy) ** 2)
+    roady = (lab_ == lab_[ys[k], xs[k]]) & (ndimage.distance_transform_edt(walk) >= 2)
+    dist_road = ndimage.distance_transform_edt(~roady) * C   # px from any cell to open road
+    def body_cells(n):
+        (bx, by, bw, bh), _ = npc_box(n, T, frames.get(n['sheet'], 32))
+        x0, y0 = int((bx - 4) // C), int((by - 4) // C)
+        x1, y1 = int((bx + bw + 4) // C) + 1, int((by + bh + 4) // C) + 1
+        return x0, y0, x1, y1
+    def ok(n, others):
+        x0, y0, x1, y1 = body_cells(n)
+        if x0 < 1 or y0 < 1 or x1 > Wc - 1 or y1 > Hc - 1: return False
+        if walk[y0:y1, x0:x1].any() or water[y0:y1, x0:x1].any(): return False
+        _, (px, py) = npc_box(n, T, frames.get(n['sheet'], 32))
+        if dist_road[min(Hc - 1, int(py // C)), min(Wc - 1, int(px // C))] > 36: return False
+        return all(abs(n['x'] - ox) + abs(n['y'] - oy) >= 2 for ox, oy in others)
+    vpath = f'{G}/content/voices.json'
+    voices = json.load(open(vpath))
+    moved, fixed = [], []
+    for ch in chapters:
+        taken = [(s['x'], s['y']) for s in ch['stops']]
+        for n in ch.get('npcs', []):
+            others = taken + [(m['x'], m['y']) for m in ch['npcs'] if m is not n]
+            if ok(n, others): continue
+            best = None
+            for r in range(1, 13):
+                cands = [(n['x'] + dx, n['y'] + dy) for dx in range(-r, r + 1) for dy in range(-r, r + 1) if max(abs(dx), abs(dy)) == r]
+                cands = [c for c in cands if ok({**n, 'x': c[0], 'y': c[1]}, others)]
+                if cands:
+                    best = min(cands, key=lambda c: (c[0] - n['x']) ** 2 + (c[1] - n['y']) ** 2); break
+            if not best:
+                fixed.append(f"{n['sheet']}@{n['x']},{n['y']}"); continue
+            old = f"{ch['id']}-{n['sheet']}-{n['x']}-{n['y']}"
+            new = f"{ch['id']}-{n['sheet']}-{best[0]}-{best[1]}"
+            for key in [k for k in voices['files'] if k.startswith(f'talk-{old}-') or k == f'resist-{old}']:
+                nk = key.replace(old, new)
+                src, dst = f"{G}/{voices['files'][key]}", f"{G}/assets/voice/{nk}.m4a"
+                if os.path.exists(src): os.replace(src, dst)
+                del voices['files'][key]; voices['files'][nk] = f'assets/voice/{nk}.m4a'
+            moved.append(f"{n['sheet']} ({n['x']},{n['y']})->({best[0]},{best[1]})")
+            n['x'], n['y'] = best
+    json.dump(voices, open(vpath, 'w'), ensure_ascii=False, indent=1)
+    return moved, fixed
+
+
+def block_npc_bodies(walk, chapters, T, frames, skip=()):
+    """The final path never runs under a person's body."""
+    for ch in chapters:
+        for n in ch.get('npcs', []):
+            if f"{n['sheet']}@{n['x']},{n['y']}" in skip: continue
+            (bx, by, bw, bh), _ = npc_box(n, T, frames.get(n['sheet'], 32))
+            walk[max(0, int(by // C)):int((by + bh) // C) + 1, max(0, int(bx // C)):int((bx + bw) // C) + 1] = False
+
+
 def process(G, mid, chapters, frames, review):
     path = f'{G}/content/maps/{mid}.json'
     raw = open(path).read()
@@ -238,6 +300,8 @@ def process(G, mid, chapters, frames, review):
     cost = np.where(walk, 1.0, 5.0); cost[water] = 80.0
     sp = g['spawn']; spawn = ((sp['x'] + 0.5) * T, (sp['y'] + 1) * T - 4)
     moved = place_stops_on_road(walk, chapters, T, spawn)
+    npc_moved, npc_stuck = place_npcs_off_road(G, walk, water, chapters, T, frames, spawn)
+    moved += [f'npc {m}' for m in npc_moved]
     targets = []
     for ch in chapters:
         for s in ch['stops']:
@@ -269,6 +333,32 @@ def process(G, mid, chapters, frames, review):
         for kind, name, px, py, r in todo:
             p = carve(walk, cost, R, px, py)
             carved.append((name, p))
+            free = foot_free(walk, solids); R = reach(free, spawn)
+    tried = set()
+    # every sizeable stretch of painted road joins the rest: a road the player
+    # can see must be a road the player can walk (not only where someone stands)
+    for _ in range(8):
+        free = foot_free(walk, solids); R = reach(free, spawn)
+        rc = np.zeros_like(walk); ys, xs = np.nonzero(R)
+        rc[np.clip(ys * 2 // C - 1, 0, walk.shape[0] - 1), np.clip(xs * 2 // C, 0, walk.shape[1] - 1)] = True
+        rc = ndimage.binary_dilation(rc, iterations=2)
+        lab_r, n_r = ndimage.label(road)
+        lost = []
+        for i in range(1, n_r + 1):
+            comp = lab_r == i
+            if comp.sum() < 300 or (comp & rc).sum() > comp.sum() * 0.5: continue
+            # a road is long and thin; a tent roof or a sandy yard is a blob
+            ys_, xs_ = np.nonzero(comp)
+            if comp.sum() > 0.45 * (np.ptp(xs_) + 1) * (np.ptp(ys_) + 1): continue
+            core = ndimage.distance_transform_edt(comp)
+            cy, cx = np.unravel_index(np.argmax(core), core.shape)
+            lost.append((cx * C + C // 2, cy * C + C // 2))
+        if not lost: break
+        lost = [q for q in lost if q not in tried]
+        if not lost: break
+        for px, py in lost:
+            tried.add((px, py))
+            carved.append((f'road@{px},{py}', carve(walk, cost, R, px, py)))
             free = foot_free(walk, solids); R = reach(free, spawn)
     free = foot_free(walk, solids); R = reach(free, spawn)
     # keep only ground the player can actually get to (drops rooftops and loose bits)
@@ -305,6 +395,7 @@ def process(G, mid, chapters, frames, review):
             ys, xs = np.nonzero(lab_o == i); k = len(xs) // 2
             carved.append((f'neck@{xs[k]*2},{ys[k]*2}', carve(walk, cost, Rw, xs[k] * 2, ys[k] * 2)))
             Rw = reach(foot_free(walk, solids), spawn)
+    block_npc_bodies(walk, chapters, T, frames, set(npc_stuck))
     # a clear pad where the player appears
     cx, cy = int(spawn[0] // C), int((spawn[1] - 6) // C)
     pad = np.zeros_like(walk); pad[max(0, cy - 5):cy + 6, max(0, cx - 5):cx + 6] = disc(5)[max(0, 5 - cy):, max(0, 5 - cx):][:pad[max(0, cy - 5):cy + 6, max(0, cx - 5):cx + 6].shape[0], :pad[max(0, cy - 5):cy + 6, max(0, cx - 5):cx + 6].shape[1]]
@@ -347,11 +438,14 @@ def process(G, mid, chapters, frames, review):
         d.rectangle([spawn[0] - 5, spawn[1] - 5, spawn[0] + 5, spawn[1] + 5], fill=(0, 255, 0))
         im.save(os.path.join(review, f'walk_{mid}.png'))
     for ch in chapters:
-        if any(m.split(' ')[0] in [st['id'] for st in ch['stops']] for m in moved):
+        if any(m.split(' ')[0] in [st['id'] for st in ch['stops']] for m in moved) or npc_moved:
             fn = f"{G}/content/chapters/{ch['id']}.json"
             nl = '\n' if open(fn).read().endswith('\n') else ''
             open(fn, 'w').write(json.dumps(ch, ensure_ascii=False, indent=2) + nl)
-    if moved: print('   stops moved onto the road: ' + '; '.join(moved))
+    if moved: print('   moved: ' + '; '.join(moved))
+    if npc_stuck: print('   WARNING no place beside the road for: ' + ', '.join(npc_stuck))
+    roads = [n for n, _ in carved if n.startswith('road@')]
+    if roads: print('   roads joined: ' + ', '.join(roads))
     print(f'{mid:12s} walkable {walk.mean() * 100:4.1f}%  scroll spots {len(spots)}  passages opened: {len(carved)}  {"UNREACHABLE: " + ", ".join(bad) if bad else "all reachable"}')
     return bad
 

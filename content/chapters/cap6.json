@@ -12,8 +12,8 @@
   "npcs": [
     {
       "sheet": "abraao",
-      "x": 12,
-      "y": 8,
+      "x": 13,
+      "y": 9,
       "dir": 0,
       "talk": [
         "Deus me chamou e eu vim, mesmo sem saber o caminho.",
@@ -23,8 +23,8 @@
     },
     {
       "sheet": "sara",
-      "x": 3,
-      "y": 10,
+      "x": 1,
+      "y": 9,
       "dir": 0,
       "talk": [
         "Eu ri quando ouvi a promessa... mas Deus cumpriu!",
@@ -34,8 +34,8 @@
     },
     {
       "sheet": "lucifer",
-      "x": 3,
-      "y": 16,
+      "x": 5,
+      "y": 14,
       "dir": 0,
       "talk": [
         "Psiu... fique onde está, é mais seguro.",

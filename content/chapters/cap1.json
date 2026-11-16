@@ -12,8 +12,8 @@
   "npcs": [
     {
       "sheet": "adao",
-      "x": 11,
-      "y": 11,
+      "x": 10,
+      "y": 9,
       "dir": 0,
       "talk": [
         "Bem-vindo ao Éden! Eu dei nome a todos esses animais.",
@@ -23,7 +23,7 @@
     },
     {
       "sheet": "eva",
-      "x": 17,
+      "x": 16,
       "y": 11,
       "dir": 0,
       "talk": [

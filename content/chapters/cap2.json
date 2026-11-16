@@ -9,8 +9,8 @@
   "npcs": [
     {
       "sheet": "serpente",
-      "x": 3,
-      "y": 2,
+      "x": 5,
+      "y": 1,
       "tempter": true,
       "talk": [
         "É verdade que Deus não deixa vocês comerem de nenhuma árvore?",
@@ -25,7 +25,7 @@
     {
       "sheet": "adao",
       "x": 19,
-      "y": 4,
+      "y": 3,
       "dir": 0,
       "talk": [
         "Eu e Eva erramos... mas Deus veio nos procurar.",
@@ -35,7 +35,7 @@
     },
     {
       "sheet": "eva",
-      "x": 17,
+      "x": 20,
       "y": 4,
       "dir": 0,
       "talk": [
@@ -47,7 +47,7 @@
     {
       "sheet": "anjos_fieis",
       "x": 24,
-      "y": 4,
+      "y": 3,
       "variant": 2,
       "talk": [
         "Eu guardo o caminho da árvore da vida.",

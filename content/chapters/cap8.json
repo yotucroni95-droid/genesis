@@ -11,8 +11,8 @@
   "npcs": [
     {
       "sheet": "povo",
-      "x": 20,
-      "y": 13,
+      "x": 19,
+      "y": 12,
       "dir": 0,
       "talk": [
         "Eu estava com tanta fome... troquei algo precioso por um prato de comida.",
@@ -23,8 +23,8 @@
     },
     {
       "sheet": "jaco",
-      "x": 7,
-      "y": 9,
+      "x": 10,
+      "y": 7,
       "dir": 0,
       "talk": [
         "Deus estava comigo até quando eu fugia.",
@@ -34,8 +34,8 @@
     },
     {
       "sheet": "rebeca",
-      "x": 5,
-      "y": 5,
+      "x": 14,
+      "y": 6,
       "dir": 0,
       "talk": [
         "Meus meninos brigavam desde a barriga!",
@@ -44,8 +44,8 @@
     },
     {
       "sheet": "anjos_caidos",
-      "x": 25,
-      "y": 9,
+      "x": 18,
+      "y": 11,
       "dir": 0,
       "talk": [
         "Troque o que é de Deus por algo agora. Que mal tem?",

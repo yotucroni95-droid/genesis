@@ -9,8 +9,8 @@
   "npcs": [
     {
       "sheet": "povo",
-      "x": 9,
-      "y": 8,
+      "x": 12,
+      "y": 10,
       "dir": 0,
       "talk": [
         "Mais tijolos! Mais rápido! A torre tem que subir!",
@@ -21,7 +21,7 @@
     },
     {
       "sheet": "povo",
-      "x": 21,
+      "x": 23,
       "y": 11,
       "dir": 0,
       "talk": [
@@ -32,20 +32,9 @@
       "variant": 1
     },
     {
-      "sheet": "noe",
-      "x": 11,
-      "y": 12,
-      "dir": 0,
-      "talk": [
-        "Depois do dilúvio, Deus pediu que enchêssemos a Terra.",
-        "Lembre do arco-íris: Deus cumpre o que promete.",
-        "Orgulho não leva ninguém até o céu, meu filho."
-      ]
-    },
-    {
       "sheet": "povo",
-      "x": 21,
-      "y": 5,
+      "x": 20,
+      "y": 6,
       "dir": 0,
       "talk": [
         "Vamos ficar famosos! Ninguém vai esquecer o nosso nome!",

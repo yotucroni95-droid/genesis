@@ -48,17 +48,24 @@ function blockBrowserGestures() {
   document.addEventListener('contextmenu', stop);
 }
 
-// "Gire o celular": some phones never turn (rotation lock, or the browser inside
-// WhatsApp/Instagram). "Girar a tela" tries full screen locked lying down
-// (Android); "Jogar em pé" plays upright, which the game also supports.
+// "Gire o celular": the game is played lying down only. Some phones never turn:
+// rotation lock (the notice explains how to unlock it) or the browser inside
+// Instagram/Facebook, which stays upright (it explains how to open the game
+// in the phone's browser). "Girar a tela" tries full screen locked lying down
+// (works on Android).
 function setupRotateNotice() {
-  const UPRIGHT = 'genesis.upright';
-  try { if (localStorage.getItem(UPRIGHT) === '1') document.documentElement.classList.add('play-upright'); } catch { /* storage blocked */ }
+  try { localStorage.removeItem('genesis.upright'); } catch { /* storage blocked */ }
   const el = document.getElementById('rotate');
   if (!el) return;
-  el.querySelector('.rotate__stay').addEventListener('click', () => {
-    document.documentElement.classList.add('play-upright');
-    try { localStorage.setItem(UPRIGHT, '1'); } catch { /* storage blocked */ }
+  const help = el.querySelector('.rotate__help');
+  const copy = el.querySelector('.rotate__copy');
+  if (/Instagram|FBAN|FBAV|FB_IAB|Line\/|Snapchat|TikTok|musical_ly|Bytedance/i.test(navigator.userAgent)) {
+    help.textContent = 'Você abriu o jogo por dentro de um aplicativo, que não deixa a tela girar. Toque nos três pontinhos (⋯) e escolha "Abrir no navegador", ou copie o link e cole no Chrome ou no Safari.';
+    copy.hidden = false;
+  }
+  copy.addEventListener('click', async () => {
+    const url = location.origin + location.pathname;
+    try { await navigator.clipboard.writeText(url); copy.textContent = 'Link copiado! Cole no navegador'; } catch { copy.textContent = url; }
   });
   el.querySelector('.rotate__turn').addEventListener('click', async () => {
     try {
@@ -66,13 +73,9 @@ function setupRotateNotice() {
       if (!document.fullscreenElement && root.requestFullscreen) await root.requestFullscreen({ navigationUI: 'hide' });
       await screen.orientation.lock('landscape');
     } catch {
-      el.querySelector('.rotate__help').textContent = 'Este celular não deixa girar sozinho. Destrave a rotação automática ou toque em "Jogar com o celular em pé".';
+      help.textContent = 'Este celular não deixa o jogo girar a tela sozinho. Destrave a rotação automática no painel de atalhos (deslize o dedo do topo da tela) e vire o celular.';
     }
   });
-  // lying down again: the upright choice is forgotten, so the notice works next time
-  const mq = window.matchMedia('(orientation: landscape)');
-  const onTurn = () => { if (mq.matches) { document.documentElement.classList.remove('play-upright'); try { localStorage.removeItem(UPRIGHT); } catch { /* storage blocked */ } } };
-  if (mq.addEventListener) mq.addEventListener('change', onTurn);
 }
 
 async function boot() {

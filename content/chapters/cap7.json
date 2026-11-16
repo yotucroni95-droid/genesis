@@ -13,7 +13,7 @@
     {
       "sheet": "abraao",
       "x": 19,
-      "y": 3,
+      "y": 2,
       "dir": 0,
       "talk": [
         "O Senhor proverá. Nunca esqueça disso.",
@@ -23,7 +23,7 @@
     {
       "sheet": "isaque",
       "x": 16,
-      "y": 9,
+      "y": 10,
       "dir": 0,
       "talk": [
         "Meu pai disse: \"Deus mesmo vai providenciar.\" E providenciou!",
@@ -33,7 +33,7 @@
     },
     {
       "sheet": "rebeca",
-      "x": 15,
+      "x": 16,
       "y": 16,
       "dir": 0,
       "talk": [
@@ -44,7 +44,7 @@
     },
     {
       "sheet": "anjos_caidos",
-      "x": 20,
+      "x": 19,
       "y": 10,
       "dir": 0,
       "talk": [

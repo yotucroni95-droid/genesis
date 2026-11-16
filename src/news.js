@@ -4,16 +4,17 @@
 const SEEN_KEY = 'genesis.newsSeen';
 
 export const NEWS = {
-  id: '2026-11-16',
+  id: '2026-11-16b',
   title: 'Nova versão do Gênesis!',
   intro: 'Você está jogando a versão nova. Resolvemos alguns problemas que vocês nos contaram:',
   fixes: [
     'Os caminhos de todos os mapas foram revisados: agora dá para passar em todo lugar, inclusive em Babel e na ponte do Éden.',
-    'Os personagens não ficam mais travando a passagem: o seu boneco passa por eles.',
+    'Os personagens agora ficam ao lado da estrada, fora do caminho: ninguém fica parado no meio da passagem.',
+    'Os personagens lendários (Paulo, João Batista, Salomão, Maria, Abel e a Aventureira) agora olham para a direita quando você vira o joystick para a direita.',
+    'O jogo abre sempre deitado (na horizontal). Se a tela não girar, a rotação automática do celular está travada: destrave e vire de novo.',
     'Todas as missões ficam em cima do caminho, fáceis de alcançar (Jacó e Esaú, Moriá e as missões do Acampamento).',
     'Os pergaminhos aparecem só na estrada, e são sempre 5 por mapa.',
     'O botão de voltar volta só uma tela por toque (antes, às vezes voltava duas).',
-    'Se o seu celular não gira a tela, agora dá para jogar com ele em pé.',
     'Acampamento: o Voto e a Lei do Aventureiro foram corrigidos com o texto oficial, e o jogo de colocar em ordem agora aceita a resposta certa.',
   ],
   outro: 'Em breve chegam mais atualizações, sempre buscando melhorias. Obrigado por jogar e por nos ajudar!',

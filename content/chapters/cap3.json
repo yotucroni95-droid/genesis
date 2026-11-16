@@ -11,8 +11,8 @@
   "npcs": [
     {
       "sheet": "caim",
-      "x": 12,
-      "y": 8,
+      "x": 13,
+      "y": 7,
       "dir": 0,
       "tempter": true,
       "talk": [
@@ -28,7 +28,7 @@
     {
       "sheet": "abel",
       "x": 20,
-      "y": 8,
+      "y": 9,
       "dir": 0,
       "talk": [
         "Eu dou a Deus o melhor que tenho, com fé.",
