@@ -24,6 +24,7 @@ export class TileMap {
     this.solid = collision ? collision.data : new Array(this.cols * this.rows).fill(0);
     this.triggers = (this.layers.triggers && this.layers.triggers.objects) || [];
     this.bridges = ext.bridges || [];
+    this.scrollSpots = ext.scrollSpots || []; // places on the painted road where scrolls may lie (tools/make_walk.py)
     this.foreground = ext.foreground || []; // parts of the picture drawn over the characters (a gate they walk under)
     this.waterCell = 4;
     this.waterMask = null;

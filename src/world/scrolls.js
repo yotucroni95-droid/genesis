@@ -43,6 +43,7 @@ export class Scrolls {
     const H = Math.floor(map.pixelH / S);
     const free = (x, y) => !boxHitsMap(map, x * S - 7, y * S - 8, 14, 8);
     const seen = new Uint8Array(W * H);
+    const ok = new Uint8Array(W * H); // reached on foot
     const sx = Math.round(start.x / S);
     const sy = Math.round(start.y / S);
     const queue = [[sx, sy]];
@@ -51,6 +52,7 @@ export class Scrolls {
     while (queue.length) {
       const [x, y] = queue.pop();
       spots.push([x * S, y * S]);
+      ok[y * W + x] = 1;
       for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
         const nx = x + dx;
         const ny = y + dy;
@@ -59,9 +61,15 @@ export class Scrolls {
         if (free(nx, ny)) queue.push([nx, ny]);
       }
     }
-    // scrolls lie in the middle of the road, never squeezed against an edge
-    const roomy = spots.filter(([x, y]) => !boxHitsMap(map, x - 15, y - 15, 30, 22));
-    if (roomy.length >= 40) spots = roomy;
+    // scrolls lie only on the painted road of the map, never in the woods or on
+    // an opened passage: make_walk.py lists those places; the reachable set is a
+    // fallback for maps without the list
+    const onRoad = map.scrollSpots.filter(([x, y]) => ok[Math.round(y / S) * W + Math.round(x / S)] && !boxHitsMap(map, x - 7, y - 8, 14, 8));
+    if (onRoad.length >= 8) spots = onRoad;
+    else {
+      const roomy = spots.filter(([x, y]) => !boxHitsMap(map, x - 15, y - 15, 30, 22));
+      if (roomy.length >= 40) spots = roomy;
+    }
     const rnd = seeded(`${this.today}|${this.chapterId}`);
     const avoid = [[start.x, start.y, 110], ...stops.stops.map((s) => [s.px, s.py, 60]), ...stops.npcs.map((n) => [n.px, n.py, 40])];
     const chosen = [];

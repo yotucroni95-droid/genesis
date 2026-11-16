@@ -234,6 +234,7 @@ def process(G, mid, chapters, frames, review):
     lab, n = ndimage.label(walk)
     sizes = ndimage.sum(walk, lab, range(1, n + 1))
     walk = np.isin(lab, [i + 1 for i, s in enumerate(sizes) if s >= 40])
+    road = walk.copy()   # the painted road itself, before any passage is opened
     cost = np.where(walk, 1.0, 5.0); cost[water] = 80.0
     sp = g['spawn']; spawn = ((sp['x'] + 0.5) * T, (sp['y'] + 1) * T - 4)
     moved = place_stops_on_road(walk, chapters, T, spawn)
@@ -316,6 +317,17 @@ def process(G, mid, chapters, frames, review):
             ys, xs = np.nonzero(R)
             dmin = np.sqrt(((xs * 2 - t[2]) ** 2 + (ys * 2 - t[3]) ** 2).min()) if len(xs) else -1
             print(f'   {t[1]} at ({t[2]:.0f},{t[3]:.0f}) nearest reachable {dmin:.0f}px (needs < {t[4]})')
+    # scroll spots: on the painted road, 12 px from its edge, roomy for the player,
+    # reachable, and not on the start pad (src/world/scrolls.js draws from these)
+    core = ndimage.distance_transform_edt(road & walk) >= 3
+    roomy = foot_free(walk, solids, 30, 22)
+    spots = []
+    for y in range(8, walk.shape[0] * C - 8, 16):
+        for x in range(8, walk.shape[1] * C - 8, 16):
+            if core[y // C, x // C] and R[min(y // 2, R.shape[0] - 1), x // 2] and roomy[min(y // 2, roomy.shape[0] - 1), x // 2] \
+                    and (x - spawn[0]) ** 2 + (y - spawn[1]) ** 2 > 90 ** 2:
+                spots.append([x, y])
+    g['scrollSpots'] = spots
     g['walk'] = {'cell': C, 'w': walk.shape[1], 'h': walk.shape[0], 'rows': [rle(r) for r in walk]}
     compact = '\n' not in raw.strip()
     open(path, 'w').write(json.dumps(m, ensure_ascii=False, separators=(',', ':')) if compact else json.dumps(m, ensure_ascii=False, indent=1))
@@ -331,6 +343,7 @@ def process(G, mid, chapters, frames, review):
             col = (255, 230, 0) if kind == 'stop' else (0, 255, 255)
             if name in bad: col = (255, 0, 0)
             d.ellipse([px - r, py - r, px + r, py + r], outline=col, width=2)
+        for x, y in spots: d.point((x, y), fill=(255, 255, 255))
         d.rectangle([spawn[0] - 5, spawn[1] - 5, spawn[0] + 5, spawn[1] + 5], fill=(0, 255, 0))
         im.save(os.path.join(review, f'walk_{mid}.png'))
     for ch in chapters:
@@ -339,7 +352,7 @@ def process(G, mid, chapters, frames, review):
             nl = '\n' if open(fn).read().endswith('\n') else ''
             open(fn, 'w').write(json.dumps(ch, ensure_ascii=False, indent=2) + nl)
     if moved: print('   stops moved onto the road: ' + '; '.join(moved))
-    print(f'{mid:12s} walkable {walk.mean() * 100:4.1f}%  passages opened: {len(carved)}  {"UNREACHABLE: " + ", ".join(bad) if bad else "all reachable"}')
+    print(f'{mid:12s} walkable {walk.mean() * 100:4.1f}%  scroll spots {len(spots)}  passages opened: {len(carved)}  {"UNREACHABLE: " + ", ".join(bad) if bad else "all reachable"}')
     return bad
 
 

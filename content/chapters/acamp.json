@@ -1137,7 +1137,7 @@
               "verse": "Colossenses 3:23"
             },
             {
-              "q": "Qual é o lema JA?",
+              "q": "Qual é o lema dos Desbravadores?",
               "options": [
                 "O amor de Cristo me motiva",
                 "Quem chega primeiro ganha",
@@ -1448,11 +1448,11 @@
       "story": [
         {
           "speaker": "desbravadora",
-          "text": "Lema JA: \"O amor de Cristo me motiva.\" Alvo JA: \"A mensagem do advento a todo o mundo em minha geração.\""
+          "text": "Lema dos Desbravadores: \"O amor de Cristo me motiva.\" Alvo: \"A mensagem do advento a todo o mundo em minha geração.\""
         },
         {
           "speaker": "desbravadora",
-          "text": "Objetivo JA: \"Salvar do pecado e guiar no serviço.\" Verdadeiro ou falso, bem rápido. Com 3 estrelas, eu sou sua!"
+          "text": "Objetivo: \"Salvar do pecado e guiar no serviço.\" Verdadeiro ou falso, bem rápido. Com 3 estrelas, eu sou sua!"
         }
       ],
       "challenge": {
@@ -1460,17 +1460,17 @@
         "config": {
           "items": [
             {
-              "s": "O lema JA é: \"O amor de Cristo me motiva\".",
+              "s": "O lema dos Desbravadores é: \"O amor de Cristo me motiva\".",
               "ok": true,
               "ref": "2 Coríntios 5:14"
             },
             {
-              "s": "O alvo JA é: \"A mensagem do advento a todo o mundo em minha geração\".",
+              "s": "O alvo dos Desbravadores é: \"A mensagem do advento a todo o mundo em minha geração\".",
               "ok": true,
               "ref": "Mateus 28:19-20"
             },
             {
-              "s": "O objetivo JA é: \"Salvar do pecado e guiar no serviço\".",
+              "s": "O objetivo dos Desbravadores é: \"Salvar do pecado e guiar no serviço\".",
               "ok": true,
               "ref": "Mateus 28:19-20"
             },
@@ -1525,7 +1525,7 @@
               "ref": "1 Coríntios 6:19"
             },
             {
-              "s": "O lema JA é: \"Cada um por si\".",
+              "s": "O lema dos Desbravadores é: \"Cada um por si\".",
               "ok": false,
               "ref": "2 Coríntios 5:14"
             }

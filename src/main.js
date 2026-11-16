@@ -33,6 +33,7 @@ import { toast } from './ui/toast.js';
 import { celebrate } from './ui/celebrate.js';
 import { installReliableTaps } from './ui/tap.js';
 import { checkMaintenance } from './maintenance.js';
+import { showNews } from './news.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -152,6 +153,7 @@ async function boot() {
   loop.start();
   bootEl.classList.add('is-done');
   setTimeout(() => { bootEl.style.display = 'none'; }, 600);
+  setTimeout(showNews, 700); // "nova versão" notice, once per update
   window.__genesis = game; // handy for debugging in the browser console
 }
 
