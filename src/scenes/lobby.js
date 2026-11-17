@@ -133,7 +133,9 @@ export function createLobbyScene(game) {
       if (!entry || !entry.image) return;
       const f = entry.frame || 32;
       const avail = c.y - top.y;
-      const scale = Math.max(1, Math.min(4, Math.floor((avail - 10) / f)));
+      // fill the stage (steps of 1/4, not only whole numbers: on phones lying
+      // down the stage is ~1.6 sprites tall and the character looked tiny)
+      const scale = Math.max(1, Math.min(4, Math.floor(((avail - 6) / f) * 4) / 4));
       const size = f * scale;
       const baseY = Math.round(c.y - 6);
       // glowing platform

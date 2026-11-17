@@ -5,6 +5,8 @@ const SEEN_KEY = 'genesis.newsSeen';
 
 export const NEWS = {
   id: '2026-11-17b',
+  // stops showing after this moment (Brasília time); remove or change for the next update
+  until: '2026-11-18T12:00:00-03:00',
   title: 'Nova versão do Gênesis!',
   intro: 'Você está jogando a versão nova. Resolvemos alguns problemas que vocês nos contaram:',
   fixes: [
@@ -28,6 +30,7 @@ export function showNews() {
   let seen = '';
   try { seen = localStorage.getItem(SEEN_KEY) || ''; } catch { /* storage blocked */ }
   if (seen === NEWS.id || document.getElementById('news')) return;
+  if (NEWS.until && Date.now() >= Date.parse(NEWS.until)) return;
   const el = document.createElement('div');
   el.id = 'news';
   el.setAttribute('role', 'dialog');
