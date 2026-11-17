@@ -69,6 +69,7 @@ export function createArenaScene(game) {
           powerNote ? h('p', { class: 'arena__power', text: `⚡ ${powerNote}` }) : null,
           h('p', { class: 'arena__best', text: save.state.arenaBest ? `Seu recorde: ${save.state.arenaBest} pontos` : 'Ainda sem recorde. Bora!' }),
           h('button', { class: 'btn btn--play', onClick: play }, h('b', { text: 'COMEÇAR' })),
+          h('button', { class: 'btn btn--ghost btn--small', text: '🏆 Ver ranking', onClick: () => game.scenes.go('ranking', { tab: 'arena', back: 'arena' }) }),
         ));
       };
 
@@ -190,6 +191,7 @@ export function createArenaScene(game) {
                 headline: `Fiz ${score} pontos na Arena do Gênesis! Duvido você bater!`,
                 link: `?desafio=${seed}.${score}.${encodeURIComponent(save.state.nick)}`,
               }) }),
+              h('button', { class: 'btn btn--ghost', text: '🏆 Ranking', onClick: () => game.scenes.go('ranking', { tab: 'arena', back: 'arena' }) }),
               h('button', { class: 'btn btn--ghost', text: 'Lobby', onClick: () => game.scenes.go('lobby') }),
             ),
           ));

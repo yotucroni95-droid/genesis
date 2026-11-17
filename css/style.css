@@ -758,7 +758,7 @@ button.chip { cursor: pointer; touch-action: manipulation; }
 @keyframes glow { 50% { filter: brightness(1.25); } }
 
 /* Lobby */
-.lobby { position: absolute; inset: 0; pointer-events: auto; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto 1fr auto auto; grid-template-areas: "top top top" "left stage right" "left name right" "bottom bottom bottom"; gap: 6px 10px; padding: calc(var(--safe-top) + 8px) calc(var(--safe-right) + 12px) calc(var(--safe-bottom) + 10px) calc(var(--safe-left) + 12px); }
+.lobby { position: absolute; inset: 0; pointer-events: auto; display: grid; grid-template-columns: auto 1fr auto; grid-template-rows: auto 1fr auto auto; grid-template-areas: "top top top" "left stage right" "left name right" "left bottom bottom"; gap: 6px 10px; padding: calc(var(--safe-top) + 8px) calc(var(--safe-right) + 12px) calc(var(--safe-bottom) + 10px) calc(var(--safe-left) + 12px); }
 .lobby__top { grid-area: top; display: flex; align-items: center; gap: 12px; }
 .lobby__me { display: flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; border: 2px solid var(--panel-edge); border-radius: 16px; background: rgba(7,10,28,.75); color: var(--ink); cursor: pointer; text-align: left; font-family: var(--font); }
 .lobby__me b { display: block; color: var(--gold); font-size: 15px; }
@@ -787,6 +787,7 @@ button.chip { cursor: pointer; touch-action: manipulation; }
 .btn--arena small { font-size: 11px; }
 .btn--small { min-height: 40px; padding: 0 14px; font-size: 14px; }
 @media (max-height: 360px) { .lobby__btn { min-height: 44px; min-width: 116px; } .lobby__top .rankbar { display: none; } }
+@media (max-height: 430px) { .lobby__left { gap: 6px; } .lobby__left .lobby__btn { min-height: 40px; padding: 4px 10px; } .rank-me { padding: 6px 10px; font-size: 13px; } }
 
 /* Baú desenhado */
 .chest { position: relative; flex: 0 0 auto; filter: drop-shadow(0 4px 0 rgba(0,0,0,.4)) drop-shadow(0 0 10px color-mix(in srgb, var(--chest) 60%, transparent)); }
@@ -1115,3 +1116,25 @@ button, .btn, [role="button"], .boxcard, .map-card, .lobby__btn { touch-action: 
   .account p, .account__tips { font-size: 12.5px; }
   .account__code { padding: 6px 12px; font-size: 20px; }
 }
+
+/* ---- ranking ---- */
+.rank { display: flex; flex-direction: column; gap: 8px; max-width: 720px; margin: 0 auto; }
+.rank-tabs { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; }
+.rank-tab { padding: 8px 14px; border: 2px solid var(--panel-edge); border-radius: 999px; background: rgba(14,20,51,.9); color: var(--ink); font: 700 14px var(--font); cursor: pointer; }
+.rank-tab.is-on { border-color: var(--gold); background: rgba(255, 211, 110, .18); color: var(--gold); }
+.rank-info { margin: 0; text-align: center; font-size: 13px; opacity: .8; }
+.rank-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.rank-row { display: flex; align-items: center; gap: 10px; padding: 6px 12px; border: 2px solid var(--panel-edge); border-radius: 12px; background: rgba(14,20,51,.85); }
+.rank-row.is-top1 { border-color: #ffd36e; background: linear-gradient(90deg, rgba(255, 211, 110, .25), rgba(14,20,51,.85)); }
+.rank-row.is-top2 { border-color: #cfd8e6; }
+.rank-row.is-top3 { border-color: #d08a4a; }
+.rank-row.is-me { outline: 3px solid var(--ok, #6ee7a8); outline-offset: 1px; }
+.rank-pos { width: 38px; text-align: center; font: 700 18px var(--font); flex: none; }
+.rank-name { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.rank-name b { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rank-name small, .rank-value small { opacity: .7; font-size: 12px; }
+.rank-value { display: flex; flex-direction: column; align-items: flex-end; flex: none; }
+.rank-value b { font-size: 17px; color: var(--gold); }
+.rank-empty { text-align: center; padding: 18px; opacity: .8; }
+.rank-me { position: sticky; bottom: 0; padding: 10px 14px; border: 2px solid var(--gold); border-radius: 12px; background: var(--bg-2); text-align: center; }
+.rank-me:empty { display: none; }

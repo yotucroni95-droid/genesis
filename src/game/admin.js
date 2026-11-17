@@ -20,6 +20,7 @@ async function sha256(text) {
 /** Every chapter with 3 stars (also Modo Herói), all characters, cosmetics, cards and medals. */
 export async function unlockEverything(game) {
   const { save, assets } = game;
+  try { localStorage.setItem('genesis.owner', '1'); } catch { /* storage blocked */ } // keeps the creator out of the ranking
   const now = new Date().toISOString();
   const entries = assets.json('chapters/index.json').chapters;
   const chapters = (await Promise.all(entries.map((e) => loadChapter(assets, e)))).filter(Boolean);

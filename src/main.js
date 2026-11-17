@@ -36,6 +36,7 @@ import { checkMaintenance } from './maintenance.js';
 import { showNews } from './news.js';
 import { startSync } from './cloud/account.js';
 import { createWelcomeScene } from './cloud/account-ui.js';
+import { createRankingScene } from './scenes/ranking.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -140,6 +141,7 @@ async function boot() {
   });
   game.scenes.register('title', createTitleScene);
   game.scenes.register('welcome', createWelcomeScene);
+  game.scenes.register('ranking', createRankingScene);
   game.scenes.register('credits', createCreditsScene);
   game.scenes.register('gallery', createGalleryScene);
   game.scenes.register('explore', createExploreScene);

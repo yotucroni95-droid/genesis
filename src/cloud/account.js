@@ -5,6 +5,9 @@
 import { CLOUD } from './config.js';
 
 const ACCOUNT_KEY = 'genesis.account';
+// the game's creator (owner code) never shows up in the ranking
+const isOwner = () => { try { return localStorage.getItem('genesis.owner') === '1'; } catch { return false; } };
+const payload = (state) => (isOwner() ? { ...state, creator: true } : state);
 const ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no 0/O/1/I (easy to read)
 export const CODE_RULE = /^GEN-[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{4}$/;
 
@@ -50,9 +53,9 @@ async function rpc(fn, body, { keepalive = false, timeout = 12000 } = {}) {
 /** Creates an account with this phone's progress and keeps its code here. */
 export async function createAccount(save) {
   const code = newCode();
-  await rpc('genesis_create', { p_code: code, p_data: save.state });
+  await rpc('genesis_create', { p_code: code, p_data: payload(save.state) });
   setAccountCode(code);
-  lastPushed = JSON.stringify(save.state);
+  lastPushed = JSON.stringify(payload(save.state));
   return code;
 }
 
@@ -83,11 +86,11 @@ let pushing = false;
 export async function pushNow(save, { keepalive = false } = {}) {
   const code = accountCode();
   if (!cloudOn() || !code || pushing) return;
-  const json = JSON.stringify(save.state);
+  const json = JSON.stringify(payload(save.state));
   if (json === lastPushed) return;
   pushing = true;
   try {
-    const ok = await rpc('genesis_save', { p_code: code, p_data: save.state }, { keepalive });
+    const ok = await rpc('genesis_save', { p_code: code, p_data: payload(save.state) }, { keepalive });
     if (ok) lastPushed = json;
   } catch { /* offline: tries again on the next change */ } finally {
     pushing = false;
@@ -121,4 +124,9 @@ export async function startSync(save) {
   });
   if (code) pushNow(save);
   return { pulled };
+}
+
+/** Top 50 and this player's place. kind: 'trofeus' | 'arena' | 'estrelas'. */
+export async function fetchRanking(kind) {
+  return rpc('genesis_ranking', { p_kind: kind, p_code: accountCode() || null });
 }
