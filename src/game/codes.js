@@ -1,12 +1,16 @@
-// Gift codes for the owner's challenges (stories, sharing...). Each code works
-// once per phone and gives the prize below. Only fingerprints live in the code
-// (codes-list.js); the list of codes stays on the owner's computer.
+// Gift codes for the owner's challenges (stories, sharing...).
+// - The challenge code (GIFT_HASHES) works once per phone and gives GIFT.
+// - Prize codes (raffles, promises) live in Supabase (supabase/codes.sql) and
+//   work ONCE IN TOTAL: the first player who redeems one uses it up.
+// Only fingerprints are published; the codes stay on the owner's computer.
 
 import { h } from '../ui/dom.js';
 import { toast } from '../ui/toast.js';
 import { addCoins } from './economy.js';
 import { addDenarios } from './meta.js';
 import { GIFT_HASHES, RETIRED_HASHES } from './codes-list.js';
+import { CLOUD } from '../cloud/config.js';
+import { accountCode } from '../cloud/account.js';
 
 export const GIFT = { character: 'paulo', coins: 1500, denarios: 50 };
 
@@ -22,7 +26,7 @@ export async function redeem(game, value) {
   const code = clean(value);
   if (!code) return { ok: false, msg: 'Digite o código.' };
   const hash = await sha256(`genesis-presente|${code}`);
-  if (!GIFT_HASHES.includes(hash)) return { ok: false, msg: 'Código inválido. Confira as letras e os tracinhos.' };
+  if (!GIFT_HASHES.includes(hash)) return redeemPrize(game, code, hash);
   const { save } = game;
   const used = Object.keys(save.state.redeemed || {});
   if (used.includes(hash) || used.some((x) => RETIRED_HASHES.includes(x))) return { ok: false, msg: 'Você já resgatou o presente do desafio neste celular.' };
@@ -37,6 +41,38 @@ export async function redeem(game, value) {
   addCoins(save, GIFT.coins);
   addDenarios(save, GIFT.denarios);
   got.push(`${GIFT.coins} talentos`, `${GIFT.denarios} denários`);
+  save.update((s) => { s.redeemed = { ...(s.redeemed || {}), [hash]: new Date().toISOString() }; });
+  return { ok: true, msg: `Presente recebido: ${got.join(', ')}!` };
+}
+
+/** A one-time prize code kept in Supabase: the server hands out the prize only once. */
+async function redeemPrize(game, code, hash) {
+  if (!CLOUD.url || !CLOUD.key) return { ok: false, msg: 'Código inválido. Confira as letras e os tracinhos.' };
+  let res;
+  try {
+    const headers = { apikey: CLOUD.key, 'Content-Type': 'application/json' };
+    if (CLOUD.key.startsWith('eyJ')) headers.Authorization = `Bearer ${CLOUD.key}`;
+    res = await fetch(`${CLOUD.url}/rest/v1/rpc/genesis_redeem`, { method: 'POST', headers, body: JSON.stringify({ p_code: code, p_account: accountCode() || null }) });
+  } catch {
+    return { ok: false, msg: 'Sem internet agora. Conecte e tente de novo.' };
+  }
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    if (/usado/.test(err.message || '')) return { ok: false, msg: 'Esse código já foi resgatado. Cada código vale só uma vez.' };
+    return { ok: false, msg: 'Código inválido. Confira as letras e os tracinhos.' };
+  }
+  const prize = await res.json();
+  const { save } = game;
+  const chars = game.assets.json('characters.json').characters;
+  const got = [];
+  if (prize.character) {
+    const c = chars.find((x) => x.id === prize.character);
+    const label = c ? `o personagem ${c.rarity ? `${c.rarity} ` : ''}${c.name}` : 'um personagem';
+    if (!save.isUnlocked(prize.character)) { save.unlock(prize.character); got.push(label); }
+    else if (prize.fallbackCoins) { addCoins(save, prize.fallbackCoins); got.push(`${prize.fallbackCoins} talentos extras (você já tinha ${c ? c.name : 'esse personagem'})`); }
+  }
+  if (prize.coins) { addCoins(save, prize.coins); got.push(`${prize.coins} talentos`); }
+  if (prize.denarios) { addDenarios(save, prize.denarios); got.push(`${prize.denarios} denários`); }
   save.update((s) => { s.redeemed = { ...(s.redeemed || {}), [hash]: new Date().toISOString() }; });
   return { ok: true, msg: `Presente recebido: ${got.join(', ')}!` };
 }
