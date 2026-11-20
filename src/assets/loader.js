@@ -3,12 +3,17 @@
 
 import { makePlaceholder } from './placeholders.js';
 
+// a file that never arrives (slow network, server hiccup) must not freeze the
+// loading bar: after a while it gets the placeholder and the game goes on
+const IMAGE_TIMEOUT_MS = 15000;
+
 function loadImage(src) {
   return new Promise((resolve) => {
     const img = new Image();
     img.decoding = 'async';
-    img.onload = () => resolve(img);
-    img.onerror = () => resolve(null);
+    const timer = setTimeout(() => resolve(null), IMAGE_TIMEOUT_MS);
+    img.onload = () => { clearTimeout(timer); resolve(img); };
+    img.onerror = () => { clearTimeout(timer); resolve(null); };
     img.src = src;
   });
 }
