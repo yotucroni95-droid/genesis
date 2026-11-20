@@ -4,14 +4,15 @@
 const SEEN_KEY = 'genesis.newsSeen';
 
 export const NEWS = {
-  id: '2026-11-20',
+  id: '2026-11-20b',
   // stops showing after this moment (Brasília time); remove or change for the next update
   until: '2026-11-23T12:00:00-03:00',
   title: 'Chegou a versão 2.0 do Gênesis!',
   intro: 'Muita coisa nova para você explorar:',
   fixes: [
     'NOVA TEMPORADA: ÊXODO! Três capítulos novos: Moisés do Nilo à sarça, o Mar Vermelho e a aliança no Sinai. Ganhe Joquebede, Miriã e Bezalel.',
-    'NOVO: ARENA ONLINE 1x1! Crie uma sala e desafie outro jogador de verdade, cada um no seu celular.',
+    'NOVO: ARENA ONLINE 1x1 e 2x2! Desafie um amigo ou jogue em duplas, 2 contra 2, cada um no seu celular.',
+    'NOVO: Configurações (⚙️ no lobby): volume da música, efeitos e dublagem, lembretes, sua conta e texto grande.',
     'NOVO: AMIGOS! Pesquise pelo apelido ou pelo código de amigo, mande pedidos e chame seus amigos para a Arena.',
     'NOVO: Ranking da Temporada. Ganhe Pontos de Temporada jogando; o ranking recomeça toda segunda-feira. Seus troféus e conquistas continuam seus para sempre.',
     'Passe de batalha com tema da temporada e 5 missões com recompensas.',

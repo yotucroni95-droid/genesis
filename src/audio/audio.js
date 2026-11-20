@@ -11,6 +11,22 @@ let music = null; // { timer, name }
 const KEY = 'genesis.muted';
 try { muted = localStorage.getItem(KEY) === '1'; } catch { /* storage blocked */ }
 
+// volume of each part (0 to 1), set in Configurações
+const VOL_KEY = 'genesis.volume';
+const vol = { music: 1, sfx: 1, voice: 1 };
+try { Object.assign(vol, JSON.parse(localStorage.getItem(VOL_KEY) || '{}')); } catch { /* storage blocked */ }
+const MUSIC_BASE = 0.12;
+const SFX_BASE = 0.35;
+const musicLevel = (duck = false) => (duck ? 0.035 : MUSIC_BASE) * vol.music;
+export function getVolume() { return { ...vol }; }
+export function setVolume(part, value) {
+  vol[part] = Math.max(0, Math.min(1, Number(value) || 0));
+  try { localStorage.setItem(VOL_KEY, JSON.stringify(vol)); } catch { /* ignore */ }
+  if (!ctx) return;
+  if (part === 'music') musicGain.gain.setTargetAtTime(musicLevel(Boolean(voiceSrc)), ctx.currentTime, 0.05);
+  if (part === 'sfx') sfxGain.gain.setTargetAtTime(SFX_BASE * vol.sfx, ctx.currentTime, 0.05);
+}
+
 function ensure() {
   if (ctx) return ctx;
   const AC = window.AudioContext || window.webkitAudioContext;
@@ -20,10 +36,10 @@ function ensure() {
   master.gain.value = muted ? 0 : 1;
   master.connect(ctx.destination);
   musicGain = ctx.createGain();
-  musicGain.gain.value = 0.12;
+  musicGain.gain.value = musicLevel();
   musicGain.connect(master);
   sfxGain = ctx.createGain();
-  sfxGain.gain.value = 0.35;
+  sfxGain.gain.value = SFX_BASE * vol.sfx;
   sfxGain.connect(master);
   return ctx;
 }
@@ -189,7 +205,7 @@ let voiceSrc = null;
 export function stopVoice() {
   if (voiceSrc) { try { voiceSrc.stop(); } catch { /* already stopped */ } }
   voiceSrc = null;
-  if (musicGain && ctx) musicGain.gain.setTargetAtTime(0.12, ctx.currentTime, 0.3);
+  if (musicGain && ctx) musicGain.gain.setTargetAtTime(musicLevel(), ctx.currentTime, 0.3);
 }
 
 /** Plays a recorded line (m4a). Music gets quieter while someone speaks. */
@@ -209,10 +225,10 @@ export async function playVoice(url) {
   if (muted) return;
   const src = c.createBufferSource();
   const g = c.createGain();
-  g.gain.value = 1.4;
+  g.gain.value = 1.4 * vol.voice;
   src.buffer = buf;
   src.connect(g).connect(master);
-  musicGain.gain.setTargetAtTime(0.035, c.currentTime, 0.15);
+  musicGain.gain.setTargetAtTime(musicLevel(true), c.currentTime, 0.15);
   src.onended = () => { if (voiceSrc === src) stopVoice(); };
   voiceSrc = src;
   src.start();

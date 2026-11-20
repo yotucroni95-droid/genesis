@@ -9,7 +9,7 @@
 --    não vale, e cada jogador só pontua UMA vez por pergunta (chave primária);
 --  * quem fica 20 s sem dar sinal (ou sai) abandona: o outro vence;
 --  * cada jogador é um "token" aleatório do aparelho (o banco guarda só o SHA-256).
--- Pronto para 2x2 no futuro: max_players e team já existem (hoje só '1x1').
+-- Modos: '1x1' (2 jogadores) e '2x2' (4 jogadores; lugares 0 e 2 = dupla 0, lugares 1 e 3 = dupla 1).
 
 create table if not exists public.genesis_rooms (
   id          bigserial primary key,
@@ -109,7 +109,7 @@ declare
   v_id bigint;
 begin
   if length(coalesce(p_token, '')) < 16 then raise exception 'token invalido'; end if;
-  if p_mode <> '1x1' then raise exception 'modo indisponivel'; end if; -- 2x2: max_players 4, times 0/1
+  if p_mode not in ('1x1', '2x2') then raise exception 'modo indisponivel'; end if;
   delete from public.genesis_rooms where created_at < now() - interval '2 days';
   loop
     v_code := '';
@@ -117,7 +117,7 @@ begin
     exit when not exists (select 1 from public.genesis_rooms where code = v_code);
   end loop;
   insert into public.genesis_rooms (code, seed, mode, max_players)
-       values (v_code, 1 + floor(random() * 999999)::int, p_mode, 2) returning id into v_id;
+       values (v_code, 1 + floor(random() * 999999)::int, p_mode, case when p_mode = '2x2' then 4 else 2 end) returning id into v_id;
   insert into public.genesis_room_players (room_id, seat, team, token_hash, nick, avatar)
        values (v_id, 0, 0, public.genesis_room_tok(p_token), left(coalesce(nullif(btrim(p_nick), ''), 'jogador'), 16), left(p_avatar, 40));
   return public.genesis_room_state(v_code, p_token);
@@ -139,11 +139,13 @@ begin
     return public.genesis_room_state(r.code, p_token);
   end if;
   if r.status <> 'waiting' then raise exception 'sala ja comecou'; end if;
-  select count(*) into v_n from public.genesis_room_players where room_id = r.id;
-  if v_n >= r.max_players then raise exception 'sala cheia'; end if;
+  -- primeiro lugar livre (alguém pode ter saído antes de começar)
+  select min(s) into v_n from generate_series(0, r.max_players - 1) s
+   where not exists (select 1 from public.genesis_room_players where room_id = r.id and seat = s);
+  if v_n is null then raise exception 'sala cheia'; end if;
   insert into public.genesis_room_players (room_id, seat, team, token_hash, nick, avatar)
        values (r.id, v_n, v_n % 2, public.genesis_room_tok(p_token), left(coalesce(nullif(btrim(p_nick), ''), 'jogador'), 16), left(p_avatar, 40));
-  if v_n + 1 >= r.max_players then
+  if (select count(*) from public.genesis_room_players where room_id = r.id) >= r.max_players then
     update public.genesis_rooms set status = 'playing', starts_at = now() + interval '4 seconds' where id = r.id;
   end if;
   return public.genesis_room_state(r.code, p_token);
@@ -187,11 +189,17 @@ declare
 begin
   select * into r from public.genesis_rooms where code = upper(btrim(p_code)) for update;
   if r.id is null then return; end if;
+  if r.status = 'waiting' then
+    -- antes de começar: quem criou fecha a sala; os outros só liberam o lugar
+    if exists (select 1 from public.genesis_room_players where room_id = r.id and seat = 0 and token_hash = public.genesis_room_tok(p_token)) then
+      update public.genesis_rooms set status = 'finished', finished_at = now() where id = r.id;
+    else
+      delete from public.genesis_room_players where room_id = r.id and token_hash = public.genesis_room_tok(p_token);
+      return;
+    end if;
+  end if;
   update public.genesis_room_players set left_at = now()
    where room_id = r.id and token_hash = public.genesis_room_tok(p_token) and left_at is null;
-  if r.status = 'waiting' then
-    update public.genesis_rooms set status = 'finished', finished_at = now() where id = r.id;
-  end if;
 end $$;
 
 revoke all on function public.genesis_room_tok(text) from public, anon, authenticated;

@@ -38,6 +38,7 @@
 "src/scenes/pass.js",
 "src/scenes/profile.js",
 "src/scenes/ranking.js",
+"src/scenes/settings.js",
 "src/scenes/shop.js",
 "src/scenes/starfield.js",
 "src/scenes/story.js",

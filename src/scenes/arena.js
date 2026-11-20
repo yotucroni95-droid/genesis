@@ -70,7 +70,7 @@ export function createArenaScene(game) {
           h('p', { class: 'arena__best', text: save.state.arenaBest ? `Seu recorde: ${save.state.arenaBest} pontos` : 'Ainda sem recorde. Bora!' }),
           h('div', { class: 'online__row' },
             h('button', { class: 'btn btn--play', onClick: play }, h('b', { text: 'COMEÇAR' })),
-            duel ? null : h('button', { class: 'btn btn--online', text: '🌐 Online 1x1', onClick: () => game.scenes.go('online') }),
+            duel ? null : h('button', { class: 'btn btn--online', text: '🌐 Online 1x1 e 2x2', onClick: () => game.scenes.go('online') }),
             h('button', { class: 'btn btn--ghost btn--small', text: '🏆 Ranking', onClick: () => game.scenes.go('ranking', { tab: 'arena', back: 'arena' }) }),
           ),
         ));

@@ -325,7 +325,7 @@ const SEASON_POOL = [
   { type: 'stops', target: 30, fe: 150, denarios: 5, label: 'Complete 30 paradas da Jornada' },
   { type: 'threeStars', target: 15, fe: 150, denarios: 5, label: 'Ganhe 3 estrelas em 15 desafios' },
   { type: 'arenaPlay', target: 25, fe: 120, denarios: 4, label: 'Jogue 25 partidas na Arena' },
-  { type: 'onlineWin', target: 3, fe: 150, denarios: 6, label: 'Vença 3 partidas online 1x1' },
+  { type: 'onlineWin', target: 3, fe: 150, denarios: 6, label: 'Vença 3 partidas online' },
   { type: 'correct', target: 400, fe: 150, denarios: 5, label: 'Acerte 400 perguntas' },
   { type: 'daily', target: 12, fe: 120, denarios: 4, label: 'Leia o versículo do dia 12 vezes' },
   { type: 'dailyMissions', target: 20, fe: 150, denarios: 5, label: 'Complete 20 missões do dia' },

@@ -1,4 +1,4 @@
-// Arena online 1x1: private room by code or invite link (?sala=CODE).
+// Arena online 1x1 and 2x2 (duplas): private room by code or invite link (?sala=CODE).
 // The server (supabase/arena_online.sql) keeps the clock and the score; this
 // screen polls the room once per second and draws the same questions for both.
 
@@ -42,7 +42,7 @@ export function createOnlineScene(game) {
       const save = game.save;
       const nick = save.state.nick || 'jogador';
       const area = h('div', { class: 'arena online' });
-      ui.appendChild(gameScreen(game, 'Arena online 1x1 🌐', area, { back: 'arena' }));
+      ui.appendChild(gameScreen(game, 'Arena online 🌐', area, { back: 'arena' }));
 
       const serverNow = () => Date.now() + offset;
       const setState = (s, sentAt) => {
@@ -66,12 +66,15 @@ export function createOnlineScene(game) {
         input.addEventListener('keydown', (e) => { if (e.key === 'Enter') enterRoom(input.value); });
         const back = lastRoom();
         area.replaceChildren(h('div', { class: 'quiz__result online__menu' },
-          h('h2', { class: 'quiz__q', text: 'Desafie um amigo ao vivo!' }),
-          h('p', { class: 'screen__note', text: 'Vocês dois respondem as mesmas 10 perguntas ao mesmo tempo. Quem acertar mais rápido ganha mais pontos.' }),
+          h('h2', { class: 'quiz__q', text: 'Desafie amigos ao vivo!' }),
+          h('p', { class: 'screen__note', text: 'Todos respondem as mesmas 10 perguntas ao mesmo tempo. Quem acertar mais rápido ganha mais pontos. No 2x2, os pontos da dupla somam.' }),
           msg ? h('p', { class: 'online__msg', text: msg }) : null,
           h('div', { class: 'online__row' },
-            h('button', { class: 'btn btn--play', onClick: newRoom }, h('b', { text: 'CRIAR SALA' })),
-            h('span', { class: 'online__or', text: 'ou' }),
+            h('button', { class: 'btn btn--play', onClick: () => newRoom('1x1') }, h('b', { text: 'SALA 1x1' })),
+            h('button', { class: 'btn btn--play', onClick: () => newRoom('2x2') }, h('b', { text: 'SALA 2x2' })),
+          ),
+          h('div', { class: 'online__row' },
+            h('span', { class: 'online__or', text: 'ou entre com o código' }),
             input,
             h('button', { class: 'btn', text: 'Entrar', onClick: () => enterRoom(input.value) }),
           ),
@@ -81,10 +84,12 @@ export function createOnlineScene(game) {
 
       const busy = (text) => area.replaceChildren(h('div', { class: 'quiz__result' }, h('p', { class: 'screen__note', text })));
 
-      async function newRoom() {
+      let lastMode = '1x1';
+      async function newRoom(mode = lastMode) {
+        lastMode = mode;
         busy('Criando a sala…');
         const t = Date.now();
-        try { setState(await createRoom(nick, save.state.avatarId), t); } catch (err) { if (alive) menu(roomError(err)); return; }
+        try { setState(await createRoom(nick, save.state.avatarId, mode), t); } catch (err) { if (alive) menu(roomError(err)); return; }
         rememberRoom(room.code);
         sfx('click');
         follow();
@@ -128,6 +133,11 @@ export function createOnlineScene(game) {
       let view = ''; // which screen is on: waiting | count | q<N> | wait-end | end
       const meP = () => room.players.find((p) => p.seat === room.me);
       const foeP = () => room.players.find((p) => p.seat !== room.me);
+      const duo = () => room.max > 2;
+      const myTeam = () => (meP() || { team: 0 }).team;
+      const foes = () => room.players.filter((p) => p.team !== myTeam());
+      const sum = (list) => list.reduce((n, p) => n + p.score, 0);
+      const names = (list) => list.map((p) => `@${p.nick}`).join(' e ') || 'adversários';
 
       const draw = () => {
         if (!room) return;
@@ -141,8 +151,10 @@ export function createOnlineScene(game) {
       };
 
       const waiting = () => {
-        if (view === 'waiting') return;
-        view = 'waiting';
+        const key = `waiting${room.players.map((p) => p.seat).join('')}`;
+        if (view === key) return;
+        view = key;
+        const missing = room.max - room.players.length;
         const link = `${GAME_URL}?sala=${room.code}`;
         const invite = async () => {
           const text = `Vem jogar comigo na Arena do Gênesis! Sala ${room.code}`;
@@ -155,8 +167,11 @@ export function createOnlineScene(game) {
         area.replaceChildren(h('div', { class: 'quiz__result' },
           h('p', { class: 'screen__note', text: 'Código da sala:' }),
           h('div', { class: 'online__big', text: room.code }),
-          h('p', { class: 'screen__note', text: 'Mande o código ou o convite para um amigo. A partida começa quando ele entrar.' }),
-          h('p', { class: 'online__wait', text: 'Esperando o amigo…' }),
+          h('p', { class: 'screen__note', text: duo() ? 'Mande o código para 3 amigos. A partida começa quando os 4 entrarem.' : 'Mande o código ou o convite para um amigo. A partida começa quando ele entrar.' }),
+          duo() ? h('div', { class: 'online__teams' }, ...[0, 1].map((t) => h('div', { class: `online__team${t === myTeam() ? ' is-me' : ''}` },
+            h('small', { text: t === myTeam() ? 'Sua dupla' : 'Adversários' }),
+            ...room.players.filter((p) => p.team === t).map((p) => h('b', { text: p.seat === room.me ? 'Você' : `@${p.nick}` }))))) : null,
+          h('p', { class: 'online__wait', text: missing > 1 ? `Esperando mais ${missing} jogadores…` : duo() ? 'Falta 1 jogador…' : 'Esperando o amigo…' }),
           h('div', { class: 'online__row' },
             h('button', { class: 'btn btn--share', text: '📲 Convidar', onClick: invite }),
             h('button', { class: 'btn btn--ghost', text: 'Cancelar', onClick: () => { leaveRoom(room.code); forgetRoom(); menu(); } }),
@@ -165,6 +180,12 @@ export function createOnlineScene(game) {
       };
 
       const versus = () => {
+        if (duo()) {
+          const team = (list, mine) => h('div', { class: `online__side${mine ? ' is-me' : ''}${list.length && list.every((p) => p.left) ? ' is-gone' : ''}` },
+            h('small', { text: list.map((p) => (p.seat === room.me ? 'Você' : `@${p.nick}`) + (p.left ? ' (saiu)' : '')).join(' + ') || '…' }),
+            h('b', { text: `${sum(list)}` }));
+          return h('div', { class: 'online__vs' }, team(room.players.filter((p) => p.team === myTeam()), true), h('span', { class: 'online__x', text: 'VS' }), team(foes(), false));
+        }
         const me = meP(); const foe = foeP();
         const side = (p, mine) => h('div', { class: `online__side${mine ? ' is-me' : ''}${p && p.left ? ' is-gone' : ''}` },
           h('small', { text: p ? `${mine ? 'Você' : '@' + p.nick}${p.left ? ' (saiu)' : ''}` : '…' }),
@@ -177,7 +198,7 @@ export function createOnlineScene(game) {
         if (view === key) return;
         view = key;
         sfx('click');
-        area.replaceChildren(versus(), h('div', { class: 'quiz__result' }, h('p', { class: 'screen__note', text: `@${(foeP() || {}).nick || 'amigo'} entrou! Prepare-se…` }), h('div', { class: 'online__big', text: `${n}` })));
+        area.replaceChildren(versus(), h('div', { class: 'quiz__result' }, h('p', { class: 'screen__note', text: duo() ? 'Todos entraram! Prepare-se…' : `@${(foeP() || {}).nick || 'amigo'} entrou! Prepare-se…` }), h('div', { class: 'online__big', text: `${n}` })));
       };
 
       // question view: built once per question, then only the timer/reveal changes
@@ -210,7 +231,11 @@ export function createOnlineScene(game) {
           qv.buttons[qv.opts.findIndex((o) => o.ok)].classList.add('is-right');
           if (qv.picked < 0) { sfx('wrong'); qv.foe.textContent = `Tempo esgotado! Resposta em ${qv.cur.ref}`; }
         }
-        if (reveal) {
+        if (duo()) {
+          const others = room.players.filter((p) => p.seat !== room.me);
+          const mark = (p) => { const a = p.answers ? p.answers[String(q)] : undefined; return `${p.team === myTeam() ? '🤝' : ''}@${p.nick} ${p.left ? 'saiu' : a === true ? '✔' : a === false ? '✖' : reveal ? '—' : '…'}`; };
+          qv.foe.textContent = `${reveal && qv.picked < 0 ? 'Você não respondeu. ' : ''}${others.map(mark).join(' · ')}`;
+        } else if (reveal) {
           const foeText = foe && foe.left ? `@${foe.nick} saiu da partida.` : foeAns === true ? `@${foe.nick} acertou ✔` : foeAns === false ? `@${foe.nick} errou ✖` : `@${(foe || {}).nick || 'amigo'} não respondeu`;
           qv.foe.textContent = `${qv.picked < 0 ? 'Você não respondeu. ' : ''}${foeText}`;
         } else if (qv.picked >= 0) {
@@ -245,10 +270,14 @@ export function createOnlineScene(game) {
         stop();
         forgetRoom();
         const me = meP(); const foe = foeP();
-        if (!foe) { menu('A sala foi fechada.'); return; }
+        if (!foe || !me) { menu('A sala foi fechada.'); return; }
         const answered = Object.keys(me.answers || {}).length;
-        const wo = foe.left && !me.left; // opponent abandoned
-        const result = me.left && !foe.left ? 'lose' : wo || me.score > foe.score ? 'win' : me.score === foe.score ? 'draw' : 'lose';
+        const ours = room.players.filter((p) => p.team === myTeam());
+        const theirs = foes();
+        const goneUs = ours.every((p) => p.left); const goneThem = theirs.every((p) => p.left);
+        const wo = goneThem && !goneUs; // the other side abandoned
+        const usPts = sum(ours); const themPts = sum(theirs);
+        const result = goneUs && !goneThem ? 'lose' : wo || usPts > themPts ? 'win' : usPts === themPts ? 'draw' : 'lose';
         // rewards only once per room, and only if the match was really played
         const key = `${room.code}.${room.seed}`;
         const done = save.state.onlineRooms || [];
@@ -267,15 +296,18 @@ export function createOnlineScene(game) {
           if (result === 'win') track(save, 'onlineWin', 1);
         }
         sfx(result === 'win' ? 'fanfare' : 'coin');
-        const title = result === 'win' ? (wo ? `@${foe.nick} saiu. VOCÊ VENCEU! 🏆` : `VOCÊ VENCEU @${foe.nick}! 🏆`) : result === 'draw' ? 'EMPATE!' : `@${foe.nick} ganhou desta vez…`;
+        const them = duo() ? names(theirs) : `@${foe.nick}`;
+        const title = result === 'win' ? (wo ? `${them} ${duo() ? 'saíram' : 'saiu'}. ${duo() ? 'SUA DUPLA VENCEU' : 'VOCÊ VENCEU'}! 🏆` : duo() ? 'SUA DUPLA VENCEU! 🏆' : `VOCÊ VENCEU ${them}! 🏆`) : result === 'draw' ? 'EMPATE!' : `${them} ${duo() ? 'ganharam' : 'ganhou'} desta vez…`;
         area.replaceChildren(h('div', { class: 'quiz__result online__end' },
           h('h2', { class: 'quiz__q', text: title }),
-          h('p', { class: 'screen__note', text: `Você: ${me.score} pts (${me.correct} acertos) · @${foe.nick}: ${foe.score} pts (${foe.correct} acertos)` }),
+          h('p', { class: 'screen__note', text: duo()
+            ? `Sua dupla: ${usPts} pts · ${names(theirs)}: ${themPts} pts — você fez ${me.score} pts (${me.correct} acertos)`
+            : `Você: ${me.score} pts (${me.correct} acertos) · @${foe.nick}: ${foe.score} pts (${foe.correct} acertos)` }),
           coins || trophies ? h('div', { class: 'rewards online__rewards' },
             coins ? h('div', { class: 'reward' }, h('span', { class: 'chip__emoji', text: '🪙' }), h('span', { text: `+${coins} talentos` })) : null,
             trophies ? h('div', { class: 'reward' }, h('span', { class: 'chip__emoji', text: '🏆' }), h('span', { text: `+${trophies} troféus` })) : null) : null,
           h('div', { class: 'online__row' },
-            h('button', { class: 'btn btn--play', onClick: newRoom }, h('b', { text: 'NOVA SALA' })),
+            h('button', { class: 'btn btn--play', onClick: () => newRoom() }, h('b', { text: 'NOVA SALA' })),
             h('button', { class: 'btn btn--ghost', text: 'Arena', onClick: () => game.scenes.go('arena') }),
           ),
         ));

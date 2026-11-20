@@ -1,6 +1,6 @@
 // Arena online: private rooms on Supabase (see supabase/arena_online.sql).
 // Each phone plays with a random secret token; the server keeps the clock,
-// the score and one answer per question. Ready for 2x2 (mode/team), today 1x1.
+// the score and one answer per question. Modes 1x1 and 2x2 (teams by seat).
 
 import { rpc, cloudOn } from './account.js';
 
@@ -34,7 +34,7 @@ export function roomError(err) {
 
 const call = (fn, body) => rpc(fn, body, { timeout: 8000 });
 
-export const createRoom = (nick, avatar) => call('genesis_room_create', { p_token: roomToken(), p_nick: nick, p_avatar: avatar || null, p_mode: '1x1' });
+export const createRoom = (nick, avatar, mode = '1x1') => call('genesis_room_create', { p_token: roomToken(), p_nick: nick, p_avatar: avatar || null, p_mode: mode });
 export const joinRoom = (code, nick, avatar) => call('genesis_room_join', { p_code: cleanRoom(code), p_token: roomToken(), p_nick: nick, p_avatar: avatar || null });
 export const roomState = (code) => call('genesis_room_state', { p_code: code, p_token: roomToken() });
 export const sendAnswer = (code, q, ok) => call('genesis_room_answer', { p_code: code, p_token: roomToken(), p_q: q, p_ok: ok });
