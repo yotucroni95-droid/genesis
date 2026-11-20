@@ -392,3 +392,22 @@ Cenas, em ordem:
 5. José com sua túnica colorida e seus irmãos no campo
 6. José abraçando os irmãos no palácio do Egito
 ```
+
+---
+
+## 10. Fuga da Tentação (modo cooperativo) — LOTE A (4 imagens)
+
+Hoje o modo usa desenhos **provisórios** (cores lisas e uma serpente de bolinhas). Quando estas artes chegarem, trocamos.
+Prompt-base (mande uma vez, anexando o Peregrino): *"Pixel art 16-bit, visão de cima (top-down), estilo chibi, contornos escuros, mesma paleta e estilo desta imagem. Fundo roxo liso #8000FF, sem texto."*
+
+**F1 · Serpente andando** → `assets/characters/serpente_fuga_sheet.png` · 192×192 px · grade 4×4 de quadros 48×48 · linhas: baixo, esquerda, direita, cima · 4 quadros de rastejar por linha.
+> "Serpente do Éden, verde-escura com escamas douradas e olhos amarelos, ameaçadora mas adequada para crianças (sem sangue, sem horror). Folha de sprites 4×4: cada linha uma direção (baixo, esquerda, direita, cima), 4 quadros rastejando."
+
+**F2 · Serpente perseguindo + aparição** → `assets/characters/serpente_fuga_fx.png` · 192×96 px · 4 quadros 48×48 por linha · linha 1: perseguindo (olhos vermelhos, boca aberta); linha 2: surgindo do chão num círculo de fumaça escura (aviso).
+
+**F3 · Tileset do Jardim da Resistência** → `assets/maps/fuga_jardim_tiles.png` · 128×64 px · peças 16×16, **sem fundo roxo** · 8×4 peças: grama (3 variações), caminho de terra (3), muro de sebe (cima, lado, canto), árvore, moita de esconder, água (2), flores (2), pedras, pedestal de tarefa (apagado/aceso), placa de pressão (apagada/acesa), portal fechado, portal aberto, trepadeira de bloqueio, fragmento brilhante.
+> "Tileset 16×16 de jardim bíblico (Éden) em pixel art 16-bit top-down, cores vivas, contornos escuros, peças que se encaixam lado a lado."
+
+**F4 · Ícones do HUD** → `assets/icons/fuga_icons.png` · 192×32 px · 6 ícones 32×32 com fundo roxo: tarefa (pergaminho), tempo (ampulheta), equipe, escudo de proteção, olho de espectador, portal.
+
+**Lote B (depois):** Anjo caído e Lúcifer (mesmo formato do F1), tilesets do Deserto das Provações e do Confronto Final, e os 21 pets (folhas 4×4 de 32×32: andar, descansar, comemorar).
