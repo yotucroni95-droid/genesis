@@ -263,7 +263,8 @@
      2,
      1
     ]
-   }
+   },
+   "pending": true
   },
   {
    "id": "sheet.anjos_fieis",
@@ -432,7 +433,8 @@
     "#8f96e8"
    ],
    "label": "Céu",
-   "group": "Peças do mapa (tiles)"
+   "group": "Peças do mapa (tiles)",
+   "pending": true
   },
   {
    "id": "tiles.eden",
@@ -453,7 +455,8 @@
     "#e8d27a"
    ],
    "label": "Éden",
-   "group": "Peças do mapa (tiles)"
+   "group": "Peças do mapa (tiles)",
+   "pending": true
   },
   {
    "id": "tiles.fora_eden",
@@ -474,7 +477,8 @@
     "#3a3a3a"
    ],
    "label": "Fora do Éden",
-   "group": "Peças do mapa (tiles)"
+   "group": "Peças do mapa (tiles)",
+   "pending": true
   },
   {
    "id": "tiles.campos",
@@ -495,7 +499,8 @@
     "#4a6a2a"
    ],
    "label": "Campos de Caim e Abel",
-   "group": "Peças do mapa (tiles)"
+   "group": "Peças do mapa (tiles)",
+   "pending": true
   },
   {
    "id": "tiles.arca",
@@ -516,7 +521,8 @@
     "#d0c8a0"
    ],
    "label": "A Arca de Noé",
-   "group": "Peças do mapa (tiles)"
+   "group": "Peças do mapa (tiles)",
+   "pending": true
   },
   {
    "id": "map.ceu",

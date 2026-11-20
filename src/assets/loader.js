@@ -6,6 +6,7 @@ import { makePlaceholder } from './placeholders.js';
 // a file that never arrives (slow network, server hiccup) must not freeze the
 // loading bar: after a while it gets the placeholder and the game goes on
 const IMAGE_TIMEOUT_MS = 15000;
+const LAZY_KINDS = new Set(['map', 'puzzle']);
 
 function loadImage(src) {
   return new Promise((resolve) => {
@@ -44,9 +45,25 @@ export class Assets {
   /** URL usable in <img src>, for DOM-based UI. */
   url(id) {
     const e = this.entries.get(id);
+    if (e && e.lazy) return e.fullSrc; // the browser loads it when the screen shows it
     if (!e || !e.image) return '';
     if (!e.url) e.url = e.placeholder ? e.image.toDataURL() : e.fullSrc;
     return e.url;
+  }
+
+  /** Makes sure an image loaded on demand is ready (see LAZY_KINDS). */
+  async ensure(id) {
+    const e = this.entries.get(id);
+    if (!e || !e.lazy) return;
+    if (!e.loading) {
+      e.loading = loadImage(e.fullSrc).then((img) => {
+        e.image = img || makePlaceholder(e);
+        e.placeholder = !img;
+        e.url = img ? e.fullSrc : '';
+        e.lazy = false;
+      });
+    }
+    await e.loading;
   }
 
   json(path) {
@@ -82,6 +99,12 @@ export class Assets {
 
     const imageJobs = list.map(async (asset) => {
       const fullSrc = base + asset.src;
+      // big images used by one chapter only (map backgrounds, puzzles): loaded when needed
+      if (LAZY_KINDS.has(asset.kind) && !asset.pending) {
+        this.entries.set(asset.id, { ...asset, fullSrc, image: null, placeholder: false, lazy: true, url: fullSrc });
+        tick();
+        return;
+      }
       // art still being drawn: do not even ask the server (no 404s, faster start)
       const img = asset.pending ? null : await loadImage(fullSrc);
       const entry = { ...asset, fullSrc, image: img, placeholder: !img, url: '' };

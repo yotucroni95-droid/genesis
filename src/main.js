@@ -84,6 +84,10 @@ function setupRotateNotice() {
   });
 }
 
+// the offline download waits for the game to open, so it does not slow the first load
+let bootDone;
+const booted = new Promise((r) => { bootDone = r; });
+
 async function boot() {
   blockBrowserGestures();
   setupRotateNotice();
@@ -203,6 +207,7 @@ async function boot() {
   bootEl.classList.add('is-done');
   setTimeout(() => { bootEl.style.display = 'none'; }, 600);
   setTimeout(showNews, 700); // "nova versão" notice, once per update
+  setTimeout(bootDone, 3000);
   window.__genesis = game; // handy for debugging in the browser console
 }
 
@@ -213,6 +218,7 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   navigator.serviceWorker.register('sw.js').then(async () => {
     // download everything (sounds and voices too) so the game works offline
     const reg = await navigator.serviceWorker.ready;
+    await Promise.race([booted, new Promise((r) => setTimeout(r, 60000))]);
     if (reg.active) reg.active.postMessage('precache');
   }).catch(() => {});
   navigator.serviceWorker.addEventListener('message', (e) => {

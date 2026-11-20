@@ -85,16 +85,25 @@ let pushing = false;
 
 export async function pushNow(save, { keepalive = false } = {}) {
   const code = accountCode();
-  if (!cloudOn() || !code || pushing) return;
+  if (!cloudOn() || !code) return;
+  if (pushing) { retryLater(save, 3000); return; } // a change arrived mid-send: send it right after
   const json = JSON.stringify(payload(save.state));
   if (json === lastPushed) return;
   pushing = true;
   try {
-    const ok = await rpc('genesis_save', { p_code: code, p_data: payload(save.state) }, { keepalive });
+    const ok = await rpc('genesis_save', { p_code: code, p_data: JSON.parse(json) }, { keepalive });
     if (ok) lastPushed = json;
-  } catch { /* offline: tries again on the next change */ } finally {
+  } catch {
+    retryLater(save, 30000); // offline or server hiccup: try again soon (and as soon as the internet is back)
+  } finally {
     pushing = false;
   }
+}
+
+let retryTimer = 0;
+function retryLater(save, ms) {
+  clearTimeout(retryTimer);
+  retryTimer = setTimeout(() => pushNow(save), ms);
 }
 
 /**
@@ -122,6 +131,7 @@ export async function startSync(save) {
   document.addEventListener('visibilitychange', () => {
     if (document.visibilityState === 'hidden') { clearTimeout(timer); pushNow(save, { keepalive: true }); }
   });
+  window.addEventListener('online', () => pushNow(save));
   if (code) pushNow(save);
   return { pulled };
 }

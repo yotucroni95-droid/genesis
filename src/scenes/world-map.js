@@ -85,6 +85,7 @@ export function createWorldScene(game) {
       }
       const mapId = chapter ? chapter.map : params.mapId || 'eden';
       const json = await game.assets.loadJSON(`maps/${mapId}.json`);
+      if (json.genesis && json.genesis.background) await game.assets.ensure(json.genesis.background);
       map = new TileMap(json, game.assets);
       let at = params.at || { x: (map.spawn.x + 0.5) * map.tileW, y: (map.spawn.y + 1) * map.tileH - 4 };
       // never start stuck: if this spot is blocked (an old save, a changed map), step onto the path
