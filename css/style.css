@@ -1270,22 +1270,6 @@ p { line-height: 1.4; }
 .friend__info small { font: 600 12px var(--font-text); color: var(--ink-dim); }
 .friend .rank-badge, .friend .rankbadge { flex: none; }
 .friend__actions { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
-.frows { list-style: none; margin: 0; padding: 0; max-height: min(52vh, 420px); overflow-y: auto; border-radius: 10px; border: 2px solid var(--panel-edge); background: rgba(14,20,51,.85); }
-.frow { display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 2px 6px 2px 8px; border-bottom: 1px solid rgba(169,176,214,.15); }
-.frow:last-child { border-bottom: 0; }
-.frow__face { width: 28px; height: 28px; object-fit: contain; flex: none; }
-.frow__name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font: 700 14px var(--font-text); }
-.frow__status { display: flex; align-items: center; gap: 4px; flex: none; font: 600 11px var(--font-text); color: var(--ink-dim); }
-.frow__dot { width: 8px; height: 8px; border-radius: 50%; background: #6b7090; }
-.frow.is-online .frow__dot { background: var(--ok); box-shadow: 0 0 6px var(--ok); }
-.frow.is-online .frow__status { color: var(--ok); }
-.frow__menu { position: relative; flex: none; }
-.frow__more { list-style: none; cursor: pointer; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 8px; font: 700 18px var(--font-text); color: var(--ink-dim); }
-.frow__more::-webkit-details-marker { display: none; }
-.frow__more:hover, .frow__menu[open] .frow__more { background: rgba(169,176,214,.15); color: inherit; }
-.frow__pop { position: absolute; right: 0; top: 100%; z-index: 5; display: flex; flex-direction: column; gap: 6px; padding: 8px; min-width: 160px; border-radius: 10px; background: #0e1433; border: 2px solid var(--panel-edge); box-shadow: 0 6px 18px rgba(0,0,0,.5); }
-.frow:nth-last-child(-n+2):not(:nth-child(-n+2)) .frow__pop { top: auto; bottom: 100%; }
-.frows__filter { min-height: 40px; }
 .lobby__pair { display: flex; gap: 6px; }
 .lobby__pair .lobby__btn { min-width: 0; flex: 1; padding: 6px 8px; gap: 4px; font-size: calc(14px * var(--fs, 1)); }
 .lobby__pair .lobby__icon { width: 26px; height: 26px; }
@@ -1346,55 +1330,3 @@ p { line-height: 1.4; }
 .duel--invite h2 { margin: 0 28px 10px; font-size: calc(18px * var(--fs, 1)); }
 .duel--invite p { margin: 10px 0 0; font-size: calc(13px * var(--fs, 1)); opacity: .8; }
 .modal__x { position: absolute; top: 6px; right: 6px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(255,255,255,.15); color: #fff; font-size: calc(18px * var(--fs, 1)); cursor: pointer; }
-/* Fuga da Tentação (cooperativo) */
-.fuga__menu { display: flex; flex-direction: column; gap: 10px; max-width: 640px; margin: 0 auto; }
-.fuga__row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.fuga__diffs { display: flex; gap: 6px; }
-.fuga__btns { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
-.fuga__btns .btn { display: flex; flex-direction: column; gap: 2px; min-height: 64px; }
-.fuga__btns small { font-size: 12px; opacity: .85; }
-.fuga__loading { position: absolute; inset: 0; display: grid; place-items: center; }
-.fuga__hud { flex-wrap: wrap; gap: 6px; }
-.fuga__hud .chip { min-height: 30px; font-size: 13px; padding: 2px 10px; }
-.fuga__stage { margin-left: auto; }
-.fuga__stage--3 { color: #ffb347; } .fuga__stage--4 { color: #ff7a59; } .fuga__stage--5 { color: #ff4d5e; }
-.fuga__net { border-color: #ffb347; }
-.fuga__action { position: absolute; right: max(16px, env(safe-area-inset-right)); bottom: max(16px, env(safe-area-inset-bottom)); min-height: 52px; font-size: 16px; max-width: 46vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.fuga__spect { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 4px 8px; border-radius: 12px; background: rgba(7,10,28,.8); font: 700 13px var(--font-text); }
-.fuga__spect[hidden] { display: none; }
-.fuga__overlay { position: absolute; inset: 0; z-index: 60; overflow-y: auto; padding: 8px 12px; background: rgba(7,10,28,.94); }
-.fuga__overlay .screen__head { display: flex; align-items: center; gap: 10px; }
-.fuga__capture { display: flex; flex-direction: column; justify-content: center; gap: 10px; max-width: 640px; margin: 0 auto; background: rgba(40,6,18,.95); }
-.fuga__question { font: 700 17px var(--font-text); text-align: center; }
-.lobby__fuga { display: flex; flex-direction: column; align-items: center; gap: 0; min-width: 0; }
-.joy[hidden] { display: none; }
-.fuga__overlay, .fuga__action, .fuga__spect { pointer-events: auto; }
-/* Labirinto da Fé + Armadura de Deus (visual PROVISÓRIO até as artes) */
-.labi__play { display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap; }
-.labi__grid { display: grid; width: min(calc(100vh - 150px), 92vw, 420px); aspect-ratio: 1; background: #2c4a2e; border: 3px solid #14251a; border-radius: 8px; touch-action: none; }
-.labi__cell { display: grid; place-items: center; font-size: clamp(10px, 3.2vh, 22px); line-height: 1; border: 2px solid transparent; }
-.labi__cell.t { border-top-color: #0f1c12; } .labi__cell.r { border-right-color: #0f1c12; } .labi__cell.b { border-bottom-color: #0f1c12; } .labi__cell.l { border-left-color: #0f1c12; }
-.labi__pad { display: grid; grid-template-columns: repeat(3, 52px); grid-template-rows: repeat(2, 52px); gap: 6px; }
-.labi__k { min-height: 52px; font-size: 20px; } .labi__k0 { grid-column: 2; } .labi__k3 { grid-column: 1; grid-row: 2; } .labi__k2 { grid-column: 2; grid-row: 2; } .labi__k1 { grid-column: 3; grid-row: 2; }
-.labi__verse { text-align: center; font: italic 600 15px var(--font-text); color: var(--gold); min-height: 1.2em; }
-.armor__attack { text-align: center; font: 800 20px var(--font-text); padding: 10px; border-radius: 12px; background: rgba(120,20,40,.35); border: 2px solid #ff5a6a; margin: 6px auto; max-width: 520px; }
-.armor__attack.is-hit { background: rgba(124,240,166,.25); border-color: var(--ok); }
-.armor__attack.is-miss { font-size: 15px; }
-.armor__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; max-width: 560px; margin: 0 auto; }
-.armor__piece { display: flex; flex-direction: column; align-items: center; gap: 2px; min-height: 64px; padding: 6px; border-radius: 12px; border: 2px solid var(--panel-edge); background: rgba(14,20,51,.9); color: var(--ink); font: 600 12px var(--font-text); }
-.armor__piece:active { transform: scale(.96); }
-.armor__icon { font-size: 26px; }
-/* Pets */
-.pets { display: flex; flex-direction: column; gap: 8px; max-width: 760px; margin: 0 auto; }
-.pets__detail { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-radius: 14px; border: 2px solid; background: rgba(14,20,51,.85); flex-wrap: wrap; }
-.pets__big { width: 64px; height: 64px; font-size: 48px; line-height: 64px; text-align: center; flex: none; }
-.pets__info { flex: 1; min-width: 180px; display: flex; flex-direction: column; gap: 2px; }
-.pets__info p { margin: 2px 0; font: 600 14px var(--font-text); }
-.pets__info em { font: 600 12px var(--font-text); color: var(--gold); }
-.pets__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 6px; }
-.pets__cell { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 4px; min-height: 68px; border-radius: 10px; border: 2px solid; background: rgba(14,20,51,.85); color: var(--ink); font: 600 11px var(--font-text); }
-.pets__cell small { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.pets__cell.is-locked .pets__face { filter: grayscale(1) brightness(.5); }
-.pets__cell.is-sel { box-shadow: 0 0 0 3px var(--gold); }
-.pets__cell.is-on::after { content: '✓'; color: var(--ok); font-weight: 800; }
-.pets__face { width: 36px; height: 36px; font-size: 28px; line-height: 36px; text-align: center; }

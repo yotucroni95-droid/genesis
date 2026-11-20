@@ -20,14 +20,12 @@ import { RARITY_LABEL } from '../game/economy.js';
 import { Input } from '../input/input.js';
 import { muteButton } from '../ui/mute-button.js';
 import { sfx } from '../audio/audio.js';
-import { Pet, petState } from '../world/pet.js';
 
 const DEBUG = new URLSearchParams(location.search).has('debug');
 
 export function createWorldScene(game) {
   let map = null;
   let player = null;
-  let pet = null;
   let ambient = null;
   let stops = null;
   let chapter = null;
@@ -94,9 +92,6 @@ export function createWorldScene(game) {
       at = nearestFree(map, at.x, at.y) || nearestFree(map, (map.spawn.x + 0.5) * map.tileW, (map.spawn.y + 1) * map.tileH - 4) || at;
       player = new Player(game.assets, game.save.state.avatarId || 'peregrino', at.x, at.y);
       ambient = new Ambient(map);
-      const petId = petState(game.save).on;
-      const petDef = petId && (await game.assets.loadJSON('pets.json')).pets.find((p) => p.id === petId);
-      pet = petDef ? new Pet(game.assets, petDef, player.x, player.y) : null;
       stops = chapter ? new Stops(chapter, map, game.assets, game.save, { hero, visible: (id) => stopVisible(game.save, chapter, id) }) : null;
       firstFrame = true;
       if (DEBUG) window.__world = { map, player, camera, stops }; // only with ?debug=1, for testing
@@ -156,7 +151,6 @@ export function createWorldScene(game) {
       if (!map || !input) return; // still loading (slow phone internet)
       const vec = leaving ? { x: 0, y: 0 } : input.vector();
       player.update(dt, vec, map);
-      if (pet) pet.update(dt, player);
       if (player.moving) { stepT += dt; if (stepT > 0.32) { stepT = 0; sfx('step'); } }
       if (trailColor && player.moving && Math.random() < dt * 22) {
         trail.push({ x: player.x + (Math.random() - 0.5) * 10, y: player.y - Math.random() * 4, vy: -6 - Math.random() * 10, life: 0.9 });
@@ -212,7 +206,6 @@ export function createWorldScene(game) {
       // characters sorted by depth, so whoever is lower on screen is in front
       const list = stops ? stops.drawables() : [];
       list.push({ y: player.y, draw: (c) => player.draw(c) });
-      if (pet) list.push({ y: pet.y, draw: (c) => pet.draw(c) });
       list.sort((a, b) => a.y - b.y).forEach((d) => d.draw(ctx));
       map.drawForeground(ctx);
       ambient.drawAbove(ctx, view);

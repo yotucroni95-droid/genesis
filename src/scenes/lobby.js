@@ -77,9 +77,7 @@ export function createLobbyScene(game) {
           side(ico('icon.personagens', '🧑', 'lobby__icon'), 'Personagens', go('avatar', { backScene: 'lobby' })),
           side(ico('icon.colecao', '🃏', 'lobby__icon'), 'Coleção', go('collection')),
           side(ico('icon.livro', '📖', 'lobby__icon'), 'Versículo', go('daily'), dailyDone(save) ? 0 : 1),
-          h('div', { class: 'lobby__pair' },
-            side(ico('icon.medalha', '🏅', 'lobby__icon'), 'Medalhas', go('medals')),
-            side(ico('icon.pets', '🐾', 'lobby__icon'), 'Pets', go('pets'))),
+          side(ico('icon.medalha', '🏅', 'lobby__icon'), 'Medalhas', go('medals')),
           side(ico('icon.trofeu_ouro', '🏆', 'lobby__icon'), 'Ranking', go('ranking')),
         ),
         stage,
@@ -98,7 +96,6 @@ export function createLobbyScene(game) {
         h('div', { class: 'lobby__bottom' },
           h('button', { class: 'btn btn--arena', onClick: go('arena') }, ico('icon.arena', '⚡', 'arena__ico'), h('span', {}, h('b', { text: 'ARENA' }), h('small', { text: s.arenaBest ? `Recorde: ${s.arenaBest}` : 'Desafio relâmpago' }))),
           h('button', { class: 'btn btn--play', onClick: go('explore') }, h('b', { text: 'JOGAR' }), h('small', { text: 'Jornada' })),
-          h('button', { class: 'btn btn--online lobby__fuga', onClick: go('fuga') }, h('b', { text: 'FUGA' }), h('small', { text: 'Cooperativo 1–5' })),
         ),
       ));
       if ((s.boxes || []).length) {
@@ -131,9 +128,9 @@ export function createLobbyScene(game) {
           // full-screen notice covers the bottom of the screen for a few seconds
           const modal = h('div', { class: 'modal modal--top' }, h('div', { class: 'modal__box duel duel--invite' },
             h('button', { class: 'modal__x', 'aria-label': 'Fechar', text: '✕', onClick: () => { clearInvite(inv.room); modal.remove(); } }),
-            h('h2', { text: `⚡ @${inv.nick} te chamou para jogar!` }),
+            h('h2', { text: `⚡ @${inv.nick} te chamou para a Arena!` }),
             h('div', { style: { display: 'flex', gap: '10px', justifyContent: 'center' } },
-              h('button', { class: 'btn btn--play', onClick: () => { modal.remove(); clearInvite(inv.room); game.scenes.go('fuga', { join: inv.room, orArena: true }); } }, h('b', { text: 'JOGAR' })),
+              h('button', { class: 'btn btn--play', onClick: () => { modal.remove(); clearInvite(inv.room); game.scenes.go('online', { join: inv.room }); } }, h('b', { text: 'JOGAR' })),
               h('button', { class: 'btn btn--ghost', text: 'Agora não', onClick: () => { clearInvite(inv.room); modal.remove(); } }),
             ),
             h('p', { text: 'Partida online: as mesmas perguntas, ao mesmo tempo.' })));
