@@ -26,7 +26,8 @@ export function roomError(err) {
   const m = String((err && err.message) || err);
   if (/nao existe/.test(m)) return 'Não achei essa sala. Confira o código.';
   if (/cheia/.test(m)) return 'Essa sala já está cheia.';
-  if (/ja comecou/.test(m)) return 'Essa partida já começou.';
+  if (/encerrada/.test(m)) return 'Essa sala já foi fechada. Peça um convite novo ou crie uma sala.';
+  if (/ja comecou/.test(m)) return 'Essa partida já começou sem você. Peça um convite novo.';
   if (/nao esta/.test(m)) return 'Você não está nesta sala.';
   if (/abort|Failed to fetch|NetworkError|cloud/.test(m)) return 'Sem conexão com o servidor. Verifique a internet.';
   return 'Algo deu errado. Tente de novo.';

@@ -138,6 +138,7 @@ begin
      where room_id = r.id and token_hash = public.genesis_room_tok(p_token) and r.status <> 'finished';
     return public.genesis_room_state(r.code, p_token);
   end if;
+  if r.status = 'finished' then raise exception 'sala encerrada'; end if;
   if r.status <> 'waiting' then raise exception 'sala ja comecou'; end if;
   -- primeiro lugar livre (alguém pode ter saído antes de começar)
   select min(s) into v_n from generate_series(0, r.max_players - 1) s

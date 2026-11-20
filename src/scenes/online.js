@@ -79,6 +79,7 @@ export function createOnlineScene(game) {
             h('button', { class: 'btn', text: 'Entrar', onClick: () => enterRoom(input.value) }),
           ),
           back ? h('button', { class: 'btn btn--ghost btn--small', text: `Voltar para a sala ${back}`, onClick: () => enterRoom(back) }) : null,
+          msg ? h('button', { class: 'btn btn--ghost btn--small', text: '← Voltar ao lobby', onClick: () => game.scenes.go('lobby') }) : null,
         ));
       };
 
@@ -99,7 +100,11 @@ export function createOnlineScene(game) {
         if (!ROOM_RULE.test(code)) { menu('O código da sala tem 6 letras e números.'); return; }
         busy('Entrando na sala…');
         const t = Date.now();
-        try { setState(await joinRoom(code, nick, save.state.avatarId), t); } catch (err) { if (alive) menu(roomError(err)); return; }
+        try { setState(await joinRoom(code, nick, save.state.avatarId), t); } catch (err) {
+          if (!/Sem conexão/.test(roomError(err))) forgetRoom(); // a closed/full room never comes back
+          if (alive) menu(roomError(err));
+          return;
+        }
         rememberRoom(room.code);
         sfx('click');
         follow();

@@ -1324,3 +1324,9 @@ p { line-height: 1.4; }
 .online__team { display: flex; flex-direction: column; gap: 2px; min-width: 130px; padding: 8px 12px; border-radius: 12px; background: rgba(255,255,255,.06); }
 .online__team.is-me { outline: 2px solid var(--gold); }
 .online__team small { opacity: .75; font-size: calc(12px * var(--fs, 1)); }
+/* invite: compact, high on the screen (the browser's full-screen notice covers the bottom) */
+.modal--top { align-items: flex-start; padding-top: 10px; }
+.duel--invite { position: relative; padding: 12px 16px; }
+.duel--invite h2 { margin: 0 28px 10px; font-size: calc(18px * var(--fs, 1)); }
+.duel--invite p { margin: 10px 0 0; font-size: calc(13px * var(--fs, 1)); opacity: .8; }
+.modal__x { position: absolute; top: 6px; right: 6px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(255,255,255,.15); color: #fff; font-size: calc(18px * var(--fs, 1)); cursor: pointer; }

@@ -30,6 +30,7 @@ export function createLobbyScene(game) {
 
   return {
     async enter(_p, ui) {
+      const enteredAt = Date.now();
       const save = game.save;
       game.extras = game.extras || await loadExtras(game.assets);
       const events = startDay(save);
@@ -118,15 +119,23 @@ export function createLobbyScene(game) {
           if (btn) { const old = btn.querySelector('.badge'); if (old) old.remove(); const n = st.incoming.length + st.invites.length; if (n) btn.appendChild(badge(n)); }
           const inv = st.invites[0];
           if (!inv || game.room || game.duel || ui.querySelector('.modal')) return;
-          const modal = h('div', { class: 'modal' }, h('div', { class: 'modal__box duel' },
-            ico('icon.arena', '⚡', 'duel__ico'),
-            h('h2', { text: `@${inv.nick} te chamou para a Arena!` }),
-            h('p', { text: 'Partida online 1x1 ou em duplas 2x2: as mesmas perguntas, ao mesmo tempo.' }),
+          // each invite pops up only once on this phone (no loop if clearing fails)
+          let seenInv = [];
+          try { seenInv = JSON.parse(localStorage.getItem('genesis.invSeen') || '[]'); } catch { /* storage blocked */ }
+          if (seenInv.includes(inv.room)) return;
+          try { localStorage.setItem('genesis.invSeen', JSON.stringify(seenInv.concat(inv.room).slice(-20))); } catch { /* ignore */ }
+          // compact and high on the screen: right after "Toque para começar" the browser's
+          // full-screen notice covers the bottom of the screen for a few seconds
+          const modal = h('div', { class: 'modal modal--top' }, h('div', { class: 'modal__box duel duel--invite' },
+            h('button', { class: 'modal__x', 'aria-label': 'Fechar', text: '✕', onClick: () => { clearInvite(inv.room); modal.remove(); } }),
+            h('h2', { text: `⚡ @${inv.nick} te chamou para a Arena!` }),
             h('div', { style: { display: 'flex', gap: '10px', justifyContent: 'center' } },
-              h('button', { class: 'btn btn--play', onClick: () => { clearInvite(inv.room); game.scenes.go('online', { join: inv.room }); } }, h('b', { text: 'JOGAR' })),
+              h('button', { class: 'btn btn--play', onClick: () => { modal.remove(); clearInvite(inv.room); game.scenes.go('online', { join: inv.room }); } }, h('b', { text: 'JOGAR' })),
               h('button', { class: 'btn btn--ghost', text: 'Agora não', onClick: () => { clearInvite(inv.room); modal.remove(); } }),
-            )));
-          ui.appendChild(modal);
+            ),
+            h('p', { text: 'Partida online: as mesmas perguntas, ao mesmo tempo.' })));
+          const show = () => { if (ui.isConnected && !ui.querySelector('.modal')) ui.appendChild(modal); };
+          setTimeout(show, Math.max(0, 4500 - (Date.now() - enteredAt)));
         }).catch(() => {});
       }
       // reminders (lamp about to go out, missions, ranking): offered once the player has played
@@ -150,7 +159,7 @@ export function createLobbyScene(game) {
               h('button', { class: 'btn btn--ghost', text: 'Agora não', onClick: close }),
             )));
           ui.appendChild(modal);
-        }).catch(() => {}), 2500);
+        }).catch(() => {}), 9000);
       }
       if (game.room) {
         const join = game.room;
