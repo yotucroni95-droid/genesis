@@ -8,6 +8,7 @@ import { Starfield } from './starfield.js';
 import { rankBadge } from '../ui/game-ui.js';
 import { friendsOn, friendsState, searchPlayers, requestFriend, answerFriend, removeFriend, inviteFriend, clearInvite, friendError } from '../cloud/friends.js';
 import { createRoom } from '../cloud/rooms.js';
+import { online as fugaRooms, fugaError } from '../cloud/fuga.js';
 
 export function createFriendsScene(game) {
   const stars = new Starfield(100);
@@ -56,6 +57,16 @@ export function createFriendsScene(game) {
         } catch (err) { toast(friendError(err)); }
       };
 
+      // Fuga da Tentação: private co-op room, the friend gets the code as an invite
+      const inviteFuga = async (p) => {
+        try {
+          const room = await fugaRooms.create(save.state.nick || 'jogador', save.state.avatarId, false, 1);
+          await inviteFriend(p.tag, room.code);
+          toast(`Convite da Fuga enviado para @${p.nick}!`);
+          game.scenes.go('fuga', { join: room.code });
+        } catch (err) { toast(/fuga|404|PGRST/.test(String(err && err.message)) ? fugaError(err) : friendError(err)); }
+      };
+
       const input = h('input', { class: 'field__input friends__search', placeholder: 'Apelido ou código de amigo', maxlength: '16', autocomplete: 'off', spellcheck: 'false', 'aria-label': 'Pesquisar jogador' });
       const search = async () => {
         try { results = await searchPlayers(input.value); } catch (err) { toast(friendError(err)); results = null; }
@@ -71,6 +82,7 @@ export function createFriendsScene(game) {
           h('div', { class: 'frow__pop' },
             h('button', { class: 'btn btn--small btn--online', text: '⚡ Desafiar 1x1', onClick: () => challenge(p, '1x1') }),
             h('button', { class: 'btn btn--small btn--online', text: '👥 Convidar 2x2', onClick: () => challenge(p, '2x2') }),
+            h('button', { class: 'btn btn--small', text: '🏃 Convidar para a Fuga', onClick: () => inviteFuga(p) }),
             act('Remover', 'btn--ghost', () => (confirm(`Remover @${p.nick} dos amigos?`) ? removeFriend(p.tag) : null))));
         return h('li', { class: `frow${p.online ? ' is-online' : ''}` },
           h('img', { class: 'pixel frow__face', src: portrait(p.avatar), alt: '' }),
@@ -102,8 +114,8 @@ export function createFriendsScene(game) {
           h('div', { class: 'friends__me' },
             h('span', { text: 'Seu código de amigo:' }), h('b', { class: 'friends__tag', text: state.me.tag }),
             h('button', { class: 'btn btn--small btn--ghost', text: 'Copiar', onClick: () => navigator.clipboard && navigator.clipboard.writeText(state.me.tag).then(() => toast('Código copiado!')).catch(() => {}) })),
-          ...(state.invites.length ? section('Convites para a Arena', state.invites.map((p) => card(p,
-            act('Jogar!', 'btn--play', async () => { await clearInvite(p.room); game.scenes.go('online', { join: p.room }); }),
+          ...(state.invites.length ? section('Convites para jogar', state.invites.map((p) => card(p,
+            act('Jogar!', 'btn--play', async () => { await clearInvite(p.room); game.scenes.go('fuga', { join: p.room, orArena: true }); }),
             act('Agora não', 'btn--ghost', () => clearInvite(p.room))))) : []),
           ...(state.incoming.length ? section('Pedidos de amizade', state.incoming.map((p) => card(p,
             act('Aceitar', '', () => answerFriend(p.tag, true)),

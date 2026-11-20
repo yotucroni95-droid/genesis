@@ -129,9 +129,9 @@ export function createLobbyScene(game) {
           // full-screen notice covers the bottom of the screen for a few seconds
           const modal = h('div', { class: 'modal modal--top' }, h('div', { class: 'modal__box duel duel--invite' },
             h('button', { class: 'modal__x', 'aria-label': 'Fechar', text: '✕', onClick: () => { clearInvite(inv.room); modal.remove(); } }),
-            h('h2', { text: `⚡ @${inv.nick} te chamou para a Arena!` }),
+            h('h2', { text: `⚡ @${inv.nick} te chamou para jogar!` }),
             h('div', { style: { display: 'flex', gap: '10px', justifyContent: 'center' } },
-              h('button', { class: 'btn btn--play', onClick: () => { modal.remove(); clearInvite(inv.room); game.scenes.go('online', { join: inv.room }); } }, h('b', { text: 'JOGAR' })),
+              h('button', { class: 'btn btn--play', onClick: () => { modal.remove(); clearInvite(inv.room); game.scenes.go('fuga', { join: inv.room, orArena: true }); } }, h('b', { text: 'JOGAR' })),
               h('button', { class: 'btn btn--ghost', text: 'Agora não', onClick: () => { clearInvite(inv.room); modal.remove(); } }),
             ),
             h('p', { text: 'Partida online: as mesmas perguntas, ao mesmo tempo.' })));

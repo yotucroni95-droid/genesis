@@ -89,9 +89,9 @@ export function createFugaScene(game) {
     ));
   }
 
-  async function enterRoom(make) {
+  async function enterRoom(make, onFail) {
     let st;
-    try { st = await make(); } catch (err) { toast(fugaError(err)); return; }
+    try { st = await make(); } catch (err) { if (onFail) { onFail(err); return; } toast(fugaError(err)); return; }
     S.api = online;
     S.code = st.code;
     S.diff = st.difficulty;
@@ -571,7 +571,10 @@ export function createFugaScene(game) {
       S = fresh();
       S.ui = ui; uiRoot = ui;
       menu();
-      if (params && params.join && fugaOn()) enterRoom(() => online.join(params.join, game.save.state.nick || 'jogador', game.save.state.avatarId));
+      // an invite code may be a Fuga room or an Arena room (same format): try the Fuga first
+      const arena = params && params.orArena ? (err) => { if (/sala nao existe|404|PGRST|Could not find/.test(String(err && err.message))) game.scenes.go('online', { join: params.join }); else toast(fugaError(err)); } : null;
+      if (params && params.join && fugaOn()) enterRoom(() => online.join(params.join, game.save.state.nick || 'jogador', game.save.state.avatarId), arena);
+      else if (params && params.join && arena) arena(new Error('404'));
     },
     exit() { if (S) { if (S.phase === 'wait' && S.api && !S.api.solo) S.api.leave(S.code); S.alive = false; teardown(); } },
     update(dt) { stars.update(dt); update(dt); },

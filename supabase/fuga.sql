@@ -371,3 +371,5 @@ grant execute on function public.genesis_fuga_caught(text, text, int) to anon, a
 grant execute on function public.genesis_fuga_answer(text, text, int) to anon, authenticated;
 grant execute on function public.genesis_fuga_escape(text, text) to anon, authenticated;
 grant execute on function public.genesis_fuga_leave(text, text) to anon, authenticated;
+
+notify pgrst, 'reload schema';
