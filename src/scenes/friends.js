@@ -39,14 +39,17 @@ export function createFriendsScene(game) {
         rankBadge(p.trophies || 0),
         h('div', { class: 'friend__actions' }, ...actions));
       const act = (text, cls, fn) => h('button', { class: `btn btn--small ${cls}`, text, onClick: async (e) => {
-        e.currentTarget.disabled = true;
+        const btn = e.currentTarget;
+        btn.disabled = true;
         try { await fn(); sfx('click'); } catch (err) { toast(friendError(err)); }
+        const menu = btn.closest('details'); if (menu) menu.open = false; // let the refresh repaint the list
+        btn.disabled = false;
         if (alive) await load();
       } });
 
-      const challenge = async (p) => {
+      const challenge = async (p, mode = '1x1') => {
         try {
-          const room = await createRoom(save.state.nick || 'jogador', save.state.avatarId);
+          const room = await createRoom(save.state.nick || 'jogador', save.state.avatarId, mode);
           await inviteFriend(p.tag, room.code);
           toast(`Convite enviado para @${p.nick}!`);
           game.scenes.go('online', { join: room.code });
@@ -59,6 +62,36 @@ export function createFriendsScene(game) {
         if (alive) paint();
       };
       input.addEventListener('keydown', (e) => { if (e.key === 'Enter') search(); });
+
+      // compact row for the friend list: small face, name, online dot + a discreet actions menu
+      let filter = '';
+      const row = (p) => {
+        const menu = h('details', { class: 'frow__menu' },
+          h('summary', { class: 'frow__more', 'aria-label': `Ações para @${p.nick}`, text: '⋯' }),
+          h('div', { class: 'frow__pop' },
+            h('button', { class: 'btn btn--small btn--online', text: '⚡ Desafiar 1x1', onClick: () => challenge(p, '1x1') }),
+            h('button', { class: 'btn btn--small btn--online', text: '👥 Convidar 2x2', onClick: () => challenge(p, '2x2') }),
+            act('Remover', 'btn--ghost', () => (confirm(`Remover @${p.nick} dos amigos?`) ? removeFriend(p.tag) : null))));
+        return h('li', { class: `frow${p.online ? ' is-online' : ''}` },
+          h('img', { class: 'pixel frow__face', src: portrait(p.avatar), alt: '' }),
+          h('span', { class: 'frow__name', text: `@${p.nick}`, title: `@${p.nick}` }),
+          h('span', { class: 'frow__status', role: 'status', 'aria-label': p.online ? 'online' : 'offline' },
+            h('i', { class: 'frow__dot', 'aria-hidden': 'true' }), h('small', { text: p.online ? 'online' : 'offline' })),
+          menu);
+      };
+      const friendList = () => {
+        const list = h('ul', { class: 'frows' });
+        const fill = () => {
+          const q = filter.trim().toLowerCase();
+          const shown = state.friends.filter((p) => !q || String(p.nick).toLowerCase().includes(q) || String(p.tag).toLowerCase().includes(q));
+          list.replaceChildren(...(shown.length ? shown.map(row) : [h('li', { class: 'screen__note', text: 'Nenhum amigo com esse nome.' })]));
+        };
+        fill();
+        if (state.friends.length <= 6) return [list];
+        const f = h('input', { class: 'field__input frows__filter', placeholder: 'Buscar entre amigos', value: filter, maxlength: '16', autocomplete: 'off', 'aria-label': 'Buscar entre amigos' });
+        f.addEventListener('input', () => { filter = f.value; fill(); });
+        return [f, list];
+      };
 
       const paint = () => {
         if (!state) { body.replaceChildren(h('p', { class: 'screen__note', text: 'Carregando amigos…' })); return; }
@@ -75,10 +108,9 @@ export function createFriendsScene(game) {
           ...(state.incoming.length ? section('Pedidos de amizade', state.incoming.map((p) => card(p,
             act('Aceitar', '', () => answerFriend(p.tag, true)),
             act('Recusar', 'btn--ghost', () => answerFriend(p.tag, false))))) : []),
-          ...section(`Amigos (${state.friends.length})`, state.friends.sort((a, b) => Number(b.online) - Number(a.online)).map((p) => card(p,
-            h('button', { class: 'btn btn--small btn--online', text: '⚡ Desafiar', onClick: () => challenge(p) }),
-            act('Remover', 'btn--ghost', () => (confirm(`Remover @${p.nick} dos amigos?`) ? removeFriend(p.tag) : null)))),
-          'Pesquise pelo apelido ou pelo código de amigo e mande um pedido.'),
+          h('h3', { class: 'friends__title', text: `Amigos (${state.friends.length}) · ${state.friends.filter((p) => p.online).length} online` }),
+          ...(state.friends.sort((a, b) => Number(b.online) - Number(a.online) || String(a.nick).localeCompare(String(b.nick))), state.friends.length
+            ? friendList() : [h('p', { class: 'screen__note', text: 'Pesquise pelo apelido ou pelo código de amigo e mande um pedido.' })]),
           h('h3', { class: 'friends__title', text: 'Encontrar jogadores' }),
           h('div', { class: 'online__row' }, input, h('button', { class: 'btn', text: '🔍 Pesquisar', onClick: search })),
           results ? (results.length ? h('div', { class: 'friends__list' }, ...results.map((p) => card(p,
@@ -90,8 +122,11 @@ export function createFriendsScene(game) {
       paint();
       const load = async () => {
         try { state = await friendsState(); } catch (err) { if (!state) body.replaceChildren(h('p', { class: 'screen__note', text: friendError(err) })); return; }
-        if (alive) paint();
+        // don't rebuild under the player's finger: an open actions menu or the friend filter in use
+        if (alive && !body.querySelector('.frow__menu[open]') && document.activeElement?.classList?.contains('frows__filter') !== true) paint();
       };
+      body.addEventListener('toggle', (e) => { if (e.target.open) body.querySelectorAll('.frow__menu[open]').forEach((d) => { if (d !== e.target) d.open = false; }); }, true);
+      body.addEventListener('click', (e) => { if (!e.target.closest('.frow__menu')) body.querySelectorAll('.frow__menu[open]').forEach((d) => { d.open = false; }); });
       await load();
       timer = setInterval(load, 20000); // new requests and invites show up while the screen is open
     },
