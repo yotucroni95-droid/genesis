@@ -36,7 +36,7 @@ export function createChallengeScene(game) {
       // Do not wait here: the scene must finish entering so buttons (like
       // "Voltar") keep working while the challenge is being played.
       getChallenge(plan.type)
-        .start(plan.config || {}, { root: area, assets: game.assets, verse: stop.verse, sfx })
+        .start(plan.config || {}, { root: area, assets: game.assets, verse: stop.verse, sfx, avatar: game.save.state.avatarId })
         .then((result) => this.finish(result, { chapter, stop, area, back }));
     },
 

@@ -221,6 +221,7 @@ export function weekly(save) {
 }
 
 export function trackWeekly(save, type, amount) {
+  trackSeason(save, type, amount);
   const wk = weekly(save);
   let changed = false;
   for (const m of wk.missions) {
@@ -315,11 +316,57 @@ export function claimPass(save, level) {
   return out;
 }
 
+// ---------- season missions (inside the Passe da Fé) ----------
+// Each season has a theme and 5 missions drawn from this pool (the same for
+// everybody in the same season). They last the whole season and give fé.
+export const SEASON_THEMES = ['Criação', 'Patriarcas', 'Êxodo', 'Juízes', 'Reis', 'Profetas', 'Evangelhos', 'Igreja'];
+export const seasonTheme = (n = seasonNumber()) => SEASON_THEMES[(n - 1) % SEASON_THEMES.length];
+const SEASON_POOL = [
+  { type: 'stops', target: 30, fe: 150, denarios: 5, label: 'Complete 30 paradas da Jornada' },
+  { type: 'threeStars', target: 15, fe: 150, denarios: 5, label: 'Ganhe 3 estrelas em 15 desafios' },
+  { type: 'arenaPlay', target: 25, fe: 120, denarios: 4, label: 'Jogue 25 partidas na Arena' },
+  { type: 'onlineWin', target: 3, fe: 150, denarios: 6, label: 'Vença 3 partidas online 1x1' },
+  { type: 'correct', target: 400, fe: 150, denarios: 5, label: 'Acerte 400 perguntas' },
+  { type: 'daily', target: 12, fe: 120, denarios: 4, label: 'Leia o versículo do dia 12 vezes' },
+  { type: 'dailyMissions', target: 20, fe: 150, denarios: 5, label: 'Complete 20 missões do dia' },
+  { type: 'openBox', target: 15, fe: 100, denarios: 3, label: 'Abra 15 baús' },
+];
+export function seasonMissions(save) {
+  const p = pass(save);
+  if (!p.missions) {
+    const rnd = seeded(p.season * 7919);
+    const pool = SEASON_POOL.slice();
+    const pick = [];
+    while (pick.length < 5) pick.push(pool.splice(Math.floor(rnd() * pool.length), 1)[0]);
+    save.update((s) => { s.pass.missions = pick.map((m) => ({ ...m, progress: 0, claimed: false })); });
+  }
+  return save.state.pass.missions;
+}
+function trackSeason(save, type, amount) {
+  const list = seasonMissions(save);
+  let changed = false;
+  for (const m of list) {
+    if (m.type !== type || m.claimed || m.progress >= m.target) continue;
+    m.progress = Math.min(m.target, m.progress + amount);
+    changed = true;
+  }
+  if (changed) save.update(() => {});
+}
+export function claimSeasonMission(save, i) {
+  const m = seasonMissions(save)[i];
+  if (!m || m.claimed || m.progress < m.target) return null;
+  m.claimed = true;
+  save.update(() => {});
+  addFe(save, m.fe);
+  addDenarios(save, m.denarios);
+  return m;
+}
+
 export const pendingPass = (save) => {
   const p = pass(save);
   let n = 0;
   for (let l = 1; l <= p.level; l++) if (!p.claimed[l]) n++;
-  return n;
+  return n + seasonMissions(save).filter((m) => !m.claimed && m.progress >= m.target).length;
 };
 
 // ---------- shop: offers of the day and pack of the week ----------
@@ -352,6 +399,16 @@ export function dailyOffers(save, cosmetics) {
   const bought = (save.state.offers && save.state.offers.day === dayIndex()) ? save.state.offers.bought : {};
   return offers.map((o, i) => ({ ...o, i, bought: Boolean(bought[i]),
     owned: o.kind === 'cosmetic' ? Boolean((save.state[o.cosmeticKind] || {})[o.id]) : o.kind === 'frag' ? save.isUnlocked(o.id) : o.kind === 'oil' ? (save.state.oil || 0) >= OIL_MAX : false }));
+}
+
+// permanent showcase: every cosmetic that is not a prize, a bit dearer than the daily offer
+export const COSMETIC_PRICE = { comum: 25, raro: 40, 'épico': 60, 'lendário': 100 };
+export function buyCosmetic(save, kind, c) {
+  if ((save.state[kind] || {})[c.id]) return { error: 'Você já tem isso.' };
+  const price = COSMETIC_PRICE[c.rarity] || 40;
+  if (!pay(save, price, 'denarios')) return { error: 'Denários insuficientes. Ganhe nas missões da semana, no Passe da Fé e em baús épicos.' };
+  grantCosmetic(save, kind, c.id);
+  return { ok: true };
 }
 
 export const WEEKLY_PACK = { price: 70, label: 'Pacote da semana', text: 'Baú Épico + 4 fragmentos épicos + 2 frascos de azeite' };

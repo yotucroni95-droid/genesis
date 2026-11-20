@@ -340,6 +340,51 @@
    }
   },
   {
+   "id": "joquebede",
+   "name": "Joquebede",
+   "playable": true,
+   "base": false,
+   "color": "#7a2f4a",
+   "virtue": "Coragem",
+   "passage": "Êxodo 2:1-10",
+   "description": "Mãe de Moisés. Escondeu o bebê e o colocou num cesto no Nilo, confiando em Deus.",
+   "rarity": "comum",
+   "unlockedIn": 11,
+   "power": {
+    "coins": 15
+   }
+  },
+  {
+   "id": "miria",
+   "name": "Miriã",
+   "playable": true,
+   "base": false,
+   "color": "#1f8a82",
+   "virtue": "Louvor",
+   "passage": "Êxodo 15:20-21",
+   "description": "Irmã de Moisés. Vigiou o cesto no rio e louvou a Deus com tamborim depois do Mar Vermelho.",
+   "rarity": "raro",
+   "unlockedIn": 12,
+   "power": {
+    "fe": 20
+   }
+  },
+  {
+   "id": "bezalel",
+   "name": "Bezalel",
+   "playable": true,
+   "base": false,
+   "color": "#c98a2c",
+   "virtue": "Habilidade",
+   "passage": "Êxodo 31:1-5",
+   "description": "Artesão cheio do Espírito de Deus. Fez a arca e as peças do santuário com ouro, prata e bronze.",
+   "rarity": "épico",
+   "unlockedIn": 13,
+   "power": {
+    "arenaCoins": 25
+   }
+  },
+  {
    "id": "davi",
    "name": "Davi",
    "playable": true,
@@ -535,6 +580,121 @@
     "coins": 35,
     "trophies": 25,
     "hint": 1
+   }
+  },
+  {
+   "id": "arao",
+   "name": "Arão",
+   "playable": true,
+   "base": false,
+   "color": "#3b5bb5",
+   "virtue": "Serviço",
+   "passage": "Êxodo 28:1",
+   "description": "Irmão de Moisés e primeiro sumo sacerdote. Falava ao povo e servia a Deus no santuário.",
+   "rarity": "épico",
+   "power": {
+    "fe": 25
+   }
+  },
+  {
+   "id": "jo",
+   "name": "Jó",
+   "playable": true,
+   "base": false,
+   "color": "#8a5a2b",
+   "virtue": "Perseverança",
+   "passage": "Jó 1:21",
+   "description": "Perdeu quase tudo, mas não deixou de confiar em Deus. No fim, Deus lhe deu o dobro do que tinha antes.",
+   "rarity": "lendário",
+   "power": {
+    "fe": 30,
+    "arenaLife": 1
+   }
+  },
+  {
+   "id": "neemias",
+   "name": "Neemias",
+   "playable": true,
+   "base": false,
+   "color": "#2f4f9e",
+   "virtue": "Liderança",
+   "passage": "Neemias 6:15",
+   "description": "Copeiro do rei. Orou a Deus e liderou o povo para reconstruir os muros de Jerusalém em 52 dias.",
+   "rarity": "épico",
+   "power": {
+    "trophies": 25
+   }
+  },
+  {
+   "id": "enoque",
+   "name": "Enoque",
+   "playable": true,
+   "base": false,
+   "color": "#e8d9a8",
+   "virtue": "Comunhão",
+   "passage": "Gênesis 5:24",
+   "description": "Andou com Deus todos os dias. Deus o levou para o céu sem que ele passasse pela morte.",
+   "rarity": "lendário",
+   "power": {
+    "hint": 1,
+    "arenaTime": 3
+   }
+  },
+  {
+   "id": "jeremias",
+   "name": "Jeremias",
+   "playable": true,
+   "base": false,
+   "color": "#9b3a2a",
+   "virtue": "Coragem",
+   "passage": "Jeremias 29:11",
+   "description": "Profeta que, mesmo rejeitado, anunciou a mensagem de Deus e falou de esperança ao povo.",
+   "rarity": "épico",
+   "power": {
+    "arenaTime": 5
+   }
+  },
+  {
+   "id": "nabucodonosor",
+   "name": "Nabucodonosor",
+   "playable": true,
+   "base": false,
+   "color": "#6a2c91",
+   "virtue": "Humildade",
+   "passage": "Daniel 4:37",
+   "description": "Rei da Babilônia. Depois de ser humilhado, reconheceu que o Deus do céu é o Rei de todos.",
+   "rarity": "lendário",
+   "power": {
+    "coins": 40
+   }
+  },
+  {
+   "id": "estatua",
+   "name": "A Estátua",
+   "playable": true,
+   "base": false,
+   "color": "#d4a017",
+   "virtue": "Profecia",
+   "passage": "Daniel 2:31-33",
+   "description": "A grande estátua do sonho do rei: cabeça de ouro, peito de prata, ventre de bronze, pernas de ferro e pés de ferro e barro.",
+   "rarity": "lendário",
+   "power": {
+    "fe": 40,
+    "coins": 20
+   }
+  },
+  {
+   "id": "estevao",
+   "name": "Estêvão",
+   "playable": true,
+   "base": false,
+   "color": "#3d5fa8",
+   "virtue": "Fé",
+   "passage": "Atos 7:55-60",
+   "description": "Cheio do Espírito Santo, viu o céu aberto. Foi o primeiro mártir cristão e perdoou quem o apedrejava.",
+   "rarity": "épico",
+   "power": {
+    "arenaCoins": 25
    }
   }
  ]

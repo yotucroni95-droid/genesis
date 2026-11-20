@@ -5,7 +5,7 @@ import { h } from '../ui/dom.js';
 import { gameScreen } from '../ui/screen.js';
 import { toast } from '../ui/toast.js';
 import { ico, chest, formatWait, hasArt } from '../ui/game-ui.js';
-import { pass, passReward, claimPass, PASS_LEVELS, FE_PER_LEVEL, seasonNumber, seasonEndsIn } from '../game/meta.js';
+import { pass, passReward, claimPass, PASS_LEVELS, FE_PER_LEVEL, seasonNumber, seasonEndsIn, seasonTheme, seasonMissions, claimSeasonMission } from '../game/meta.js';
 import { Starfield } from './starfield.js';
 import { sfx } from '../audio/audio.js';
 
@@ -51,13 +51,25 @@ export function createPassScene(game) {
         h('div', { class: 'pass__head' },
           ico(p.level >= 20 ? 'icon.passe_premium' : 'icon.passe', '🎖️', 'pass__badge'),
           h('div', { class: 'pass__info' },
-            h('b', { text: `Temporada ${seasonNumber()} · Nível ${p.level} de ${PASS_LEVELS}` }),
+            h('b', { text: `Temporada ${seasonNumber()}: ${seasonTheme()} · Nível ${p.level} de ${PASS_LEVELS}` }),
             h('div', { class: 'bar' }, h('div', { class: 'bar__fill', style: { width: `${Math.round((inLevel / FE_PER_LEVEL) * 100)}%` } })),
             h('small', { text: p.level >= PASS_LEVELS ? 'Passe completo! Parabéns!' : `${inLevel} / ${FE_PER_LEVEL} pontos de fé para o próximo nível · termina em ${formatWait(seasonEndsIn())}` }),
           ),
         ),
         h('p', { class: 'screen__note', text: 'Ganhe pontos de fé jogando: paradas (+20), 3 estrelas (+10), Arena (+15), versículo do dia (+15), missões do dia (+25) e da semana (+60). Quando a temporada acaba, o passe recomeça com prêmios novos!' }),
         track,
+        h('h2', { class: 'pass__title', text: `Missões da temporada ${seasonTheme()}` }),
+        h('div', { class: 'pass__missions' }, ...seasonMissions(save).map((m, i) => h('div', { class: `pass__mission${m.claimed ? ' is-claimed' : ''}` },
+          h('span', { class: 'pass__mlabel', text: m.label }),
+          h('div', { class: 'bar' }, h('div', { class: 'bar__fill', style: { width: `${Math.round((m.progress / m.target) * 100)}%` } })),
+          h('small', { text: `${m.progress}/${m.target} · +${m.fe} fé · +${m.denarios} denários` }),
+          m.claimed ? h('span', { class: 'tag tag--final', text: '✓' }) : h('button', { class: 'btn btn--small', disabled: m.progress < m.target, text: 'Pegar', onClick: () => {
+            if (!claimSeasonMission(save, i)) return;
+            sfx('coin');
+            toast(`+${m.fe} pontos de fé e +${m.denarios} denários!`);
+            game.scenes.go('pass');
+          } }),
+        ))),
       )));
       const first = ui.querySelector('.pass__lvl:not(.is-claimed) .btn:not([disabled])') || ui.querySelector('.pass__lvl:not(.is-on)');
       if (first) setTimeout(() => { const el = first.closest('.pass__lvl'); track.scrollLeft = Math.max(0, el.offsetLeft - track.offsetLeft - 40); }, 50);

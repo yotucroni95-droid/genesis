@@ -21,6 +21,8 @@ import { createBoxesScene } from './scenes/boxes.js';
 import { createShopScene } from './scenes/shop.js';
 import { createMissionsScene } from './scenes/missions.js';
 import { createArenaScene } from './scenes/arena.js';
+import { createOnlineScene } from './scenes/online.js';
+import { createFriendsScene } from './scenes/friends.js';
 import { createCollectionScene } from './scenes/collection.js';
 import { createProfileScene } from './scenes/profile.js';
 import { createDailyScene } from './scenes/daily.js';
@@ -108,6 +110,12 @@ async function boot() {
     if (Number(seed) > 0) game.duel = { seed: Number(seed), score: Number(score) || 0, nick: decodeURIComponent(nick.join('.')).slice(0, 16) || 'amigo' };
     history.replaceState(null, '', location.pathname); // do not repeat it on reload
   }
+  // an invite to an online Arena room: ?sala=CODE
+  const roomParam = new URLSearchParams(location.search).get('sala');
+  if (roomParam) {
+    game.room = roomParam.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+    history.replaceState(null, '', location.pathname);
+  }
   game.scenes = new SceneManager(game, document.getElementById('ui'));
 
   try {
@@ -152,7 +160,7 @@ async function boot() {
   game.scenes.register('album', createAlbumScene);
   game.scenes.register('medals', createMedalsScene);
   game.scenes.register('avatar', createAvatarScene);
-  for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, collection: createCollectionScene, profile: createProfileScene, daily: createDailyScene, pass: createPassScene })) game.scenes.register(name, f);
+  for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, online: createOnlineScene, friends: createFriendsScene, collection: createCollectionScene, profile: createProfileScene, daily: createDailyScene, pass: createPassScene })) game.scenes.register(name, f);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),
@@ -166,11 +174,11 @@ async function boot() {
   const goScene = game.scenes.go.bind(game.scenes);
   game.scenes.go = async (name, params = {}) => {
     let tune = 'lobby';
-    if (name === 'arena') tune = 'arena';
+    if (name === 'arena' || name === 'online') tune = 'arena';
     if (['world', 'story', 'challenge'].includes(name)) {
       const id = params.chapterId || (params.back && params.back.chapterId);
       const entry = id && assets.json('chapters/index.json').chapters.find((c) => c.id === id);
-      tune = entry ? ({ cap0: 'ceu', cap1: 'eden', cap2: 'fora_eden', cap3: 'campos', cap4: 'arca', cap5: 'campos', cap6: 'eden', cap7: 'fora_eden', cap8: 'campos', cap9: 'eden', cap10: 'arca' })[id] || 'eden' : (params.mapId || 'eden');
+      tune = entry ? entry.music || ({ cap0: 'ceu', cap1: 'eden', cap2: 'fora_eden', cap3: 'campos', cap4: 'arca', cap5: 'campos', cap6: 'eden', cap7: 'fora_eden', cap8: 'campos', cap9: 'eden', cap10: 'arca' })[id] || 'eden' : (params.mapId || 'eden');
     }
     playMusic(tune);
     if (name !== 'title' && name !== 'challenge') sfx('transition');

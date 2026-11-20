@@ -1,0 +1,418 @@
+{
+  "id": "cap11",
+  "number": 11,
+  "title": "Moisés: do Nilo à sarça",
+  "map": "egito_midia",
+  "intro": "Um novo Faraó, que não conhecia José, escravizou os israelitas. Mas Deus ouviu o clamor do seu povo.",
+  "unlocks": [
+    "joquebede"
+  ],
+  "medal": "capitulo_11",
+  "npcs": [
+    {
+      "sheet": "joquebede",
+      "x": 2,
+      "y": 6,
+      "dir": 0,
+      "talk": [
+        "Escondi meu bebê por três meses.",
+        "Fiz um cesto de junco e o coloquei no rio.",
+        "Confio que Deus cuida do meu filho."
+      ]
+    },
+    {
+      "sheet": "miria",
+      "x": 4,
+      "y": 13,
+      "dir": 2,
+      "talk": [
+        "Fico de longe, olhando o cesto do meu irmãozinho.",
+        "Vou chamar uma mulher hebreia para cuidar dele!",
+        "Psiu... a filha do Faraó está chegando!"
+      ]
+    },
+    {
+      "sheet": "povo",
+      "variant": 2,
+      "x": 9,
+      "y": 16,
+      "dir": 0,
+      "talk": [
+        "Fazemos tijolos o dia inteiro...",
+        "Agora temos que buscar a palha sozinhos!",
+        "Deus vai ouvir o nosso clamor."
+      ]
+    },
+    {
+      "sheet": "povo",
+      "variant": 5,
+      "x": 24,
+      "y": 6,
+      "dir": 0,
+      "talk": [
+        "O Faraó não quer deixar o povo ir.",
+        "Já houve tantas pragas no Egito...",
+        "O Deus dos hebreus é poderoso!"
+      ]
+    },
+    {
+      "sheet": "moises",
+      "x": 26,
+      "y": 6,
+      "dir": 0,
+      "talk": [
+        "Fui pastor das ovelhas de Jetro por muitos anos.",
+        "Quem sou eu para ir ao Faraó?",
+        "Deus prometeu: \"Eu estarei com você.\""
+      ]
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap11_s1",
+      "title": "O bebê no cesto",
+      "x": 3,
+      "y": 8,
+      "verse": "Êxodo 1:8–2:10",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Um novo rei subiu ao trono do Egito. Ele não conhecia José e teve medo dos israelitas, que eram muitos."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O Faraó os fez escravos, fazendo tijolos de barro, e mandou jogar no rio Nilo todos os meninos hebreus que nascessem."
+        },
+        {
+          "speaker": "joquebede",
+          "text": "Meu filho é tão lindo! Vou escondê-lo. Depois de três meses, fiz um cesto de junco e o coloquei entre os juncos do rio."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Miriã, a irmã do bebê, ficou de longe olhando. A filha do Faraó veio se banhar, achou o cesto e teve pena do menino."
+        },
+        {
+          "speaker": "miria",
+          "text": "Quer que eu chame uma mulher hebreia para amamentar o bebê para a senhora?"
+        },
+        {
+          "speaker": "narrador",
+          "text": "E Miriã chamou a própria mãe! Quando o menino cresceu, a filha do Faraó o adotou e o chamou de Moisés, que quer dizer \"tirado das águas\"."
+        }
+      ],
+      "challenge": {
+        "type": "cesto",
+        "config": {
+          "seconds": 26,
+          "lives": 3,
+          "speed": 1.0
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap11_s2",
+      "title": "Moisés foge para Midiã",
+      "x": 26,
+      "y": 8,
+      "verse": "Êxodo 2:11-25",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Já adulto, Moisés viu um egípcio batendo num hebreu. Ele matou o egípcio e o escondeu na areia."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O Faraó descobriu e quis matar Moisés. Então ele fugiu para a terra de Midiã e se sentou junto a um poço."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Ali, defendeu as sete filhas de Jetro, o sacerdote de Midiã, contra pastores que as expulsavam, e deu água às ovelhas delas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Moisés ficou morando com Jetro, casou com Zípora e cuidou das ovelhas por muitos anos."
+        },
+        {
+          "speaker": "narrador",
+          "text": "No Egito, os israelitas gemiam sob a escravidão. Deus ouviu o clamor deles e lembrou da sua aliança com Abraão, Isaque e Jacó."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "Para onde Moisés fugiu?",
+              "options": [
+                "Para Midiã",
+                "Para Canaã",
+                "Para a Babilônia"
+              ],
+              "answer": 0,
+              "explain": "Ele fugiu do Faraó e foi morar em Midiã.",
+              "verse": "Êxodo 2:15"
+            },
+            {
+              "q": "Onde Moisés se sentou ao chegar em Midiã?",
+              "options": [
+                "Junto a um poço",
+                "Num palácio",
+                "Num barco"
+              ],
+              "answer": 0,
+              "explain": "Ali ele ajudou as filhas de Jetro.",
+              "verse": "Êxodo 2:15-17"
+            },
+            {
+              "q": "Quantas filhas tinha o sacerdote de Midiã?",
+              "options": [
+                "Sete",
+                "Duas",
+                "Doze"
+              ],
+              "answer": 0,
+              "explain": "Moisés deu água às ovelhas delas.",
+              "verse": "Êxodo 2:16"
+            },
+            {
+              "q": "Com quem Moisés se casou?",
+              "options": [
+                "Zípora",
+                "Miriã",
+                "Raquel"
+              ],
+              "answer": 0,
+              "explain": "Zípora era filha de Jetro.",
+              "verse": "Êxodo 2:21"
+            },
+            {
+              "q": "O que Deus fez quando o povo clamou no Egito?",
+              "options": [
+                "Ouviu e lembrou da sua aliança",
+                "Esqueceu o povo",
+                "Mandou o povo calar"
+              ],
+              "answer": 0,
+              "explain": "Deus viu e se importou com eles.",
+              "verse": "Êxodo 2:24-25"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap11_s3",
+      "title": "A sarça ardente",
+      "x": 27,
+      "y": 2,
+      "verse": "Êxodo 3:1–4:17",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Um dia, Moisés levou as ovelhas até Horebe, o monte de Deus. Ali viu uma sarça pegando fogo, mas que não se queimava!"
+        },
+        {
+          "speaker": "deus",
+          "text": "Moisés, Moisés! Não se aproxime. Tire as sandálias dos pés, porque o lugar onde você está é terra santa."
+        },
+        {
+          "speaker": "deus",
+          "text": "Eu vi o sofrimento do meu povo no Egito. Vou enviar você ao Faraó para tirar o meu povo de lá."
+        },
+        {
+          "speaker": "moises",
+          "text": "Quem sou eu para ir ao Faraó? E se perguntarem o nome de quem me enviou?"
+        },
+        {
+          "speaker": "deus",
+          "text": "EU SOU O QUE SOU. Diga: \"EU SOU me enviou a vocês.\" E eu estarei com você."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus transformou o cajado de Moisés numa serpente e deu Arão, seu irmão, para falar junto com ele."
+        }
+      ],
+      "challenge": {
+        "type": "lacunas",
+        "config": {
+          "count": 3,
+          "items": [
+            {
+              "text": "Tire as [sandálias] dos pés, porque o lugar em que você está é terra [santa].",
+              "ref": "Êxodo 3:5"
+            },
+            {
+              "text": "Disse Deus a Moisés: [EU] [SOU] O QUE SOU.",
+              "ref": "Êxodo 3:14"
+            },
+            {
+              "text": "Eu estarei com [você].",
+              "ref": "Êxodo 3:12"
+            },
+            {
+              "text": "A sarça estava em [chamas], mas não se [queimava].",
+              "ref": "Êxodo 3:2"
+            },
+            {
+              "text": "Eu vi a [aflição] do meu povo que está no [Egito].",
+              "ref": "Êxodo 3:7"
+            }
+          ],
+          "extra": [
+            "Faraó",
+            "água",
+            "pedra",
+            "noite",
+            "montanha",
+            "areia",
+            "ouro",
+            "longe"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap11_s4",
+      "title": "Deixe o meu povo ir!",
+      "x": 15,
+      "y": 4,
+      "verse": "Êxodo 5–11",
+      "story": [
+        {
+          "speaker": "moises",
+          "text": "Assim diz o Senhor, o Deus de Israel: \"Deixe o meu povo ir!\""
+        },
+        {
+          "speaker": "narrador",
+          "text": "O Faraó respondeu: \"Quem é o Senhor para que eu o obedeça? Não deixarei Israel ir.\" E ainda aumentou o trabalho dos escravos."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Então Deus mandou pragas sobre o Egito. A água do Nilo virou sangue, depois vieram rãs, piolhos e moscas."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Morreram os animais, vieram feridas, granizo, gafanhotos e três dias de escuridão. Mas onde os israelitas moravam, havia luz."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Cada vez o Faraó endurecia o coração. Faltava a última praga."
+        }
+      ],
+      "challenge": {
+        "type": "ordem",
+        "config": {
+          "title": "As pragas do Egito",
+          "ref": "Êxodo 7–12",
+          "count": 6,
+          "items": [
+            "A água vira sangue",
+            "Rãs",
+            "Piolhos",
+            "Moscas",
+            "Peste nos animais",
+            "Feridas",
+            "Granizo",
+            "Gafanhotos",
+            "Escuridão",
+            "Morte dos primogênitos"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap11_s5",
+      "title": "A primeira Páscoa",
+      "x": 15,
+      "y": 15,
+      "verse": "Êxodo 12:1-42",
+      "story": [
+        {
+          "speaker": "moises",
+          "text": "Cada família deve sacrificar um cordeiro sem defeito e passar o sangue nos batentes da porta."
+        },
+        {
+          "speaker": "moises",
+          "text": "Comam com as sandálias nos pés e o cajado na mão, prontos para partir: é a Páscoa do Senhor."
+        },
+        {
+          "speaker": "narrador",
+          "text": "À meia-noite, morreram os primogênitos do Egito. Mas o anjo passou por cima das casas marcadas com o sangue."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Então o Faraó chamou Moisés e Arão: \"Saiam do meio do meu povo! Vão!\""
+        },
+        {
+          "speaker": "narrador",
+          "text": "Depois de 430 anos, o povo de Israel saiu do Egito. O cordeiro da Páscoa lembra Jesus, o Cordeiro de Deus que nos salva."
+        }
+      ],
+      "challenge": {
+        "type": "vf",
+        "config": {
+          "count": 6,
+          "seconds": 7,
+          "items": [
+            {
+              "s": "O cordeiro da Páscoa devia ser sem defeito.",
+              "ok": true,
+              "ref": "Êxodo 12:5"
+            },
+            {
+              "s": "O sangue era passado nos batentes da porta.",
+              "ok": true,
+              "ref": "Êxodo 12:7"
+            },
+            {
+              "s": "Eles comeram a Páscoa sentados e descansando.",
+              "ok": false,
+              "ref": "Êxodo 12:11"
+            },
+            {
+              "s": "O povo comeu pão sem fermento.",
+              "ok": true,
+              "ref": "Êxodo 12:8"
+            },
+            {
+              "s": "O anjo entrou nas casas marcadas com sangue.",
+              "ok": false,
+              "ref": "Êxodo 12:23"
+            },
+            {
+              "s": "Israel morou 430 anos no Egito.",
+              "ok": true,
+              "ref": "Êxodo 12:40"
+            },
+            {
+              "s": "O Faraó deixou o povo ir logo na primeira praga.",
+              "ok": false,
+              "ref": "Êxodo 7:22"
+            },
+            {
+              "s": "Jesus é chamado de Cordeiro de Deus.",
+              "ok": true,
+              "ref": "João 1:29"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    }
+  ]
+}

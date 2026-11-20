@@ -1,4 +1,5 @@
 // "Caça-palavras bíblico": tap the first and the last letter of each word.
+// No time limit: finding every word is all it takes (3 stars, mission done).
 // config: { words, count, size, hard }
 
 import { h } from '../ui/dom.js';
@@ -76,20 +77,19 @@ export function start(config, env) {
       };
       const finish = () => {
         const secs = Math.round((performance.now() - t0) / 1000);
-        const limit = (config.secsPerWord || 25) * puzzle.placed.length;
-        const score = secs <= limit ? 100 : secs <= limit * 2 ? 75 : 55;
         resultScreen(wrap, {
           passed: true,
-          big: `${secs}s`,
-          note: score === 100 ? 'Muito rápido! 3 estrelas.' : `Achou tudo! Para 3 estrelas, termine em até ${limit} segundos.`,
-          onContinue: () => resolve({ success: true, score, correct: puzzle.placed.length }),
+          big: `${puzzle.placed.length}/${puzzle.placed.length}`,
+          title: 'Você achou todas as palavras!',
+          note: `Tempo: ${secs >= 60 ? `${Math.floor(secs / 60)} min ` : ''}${secs % 60} s. Sem pressa: aqui não tem relógio.`,
+          onContinue: () => resolve({ success: true, score: 100, correct: puzzle.placed.length }),
         });
       };
       paintWords();
-      wrap.replaceChildren(
-        h('p', { class: 'screen__note', text: 'Toque na primeira e depois na última letra de cada palavra.' }),
-        h('div', { class: 'caca__layout' }, board, list),
-      );
+      wrap.replaceChildren(h('div', { class: 'caca__layout' }, board,
+        h('div', { class: 'caca__side' },
+          h('p', { class: 'screen__note', text: 'Toque na primeira e depois na última letra de cada palavra. Sem limite de tempo!' }),
+          list)));
     };
     play();
   });

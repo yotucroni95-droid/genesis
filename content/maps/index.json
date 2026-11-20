@@ -59,6 +59,21 @@
       "id": "acampamento",
       "name": "Acampamento",
       "file": "maps/acampamento.json"
+    },
+    {
+      "id": "egito_midia",
+      "name": "Egito e Midiã",
+      "file": "maps/egito_midia.json"
+    },
+    {
+      "id": "mar_vermelho",
+      "name": "O Mar Vermelho",
+      "file": "maps/mar_vermelho.json"
+    },
+    {
+      "id": "sinai",
+      "name": "O Monte Sinai",
+      "file": "maps/sinai.json"
     }
   ]
 }

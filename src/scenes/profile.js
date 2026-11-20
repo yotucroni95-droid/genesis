@@ -5,7 +5,7 @@ import { loadChapter } from '../content/progression.js';
 import { gameScreen } from '../ui/screen.js';
 import { toast } from '../ui/toast.js';
 import { loadExtras, rankBadge, rankProgress, framedAvatar, frameView, ico } from '../ui/game-ui.js';
-import { totalStars, RARITY_COLOR, RANKS } from '../game/economy.js';
+import { totalStars, RARITY_COLOR, visibleRanks } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 import { shareCard } from '../ui/share.js';
 import { attachSecretUnlock } from '../game/admin.js';
@@ -61,7 +61,7 @@ export function createProfileScene(game) {
         h('h3', { text: 'Molduras' }), picker('frames', game.extras.cosmetics.frames),
         h('h3', { text: 'Rastro ao andar no mapa' }), picker('trails', game.extras.cosmetics.trails || []),
         h('h3', { text: 'Patentes' }),
-        h('div', { class: 'ranks' }, ...RANKS.map((r) => h('div', { class: `ranks__item${(s.trophies || 0) >= r.min ? ' is-on' : ''}` }, rankBadge(r.min), h('small', { text: `${r.min} 🏆` })))),
+        h('div', { class: 'ranks' }, ...visibleRanks(s.trophies || 0).map((r) => h('div', { class: `ranks__item${(s.trophies || 0) >= r.min ? ' is-on' : ''}` }, rankBadge(r.min), h('small', { text: `${r.min} 🏆` })))),
         h('div', { style: { display: 'flex', gap: '10px', flexWrap: 'wrap', marginTop: '12px' } },
           h('button', { class: 'btn btn--ghost', text: 'Álbum de personagens', onClick: () => game.scenes.go('album', { backScene: 'profile' }) }),
           h('button', { class: 'btn btn--ghost', text: 'Medalhas', onClick: () => game.scenes.go('medals') }),

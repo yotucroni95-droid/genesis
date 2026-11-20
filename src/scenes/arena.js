@@ -5,7 +5,7 @@ import { h } from '../ui/dom.js';
 import { gameScreen } from '../ui/screen.js';
 import { loadExtras, vibrate } from '../ui/game-ui.js';
 import { shuffle } from '../challenges/shared.js';
-import { addCoins, addTrophies, track } from '../game/economy.js';
+import { addCoins, addTrophies, arenaLoss, track } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 import { sfx } from '../audio/audio.js';
 import { celebrate } from '../ui/celebrate.js';
@@ -14,7 +14,7 @@ import { shareCard } from '../ui/share.js';
 import { power, seeded, charById } from '../game/meta.js';
 import { rankFor, rankArt } from '../game/economy.js';
 
-function seededShuffle(list, seed) {
+export function seededShuffle(list, seed) {
   const rnd = seeded(seed);
   const a = list.slice();
   for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
@@ -68,8 +68,11 @@ export function createArenaScene(game) {
           h('p', { class: 'screen__note', text: `${duel ? 'Vocês respondem as MESMAS perguntas. ' : ''}Responda o mais rápido que puder: ${SECS} segundos por pergunta e ${LIVES} vidas. Acerte em sequência para multiplicar os pontos!` }),
           powerNote ? h('p', { class: 'arena__power', text: `⚡ ${powerNote}` }) : null,
           h('p', { class: 'arena__best', text: save.state.arenaBest ? `Seu recorde: ${save.state.arenaBest} pontos` : 'Ainda sem recorde. Bora!' }),
-          h('button', { class: 'btn btn--play', onClick: play }, h('b', { text: 'COMEÇAR' })),
-          h('button', { class: 'btn btn--ghost btn--small', text: '🏆 Ver ranking', onClick: () => game.scenes.go('ranking', { tab: 'arena', back: 'arena' }) }),
+          h('div', { class: 'online__row' },
+            h('button', { class: 'btn btn--play', onClick: play }, h('b', { text: 'COMEÇAR' })),
+            duel ? null : h('button', { class: 'btn btn--online', text: '🌐 Online 1x1', onClick: () => game.scenes.go('online') }),
+            h('button', { class: 'btn btn--ghost btn--small', text: '🏆 Ranking', onClick: () => game.scenes.go('ranking', { tab: 'arena', back: 'arena' }) }),
+          ),
         ));
       };
 
@@ -170,6 +173,9 @@ export function createArenaScene(game) {
           const trophies = Math.round((Math.min(12, Math.floor(score / 80)) + (record && score > 0 ? 5 : 0) + (won ? 5 : 0)) * (1 + power(save, 'trophies') / 100) * tired);
           if (record) save.update((s) => { s.arenaBest = score; });
           addCoins(save, coins);
+          // at high ranks a weak game costs trophies: the top has to be defended
+          const loss = !trophies && !duel ? arenaLoss(save.state.trophies || 0, score) : 0;
+          if (loss) addTrophies(save, -loss);
           const rankUp = trophies ? addTrophies(save, trophies) : null;
           track(save, 'arenaPlay', 1);
           sfx(record ? 'fanfare' : 'coin');
@@ -183,6 +189,7 @@ export function createArenaScene(game) {
             h('div', { class: 'rewards' },
               h('div', { class: 'reward' }, h('span', { class: 'chip__emoji', text: '🪙' }), h('span', { text: `+${coins} talentos` })),
               trophies ? h('div', { class: 'reward' }, h('span', { class: 'chip__emoji', text: '🏆' }), h('span', { text: `+${trophies} troféus` })) : null,
+              loss ? h('div', { class: 'reward reward--loss' }, h('span', { class: 'chip__emoji', text: '🔻' }), h('span', { text: `-${loss} troféus (nas patentes altas, partida fraca perde troféus)` })) : null,
               rankUp ? h('div', { class: 'reward reward--big' }, h('span', { class: 'chip__emoji', text: '⬆️' }), h('span', { text: `Nova patente: ${rankUp.name}! Ganhou um baú.` })) : null,
             ),
             h('div', { style: { display: 'flex', gap: '10px' } },

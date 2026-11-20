@@ -68,13 +68,31 @@
     },
     {
       "id": "acamp",
-      "number": 11,
+      "number": 100,
       "title": "Acampamento dos Desbravadores e Aventureiros",
       "file": "chapters/acamp.json",
       "event": true,
       "window": {
         "start": "2026-11-16"
       }
+    },
+    {
+      "id": "cap11",
+      "number": 11,
+      "title": "Moisés: do Nilo à sarça",
+      "file": "chapters/cap11.json"
+    },
+    {
+      "id": "cap12",
+      "number": 12,
+      "title": "O caminho no Mar Vermelho",
+      "file": "chapters/cap12.json"
+    },
+    {
+      "id": "cap13",
+      "number": 13,
+      "title": "A aliança no Sinai",
+      "file": "chapters/cap13.json"
     }
   ]
 }

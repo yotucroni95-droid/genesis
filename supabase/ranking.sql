@@ -3,7 +3,9 @@
 -- Mostra só apelido, personagem, moldura e números do jogo (nenhum dado pessoal).
 -- Para tirar um trapaceiro do ranking: Table Editor > genesis_saves > marque "hidden".
 -- A conta do criador do jogo (data.creator = true) nunca aparece.
--- Números impossíveis (Arena > 20.000, estrelas > 600, troféus > 100.000) ficam de fora.
+-- Números impossíveis (Arena > 20.000, estrelas > 2.000, troféus > 5.000.000, semana > 20.000) ficam de fora.
+-- 'semana' = Pontos de Temporada (PT) desde a última segunda-feira; 'semana_passada' = a semana anterior (prêmio do top 3).
+-- Saves antigos sem 'points' usam os troféus da semana.
 
 alter table public.genesis_saves add column if not exists hidden boolean not null default false;
 
@@ -20,7 +22,13 @@ returns numeric language sql immutable set search_path = '' as $$
     else 0 end
 $$;
 
--- p_kind: 'trofeus' | 'arena' | 'estrelas'. Devolve o top 50 e a posição de quem pediu.
+-- a segunda-feira que começa a semana (horário de Brasília); p_back = 1 é a semana passada
+create or replace function public.genesis_week(p_back int)
+returns text language sql stable set search_path = '' as $$
+  select to_char(date_trunc('week', (now() at time zone 'America/Sao_Paulo')::date)::date - 7 * p_back, 'YYYY-MM-DD')
+$$;
+
+-- p_kind: 'trofeus' | 'arena' | 'estrelas' | 'semana' | 'semana_passada'. Devolve o top 50 e a posição de quem pediu.
 create or replace function public.genesis_ranking(p_kind text, p_code text default null)
 returns jsonb language sql stable security definer set search_path = '' as $$
   with base as (
@@ -32,6 +40,11 @@ returns jsonb language sql stable security definer set search_path = '' as $$
            case p_kind
              when 'arena' then public.genesis_num(data -> 'arenaBest')
              when 'estrelas' then public.genesis_stars(data -> 'stars')
+             when 'semana' then case when data #>> '{week,id}' = public.genesis_week(0) then public.genesis_num(coalesce(data #> '{week,points}', data #> '{week,trophies}')) else 0 end
+             when 'semana_passada' then case
+               when data #>> '{week,id}' = public.genesis_week(1) then public.genesis_num(coalesce(data #> '{week,points}', data #> '{week,trophies}'))
+               when data #>> '{lastWeek,id}' = public.genesis_week(1) then public.genesis_num(coalesce(data #> '{lastWeek,points}', data #> '{lastWeek,trophies}'))
+               else 0 end
              else public.genesis_num(data -> 'trophies')
            end as value,
            updated_at
@@ -44,7 +57,7 @@ returns jsonb language sql stable security definer set search_path = '' as $$
     select *, row_number() over (order by value desc, level desc, updated_at asc) as pos
       from base
      where value > 0
-       and value <= case p_kind when 'arena' then 20000 when 'estrelas' then 600 else 100000 end
+       and value <= case p_kind when 'arena' then 20000 when 'estrelas' then 2000 when 'semana' then 60000 when 'semana_passada' then 60000 else 5000000 end
   )
   select jsonb_build_object(
     'top', coalesce((select jsonb_agg(jsonb_build_object('pos', pos, 'nick', nick, 'avatar', avatar, 'frame', frame, 'level', level, 'value', value) order by pos)
@@ -57,5 +70,6 @@ $$;
 
 revoke all on function public.genesis_num(jsonb) from public, anon, authenticated;
 revoke all on function public.genesis_stars(jsonb) from public, anon, authenticated;
+revoke all on function public.genesis_week(int) from public, anon, authenticated;
 revoke all on function public.genesis_ranking(text, text) from public;
 grant execute on function public.genesis_ranking(text, text) to anon, authenticated;

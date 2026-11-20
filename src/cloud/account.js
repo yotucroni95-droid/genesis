@@ -33,7 +33,7 @@ function newCode() {
   return `GEN-${c.slice(0, 4)}-${c.slice(4, 8)}-${c.slice(8)}`;
 }
 
-async function rpc(fn, body, { keepalive = false, timeout = 12000 } = {}) {
+export async function rpc(fn, body, { keepalive = false, timeout = 12000 } = {}) {
   const headers = { 'Content-Type': 'application/json', apikey: CLOUD.key };
   if (CLOUD.key.startsWith('eyJ')) headers.Authorization = `Bearer ${CLOUD.key}`; // legacy anon key (JWT)
   const ctrl = new AbortController();
@@ -42,7 +42,7 @@ async function rpc(fn, body, { keepalive = false, timeout = 12000 } = {}) {
     const res = await fetch(`${CLOUD.url.replace(/\/$/, '')}/rest/v1/rpc/${fn}`, {
       method: 'POST', headers, body: JSON.stringify(body), keepalive, signal: ctrl.signal,
     });
-    if (!res.ok) throw new Error(`cloud ${fn} ${res.status}`);
+    if (!res.ok) { const j = await res.json().catch(() => ({})); throw new Error(`cloud ${fn} ${res.status}${j.message ? `: ${j.message}` : ''}`); }
     const text = await res.text();
     return text ? JSON.parse(text) : null;
   } finally {
@@ -129,4 +129,18 @@ export async function startSync(save) {
 /** Top 50 and this player's place. kind: 'trofeus' | 'arena' | 'estrelas'. */
 export async function fetchRanking(kind) {
   return rpc('genesis_ranking', { p_kind: kind, p_code: accountCode() || null });
+}
+
+/** Once a week: the top 3 of last week's ranking get a prize (checked on the lobby). */
+export const WEEK_PRIZES = [
+  { box: 'lendário', coins: 2000, denarios: 40 },
+  { box: 'épico', coins: 1200, denarios: 25 },
+  { box: 'épico', coins: 700, denarios: 15 },
+];
+export async function checkWeekPrize(save, lastWeekId) {
+  if (!cloudOn() || !accountCode() || save.state.weekPrize === lastWeekId) return null;
+  const data = await fetchRanking('semana_passada');
+  save.update((s) => { s.weekPrize = lastWeekId; });
+  const pos = data && data.me && data.me.pos;
+  return pos && pos <= 3 ? { pos, ...WEEK_PRIZES[pos - 1] } : null;
 }

@@ -3,14 +3,17 @@
 
 import { h } from '../ui/dom.js';
 import { ensureAccount } from '../cloud/account-ui.js';
+import { checkWeekPrize } from '../cloud/account.js';
+import { celebrate } from '../ui/celebrate.js';
 import { toast } from '../ui/toast.js';
 import { Starfield } from './starfield.js';
 import { loadExtras, rankBadge, rankProgress, currencyBar, framedAvatar, titleName, badge, chest, formatWait, ico } from '../ui/game-ui.js';
-import { startDay, pendingMissions, freeBoxReadyIn } from '../game/economy.js';
+import { startDay, pendingMissions, freeBoxReadyIn, weekId, addBox, addCoins } from '../game/economy.js';
 import { muteButton } from '../ui/mute-button.js';
 import { shareCard } from '../ui/share.js';
 import { dailyDone } from './daily.js';
-import { pendingWeekly, pendingPass, pass } from '../game/meta.js';
+import { pendingWeekly, pendingPass, pass, addDenarios } from '../game/meta.js';
+import { friendsOn, friendsState, cachedFriends, clearInvite } from '../cloud/friends.js';
 
 let greeted = false;
 
@@ -45,6 +48,7 @@ export function createLobbyScene(game) {
       updateFree();
       timer = setInterval(updateFree, 30000);
 
+      const friendsBadge = () => { const c = cachedFriends(); return c ? c.incoming.length + c.invites.length : 0; };
       const side = (icon, label, onClick, n = 0, extra = null) => h('button', { class: 'lobby__btn', onClick },
         typeof icon === 'string' ? h('span', { class: 'lobby__icon', text: icon }) : icon, h('span', { text: label }), badge(n), extra);
 
@@ -76,7 +80,9 @@ export function createLobbyScene(game) {
           side(ico('icon.passe', '🎖️', 'lobby__icon'), 'Passe da Fé', go('pass'), pendingPass(save), h('small', { class: 'lobby__free lobby__pass', text: `Nível ${pass(save).level}` })),
           side(ico('icon.missoes', '📅', 'lobby__icon'), 'Missões', go('missions'), pendingMissions(save) + pendingWeekly(save)),
           side(ico('icon.baus', '🎁', 'lobby__icon'), 'Baús', go('boxes'), boxesCount, freeLabel),
-          side(ico('icon.loja', '🛒', 'lobby__icon'), 'Loja', go('shop')),
+          h('div', { class: 'lobby__pair' },
+            side(ico('icon.loja', '🛒', 'lobby__icon'), 'Loja', go('shop')),
+            side(ico('icon.amigos', '👥', 'lobby__icon'), 'Amigos', go('friends'), friendsBadge())),
         ),
         h('div', { class: 'lobby__name' },
           h('b', { text: (game.assets.json('characters.json').characters.find((c) => c.id === s.avatarId) || {}).name || '' }),
@@ -93,6 +99,38 @@ export function createLobbyScene(game) {
         ui.querySelector('.lobby__right .lobby__btn:nth-child(3)').appendChild(preview);
       }
       ensureAccount(game); // gives every player a cloud account and shows the code once
+      checkWeekPrize(save, weekId(new Date(Date.now() - 7 * 864e5))).then((p) => {
+        if (!p) return;
+        addBox(save, p.box, 'semana');
+        addCoins(save, p.coins);
+        addDenarios(save, p.denarios);
+        celebrate({ title: `${['🥇', '🥈', '🥉'][p.pos - 1]} ${p.pos}º lugar na semana!`, subtitle: `Você ficou no top 3 do ranking semanal e ganhou um baú ${p.box}, ${p.coins} talentos e ${p.denarios} denários!` });
+      }).catch(() => {});
+      // friends: badge for requests/invites and a call when a friend invites to the Arena
+      if (friendsOn()) {
+        friendsState().then((st) => {
+          if (!ui.isConnected) return;
+          const btn = [...ui.querySelectorAll('.lobby__btn')].find((b) => b.textContent.includes('Amigos'));
+          if (btn) { const old = btn.querySelector('.badge'); if (old) old.remove(); const n = st.incoming.length + st.invites.length; if (n) btn.appendChild(badge(n)); }
+          const inv = st.invites[0];
+          if (!inv || game.room || game.duel || ui.querySelector('.modal')) return;
+          const modal = h('div', { class: 'modal' }, h('div', { class: 'modal__box duel' },
+            ico('icon.arena', '⚡', 'duel__ico'),
+            h('h2', { text: `@${inv.nick} te chamou para a Arena!` }),
+            h('p', { text: 'Partida online 1x1: as mesmas perguntas, ao mesmo tempo.' }),
+            h('div', { style: { display: 'flex', gap: '10px', justifyContent: 'center' } },
+              h('button', { class: 'btn btn--play', onClick: () => { clearInvite(inv.room); game.scenes.go('online', { join: inv.room }); } }, h('b', { text: 'JOGAR' })),
+              h('button', { class: 'btn btn--ghost', text: 'Agora não', onClick: () => { clearInvite(inv.room); modal.remove(); } }),
+            )));
+          ui.appendChild(modal);
+        }).catch(() => {});
+      }
+      if (game.room) {
+        const join = game.room;
+        game.room = null;
+        setTimeout(() => game.scenes.go('online', { join }), 0);
+        return;
+      }
       if (game.duel) {
         const duel = game.duel;
         game.duel = null;

@@ -1,0 +1,369 @@
+{
+  "id": "cap12",
+  "number": 12,
+  "title": "O caminho no Mar Vermelho",
+  "map": "mar_vermelho",
+  "intro": "O povo saiu do Egito, e o Senhor ia na frente deles. Mas o Faraó se arrependeu de ter deixado o povo ir.",
+  "unlocks": [
+    "miria"
+  ],
+  "medal": "capitulo_12",
+  "npcs": [
+    {
+      "sheet": "moises",
+      "x": 13,
+      "y": 7,
+      "dir": 0,
+      "talk": [
+        "Não tenham medo! Fiquem firmes!",
+        "O Senhor lutará por vocês.",
+        "Vejam a salvação que o Senhor vai fazer hoje!"
+      ]
+    },
+    {
+      "sheet": "miria",
+      "x": 28,
+      "y": 5,
+      "dir": 1,
+      "talk": [
+        "Cantem ao Senhor, que triunfou gloriosamente!",
+        "Peguei meu tamborim para louvar!",
+        "Cavalo e cavaleiro ele lançou no mar!"
+      ]
+    },
+    {
+      "sheet": "joquebede",
+      "x": 2,
+      "y": 10,
+      "dir": 2,
+      "talk": [
+        "Saímos do Egito! Somos livres!",
+        "A coluna de nuvem vai na nossa frente.",
+        "Deus nunca esquece suas promessas."
+      ]
+    },
+    {
+      "sheet": "povo",
+      "variant": 1,
+      "x": 5,
+      "y": 8,
+      "dir": 0,
+      "talk": [
+        "Os carros do Faraó estão vindo!",
+        "O mar na frente, o exército atrás...",
+        "Será que Deus vai nos salvar?"
+      ]
+    },
+    {
+      "sheet": "povo",
+      "variant": 6,
+      "x": 27,
+      "y": 11,
+      "dir": 1,
+      "talk": [
+        "Atravessamos o mar a pé enxuto!",
+        "Que água doce gostosa!",
+        "De manhã o chão fica cheio de maná."
+      ]
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap12_s1",
+      "title": "A coluna de nuvem e de fogo",
+      "x": 2,
+      "y": 9,
+      "verse": "Êxodo 13:17-22",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Deus não levou o povo pelo caminho mais curto, para que não desanimassem ao ver guerra. Levou-os pelo deserto, rumo ao Mar Vermelho."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Moisés levou com eles os ossos de José, como José tinha pedido antes de morrer."
+        },
+        {
+          "speaker": "narrador",
+          "text": "De dia, o Senhor ia na frente deles numa coluna de nuvem. De noite, numa coluna de fogo, para iluminar o caminho."
+        },
+        {
+          "speaker": "narrador",
+          "text": "A coluna nunca saiu da frente do povo. Siga a coluna com atenção!"
+        }
+      ],
+      "challenge": {
+        "type": "sequencia",
+        "config": {
+          "goal": 6,
+          "symbols": [
+            {
+              "icon": "☁️",
+              "label": "Nuvem"
+            },
+            {
+              "icon": "🔥",
+              "label": "Fogo"
+            },
+            {
+              "icon": "⛺",
+              "label": "Tenda"
+            },
+            {
+              "icon": "🐑",
+              "label": "Ovelha"
+            }
+          ],
+          "intro": "A coluna mostra o caminho. Repita a sequência!"
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap12_s2",
+      "title": "O Faraó persegue o povo",
+      "x": 6,
+      "y": 10,
+      "verse": "Êxodo 14:1-14",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "O Faraó se arrependeu: \"Deixamos os nossos escravos irem embora!\" Ele pegou seus carros de guerra e foi atrás deles."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Os israelitas viram os egípcios chegando e ficaram com muito medo. Na frente deles estava o mar."
+        },
+        {
+          "speaker": "moises",
+          "text": "Não tenham medo! Fiquem firmes e vejam o livramento que o Senhor fará hoje."
+        },
+        {
+          "speaker": "moises",
+          "text": "O Senhor lutará por vocês; fiquem tranquilos."
+        },
+        {
+          "speaker": "narrador",
+          "text": "A coluna de nuvem passou para trás do povo e ficou entre eles e os egípcios: escuridão para uns, luz para outros."
+        }
+      ],
+      "challenge": {
+        "type": "quiz",
+        "config": {
+          "minScore": 3,
+          "questions": [
+            {
+              "q": "Por que o Faraó perseguiu o povo?",
+              "options": [
+                "Ele se arrependeu de deixá-los ir",
+                "Queria dar presentes",
+                "Queria ir junto"
+              ],
+              "answer": 0,
+              "explain": "Ele não queria perder os escravos.",
+              "verse": "Êxodo 14:5"
+            },
+            {
+              "q": "O que Moisés disse ao povo com medo?",
+              "options": [
+                "O Senhor lutará por vocês",
+                "Voltem para o Egito",
+                "Corram para o deserto"
+              ],
+              "answer": 0,
+              "explain": "Era só confiar e ficar firme.",
+              "verse": "Êxodo 14:14"
+            },
+            {
+              "q": "Onde ficou a coluna de nuvem?",
+              "options": [
+                "Entre Israel e os egípcios",
+                "Em cima do Faraó",
+                "No meio do mar"
+              ],
+              "answer": 0,
+              "explain": "Ela protegeu o povo durante a noite.",
+              "verse": "Êxodo 14:19-20"
+            },
+            {
+              "q": "O que estava na frente do povo?",
+              "options": [
+                "O mar",
+                "Uma montanha de ouro",
+                "Uma cidade"
+              ],
+              "answer": 0,
+              "explain": "Parecia que não havia saída.",
+              "verse": "Êxodo 14:9-10"
+            },
+            {
+              "q": "Os ossos de quem Moisés levou?",
+              "options": [
+                "De José",
+                "De Abraão",
+                "De Noé"
+              ],
+              "answer": 0,
+              "explain": "José tinha pedido isso.",
+              "verse": "Êxodo 13:19"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap12_s3",
+      "title": "O mar se abre",
+      "x": 15,
+      "y": 9,
+      "verse": "Êxodo 14:15-31",
+      "story": [
+        {
+          "speaker": "moises",
+          "text": "Deus me disse: \"Levante o seu cajado e estenda a mão sobre o mar.\""
+        },
+        {
+          "speaker": "narrador",
+          "text": "O Senhor fez soprar um forte vento oriental a noite toda. O mar se abriu, e as águas ficaram como muralhas à direita e à esquerda."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Os israelitas atravessaram o mar a pé enxuto! Os egípcios foram atrás com seus carros."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Moisés estendeu a mão de novo, e as águas voltaram e cobriram o exército do Faraó."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O povo viu o grande poder do Senhor, temeu ao Senhor e creu nele e em Moisés. Agora é a sua vez: atravesse antes que as águas voltem!"
+        }
+      ],
+      "challenge": {
+        "type": "travessia",
+        "config": {
+          "lives": 3,
+          "length": 40
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap12_s4",
+      "title": "O cântico de Moisés e Miriã",
+      "x": 26,
+      "y": 9,
+      "verse": "Êxodo 15:1-21",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Do outro lado do mar, Moisés e o povo cantaram ao Senhor."
+        },
+        {
+          "speaker": "moises",
+          "text": "O Senhor é a minha força e o meu cântico; ele é a minha salvação!"
+        },
+        {
+          "speaker": "moises",
+          "text": "Quem é como tu, ó Senhor, entre os deuses? Quem é como tu, glorioso em santidade?"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Miriã, a profetisa, irmã de Arão, pegou um tamborim, e todas as mulheres saíram atrás dela dançando."
+        },
+        {
+          "speaker": "miria",
+          "text": "Cantem ao Senhor, porque ele triunfou gloriosamente! Lançou no mar o cavalo e o seu cavaleiro."
+        }
+      ],
+      "challenge": {
+        "type": "lacunas",
+        "config": {
+          "count": 3,
+          "items": [
+            {
+              "text": "O Senhor é a minha [força] e o meu [cântico].",
+              "ref": "Êxodo 15:2"
+            },
+            {
+              "text": "Ele é a minha [salvação].",
+              "ref": "Êxodo 15:2"
+            },
+            {
+              "text": "Quem é como tu, glorioso em [santidade]?",
+              "ref": "Êxodo 15:11"
+            },
+            {
+              "text": "Cantem ao Senhor, porque triunfou [gloriosamente].",
+              "ref": "Êxodo 15:21"
+            },
+            {
+              "text": "O Senhor [reinará] para todo o [sempre].",
+              "ref": "Êxodo 15:18"
+            }
+          ],
+          "extra": [
+            "espada",
+            "medo",
+            "tristeza",
+            "noite",
+            "Egito",
+            "fraqueza",
+            "silêncio",
+            "pedra"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap12_s5",
+      "title": "Pão do céu",
+      "x": 15,
+      "y": 17,
+      "verse": "Êxodo 15:22–16:36",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "No deserto, o povo achou água amarga em Mara. Deus mostrou a Moisés um pedaço de madeira, ele o jogou na água, e ela ficou doce."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Depois o povo reclamou de fome. Deus disse: \"Vou fazer chover pão do céu para vocês.\""
+        },
+        {
+          "speaker": "narrador",
+          "text": "De tarde vieram codornizes, e de manhã o chão ficou coberto de uma coisa fininha e branca: o maná, com gosto de bolo de mel."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Cada um devia juntar só o necessário para o dia. Quem guardou para o dia seguinte achou cheio de bichos!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "No sexto dia, juntavam a porção em dobro, porque o sábado é o dia de descanso dedicado ao Senhor. Junte o maná!"
+        }
+      ],
+      "challenge": {
+        "type": "mana",
+        "config": {
+          "goal": 12,
+          "seconds": 22,
+          "sixth": true
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    }
+  ]
+}

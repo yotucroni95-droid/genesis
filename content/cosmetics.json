@@ -115,6 +115,47 @@
    "name": "Desbravador de Gênesis",
    "rarity": "lendário",
    "hidden": true
+  },
+  {
+   "id": "povo_da_alianca",
+   "name": "Povo da Aliança",
+   "rarity": "lendário",
+   "hidden": true
+  },
+  {
+   "id": "amigo_de_fe",
+   "name": "Amigo de Fé",
+   "rarity": "comum"
+  },
+  {
+   "id": "voz_no_deserto",
+   "name": "Voz no Deserto",
+   "rarity": "raro"
+  },
+  {
+   "id": "guardiao_da_arca",
+   "name": "Guardião da Arca",
+   "rarity": "raro"
+  },
+  {
+   "id": "cacador_de_palavras",
+   "name": "Caçador de Palavras",
+   "rarity": "raro"
+  },
+  {
+   "id": "duelista",
+   "name": "Duelista da Arena",
+   "rarity": "épico"
+  },
+  {
+   "id": "construtor_tabernaculo",
+   "name": "Construtor do Tabernáculo",
+   "rarity": "épico"
+  },
+  {
+   "id": "campeao_temporada",
+   "name": "Campeão da Temporada",
+   "rarity": "lendário"
   }
  ],
  "frames": [
@@ -232,6 +273,36 @@
    "name": "Estrelas",
    "rarity": "lendário",
    "color": "#fff6c8"
+  },
+  {
+   "id": "brasas",
+   "name": "Brasas da sarça",
+   "rarity": "raro",
+   "color": "#ff7a3c"
+  },
+  {
+   "id": "agua_viva",
+   "name": "Água viva",
+   "rarity": "raro",
+   "color": "#59c3ff"
+  },
+  {
+   "id": "mana",
+   "name": "Flocos de maná",
+   "rarity": "épico",
+   "color": "#fff3c4"
+  },
+  {
+   "id": "mar_aberto",
+   "name": "Mar aberto",
+   "rarity": "épico",
+   "color": "#3fd0c9"
+  },
+  {
+   "id": "coluna_fogo",
+   "name": "Coluna de fogo",
+   "rarity": "lendário",
+   "color": "#ffb347"
   }
  ]
 }

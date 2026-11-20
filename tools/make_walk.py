@@ -28,6 +28,7 @@ TUNE = {
     'fora_eden': dict(mode='lab'), 'ceu': dict(mode='lab'),
     'betel': dict(sat=(0.75, 1.4)),
     'moria': dict(hue=0.03),
+    'egito_midia': dict(mode='lab'), 'sinai': dict(mode='lab'), 'mar_vermelho': dict(mode='lab'),
     # map id: dict(hue=..., sat=(lo, hi) as factors of the road's saturation, val=min factor, fill=cell fraction)
 }
 

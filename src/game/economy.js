@@ -31,8 +31,54 @@ export const RANKS = [
   { id: 'campeao1', name: 'Campeão da Fé I', min: 6200, color: '#ff5a46', art: 'lendario', tint: 'hue-rotate(-40deg) saturate(1.4)' },
   { id: 'campeao2', name: 'Campeão da Fé II', min: 7300, color: '#ff5a46', art: 'lendario', tint: 'hue-rotate(-40deg) saturate(1.4)' },
   { id: 'campeao3', name: 'Campeão da Fé III', min: 8600, color: '#ff5a46', art: 'lendario', tint: 'hue-rotate(-40deg) saturate(1.4)' },
-  { id: 'coroa', name: 'Coroa da Vida', min: 10000, color: '#fff1b8', art: 'lendario', tint: 'saturate(1.6) brightness(1.15) drop-shadow(0 0 6px #ffe27a)' },
+  { id: 'coroa', name: 'Coroa da Vida I', min: 10000, color: '#fff1b8', art: 'lendario', tint: 'saturate(1.6) brightness(1.15) drop-shadow(0 0 6px #ffe27a)' },
+  ...tier('coroa', 'Coroa da Vida', [11600, 13400], '#fff1b8', 'lendario', 'saturate(1.6) brightness(1.15) drop-shadow(0 0 6px #ffe27a)', 2),
+  ...tier('estrela', 'Estrela da Manhã', [15500, 18000, 20800], '#ffe9a8', 'diamante', 'sepia(.6) saturate(2.4) hue-rotate(5deg) brightness(1.2) drop-shadow(0 0 6px #fff3b0)'),
+  ...tier('sacerdocio', 'Sacerdócio Real', [24000, 27600, 31600], '#c9a2ff', 'lendario', 'hue-rotate(200deg) saturate(1.5) drop-shadow(0 0 6px #c9a2ff)'),
+  ...tier('nacao', 'Nação Santa', [36000, 41000, 46500], '#7dffc4', 'diamante', 'hue-rotate(-60deg) saturate(1.6) drop-shadow(0 0 6px #7dffc4)'),
+  ...tier('siao', 'Monte Sião', [52500, 59000, 66000], '#ffb36b', 'lendario', 'hue-rotate(-90deg) saturate(1.8) drop-shadow(0 0 7px #ffb36b)'),
+  ...tier('jerusalem', 'Nova Jerusalém', [74000, 83000, 93000], '#ffffff', 'lendario', 'grayscale(.4) brightness(1.5) drop-shadow(0 0 8px #ffffff)'),
+  // after Nova Jerusalém the climb never ends: Glória 1, 2, 3... (each a bit further)
+  ...Array.from({ length: 200 }, (_, i) => ({ id: `gloria${i + 1}`, name: `Glória ${i + 1}`, min: 105000 + i * 14000 + Math.round(i * i * 60), color: '#ffe27a', art: 'lendario', tint: `hue-rotate(${(i * 37) % 360}deg) saturate(1.8) brightness(1.2) drop-shadow(0 0 8px #ffe27a)`, gloria: true })),
 ];
+function tier(id, name, mins, color, art, tint, from = 1) {
+  return mins.map((min, i) => ({ id: `${id}${from + i}`, name: `${name} ${['I', 'II', 'III'][from + i - 1]}`, min, color, art, tint }));
+}
+/** The ranks worth showing in a list: all named ones up to the next few. */
+export function visibleRanks(trophies) {
+  const i = RANKS.indexOf(rankFor(trophies));
+  return RANKS.filter((r, k) => !r.gloria || k <= i + 3);
+}
+/** Arena trophies lost by a weak game at high ranks (the top must be defended). */
+export function arenaLoss(trophies, score) {
+  const i = RANKS.indexOf(rankFor(trophies));
+  if (i < 12) return 0; // below Lendário nothing is lost
+  const need = i < 15 ? 80 : i < 21 ? 160 : i < 30 ? 240 : 320;
+  if (score >= need) return 0;
+  return i < 15 ? 4 : i < 21 ? 7 : i < 30 ? 10 : 14;
+}
+
+// ---------- weekly ranking: Pontos de Temporada (resets every Monday) ----------
+// Trophies and achievements are permanent; the weekly ranking counts Season
+// Points (PT), earned by trophies and by playing (missions, stops, answers...).
+/** The Monday that starts this week, as YYYY-MM-DD in local time. */
+export function weekId(now = new Date()) {
+  const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() - ((now.getDay() + 6) % 7));
+  return d.toLocaleDateString('sv-SE');
+}
+function addWeekly(s, n, { trophies = n } = {}) {
+  const id = weekId();
+  if (s.week && s.week.id !== id) s.lastWeek = { id: s.week.id, trophies: s.week.trophies || 0, points: s.week.points || 0 };
+  if (!s.week || s.week.id !== id) s.week = { id, trophies: 0, points: 0 };
+  s.week.trophies += trophies;
+  s.week.points = (s.week.points || 0) + n;
+}
+/** Season Points for playing (trophies already count by themselves). */
+export const POINTS_FOR = { stops: 5, threeStars: 10, correct: 1, arenaPlay: 3, daily: 10, dailyMission: 10, onlineWin: 15, openBox: 2 };
+export function addSeasonPoints(save, n) {
+  if (n > 0) save.update((s) => addWeekly(s, n, { trophies: 0 }));
+}
+export const seasonPoints = (s) => (s.week && s.week.id === weekId() ? s.week.points || 0 : 0);
 /** The picture of a rank's badge (ranks above Lendário reuse a recoloured one). */
 export const rankArt = (r) => r.art || r.id.replace(/\d$/, '');
 
@@ -64,7 +110,7 @@ export function nextRank(trophies) {
 /** Adds trophies; returns the new rank if the player just went up. */
 export function addTrophies(save, n) {
   const before = rankFor(save.state.trophies || 0);
-  save.update((s) => { s.trophies = Math.max(0, (s.trophies || 0) + n); });
+  save.update((s) => { s.trophies = Math.max(0, (s.trophies || 0) + n); if (n > 0) addWeekly(s, n); });
   const after = rankFor(save.state.trophies);
   if (after.id !== before.id && after.min > before.min) {
     // a rank gives its box only the first time it is reached
@@ -231,6 +277,7 @@ const FE_FOR = { stops: 20, threeStars: 10, arenaPlay: 15, daily: 15, openBox: 5
 export function track(save, type, amount = 1) {
   if (LIGHTS_LAMP.has(type) && lightLamp(save)) trackWeekly(save, 'lampDays', 1);
   if (FE_FOR[type]) addFe(save, FE_FOR[type]);
+  if (POINTS_FOR[type]) addSeasonPoints(save, POINTS_FOR[type] * (type === 'correct' ? Math.min(amount, 50) : 1));
   trackWeekly(save, type, amount);
   const daily = save.state.daily;
   if (!daily) return;
@@ -253,6 +300,7 @@ export function claimMission(save, index) {
   addCoins(save, m.reward);
   addFe(save, 25);
   trackWeekly(save, 'dailyMissions', 1);
+  addSeasonPoints(save, POINTS_FOR.dailyMission);
   const rankUp = addTrophies(save, 5);
   let bonus = null;
   if (save.state.daily.missions.every((x) => x.claimed) && !save.state.daily.bonusClaimed) {
@@ -320,7 +368,7 @@ export function rewardStop(save, chapter, stop, result, isFirstTime) {
 /** A chapter finished: a guaranteed rare box (epic for the last one). */
 export function rewardChapter(save, chapter) {
   if (chapter.finalReward) { // the end of Genesis: legendary box and a special title
-    addBox(save, chapter.finalReward.box, chapter.event ? 'Acampamento' : 'fim de Gênesis');
+    addBox(save, chapter.finalReward.box, chapter.event ? 'Acampamento' : `fim do capítulo ${chapter.number}`);
     if (chapter.finalReward.title) save.update((s) => { s.titles = { ...s.titles, [chapter.finalReward.title]: new Date().toISOString() }; });
     return chapter.finalReward.box;
   }

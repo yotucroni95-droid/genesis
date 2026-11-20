@@ -44,6 +44,7 @@ SPEAKER_ROLE = {
     'querubim': 'mulher', 'eva': 'mulher', 'anjos_fieis': 'mulher',
     'abraao': 'anciao', 'isaque': 'homem', 'jaco': 'homem', 'jose': 'homem', 'sara': 'mulher', 'rebeca': 'mulher',
     'lucifer': 'sombra', 'serpente': 'sombra', 'anjos_caidos': 'sombra',
+    'moises': 'homem', 'josue': 'homem', 'bezalel': 'homem', 'joquebede': 'mulher', 'miria': 'jovem_f',
     'aventureira': 'menina', 'aventureiro': 'menino', 'desbravadora': 'jovem_f', 'desbravador': 'jovem_m',
 }
 # people of the Acampamento map, by picture: diretor, conselheira, instrutor, enfermeira, corneteiro, lanterninha

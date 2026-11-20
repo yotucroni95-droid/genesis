@@ -8,12 +8,13 @@ import { Starfield } from './starfield.js';
 import { cloudOn, accountCode, fetchRanking, pushNow } from '../cloud/account.js';
 
 const TABS = [
+  { id: 'semana', label: '📅 Temporada', unit: 'PT', how: 'Pontos de Temporada (PT) da semana: ganhe jogando, completando missões e ganhando troféus. Toda segunda-feira zera, e o top 3 ganha prêmio! Troféus e conquistas nunca zeram.' },
   { id: 'trofeus', label: '🏆 Troféus', unit: 'troféus', how: 'Ganhe troféus na Arena e suba de patente.' },
   { id: 'arena', label: '⚡ Arena', unit: 'pontos', how: 'Seu melhor resultado numa partida da Arena.' },
   { id: 'estrelas', label: '⭐ Estrelas', unit: 'estrelas', how: 'Estrelas conquistadas na Jornada.' },
 ];
 const MEDAL = ['🥇', '🥈', '🥉'];
-let lastTab = 'trofeus';
+let lastTab = 'semana';
 
 export function createRankingScene(game) {
   const stars = new Starfield(90);

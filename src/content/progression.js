@@ -26,8 +26,10 @@ export function chapterProgress(save, chapter) {
 /** Chapter n is open when chapter n-1 is finished. */
 export function isChapterOpen(save, index, loadedChapters, entries = []) {
   // chapters whose map is still being drawn are skipped, so they never block the next ones
+  // events (like the Acampamento) never block the story chapters after them
   let k = index - 1;
-  while (k >= 0 && entries[k] && entries[k].waitingMap) k -= 1;
+  const skip = (e) => e && (e.waitingMap || (e.event && !(entries[index] || {}).event));
+  while (k >= 0 && skip(entries[k])) k -= 1;
   if (k < 0) return true;
   const prev = loadedChapters[k];
   return Boolean(prev && chapterDone(save, prev));

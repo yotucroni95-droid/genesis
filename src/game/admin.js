@@ -49,7 +49,7 @@ export async function unlockEverything(game) {
     s.level = Math.max(s.level, chapters.length + 1);
     s.coins = Math.max(s.coins || 0, 99999);
     s.denarios = Math.max(s.denarios || 0, 9999);
-    s.trophies = Math.max(s.trophies || 0, RANKS[RANKS.length - 1].min);
+    s.trophies = Math.max(s.trophies || 0, RANKS.find((r) => r.id === 'jerusalem3').min);
     s.rankBest = RANKS.length - 1;
     s.pass = { ...(s.pass || {}), fe: Math.max((s.pass && s.pass.fe) || 0, PASS_LEVELS * FE_PER_LEVEL) };
     s.oil = Math.max(s.oil || 0, 5);

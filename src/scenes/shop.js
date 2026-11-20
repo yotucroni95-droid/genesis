@@ -6,7 +6,7 @@ import { gameScreen } from '../ui/screen.js';
 import { chest, frameView, ico, loadExtras, formatWait } from '../ui/game-ui.js';
 import { toast } from '../ui/toast.js';
 import { SHOP, buyBox, RARITY_LABEL, RARITY_COLOR } from '../game/economy.js';
-import { dailyOffers, buyOffer, buyWeeklyPack, weeklyPackBought, WEEKLY_PACK, charById, fragmentsNeeded } from '../game/meta.js';
+import { dailyOffers, buyOffer, buyCosmetic, COSMETIC_PRICE, buyWeeklyPack, weeklyPackBought, WEEKLY_PACK, charById, fragmentsNeeded } from '../game/meta.js';
 import { Starfield } from './starfield.js';
 import { sfx } from '../audio/audio.js';
 import { openRedeem } from '../game/codes.js';
@@ -65,6 +65,30 @@ export function createShopScene(game) {
         );
       });
 
+      // showcase: titles, trails and frames, always on sale
+      const KIND_LABEL = { titles: 'Títulos', trails: 'Rastros', frames: 'Molduras' };
+      let showKind = 'titles';
+      const showRow = h('div', { class: 'offers' });
+      const showTabs = h('div', { class: 'rank-tabs shop__tabs' });
+      const paintShow = () => {
+        showTabs.replaceChildren(...Object.keys(KIND_LABEL).map((k) => h('button', { class: `rank-tab${k === showKind ? ' is-on' : ''}`, text: KIND_LABEL[k], onClick: () => { showKind = k; paintShow(); } })));
+        showRow.replaceChildren(...(cos[showKind] || []).filter((c) => !c.hidden && c.id !== 'nenhum').map((c) => {
+          const owned = Boolean((save.state[showKind] || {})[c.id]);
+          return h('div', { class: `offer${owned ? ' is-sold' : ''}`, style: { '--r': RARITY_COLOR[c.rarity] || '#9fb3c8' } },
+            offerArt({ cosmeticKind: showKind, id: c.id }),
+            h('b', { text: c.name }),
+            h('small', { text: RARITY_LABEL[c.rarity] || c.rarity }),
+            owned ? h('span', { class: 'tag', text: 'Você já tem' }) : h('button', { class: 'btn btn--small offer__buy', onClick: () => {
+              const r = buyCosmetic(save, showKind, c);
+              if (r.error) { toast(r.error, { ms: 3500 }); return; }
+              sfx('coin');
+              toast(`${c.name}: é seu! Use no Perfil.`);
+              paintShow();
+            } }, ...price(COSMETIC_PRICE[c.rarity] || 40, 'denarios')));
+        }));
+      };
+      paintShow();
+
       const packBought = weeklyPackBought(save);
       const pack = h('div', { class: `offer offer--pack${packBought ? ' is-sold' : ''}` },
         ico('ui.pacote_semana', '🎒', 'offer__ico offer__ico--big'),
@@ -95,6 +119,9 @@ export function createShopScene(game) {
           h('button', { class: 'btn btn--small', text: 'Resgatar código', onClick: () => openRedeem(game, 'shop') })),
         h('div', { class: 'shop__title' }, h('h3', { text: 'Ofertas do dia' }), h('small', { text: `Novas ofertas em ${formatWait(msUntilMidnight())}` })),
         h('div', { class: 'offers' }, ...offers),
+        h('div', { class: 'shop__title' }, h('h3', { text: 'Personalização' }), h('small', { text: 'Títulos, rastros e molduras. Equipe no Perfil.' })),
+        showTabs,
+        showRow,
         h('h3', { text: 'Pacote da semana' }),
         pack,
         h('h3', { text: 'Baús' }),

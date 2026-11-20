@@ -1753,6 +1753,78 @@
    }
   },
   {
+   "id": "sheet.bezalel",
+   "src": "characters/bezalel_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#c98a2c",
+   "label": "Bezalel",
+   "group": "Personagens do Êxodo",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "sheet.miria",
+   "src": "characters/miria_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#1f8a82",
+   "label": "Miriã",
+   "group": "Personagens do Êxodo",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "sheet.joquebede",
+   "src": "characters/joquebede_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#7a2f4a",
+   "label": "Joquebede",
+   "group": "Personagens do Êxodo",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
    "id": "portrait.moises",
    "src": "portraits/moises.png",
    "kind": "portrait",
@@ -1761,6 +1833,36 @@
    "color": "#c0392b",
    "label": "Moisés",
    "group": "Retratos raros"
+  },
+  {
+   "id": "portrait.bezalel",
+   "src": "portraits/bezalel.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#c98a2c",
+   "label": "Bezalel",
+   "group": "Retratos do Êxodo"
+  },
+  {
+   "id": "portrait.miria",
+   "src": "portraits/miria.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#1f8a82",
+   "label": "Miriã",
+   "group": "Retratos do Êxodo"
+  },
+  {
+   "id": "portrait.joquebede",
+   "src": "portraits/joquebede.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#7a2f4a",
+   "label": "Joquebede",
+   "group": "Retratos do Êxodo"
   },
   {
    "id": "sheet.davi",
@@ -2352,6 +2454,36 @@
    "group": "Medalhas"
   },
   {
+   "id": "medal.capitulo_11",
+   "src": "medals/capitulo_11.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#e07a3a",
+   "label": "Chamado na Sarça",
+   "group": "Medalhas"
+  },
+  {
+   "id": "medal.capitulo_12",
+   "src": "medals/capitulo_12.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#3a8ad0",
+   "label": "Caminho no Mar",
+   "group": "Medalhas"
+  },
+  {
+   "id": "medal.capitulo_13",
+   "src": "medals/capitulo_13.png",
+   "kind": "medal",
+   "w": 64,
+   "h": 64,
+   "color": "#c9a2ff",
+   "label": "Povo da Aliança",
+   "group": "Medalhas"
+  },
+  {
    "id": "puzzle.babel",
    "src": "puzzles/babel.png",
    "kind": "puzzle",
@@ -2467,6 +2599,36 @@
    "kind": "map",
    "color": "#d0b070",
    "label": "Egito",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640
+  },
+  {
+   "id": "map.sinai",
+   "src": "maps/sinai.jpg",
+   "kind": "map",
+   "color": "#c08040",
+   "label": "Monte Sinai",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640
+  },
+  {
+   "id": "map.mar_vermelho",
+   "src": "maps/mar_vermelho.jpg",
+   "kind": "map",
+   "color": "#3a8ad0",
+   "label": "Mar Vermelho",
+   "group": "Mapas desenhados (opcional)",
+   "w": 960,
+   "h": 640
+  },
+  {
+   "id": "map.egito_midia",
+   "src": "maps/egito_midia.jpg",
+   "kind": "map",
+   "color": "#e0b060",
+   "label": "Egito e Midiã",
    "group": "Mapas desenhados (opcional)",
    "w": 960,
    "h": 640
@@ -3101,6 +3263,278 @@
    "group": "Mapas desenhados (opcional)",
    "w": 960,
    "h": 640
+  },
+  {
+   "id": "sheet.arao",
+   "src": "characters/arao_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#3b5bb5",
+   "label": "Arão",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.arao",
+   "src": "portraits/arao.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#3b5bb5",
+   "label": "Arão",
+   "group": "Retratos raros"
+  },
+  {
+   "id": "sheet.jo",
+   "src": "characters/jo_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#8a5a2b",
+   "label": "Jó",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.jo",
+   "src": "portraits/jo.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#8a5a2b",
+   "label": "Jó",
+   "group": "Retratos raros"
+  },
+  {
+   "id": "sheet.neemias",
+   "src": "characters/neemias_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#2f4f9e",
+   "label": "Neemias",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.neemias",
+   "src": "portraits/neemias.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#2f4f9e",
+   "label": "Neemias",
+   "group": "Retratos raros"
+  },
+  {
+   "id": "sheet.enoque",
+   "src": "characters/enoque_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#e8d9a8",
+   "label": "Enoque",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.enoque",
+   "src": "portraits/enoque.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#e8d9a8",
+   "label": "Enoque",
+   "group": "Retratos raros"
+  },
+  {
+   "id": "sheet.jeremias",
+   "src": "characters/jeremias_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#9b3a2a",
+   "label": "Jeremias",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.jeremias",
+   "src": "portraits/jeremias.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#9b3a2a",
+   "label": "Jeremias",
+   "group": "Retratos raros"
+  },
+  {
+   "id": "sheet.nabucodonosor",
+   "src": "characters/nabucodonosor_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#6a2c91",
+   "label": "Nabucodonosor",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.nabucodonosor",
+   "src": "portraits/nabucodonosor.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#6a2c91",
+   "label": "Nabucodonosor",
+   "group": "Retratos raros"
+  },
+  {
+   "id": "sheet.estatua",
+   "src": "characters/estatua_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#d4a017",
+   "label": "A Estátua",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.estatua",
+   "src": "portraits/estatua.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#d4a017",
+   "label": "A Estátua",
+   "group": "Retratos raros"
+  },
+  {
+   "id": "sheet.estevao",
+   "src": "characters/estevao_sheet.png",
+   "kind": "sheet",
+   "w": 192,
+   "h": 192,
+   "frame": 48,
+   "cols": 4,
+   "rows": 4,
+   "color": "#3d5fa8",
+   "label": "Estêvão",
+   "group": "Personagens raros (andando)",
+   "anim": {
+    "idle": [
+     0
+    ],
+    "walk": [
+     0,
+     1,
+     2,
+     3
+    ]
+   }
+  },
+  {
+   "id": "portrait.estevao",
+   "src": "portraits/estevao.png",
+   "kind": "portrait",
+   "w": 64,
+   "h": 64,
+   "color": "#3d5fa8",
+   "label": "Estêvão",
+   "group": "Retratos raros"
   }
  ]
 }

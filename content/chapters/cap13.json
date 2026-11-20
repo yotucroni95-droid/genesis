@@ -1,0 +1,385 @@
+{
+  "id": "cap13",
+  "number": 13,
+  "title": "A aliança no Sinai",
+  "map": "sinai",
+  "intro": "Três meses depois de sair do Egito, o povo acampou diante do monte Sinai. Ali Deus falaria com eles.",
+  "unlocks": [
+    "bezalel"
+  ],
+  "medal": "capitulo_13",
+  "finalReward": {
+    "box": "lendário",
+    "title": "povo_da_alianca"
+  },
+  "npcs": [
+    {
+      "sheet": "bezalel",
+      "x": 23,
+      "y": 3,
+      "dir": 0,
+      "talk": [
+        "Deus me encheu do seu Espírito para trabalhar o ouro, a prata e o bronze.",
+        "Cada peça do santuário tem que ficar do jeito que Deus mostrou.",
+        "Trabalhar com capricho também é adorar."
+      ]
+    },
+    {
+      "sheet": "moises",
+      "x": 9,
+      "y": 1,
+      "dir": 0,
+      "talk": [
+        "Fiquei quarenta dias e quarenta noites no monte.",
+        "As tábuas foram escritas pelo dedo de Deus.",
+        "Amem o Senhor de todo o coração."
+      ]
+    },
+    {
+      "sheet": "josue",
+      "x": 2,
+      "y": 5,
+      "dir": 0,
+      "talk": [
+        "Esperei Moisés no meio da subida do monte.",
+        "Lutamos contra Amaleque enquanto Moisés orava.",
+        "Seja forte e corajoso!"
+      ]
+    },
+    {
+      "sheet": "miria",
+      "x": 6,
+      "y": 16,
+      "dir": 0,
+      "talk": [
+        "Deus nos deu água da rocha!",
+        "O maná cai todas as manhãs.",
+        "Que bom ter Deus morando no meio do povo."
+      ]
+    },
+    {
+      "sheet": "povo",
+      "variant": 3,
+      "x": 6,
+      "y": 4,
+      "dir": 1,
+      "talk": [
+        "Eu dei meus brincos de ouro... que vergonha!",
+        "Moisés quebrou as tábuas quando viu o bezerro.",
+        "Deus é misericordioso e perdoa."
+      ]
+    }
+  ],
+  "stops": [
+    {
+      "id": "cap13_s1",
+      "title": "Água da rocha",
+      "x": 4,
+      "y": 9,
+      "verse": "Êxodo 17",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Em Refidim não havia água, e o povo brigou com Moisés: \"Por que você nos tirou do Egito para morrermos de sede?\""
+        },
+        {
+          "speaker": "moises",
+          "text": "Senhor, o que vou fazer com este povo?"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus mandou Moisés bater na rocha em Horebe com o cajado. E da rocha saiu água para todos beberem!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Depois, Amaleque atacou Israel. Josué foi lutar, e Moisés subiu o monte com o cajado de Deus nas mãos."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Enquanto Moisés mantinha as mãos levantadas, Israel vencia. Quando cansou, Arão e Hur seguraram as mãos dele até o sol se pôr."
+        }
+      ],
+      "challenge": {
+        "type": "memory",
+        "config": {
+          "pairs": [
+            "moises",
+            "josue",
+            "miria",
+            "joquebede",
+            "jose",
+            "abraao"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap13_s2",
+      "title": "Os Dez Mandamentos",
+      "x": 15,
+      "y": 2,
+      "verse": "Êxodo 19–20",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "No terceiro dia, houve trovões, relâmpagos e uma nuvem espessa sobre o monte. O som de uma trombeta ficou cada vez mais forte."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O monte Sinai fumegava, porque o Senhor desceu sobre ele em fogo. O povo tremeu."
+        },
+        {
+          "speaker": "deus",
+          "text": "Eu sou o Senhor, o seu Deus, que tirou você do Egito, da casa da escravidão."
+        },
+        {
+          "speaker": "deus",
+          "text": "Não tenha outros deuses além de mim. Lembre-se do dia de sábado, para santificá-lo. Honre seu pai e sua mãe."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus deu os Dez Mandamentos e os escreveu em duas tábuas de pedra. Eles mostram como amar a Deus e ao próximo."
+        }
+      ],
+      "challenge": {
+        "type": "lacunas",
+        "config": {
+          "count": 4,
+          "items": [
+            {
+              "text": "Não tenha outros [deuses] além de mim.",
+              "ref": "Êxodo 20:3"
+            },
+            {
+              "text": "Lembre-se do dia de [sábado], para santificá-lo.",
+              "ref": "Êxodo 20:8"
+            },
+            {
+              "text": "Honre seu [pai] e sua [mãe].",
+              "ref": "Êxodo 20:12"
+            },
+            {
+              "text": "Não [mate].",
+              "ref": "Êxodo 20:13"
+            },
+            {
+              "text": "Não [furte].",
+              "ref": "Êxodo 20:15"
+            },
+            {
+              "text": "Não dê falso [testemunho] contra o seu próximo.",
+              "ref": "Êxodo 20:16"
+            },
+            {
+              "text": "Não use o [nome] do Senhor, o seu Deus, em vão.",
+              "ref": "Êxodo 20:7"
+            },
+            {
+              "text": "Não [cobice] a casa do seu próximo.",
+              "ref": "Êxodo 20:17"
+            }
+          ],
+          "extra": [
+            "domingo",
+            "amigo",
+            "corra",
+            "ouro",
+            "rei",
+            "minta",
+            "cante",
+            "durma"
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap13_s3",
+      "title": "O bezerro de ouro",
+      "x": 8,
+      "y": 12,
+      "verse": "Êxodo 32–34",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "Moisés demorou no monte, e o povo disse a Arão: \"Faça deuses para nós!\" Arão juntou os brincos de ouro e fez um bezerro."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O povo fez uma festa e se curvou diante do bezerro. Deus viu e falou com Moisés."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Quando Moisés desceu e viu aquilo, ficou muito irado e quebrou as tábuas ao pé do monte. Depois queimou o bezerro."
+        },
+        {
+          "speaker": "moises",
+          "text": "Vocês cometeram um grande pecado. Mas vou subir ao Senhor; talvez eu possa conseguir o perdão."
+        },
+        {
+          "speaker": "deus",
+          "text": "O Senhor, o Senhor, Deus compassivo e misericordioso, paciente, cheio de amor e de fidelidade."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Deus perdoou o povo e escreveu de novo os mandamentos em duas novas tábuas."
+        }
+      ],
+      "challenge": {
+        "type": "vf",
+        "config": {
+          "count": 6,
+          "seconds": 7,
+          "items": [
+            {
+              "s": "O bezerro foi feito com brincos de ouro.",
+              "ok": true,
+              "ref": "Êxodo 32:2-4"
+            },
+            {
+              "s": "Quem fez o bezerro foi Josué.",
+              "ok": false,
+              "ref": "Êxodo 32:4"
+            },
+            {
+              "s": "Moisés quebrou as tábuas ao ver o bezerro.",
+              "ok": true,
+              "ref": "Êxodo 32:19"
+            },
+            {
+              "s": "Moisés orou pedindo perdão pelo povo.",
+              "ok": true,
+              "ref": "Êxodo 32:31-32"
+            },
+            {
+              "s": "Deus nunca mais escreveu os mandamentos.",
+              "ok": false,
+              "ref": "Êxodo 34:1"
+            },
+            {
+              "s": "Deus é compassivo e misericordioso.",
+              "ok": true,
+              "ref": "Êxodo 34:6"
+            },
+            {
+              "s": "O povo esperou Moisés com paciência.",
+              "ok": false,
+              "ref": "Êxodo 32:1"
+            },
+            {
+              "s": "Moisés ficou 40 dias e 40 noites no monte.",
+              "ok": true,
+              "ref": "Êxodo 24:18"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap13_s4",
+      "title": "Construindo o santuário",
+      "x": 24,
+      "y": 8,
+      "verse": "Êxodo 25–31; 35–40",
+      "story": [
+        {
+          "speaker": "deus",
+          "text": "Façam um santuário para mim, e eu habitarei no meio deles. Façam tudo conforme o modelo que vou mostrar."
+        },
+        {
+          "speaker": "narrador",
+          "text": "O povo trouxe ofertas de coração alegre: ouro, prata, bronze, tecidos azuis, roxos e vermelhos. Trouxeram tanto que Moisés pediu para pararem!"
+        },
+        {
+          "speaker": "bezalel",
+          "text": "Deus me encheu do seu Espírito, com sabedoria e habilidade, para fazer cada peça do santuário."
+        },
+        {
+          "speaker": "narrador",
+          "text": "No Lugar Santíssimo ficava a arca da aliança. No Lugar Santo, a mesa dos pães, o candelabro e o altar do incenso. No pátio, o altar de bronze e a bacia."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Agora ajude Bezalel: coloque cada peça no lugar certo!"
+        }
+      ],
+      "challenge": {
+        "type": "santuario",
+        "config": {
+          "maxErrors": 3
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    },
+    {
+      "id": "cap13_s5",
+      "title": "A glória enche o santuário",
+      "x": 22,
+      "y": 5,
+      "verse": "Êxodo 40:17-38",
+      "story": [
+        {
+          "speaker": "narrador",
+          "text": "No primeiro dia do primeiro mês do segundo ano, o tabernáculo foi levantado. Moisés fez tudo como o Senhor tinha mandado."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Então a nuvem cobriu a tenda, e a glória do Senhor encheu o tabernáculo. Nem Moisés podia entrar!"
+        },
+        {
+          "speaker": "narrador",
+          "text": "Quando a nuvem subia, o povo partia. Quando ela ficava, o povo ficava."
+        },
+        {
+          "speaker": "narrador",
+          "text": "De dia a nuvem, de noite o fogo, durante toda a viagem. Deus estava no meio do seu povo."
+        },
+        {
+          "speaker": "narrador",
+          "text": "Hoje Jesus é o \"Deus conosco\". Ele quer morar no seu coração."
+        }
+      ],
+      "challenge": {
+        "type": "versiculo",
+        "config": {
+          "count": 3,
+          "verses": [
+            {
+              "text": "E farão um santuário para mim, e eu habitarei no meio deles.",
+              "ref": "Êxodo 25:8"
+            },
+            {
+              "text": "A glória do Senhor encheu o tabernáculo.",
+              "ref": "Êxodo 40:34"
+            },
+            {
+              "text": "O Senhor é a minha força e o meu cântico; ele é a minha salvação.",
+              "ref": "Êxodo 15:2"
+            },
+            {
+              "text": "O Senhor lutará por vocês; fiquem tranquilos.",
+              "ref": "Êxodo 14:14"
+            },
+            {
+              "text": "Eu sou o Senhor, o seu Deus, que tirou você do Egito.",
+              "ref": "Êxodo 20:2"
+            }
+          ]
+        }
+      },
+      "rewards": {
+        "xp": 90
+      }
+    }
+  ]
+}

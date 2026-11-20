@@ -4,24 +4,21 @@
 const SEEN_KEY = 'genesis.newsSeen';
 
 export const NEWS = {
-  id: '2026-11-17b',
+  id: '2026-11-20',
   // stops showing after this moment (Brasília time); remove or change for the next update
-  until: '2026-11-18T12:00:00-03:00',
-  title: 'Nova versão do Gênesis!',
-  intro: 'Você está jogando a versão nova. Resolvemos alguns problemas que vocês nos contaram:',
+  until: '2026-11-23T12:00:00-03:00',
+  title: 'Chegou a versão 2.0 do Gênesis!',
+  intro: 'Muita coisa nova para você explorar:',
   fixes: [
-    'NOVO: RANKING! Veja quem está no topo em Troféus, Arena e Estrelas, e tente passar todo mundo. Botão Ranking no lobby.',
-    'NOVO: sua conta agora fica salva na nuvem! Você recebe um código secreto (GEN-...). Copie e guarde: com ele você entra na sua conta em outro celular ou navegador, sem perder nada. Não mostre o código para ninguém.',
-    'Arena: agora são 240 perguntas, e as que você já respondeu vão para o fim da fila. Chega de pergunta repetida!',
-    'Ganhou um código num desafio? Resgate na Loja, no botão “Resgatar código”.',
-    'Os caminhos de todos os mapas foram revisados: agora dá para passar em todo lugar, inclusive em Babel e na ponte do Éden.',
-    'Os personagens agora ficam ao lado da estrada, fora do caminho: ninguém fica parado no meio da passagem.',
-    'Os personagens lendários (Paulo, João Batista, Salomão, Maria, Abel e a Aventureira) agora olham para a direita quando você vira o joystick para a direita.',
-    'O jogo abre sempre deitado (na horizontal). Se a tela não girar, a rotação automática do celular está travada: destrave e vire de novo.',
-    'Todas as missões ficam em cima do caminho, fáceis de alcançar (Jacó e Esaú, Moriá e as missões do Acampamento).',
-    'Os pergaminhos aparecem só na estrada, e são sempre 5 por mapa.',
-    'O botão de voltar volta só uma tela por toque (antes, às vezes voltava duas).',
-    'Acampamento: o Voto e a Lei do Aventureiro foram corrigidos com o texto oficial, e o jogo de colocar em ordem agora aceita a resposta certa.',
+    'NOVA TEMPORADA: ÊXODO! Três capítulos novos: Moisés do Nilo à sarça, o Mar Vermelho e a aliança no Sinai. Ganhe Joquebede, Miriã e Bezalel.',
+    'NOVO: ARENA ONLINE 1x1! Crie uma sala e desafie outro jogador de verdade, cada um no seu celular.',
+    'NOVO: AMIGOS! Pesquise pelo apelido ou pelo código de amigo, mande pedidos e chame seus amigos para a Arena.',
+    'NOVO: Ranking da Temporada. Ganhe Pontos de Temporada jogando; o ranking recomeça toda segunda-feira. Seus troféus e conquistas continuam seus para sempre.',
+    'Passe de batalha com tema da temporada e 5 missões com recompensas.',
+    'Loja: nova vitrine de Personalização com títulos, rastros e molduras.',
+    '8 personagens novos para colecionar: Arão, Neemias, Jeremias e Estêvão (épicos); Jó, Enoque, Nabucodonosor e A Estátua do sonho de Daniel 2 (lendários).',
+    'Minijogos novos: "Quem disse?" e "Pares", além de novos desafios no Êxodo.',
+    'Letras mais fáceis de ler, caça-palavras maior e sem tempo, e botões ajustados para caber em qualquer tela.',
   ],
   outro: 'Em breve chegam mais atualizações, sempre buscando melhorias. Obrigado por jogar e por nos ajudar!',
 };

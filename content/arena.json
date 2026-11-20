@@ -1321,6 +1321,296 @@
    "ref": "Gênesis 50:20"
   },
   {
+   "q": "Para onde Moisés fugiu?",
+   "options": [
+    "Para Midiã",
+    "Para Canaã",
+    "Para a Babilônia"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 2:15"
+  },
+  {
+   "q": "Onde Moisés se sentou ao chegar em Midiã?",
+   "options": [
+    "Junto a um poço",
+    "Num palácio",
+    "Num barco"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 2:15-17"
+  },
+  {
+   "q": "Quantas filhas tinha o sacerdote de Midiã?",
+   "options": [
+    "Sete",
+    "Duas",
+    "Doze"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 2:16"
+  },
+  {
+   "q": "Com quem Moisés se casou?",
+   "options": [
+    "Zípora",
+    "Miriã",
+    "Raquel"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 2:21"
+  },
+  {
+   "q": "O que Deus fez quando o povo clamou no Egito?",
+   "options": [
+    "Ouviu e lembrou da sua aliança",
+    "Esqueceu o povo",
+    "Mandou o povo calar"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 2:24-25"
+  },
+  {
+   "q": "Quem escondeu o bebê Moisés por três meses?",
+   "options": [
+    "Sua mãe",
+    "A filha do Faraó",
+    "Arão"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 2:2"
+  },
+  {
+   "q": "Quem encontrou o cesto no rio?",
+   "options": [
+    "A filha do Faraó",
+    "Miriã",
+    "Um pescador"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 2:5-6"
+  },
+  {
+   "q": "O que quer dizer o nome Moisés?",
+   "options": [
+    "Tirado das águas",
+    "Filho do rei",
+    "Pastor"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 2:10"
+  },
+  {
+   "q": "Qual nome Deus revelou na sarça?",
+   "options": [
+    "EU SOU O QUE SOU",
+    "Grande Rei",
+    "Senhor do Egito"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 3:14"
+  },
+  {
+   "q": "Quem Deus mandou para falar junto com Moisés?",
+   "options": [
+    "Arão",
+    "Josué",
+    "Calebe"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 4:14-16"
+  },
+  {
+   "q": "Qual foi a primeira praga?",
+   "options": [
+    "A água virou sangue",
+    "Rãs",
+    "Gafanhotos"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 7:20"
+  },
+  {
+   "q": "Por que o Faraó perseguiu o povo?",
+   "options": [
+    "Ele se arrependeu de deixá-los ir",
+    "Queria dar presentes",
+    "Queria ir junto"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 14:5"
+  },
+  {
+   "q": "O que Moisés disse ao povo com medo?",
+   "options": [
+    "O Senhor lutará por vocês",
+    "Voltem para o Egito",
+    "Corram para o deserto"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 14:14"
+  },
+  {
+   "q": "Onde ficou a coluna de nuvem?",
+   "options": [
+    "Entre Israel e os egípcios",
+    "Em cima do Faraó",
+    "No meio do mar"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 14:19-20"
+  },
+  {
+   "q": "O que estava na frente do povo?",
+   "options": [
+    "O mar",
+    "Uma montanha de ouro",
+    "Uma cidade"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 14:9-10"
+  },
+  {
+   "q": "Os ossos de quem Moisés levou?",
+   "options": [
+    "De José",
+    "De Abraão",
+    "De Noé"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 13:19"
+  },
+  {
+   "q": "Como o povo atravessou o mar?",
+   "options": [
+    "A pé enxuto",
+    "Nadando",
+    "De barco"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 14:22"
+  },
+  {
+   "q": "O que Deus usou para abrir o mar?",
+   "options": [
+    "Um forte vento oriental",
+    "Um terremoto",
+    "Uma ponte"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 14:21"
+  },
+  {
+   "q": "Quem tocou tamborim depois da travessia?",
+   "options": [
+    "Miriã",
+    "Zípora",
+    "Raquel"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 15:20"
+  },
+  {
+   "q": "Como a água de Mara ficou doce?",
+   "options": [
+    "Moisés jogou um pedaço de madeira nela",
+    "Choveu",
+    "Secou"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 15:25"
+  },
+  {
+   "q": "Qual era o gosto do maná?",
+   "options": [
+    "De bolo de mel",
+    "De peixe",
+    "De sal"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 16:31"
+  },
+  {
+   "q": "No sexto dia, quanto maná o povo juntava?",
+   "options": [
+    "O dobro",
+    "Nada",
+    "Metade"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 16:22-23"
+  },
+  {
+   "q": "Onde Deus deu os Dez Mandamentos?",
+   "options": [
+    "No monte Sinai",
+    "No monte Moriá",
+    "No rio Nilo"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 19:20"
+  },
+  {
+   "q": "Em que Deus escreveu os mandamentos?",
+   "options": [
+    "Em tábuas de pedra",
+    "Em papiro",
+    "Na areia"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 31:18"
+  },
+  {
+   "q": "Quem segurou as mãos de Moisés na batalha?",
+   "options": [
+    "Arão e Hur",
+    "Josué e Calebe",
+    "Miriã e Zípora"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 17:12"
+  },
+  {
+   "q": "De onde saiu água em Horebe?",
+   "options": [
+    "De uma rocha",
+    "De um poço",
+    "Do céu"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 17:6"
+  },
+  {
+   "q": "Quem Deus encheu do seu Espírito para fazer o santuário?",
+   "options": [
+    "Bezalel",
+    "Arão",
+    "Josué"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 31:2-3"
+  },
+  {
+   "q": "O que ficava no Lugar Santíssimo?",
+   "options": [
+    "A arca da aliança",
+    "O altar de bronze",
+    "A bacia"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 40:20-21"
+  },
+  {
+   "q": "Qual mandamento fala do dia de descanso?",
+   "options": [
+    "Lembre-se do dia de sábado",
+    "Não mate",
+    "Não furte"
+   ],
+   "answer": 0,
+   "ref": "Êxodo 20:8"
+  },
+  {
    "q": "Para que idade é o Clube de Aventureiros?",
    "options": [
     "De 6 a 9 anos",

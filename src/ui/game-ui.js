@@ -27,7 +27,7 @@ export async function loadExtras(assets) {
 
 export function rankBadge(trophies, { big = false } = {}) {
   const r = rankFor(trophies);
-  const numeral = (r.name.match(/ (I{1,3})$/) || [])[1] || '★';
+  const numeral = (r.name.match(/ (I{1,3}|\d+)$/) || [])[1] || '★';
   const art = `ui.patente_${rankArt(r)}`;
   return h('div', { class: `rank${big ? ' rank--big' : ''}`, style: { '--rank': r.color }, title: r.name },
     hasArt(art)
