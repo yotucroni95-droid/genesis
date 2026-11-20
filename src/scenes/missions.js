@@ -9,6 +9,7 @@ import { Starfield } from './starfield.js';
 import { celebrate } from '../ui/celebrate.js';
 import { rankBadge, ico, formatWait } from '../ui/game-ui.js';
 import { sfx } from '../audio/audio.js';
+import { pushStatus, enablePush, disablePush, PUSH_TEXT } from '../cloud/push.js';
 
 const LAMP_ICON = ['icon.lamparina_apagada', 'icon.lamparina', 'icon.lamparina_azul', 'icon.lamparina_branca'];
 
@@ -44,6 +45,22 @@ export function createMissionsScene(game) {
           h('p', { text: `🫙 Frascos de azeite: ${save.state.oil || 0} (cada um protege 1 dia sem jogar)${nextGoal ? ` · Próximo prêmio: ${nextGoal} dias` : ''} · Recorde: ${l.best || l.count} ${(l.best || l.count) === 1 ? 'dia' : 'dias'}` }),
         ),
       );
+      // reminders on/off (hidden when there is no account or the browser cannot)
+      const bell = h('button', { class: 'btn btn--small btn--ghost lamp-card__bell', hidden: true });
+      const paintBell = (st) => {
+        bell.hidden = st === 'none';
+        bell.textContent = st === 'on' ? '🔔 Lembretes ligados' : '🔕 Ativar lembretes';
+        bell.onclick = async () => {
+          bell.disabled = true;
+          const next = st === 'on' ? await disablePush() : await enablePush().catch(() => 'off');
+          bell.disabled = false;
+          if (next === 'on') toast('🔔 Lembretes ligados! No máximo 1 aviso por dia.');
+          else if (PUSH_TEXT[next]) toast(PUSH_TEXT[next], { ms: 7000 });
+          paintBell(next);
+        };
+      };
+      pushStatus().then(paintBell).catch(() => {});
+      lampCard.lastElementChild.appendChild(bell);
 
       const daily = () => {
         const d = save.state.daily;

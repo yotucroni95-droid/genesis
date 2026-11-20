@@ -14,6 +14,9 @@ import { shareCard } from '../ui/share.js';
 import { dailyDone } from './daily.js';
 import { pendingWeekly, pendingPass, pass, addDenarios } from '../game/meta.js';
 import { friendsOn, friendsState, cachedFriends, clearInvite } from '../cloud/friends.js';
+import { shouldOfferPush, markPushAsked, enablePush, refreshPush, PUSH_TEXT } from '../cloud/push.js';
+
+let pushRefreshed = false;
 
 let greeted = false;
 
@@ -124,6 +127,29 @@ export function createLobbyScene(game) {
             )));
           ui.appendChild(modal);
         }).catch(() => {});
+      }
+      // reminders (lamp about to go out, missions, ranking): offered once the player has played
+      if (!pushRefreshed) { pushRefreshed = true; refreshPush(); }
+      if ((save.state.lamp && save.state.lamp.count >= 1) && !game.room && !game.duel) {
+        setTimeout(() => shouldOfferPush().then((offer) => {
+          if (!offer || !ui.isConnected || ui.querySelector('.modal')) return;
+          markPushAsked();
+          const close = () => modal.remove();
+          const modal = h('div', { class: 'modal' }, h('div', { class: 'modal__box duel' },
+            h('div', { class: 'duel__ico', text: '🔔' }),
+            h('h2', { text: 'Quer um lembrete para não apagar a lamparina?' }),
+            h('p', { text: 'No máximo 1 aviso por dia, no fim da tarde: lamparina, missões e ranking.' }),
+            h('div', { style: { display: 'flex', gap: '10px', justifyContent: 'center' } },
+              h('button', { class: 'btn btn--play', onClick: async (e) => {
+                e.currentTarget.disabled = true;
+                const st = await enablePush().catch(() => 'off');
+                close();
+                toast(st === 'on' ? '🔔 Lembretes ligados!' : PUSH_TEXT[st] || 'Não foi possível ligar agora.', { ms: st === 'on' ? 2500 : 7000 });
+              } }, h('b', { text: 'ATIVAR' })),
+              h('button', { class: 'btn btn--ghost', text: 'Agora não', onClick: close }),
+            )));
+          ui.appendChild(modal);
+        }).catch(() => {}), 2500);
       }
       if (game.room) {
         const join = game.room;

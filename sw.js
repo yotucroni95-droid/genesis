@@ -5,7 +5,7 @@
 //   * on the first visit every file listed in precache.json is downloaded
 //   * iPhones ask for audio in pieces (Range): answered from the cache
 
-const VERSION = 40;
+const VERSION = 41;
 const CODE = `genesis-code-v${VERSION}`;
 const MEDIA = 'genesis-media'; // big files: not deleted when the code changes
 
@@ -116,4 +116,28 @@ self.addEventListener('fetch', (event) => {
   if (!sameOrigin && !url.hostname.includes('fonts.g')) return;
   if (isAudio(url)) { event.respondWith(audio(request)); return; }
   event.respondWith(isMedia(url) ? cacheFirst(request) : networkFirst(request));
+});
+
+// ---- lembretes (notificações) enviados pelo servidor: supabase/functions/genesis-push ----
+self.addEventListener('push', (event) => {
+  let data = {};
+  try { data = event.data ? event.data.json() : {}; } catch { data = { body: event.data && event.data.text() }; }
+  event.waitUntil(self.registration.showNotification(data.title || 'Gênesis', {
+    body: data.body || 'Sua aventura continua!',
+    icon: 'assets/logo/icon-192.png',
+    badge: 'assets/logo/icon-192.png',
+    tag: data.tag || 'genesis',
+    data: { url: data.url || './' },
+  }));
+});
+
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+  const url = new URL((event.notification.data && event.notification.data.url) || './', self.registration.scope).href;
+  event.waitUntil((async () => {
+    const wins = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
+    const open = wins.find((w) => w.url.startsWith(self.registration.scope));
+    if (open) return open.focus();
+    return self.clients.openWindow(url);
+  })());
 });

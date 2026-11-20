@@ -39,6 +39,7 @@ import { showNews } from './news.js';
 import { startSync } from './cloud/account.js';
 import { createWelcomeScene } from './cloud/account-ui.js';
 import { createRankingScene } from './scenes/ranking.js';
+import { startPlaytime } from './game/playtime.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -194,6 +195,7 @@ async function boot() {
   }, true);
 
   // cloud account: bring newer progress from another phone (gives up after 5 s offline)
+  startPlaytime(game.save);
   const sync = await Promise.race([startSync(game.save).catch(() => ({})), new Promise((r) => setTimeout(() => r({}), 5000))]);
   if (sync.pulled) setTimeout(() => toast('☁️ Progresso atualizado com a sua conta.', { ms: 3500 }), 1500);
   await game.scenes.go('title');
