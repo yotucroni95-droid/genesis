@@ -96,6 +96,7 @@ export function createLobbyScene(game) {
         h('div', { class: 'lobby__bottom' },
           h('button', { class: 'btn btn--arena', onClick: go('arena') }, ico('icon.arena', '⚡', 'arena__ico'), h('span', {}, h('b', { text: 'ARENA' }), h('small', { text: s.arenaBest ? `Recorde: ${s.arenaBest}` : 'Desafio relâmpago' }))),
           h('button', { class: 'btn btn--play', onClick: go('explore') }, h('b', { text: 'JOGAR' }), h('small', { text: 'Jornada' })),
+          h('button', { class: 'btn btn--online lobby__fuga', onClick: go('fuga') }, h('b', { text: 'FUGA' }), h('small', { text: 'Cooperativo 1–5' })),
         ),
       ));
       if ((s.boxes || []).length) {
