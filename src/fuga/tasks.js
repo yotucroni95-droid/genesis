@@ -1,4 +1,4 @@
-// Cooperative tasks of a Fuga round. A map has 26 stations; each round draws a
+// Cooperative tasks of a Fuga round. A map has 30 stations; each round draws a
 // balanced subset from the room seed (same on every phone) and places them on
 // different spots. Mini-games REUSE the existing challenges (src/challenges).
 //   kind 'challenge' → opens a challenge; 'colher' → walk over 3 fragments;
@@ -6,7 +6,7 @@
 
 import { rng } from './map.js';
 
-// [name, kind, challenge type]
+// [name, kind, challenge type] — 30 stations per map
 const CATALOG = [
   ['Pergunta da Árvore', 'challenge', 'quiz'], ['Pergunta da Fonte', 'challenge', 'quiz'], ['Pergunta do Altar', 'challenge', 'quiz'],
   ['Ordenar a história', 'challenge', 'ordem'], ['Linha do tempo', 'challenge', 'ordem'],
@@ -16,6 +16,8 @@ const CATALOG = [
   ['Sequência de símbolos', 'challenge', 'sequencia'], ['Sinais da coluna', 'challenge', 'sequencia'],
   ['Caça-palavras', 'challenge', 'cacapalavras'], ['Jogo da velha da luz', 'challenge', 'tictactoe'], ['Quem disse?', 'challenge', 'quemdisse'],
   ['Colher o maná', 'challenge', 'mana'], ['Cesto de frutos', 'challenge', 'cesto'],
+  ['Labirinto da Fé', 'challenge', 'labirinto'], ['Caminho estreito', 'challenge', 'labirinto'],
+  ['Armadura de Deus', 'challenge', 'armadura'], ['Escudo contra as setas', 'challenge', 'armadura'],
   ['Fragmentos do pergaminho', 'colher'], ['Pedras do memorial', 'colher'], ['Sementes perdidas', 'colher'],
   ['Alavancas do portão', 'ativar'], ['Pedras de apoio', 'ativar'], ['Lâmpadas gêmeas', 'ativar'], ['Selos da aliança', 'ativar'],
 ];
@@ -31,7 +33,7 @@ export function taskCount(players, difficulty = 1) {
 
 /** Every challenge config used in the chapters, by type (the pool tasks draw from). */
 export async function loadPool(assets) {
-  const pool = {};
+  const pool = { labirinto: [{ size: 6, seconds: 60 }], armadura: [{ goal: 8 }] }; // new mini-games: always available
   const index = assets.json('chapters/index.json').chapters;
   const chapters = await Promise.all(index.map((e) => assets.loadJSON(e.file).catch(() => null)));
   for (const c of chapters) for (const s of (c && c.stops) || []) {

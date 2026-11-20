@@ -20,6 +20,7 @@ import { Director, STAGES, stageOf, KINDS } from '../fuga/director.js';
 import { loadPool, roundTasks } from '../fuga/tasks.js';
 import { fugaOn, online, soloRoom, fugaError } from '../cloud/fuga.js';
 import { Channel } from '../cloud/realtime.js';
+import { Pet, petState } from '../world/pet.js';
 
 const DIFFS = ['Fácil', 'Médio', 'Difícil'];
 const LAST_KEY = 'genesis.fugaRoom';
@@ -154,6 +155,7 @@ export function createFugaScene(game) {
       S.remotes.set(m.s, r);
     }
     Object.assign(r, { tx: m.x, ty: m.y, hidden: m.h, plate: m.pl, at: performance.now() });
+    if (m.pt !== (r.pet && r.pet.def.id) && S.petDefs) { const d = S.petDefs.find((p) => p.id === m.pt); r.pet = d ? new Pet(game.assets, d, m.x, m.y) : null; }
     r.p.dir = m.d; r.p.moving = Boolean(m.m);
   }
 
@@ -186,6 +188,9 @@ export function createFugaScene(game) {
     await game.assets.ensure(`sheet.${id}`).catch(() => {});
     S.me = new Player(game.assets, id, (at.x + 0.5) * 16, (at.y + 1) * 16 - 2);
     S.me.speed = 70;
+    S.petDefs = S.petDefs || (await game.assets.loadJSON('pets.json')).pets;
+    const myPet = S.petDefs.find((p) => p.id === petState(game.save).on);
+    S.pet = myPet ? new Pet(game.assets, myPet, S.me.x, S.me.y) : null;
     buildHud();
     S.phase = 'play';
     S.firstFrame = true;
@@ -281,7 +286,7 @@ export function createFugaScene(game) {
     if (S.channel) S.channel.broadcast('noise', noise);
     const st = await call('task', t.n);
     t.sending = false;
-    if (st && st.done.includes(t.n)) { toast(`✓ ${t.name}`); poke(); } else if (st) toast('Espere um instante entre uma tarefa e outra.');
+    if (st && st.done.includes(t.n)) { toast(`✓ ${t.name}`); poke(); if (S.pet) S.pet.celebrate(); } else if (st) toast('Espere um instante entre uma tarefa e outra.');
   }
 
   function updateTasks(dt) {
@@ -357,7 +362,7 @@ export function createFugaScene(game) {
       const solo = Boolean(S.api.solo);
       coins = Math.floor(((won ? 20 : 0) + me.tasks * (won ? 4 : 2)) * tired * (solo ? 0.5 : 1));
       pts = won ? Math.round((solo ? 4 : 8) * tired) : 0;
-      save.update((s) => { s.fugaRooms = done.concat(key).slice(-30); s.fugaDay = { date: day, n: played + 1 }; });
+      save.update((s) => { s.fugaRooms = done.concat(key).slice(-30); s.fugaDay = { date: day, n: played + 1 }; if (won) s.fugaWins = (s.fugaWins || 0) + 1; });
       if (coins) addCoins(save, coins);
       if (pts) addSeasonPoints(save, pts);
     }
@@ -406,6 +411,7 @@ export function createFugaScene(game) {
     const free = started && me.alive && !me.escaped && !me.caught && !S.overlay && !S.capture;
     S.me.update(dt, free ? S.input.vector() : { x: 0, y: 0 }, S.map);
     const hidden = S.map.isBushAt(S.me.x, S.me.y - 4);
+    if (S.pet) S.pet.update(dt, S.me);
     // explore around me (minimap)
     const cx = Math.floor(S.me.x / 16), cy = Math.floor(S.me.y / 16);
     for (let y = cy - 6; y <= cy + 6; y++) for (let x = cx - 7; x <= cx + 7; x++) if (x >= 0 && y >= 0 && x < S.map.cols && y < S.map.rows) S.explored[S.map.idx(x, y)] = 1;
@@ -419,10 +425,11 @@ export function createFugaScene(game) {
       const k = Math.min(1, dt * 10);
       rm.p.x += (rm.tx - rm.p.x) * k; rm.p.y += (rm.ty - rm.p.y) * k;
       if (rm.p.moving) rm.p.animTime += dt; else rm.p.animTime = 0;
+      if (rm.pet) rm.pet.update(dt, rm.p);
     }
     // send my position: 5/s while moving, every 2 s when still (saves Realtime quota)
     S.sendT -= dt;
-    const pkt = { s: mySeat(), x: Math.round(S.me.x), y: Math.round(S.me.y), d: S.me.dir, m: S.me.moving ? 1 : 0, h: hidden ? 1 : 0, pl: S.plate };
+    const pkt = { s: mySeat(), x: Math.round(S.me.x), y: Math.round(S.me.y), d: S.me.dir, m: S.me.moving ? 1 : 0, h: hidden ? 1 : 0, pl: S.plate, pt: S.pet ? S.pet.def.id : '' };
     const sig = JSON.stringify(pkt);
     if (S.channel && S.sendT <= 0 && (sig !== S.lastSent || S.sendT < -2)) { S.channel.broadcast('pos', pkt); S.lastSent = sig; S.sendT = 0.2; }
     // enemies
@@ -506,10 +513,12 @@ export function createFugaScene(game) {
     const list = [];
     const showMe = me.alive && !me.escaped;
     if (showMe) list.push({ y: S.me.y, draw: (c) => drawPlayer(c, S.me, me, S.map.isBushAt(S.me.x, S.me.y - 4), '') });
+    if (showMe && S.pet) list.push({ y: S.pet.y, draw: (c) => S.pet.draw(c) });
     for (const rm of S.remotes.values()) {
       const info = S.room.players.find((p) => p.seat === rm.seat) || {};
       if (!info.alive || info.escaped || info.left) continue;
       list.push({ y: rm.p.y, draw: (c) => drawPlayer(c, rm.p, info, rm.hidden, info.nick) });
+      if (rm.pet) list.push({ y: rm.pet.y, draw: (c) => rm.pet.draw(c) });
     }
     for (const e of dir.enemies) list.push({ y: e.y, draw: (c) => drawEnemy(c, e, time) });
     list.sort((a, b) => a.y - b.y).forEach((x) => x.draw(ctx));

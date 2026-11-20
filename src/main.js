@@ -24,6 +24,7 @@ import { createArenaScene } from './scenes/arena.js';
 import { createOnlineScene } from './scenes/online.js';
 import { createFriendsScene } from './scenes/friends.js';
 import { createFugaScene } from './scenes/fuga.js';
+import { createPetsScene } from './scenes/pets.js';
 import { createCollectionScene } from './scenes/collection.js';
 import { createProfileScene } from './scenes/profile.js';
 import { createDailyScene } from './scenes/daily.js';
@@ -168,7 +169,7 @@ async function boot() {
   game.scenes.register('album', createAlbumScene);
   game.scenes.register('medals', createMedalsScene);
   game.scenes.register('avatar', createAvatarScene);
-  for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, online: createOnlineScene, friends: createFriendsScene, fuga: createFugaScene, collection: createCollectionScene, profile: createProfileScene, daily: createDailyScene, pass: createPassScene })) game.scenes.register(name, f);
+  for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, online: createOnlineScene, friends: createFriendsScene, fuga: createFugaScene, pets: createPetsScene, collection: createCollectionScene, profile: createProfileScene, daily: createDailyScene, pass: createPassScene })) game.scenes.register(name, f);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),

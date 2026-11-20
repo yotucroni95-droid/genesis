@@ -20,8 +20,10 @@ import * as lacunas from './lacunas.js';
 import * as santuario from './santuario.js';
 import * as quemdisse from './quemdisse.js';
 import * as pares from './pares.js';
+import * as labirinto from './labirinto.js';
+import * as armadura from './armadura.js';
 
-const REGISTRY = { quiz, memory, tictactoe, puzzle, ordem, vf, versiculo, cacapalavras, cesto, travessia, mana, sequencia, lacunas, santuario, quemdisse, pares };
+const REGISTRY = { quiz, memory, tictactoe, puzzle, ordem, vf, versiculo, cacapalavras, cesto, travessia, mana, sequencia, lacunas, santuario, quemdisse, pares, labirinto, armadura };
 
 export function getChallenge(type) {
   return REGISTRY[type] || soon;
