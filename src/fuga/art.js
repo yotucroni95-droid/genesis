@@ -149,7 +149,7 @@ export function paintMap(map, assets) {
     // tall landmarks (drawn by depth with the players)
     const land = { 'Torre de Vigia': 'fuga.torre', 'Portão do Éden': 'fuga.portao', 'Altar de Pedras': 'fuga.altar' }[r.name];
     if (land && img(land)) { const im = img(land); props.push({ im, sx: 0, sy: 0, w: im.width, h: im.height, x: cx - im.width / 2, y: (r.name === 'Portão do Éden' ? r.y + r.h - 1 : r.y + r.h / 2 + 1) * 16 - im.height }); }
-    if (r.deco === 'fountain' && img('fuga.fonte')) props.push({ im: img('fuga.fonte'), sx: 0, sy: 0, w: 64, h: 64, x: cx - 32, y: cy - 36, frames: 3 });
+    if (r.deco === 'fountain' && img('fuga.fonte')) props.push({ im: img('fuga.fonte'), sx: 0, sy: 0, w: 64, h: 64, x: cx - 32, y: cy - 36 });
   });
   // trees and bushes as props
   const treeArt = { Pomar: 'fuga.macieira', Oliveiras: 'fuga.oliveira', Vinha: 'fuga.parreira' };
