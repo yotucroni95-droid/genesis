@@ -87,6 +87,7 @@
 "src/game/codes.js",
 "src/game/economy.js",
 "src/game/event.js",
+"src/game/limits.js",
 "src/game/meta.js",
 "src/game/playtime.js",
 "src/game/sabbath.js",

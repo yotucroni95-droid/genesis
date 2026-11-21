@@ -44,6 +44,7 @@ import { createWelcomeScene } from './cloud/account-ui.js';
 import { createRankingScene } from './scenes/ranking.js';
 import { createSettingsScene, applyTextSize } from './scenes/settings.js';
 import { startPlaytime } from './game/playtime.js';
+import { startLimits } from './game/limits.js';
 
 const CONTENT_FILES = ['characters.json', 'chapters/index.json', 'maps/index.json'];
 
@@ -210,6 +211,7 @@ async function boot() {
   applyTextSize();
   startPlaytime(game.save);
   const sync = await Promise.race([startSync(game.save).catch(() => ({})), new Promise((r) => setTimeout(() => r({}), 5000))]);
+  startLimits(game.save);
   if (sync.pulled) setTimeout(() => toast('☁️ Progresso atualizado com a sua conta.', { ms: 3500 }), 1500);
   await game.scenes.go('title');
   loop.start();
