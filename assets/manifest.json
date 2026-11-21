@@ -3541,6 +3541,156 @@
    "color": "#3d5fa8",
    "label": "Estêvão",
    "group": "Retratos raros"
+  },
+  {
+   "id": "fuga.tiles",
+   "src": "maps/fuga_jardim_tiles.png",
+   "kind": "map",
+   "w": 128,
+   "h": 128,
+   "color": "#4c8a2e",
+   "label": "Tiles",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.macieira",
+   "src": "maps/props/macieira.png",
+   "kind": "map",
+   "w": 48,
+   "h": 64,
+   "color": "#4c8a2e",
+   "label": "Macieira",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.oliveira",
+   "src": "maps/props/oliveira.png",
+   "kind": "map",
+   "w": 48,
+   "h": 64,
+   "color": "#4c8a2e",
+   "label": "Oliveira",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.parreira",
+   "src": "maps/props/parreira.png",
+   "kind": "map",
+   "w": 32,
+   "h": 48,
+   "color": "#4c8a2e",
+   "label": "Parreira",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.praca",
+   "src": "maps/props/praca.png",
+   "kind": "map",
+   "w": 96,
+   "h": 96,
+   "color": "#4c8a2e",
+   "label": "Praca",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.altar",
+   "src": "maps/props/altar.png",
+   "kind": "map",
+   "w": 48,
+   "h": 48,
+   "color": "#4c8a2e",
+   "label": "Altar",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.lago",
+   "src": "maps/props/lago.png",
+   "kind": "map",
+   "w": 128,
+   "h": 32,
+   "color": "#4c8a2e",
+   "label": "Lago",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.portao",
+   "src": "maps/props/portao_eden.png",
+   "kind": "map",
+   "w": 96,
+   "h": 64,
+   "color": "#4c8a2e",
+   "label": "Portao",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.torre",
+   "src": "maps/props/torre.png",
+   "kind": "map",
+   "w": 48,
+   "h": 80,
+   "color": "#4c8a2e",
+   "label": "Torre",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.canteiros",
+   "src": "maps/props/canteiros.png",
+   "kind": "map",
+   "w": 128,
+   "h": 32,
+   "color": "#4c8a2e",
+   "label": "Canteiros",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.portal",
+   "src": "maps/props/portal.png",
+   "kind": "map",
+   "w": 128,
+   "h": 64,
+   "color": "#4c8a2e",
+   "label": "Portal",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.moita",
+   "src": "maps/props/moita.png",
+   "kind": "map",
+   "w": 64,
+   "h": 32,
+   "color": "#4c8a2e",
+   "label": "Moita",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.espinhos",
+   "src": "maps/props/espinhos.png",
+   "kind": "map",
+   "w": 128,
+   "h": 32,
+   "color": "#4c8a2e",
+   "label": "Espinhos",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.placa",
+   "src": "maps/props/placa.png",
+   "kind": "map",
+   "w": 96,
+   "h": 32,
+   "color": "#4c8a2e",
+   "label": "Placa",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.fonte",
+   "src": "maps/props/fonte.png",
+   "kind": "map",
+   "w": 192,
+   "h": 64,
+   "color": "#4c8a2e",
+   "label": "Fonte",
+   "group": "Fuga: Jardim do Éden"
   }
  ]
 }

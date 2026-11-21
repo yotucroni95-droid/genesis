@@ -6,6 +6,7 @@
 
 import { h } from '../ui/dom.js';
 import { ico } from '../ui/game-ui.js';
+import { FUGA_ART, paintMap, drawProp } from '../fuga/art.js';
 import { gameScreen } from '../ui/screen.js';
 import { iconButton } from '../ui/icon-button.js';
 import { toast } from '../ui/toast.js';
@@ -182,7 +183,10 @@ export function createFugaScene(game) {
     if (!S.alive) return;
     const r = S.room;
     S.map = new FugaMap();
-    S.baked = S.map.bake();
+    await Promise.all(FUGA_ART.map((id) => game.assets.ensure(id)));
+    if (!S.alive) return;
+    S.art = paintMap(S.map, game.assets);
+    S.baked = S.art ? S.art.ground : S.map.bake();
     S.playersAtStart = r.players.filter((p) => !p.left).length;
     S.tasks = roundTasks(S.map, r.seed, r.tasksTotal, S.pool, S.playersAtStart);
     S.director = new Director(S.map, r.seed, { difficulty: r.difficulty, kind: 'serpente' });
@@ -497,14 +501,22 @@ export function createFugaScene(game) {
     const time = performance.now() / 1000;
     // portal gate
     const ex = S.map.exit;
-    ctx.fillStyle = S.map.exitOpen ? `rgba(255,230,140,${0.5 + 0.3 * Math.sin(time * 4)})` : '#7a6420';
-    ctx.fillRect(ex.x * 16, (ex.y - 1) * 16, 16, 48);
+    if (!S.art || !S.art.portal) {
+      ctx.fillStyle = S.map.exitOpen ? `rgba(255,230,140,${0.5 + 0.3 * Math.sin(time * 4)})` : '#7a6420';
+      ctx.fillRect(ex.x * 16, (ex.y - 1) * 16, 16, 48);
+    }
     // temporary blockade (warning flashes first)
     const dir = S.director;
     if (dir.block) {
       const cells = S.map.blockers[dir.block.i].cells;
-      ctx.fillStyle = dir.block.warn > 0 ? `rgba(200,40,60,${0.25 + 0.25 * Math.sin(time * 12)})` : 'rgba(60,20,40,.85)';
-      for (const c of cells) ctx.fillRect((c % S.map.cols) * 16, Math.floor(c / S.map.cols) * 16, 16, 16);
+      const th = S.art && S.art.thorns;
+      if (th) { // thorns grow during the warning, then stay closed
+        const f = dir.block.warn > 0 ? Math.floor(time * 6) % 3 : 3;
+        for (const c of cells) ctx.drawImage(th, f * 32, 0, 32, 32, (c % S.map.cols) * 16 - 8, Math.floor(c / S.map.cols) * 16 - 16, 32, 32);
+      } else {
+        ctx.fillStyle = dir.block.warn > 0 ? `rgba(200,40,60,${0.25 + 0.25 * Math.sin(time * 12)})` : 'rgba(60,20,40,.85)';
+        for (const c of cells) ctx.fillRect((c % S.map.cols) * 16, Math.floor(c / S.map.cols) * 16, 16, 16);
+      }
     }
     // tasks (PROVISIONAL drawings until the art arrives)
     for (const t of S.tasks) {
@@ -527,6 +539,11 @@ export function createFugaScene(game) {
       if (rm.pet) list.push({ y: rm.pet.y, draw: (c) => rm.pet.draw(c) });
     }
     for (const e of dir.enemies) list.push({ y: e.y, draw: (c) => drawEnemy(c, e, time) });
+    if (S.art) {
+      const vw = d.width, vh = d.height;
+      for (const p of S.art.props) if (p.x < vx + vw && p.x + p.w > vx && p.y < vy + vh && p.y + p.h > vy) list.push({ y: p.y + p.h - 2, draw: (c) => drawProp(c, p, time) });
+      if (S.art.portal) { const open = S.map.exitOpen; list.push({ y: (ex.y + 2) * 16, draw: (c) => c.drawImage(S.art.portal, open ? 64 : 0, 0, 64, 64, ex.x * 16 - 24, (ex.y + 2) * 16 - 64, 64, 64) }); }
+    }
     list.sort((a, b) => a.y - b.y).forEach((x) => x.draw(ctx));
     ctx.restore();
     // temptation fog: only a small circle around you stays clear

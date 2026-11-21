@@ -1447,3 +1447,18 @@ p { line-height: 1.4; }
 .fuga__codebtn { min-height: 44px; }
 .fuga__back { align-self: center; }
 @media (max-height: 430px) { .fuga__card { min-height: 104px; } .fuga__lead { font-size: calc(12px * var(--fs, 1)); } }
+/* Fuga: HUD, captura, sala de espera e resultado com o mesmo acabamento */
+.fuga__hud { position: absolute; top: calc(var(--safe-top, 0px) + 6px); left: calc(var(--safe-left, 0px) + 8px); right: calc(var(--safe-right, 0px) + 8px); display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; pointer-events: none; }
+.fuga__hud > * { pointer-events: auto; }
+.fuga__hud .chip { min-height: 30px; padding: 2px 10px; font: 700 calc(12px * var(--fs, 1)) var(--font); background: rgba(7,10,28,.82); border: 2px solid var(--panel-edge); border-radius: 999px; white-space: nowrap; }
+.fuga__hud .fuga__stage { margin-left: auto; }
+.fuga__capture { position: absolute; inset: 0; max-width: none; margin: 0; align-items: center; padding: 12px; background: radial-gradient(circle at 50% 40%, rgba(90,10,30,.92), rgba(20,2,10,.97)); }
+.fuga__capture > * { width: min(560px, 100%); text-align: center; }
+.fuga__capture .quiz__q { color: #ffb3b3; font-size: calc(18px * var(--fs, 1)); margin: 0; }
+.fuga__question { margin: 0; padding: 10px 14px; border: 2px solid #c9a227; border-radius: 14px; background: #f6ecd2; color: #2b1a08; font-weight: 700; font-size: calc(15px * var(--fs, 1)); }
+.fuga__capture .quiz__opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.fuga__capture .bar { height: 10px; }
+.fuga__menu .friends__me { justify-content: center; }
+.fuga__menu .frows { width: min(520px, 100%); align-self: center; }
+.fuga__menu > .btn { align-self: center; min-width: 220px; }
+.quiz__result .frows { width: min(520px, 100%); }
