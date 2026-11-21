@@ -24,7 +24,7 @@ export function characterCard(assets, c, unlocked, { onClick, selected = false, 
       h('img', { class: 'pixel cc__face', src: portrait, alt: '' }),
       unlocked ? null : h('span', { class: 'cc__q', text: '?' }),
     ),
-    h('div', { class: 'cc__name', text: unlocked ? c.name : '???' }),
+    h('div', { class: `cc__name${unlocked && c.name.length > 12 ? ' is-xlong' : unlocked && c.name.length > 9 ? ' is-long' : ''}`, text: unlocked ? c.name : '???' }),
     h('div', { class: 'cc__virtue', text: unlocked ? c.virtue || '' : lockedLine }),
     unlocked && c.passage ? h('div', { class: 'cc__verse', text: c.passage }) : null,
   );

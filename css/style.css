@@ -1414,3 +1414,12 @@ p { line-height: 1.4; }
 .lobby__fuga b { font-size: calc(18px * var(--fs, 1)); }
 .lobby__fuga small { font-size: calc(11px * var(--fs, 1)); }
 .lobby__sabbath { margin: 0; padding: 2px 10px; }
+/* names always fit: rank in the top bar, pair buttons, character cards */
+.lobby__top .lobby__rank { flex-shrink: 0; overflow: visible; }
+.lobby__top .lobby__rank .rank__name { font-size: calc(11px * var(--fs, 1)); }
+.lobby__pair .lobby__btn { font-size: calc(12px * var(--fs, 1)); padding: 6px 6px; }
+.lobby__pair .lobby__icon { width: 22px; height: 22px; }
+.cc { container-type: inline-size; }
+.cc__name { max-width: 100%; white-space: nowrap; font-size: min(calc(13px * var(--fs, 1)), 14cqi); }
+.cc__name.is-long { font-size: min(calc(13px * var(--fs, 1)), 10.5cqi); }
+.cc__name.is-xlong { font-size: min(calc(13px * var(--fs, 1)), 8.6cqi); }
