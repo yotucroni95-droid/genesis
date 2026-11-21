@@ -21,7 +21,7 @@ const CATALOG = [
   ['Fragmentos do pergaminho', 'colher'], ['Pedras do memorial', 'colher'], ['Sementes perdidas', 'colher'],
   ['Alavancas do portão', 'ativar'], ['Pedras de apoio', 'ativar'], ['Lâmpadas gêmeas', 'ativar'], ['Selos da aliança', 'ativar'],
 ];
-const LIGHT = { quiz: { count: 3, minScore: 2 }, ordem: { count: 4 }, versiculo: { count: 2 }, vf: { count: 4 }, lacunas: { count: 2 }, cacapalavras: { count: 3 }, sequencia: { goal: 4 }, tictactoe: { difficulty: 0.2 }, mana: { goal: 8, seconds: 20 }, cesto: { seconds: 18 } };
+const LIGHT = { quiz: { count: 3, minScore: 2 }, ordem: { count: 4 }, versiculo: { count: 2 }, vf: { count: 4 }, lacunas: { count: 2 }, cacapalavras: { count: 2, hard: false }, sequencia: { goal: 4 }, tictactoe: { difficulty: 0.2 }, mana: { goal: 8, seconds: 20 }, cesto: { seconds: 18 } };
 
 export const catalogSize = () => CATALOG.length;
 

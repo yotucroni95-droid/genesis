@@ -312,7 +312,7 @@ export function createFugaScene(game) {
     for (const t of S.tasks) {
       if (t.done) continue;
       if (t.kind === 'colher' && Math.hypot(t.x - S.me.x, t.y - S.me.y) < 120) {
-        for (const b of t.bits) if (!b.got && Math.hypot(b.x - S.me.x, b.y - S.me.y + 4) < 12) { b.got = true; sfx('scroll'); }
+        for (const b of t.bits) if (!b.got && Math.hypot(b.x - S.me.x, b.y - S.me.y + 4) < 17) { b.got = true; sfx('scroll'); }
         if (t.bits.every((b) => b.got)) finishTask(t);
       }
       if (t.kind === 'ativar') {
