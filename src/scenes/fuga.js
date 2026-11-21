@@ -554,6 +554,13 @@ export function createFugaScene(game) {
     }
     list.sort((a, b) => a.y - b.y).forEach((x) => x.draw(ctx));
     ctx.restore();
+    // soft vignette + warm light: one mood for the whole garden
+    if (!S.vig || S.vig.w !== d.width || S.vig.h !== d.height) {
+      const v = ctx.createRadialGradient(d.width / 2, d.height * 0.45, Math.min(d.width, d.height) * 0.35, d.width / 2, d.height / 2, Math.max(d.width, d.height) * 0.75);
+      v.addColorStop(0, 'rgba(255,214,140,0.06)'); v.addColorStop(0.6, 'rgba(10,20,30,0)'); v.addColorStop(1, 'rgba(6,10,24,0.45)');
+      S.vig = { w: d.width, h: d.height, g: v };
+    }
+    ctx.fillStyle = S.vig.g; ctx.fillRect(0, 0, d.width, d.height);
     // temptation fog: only a small circle around you stays clear
     if (dir.fog > 0) {
       const g = ctx.createRadialGradient(d.width / 2, d.height / 2, 30, d.width / 2, d.height / 2, d.width * 0.6);
@@ -594,7 +601,7 @@ export function createFugaScene(game) {
 
   function drawMinimap(ctx, d) {
     const m = S.map, sz = Math.round(Math.min(72, d.height * 0.3)), k = sz / m.cols;
-    const x0 = d.width - sz - 14, y0 = 56;
+    const x0 = d.width - sz - 16, y0 = 66;
     ctx.fillStyle = 'rgba(5,7,26,.75)';
     ctx.fillRect(x0 - 2, y0 - 2, sz + 4, sz + 4);
     const frame = S.art && S.art.frame;

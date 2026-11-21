@@ -24,45 +24,102 @@ export function paintMap(map, assets) {
   const plazaRoom = map.rooms.findIndex((r) => r.deco === 'plaza');
   const props = [];
   const roomOf = (x, y) => map.rooms.findIndex((r) => x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h);
-  // seamless ground: flat colour + speckles (the generated grass tiles show a grid)
-  const speck = (x, y, base, dots) => {
-    g.fillStyle = base; g.fillRect(x * 16, y * 16, 16, 16);
-    for (let k = 0; k < 5; k++) { g.fillStyle = dots[(R() * dots.length) | 0]; g.fillRect(x * 16 + ((R() * 15) | 0), y * 16 + ((R() * 15) | 0), 2, R() < 0.5 ? 1 : 2); }
+  // ---- painted ground (pixel by pixel): grass patches, dirt paths with ragged
+  // edges, paved square, forest floor; boundaries are slightly warped so
+  // nothing looks cut with a ruler (collision still uses the tiles).
+  const W = map.pixelW, H = map.pixelH;
+  const hash = (x, y) => { let h = Math.imul(x, 374761393) + Math.imul(y, 668265263); h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; };
+  const noise = (x, y) => { // smooth value noise 0..1
+    const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
+    const u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf);
+    const a = hash(xi, yi), b = hash(xi + 1, yi), c2 = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
+    return a + (b - a) * u + (c2 - a) * v + (a - b - c2 + d) * u * v;
   };
-  const PETAL = ['#ffffff', '#ffd84a', '#ff8fbf', '#ff5a5a', '#8fc8ff'];
-  const flower = (x, y, n) => {
-    for (let k = 0; k < n; k++) {
-      const px = x * 16 + 2 + ((R() * 11) | 0), py = y * 16 + 2 + ((R() * 11) | 0);
-      g.fillStyle = '#2f6a1e'; g.fillRect(px + 1, py + 3, 1, 2);
-      g.fillStyle = PETAL[(R() * PETAL.length) | 0]; g.fillRect(px, py + 1, 3, 1); g.fillRect(px + 1, py, 1, 3);
-      g.fillStyle = '#f7c531'; g.fillRect(px + 1, py + 1, 1, 1);
-    }
+  const hex = (s) => [parseInt(s.slice(1, 3), 16), parseInt(s.slice(3, 5), 16), parseInt(s.slice(5, 7), 16)];
+  const PAL = {
+    grass: ['#3f7d2b', '#4c8f31', '#5aa037', '#69b03f', '#7cc04a'].map(hex),
+    dirt: ['#8a5a32', '#9c6a3b', '#ad7b46', '#bd8c53', '#cba066'].map(hex),
+    pave: ['#9d8862', '#b19c74', '#c2ad83', '#d2bf96'].map(hex),
+    forest: ['#0f2413', '#132c17', '#17341b'].map(hex),
+    shore: ['#b9a26a', '#c9b27a', '#d8c28c', '#e3d09c'].map(hex),
   };
-  const GRASS_C = ['#6fb23c', '#4f8f2a', '#7cc246', '#5a9a30'];
+  const MAT = { GRASS: 0, DIRT: 1, PAVE: 2, FOREST: 3, WATER: 4, SHORE: 5 };
+  const nearWater = (tx, ty) => [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]].some(([a, b]) => map.get(tx + a, ty + b) === T.WATER);
+  const matAt = (px, py) => {
+    const tx = Math.max(0, Math.min(map.cols - 1, px >> 4)), ty = Math.max(0, Math.min(map.rows - 1, py >> 4));
+    const t = map.get(tx, ty);
+    if (t === T.WALL) return MAT.FOREST;
+    if (t === T.WATER) return MAT.WATER;
+    if (roomOf(tx, ty) === plazaRoom) return MAT.PAVE;
+    if (t === T.PATH || t === T.GATE) return MAT.DIRT;
+    if (nearWater(tx, ty)) return MAT.SHORE;
+    return MAT.GRASS;
+  };
+  const im = g.createImageData(W, H), D = im.data;
+  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+    // warp the lookup a few pixels: organic borders between materials
+    const wx = (noise(x / 7, y / 7) - 0.5) * 9, wy = (noise(x / 7 + 40, y / 7 + 40) - 0.5) * 9;
+    let m = matAt((x + wx) | 0, (y + wy) | 0);
+    const real = matAt(x, y);
+    if (real === MAT.WATER || m === MAT.WATER) m = real; // water keeps its exact shape (tiles drawn later)
+    const patch = noise(x / 46, y / 46) * 0.7 + noise(x / 13, y / 13) * 0.3, dith = hash(x, y) - 0.5;
+    let col;
+    if (m === MAT.GRASS) { const p = PAL.grass; col = p[Math.max(0, Math.min(p.length - 1, Math.floor(patch * p.length + dith * 1.1)))]; }
+    else if (m === MAT.DIRT) { const p = PAL.dirt; col = p[Math.max(0, Math.min(p.length - 1, Math.floor(patch * p.length + dith * 1.3)))]; }
+    else if (m === MAT.PAVE) {
+      const row = y >> 3, off = (row & 1) * 8, edge = (y & 7) === 0 || ((x + off) & 15) === 0;
+      const p = PAL.pave; col = edge ? [128, 106, 72] : p[Math.max(0, Math.min(p.length - 1, Math.floor(hash(((x + off) >> 4), row) * 2 + 1 + dith * 0.8)))];
+    } else if (m === MAT.FOREST) { const p = PAL.forest; col = p[Math.max(0, Math.min(2, Math.floor(patch * 3 + dith)))]; }
+    else col = [46, 110, 176];
+    const i = (y * W + x) * 4;
+    D[i] = col[0]; D[i + 1] = col[1]; D[i + 2] = col[2]; D[i + 3] = 255;
+  }
+  g.putImageData(im, 0, 0);
+  // small details on grass: tufts, pebbles, flowers
+  const PETAL = ['#ffffff', '#ffd84a', '#ff8fbf', '#ff6a6a', '#9fd0ff'];
   for (let y = 0; y < map.rows; y++) for (let x = 0; x < map.cols; x++) {
     const t = map.get(x, y);
-    if (t === T.WALL) {
-      speck(x, y, '#244a1c', ['#1b3a15', '#2f5d22', '#1f4218']);
-      if (map.get(x, y + 1) !== T.WALL) tile(1, 1, x, y); // hedge face toward the walkable side
-      continue;
+    if (t === T.WATER) { tile(...pick([[0, 2], [1, 2]]), x, y); if (map.get(x, y - 1) !== T.WATER) tile(2, 2, x, y); continue; }
+    if (t !== T.FLOOR && t !== T.FLOWER && t !== T.TREE && t !== T.BUSH) continue;
+    if (roomOf(x, y) === plazaRoom) continue;
+    const n = t === T.FLOWER ? 4 : 2;
+    for (let k = 0; k < n; k++) {
+      const px = x * 16 + ((R() * 14) | 0), py = y * 16 + ((R() * 14) | 0), r = R();
+      if (t === T.FLOWER || r < 0.12) { // flower
+        g.fillStyle = '#2b5e1c'; g.fillRect(px + 1, py + 2, 1, 2);
+        g.fillStyle = PETAL[(R() * PETAL.length) | 0]; g.fillRect(px, py, 3, 1); g.fillRect(px + 1, py - 1, 1, 3);
+        g.fillStyle = '#f2b72a'; g.fillRect(px + 1, py, 1, 1);
+      } else if (r < 0.75) { // tuft
+        g.fillStyle = '#2f6a22'; g.fillRect(px, py + 1, 1, 2); g.fillRect(px + 2, py, 1, 3); g.fillRect(px + 4, py + 1, 1, 2);
+        g.fillStyle = '#8fd05a'; g.fillRect(px + 2, py, 1, 1);
+      } else if (r < 0.85) { // pebble
+        g.fillStyle = '#8d8a7a'; g.fillRect(px, py, 2, 1); g.fillStyle = '#c9c4ae'; g.fillRect(px, py - 1, 1, 1);
+      }
     }
-    if (roomOf(x, y) === plazaRoom && (t === T.PATH || t === T.FLOOR)) { // paved square
-      speck(x, y, '#cdb88c', ['#bfa877', '#d9c79e', '#b49c6c']);
-      g.fillStyle = 'rgba(90,64,30,.35)'; g.fillRect(x * 16, y * 16, 16, 1); g.fillRect(x * 16, y * 16, 1, 16);
-      continue;
-    }
-    if (t === T.PATH) {
-       speck(x, y, '#b9824a', ['#a46f3c', '#c99460', '#946234']);
-      continue;
-    }
-    if (t === T.WATER) {
-      tile(...pick([[0, 2], [1, 2]]), x, y);
-      if (map.get(x, y - 1) !== T.WATER) tile(2, 2, x, y);
-      continue;
-    }
-    speck(x, y, '#62a535', GRASS_C);
-    if (t === T.FLOWER || (t === T.FLOOR && R() < 0.04)) flower(x, y, t === T.FLOWER ? 3 : 1);
-    else if (t === T.GATE) tile(1, 3, x, y);
+  }
+  // soft shade along the forest edge, then the forest canopy (dense round trees)
+  for (let y = 0; y < map.rows; y++) for (let x = 0; x < map.cols; x++) {
+    if (map.get(x, y) === T.WALL || map.get(x, y) === T.WATER) continue;
+    if (map.get(x, y - 1) === T.WALL) { g.fillStyle = 'rgba(8,20,10,.32)'; g.fillRect(x * 16, y * 16, 16, 7); g.fillStyle = 'rgba(8,20,10,.18)'; g.fillRect(x * 16, y * 16 + 7, 16, 5); }
+    if (map.get(x - 1, y) === T.WALL) { g.fillStyle = 'rgba(8,20,10,.22)'; g.fillRect(x * 16, y * 16, 5, 16); }
+  }
+  const disc = (cx, cy, r, col) => { g.fillStyle = col; for (let dy = -r; dy <= r; dy++) { const w = Math.floor(Math.sqrt(r * r - dy * dy)); g.fillRect(cx - w, cy + dy, w * 2 + 1, 1); } };
+  const crowns = [];
+  for (let y = 0; y < H; y += 11) for (let x = 0; x < W; x += 11) {
+    const jx = x + ((hash(x, y + 7) - 0.5) * 8) | 0, jy = y + ((hash(x + 3, y) - 0.5) * 8) | 0;
+    if (matAt(jx, jy) !== MAT.FOREST) continue;
+    crowns.push([jx, jy, 8 + ((hash(jx, jy) * 6) | 0), hash(jy, jx)]);
+  }
+  crowns.sort((p, q) => p[1] - q[1]);
+  const SH = [['#0c1f10', '#1f4a22', '#2c6029', '#3f7a32', '#5c9a3e'], ['#0c1f10', '#1d4526', '#28582f', '#3a7038', '#548c45'], ['#0c1f10', '#244d1e', '#336624', '#4a822c', '#6aa23c']];
+  for (const [x, y, r, k] of crowns) {
+    const s = SH[(k * 3) | 0];
+    g.fillStyle = 'rgba(0,0,0,.25)'; disc(x + 2, y + 4, r, 'rgba(0,0,0,.22)');
+    disc(x, y, r, s[0]); disc(x, y, r - 1, s[1]); disc(x - 1, y - 1, r - 3, s[2]); disc(x - 2, y - 3, Math.max(2, r - 6), s[3]);
+    disc(x - 3, y - 4, Math.max(1, r - 9), s[4]);
+  }
+  for (let y = 0; y < map.rows; y++) for (let x = 0; x < map.cols; x++) {
+    if (map.get(x, y) === T.GATE) tile(1, 3, x, y);
   }
   // flat decorations baked into the ground
   map.rooms.forEach((r, i) => {
@@ -71,7 +128,7 @@ export function paintMap(map, assets) {
     if (r.deco === 'lake' && img('fuga.lago')) {
       for (let n = 0; n < 7; n++) {
         const x = r.x + 5 + ((R() * (r.w - 10)) | 0), y = r.y + 5 + ((R() * (r.h - 10)) | 0);
-        if (map.get(x, y) === T.WATER) g.drawImage(img('fuga.lago'), ((R() * 4) | 0) * 32, 0, 32, 32, x * 16 - 8, y * 16 - 8, 32, 32);
+        if ([[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]].every(([a, b]) => map.get(x + a, y + b) === T.WATER)) g.drawImage(img('fuga.lago'), ((R() * 4) | 0) * 32, 0, 32, 32, x * 16 - 8, y * 16 - 8, 32, 32);
       }
     }
     if (r.deco === 'flowers' && img('fuga.canteiros')) {
