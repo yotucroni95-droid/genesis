@@ -33,7 +33,7 @@ export class Pet {
 
   /** owner: {x, y, dir} — the pet aims for a spot just behind the owner. */
   update(dt, owner) {
-    const back = [[13, -5], [13, -2], [-13, -2], [-11, 8]][owner.dir || 0]; // beside and a bit behind, never hidden under the owner
+    const back = [[16, 2], [16, 1], [-16, 1], [-14, 10]][owner.dir || 0]; // beside and a bit behind, never hidden under the owner
     const gx = owner.x + back[0], gy = owner.y + back[1];
     const dx = gx - this.x, dy = gy - this.y, d = Math.hypot(dx, dy);
     if (d > 160) { this.x = gx; this.y = gy; } // teleported owner: don't run across the map
@@ -51,7 +51,7 @@ export class Pet {
   draw(c) {
     const hop = this.party > 0 ? -Math.abs(Math.sin(this.t * 12)) * 6 : this.moving ? -Math.abs(Math.sin(this.t * 10)) * 1.5 : 0;
     c.fillStyle = 'rgba(0,0,0,.2)';
-    c.fillRect(Math.round(this.x - 5), Math.round(this.y - 1), 10, 2);
+    c.fillRect(Math.round(this.x - 4), Math.round(this.y - 1), 8, 2);
     const img = this.sheet && this.sheet.image && !this.sheet.placeholder ? this.sheet.image : null;
     if (img) {
       const f = 32, frame = Math.floor(this.t * 8) % 4;
@@ -59,11 +59,13 @@ export class Pet {
       c.save();
       c.translate(Math.round(this.x), Math.round(this.y + hop));
       if (this.moving && this.dir === 1) c.scale(-1, 1); // the side row faces right
-      c.drawImage(img, frame * f, row * f, f, f, -f / 2, -f + 2, f, f);
+      const s = 20; // drawn smaller than the 32 px frame: a pet is about half the owner's height
+      c.imageSmoothingEnabled = false;
+      c.drawImage(img, frame * f, row * f, f, f, -s / 2, -s + 1, s, s);
       c.restore();
       return;
     }
-    c.font = '18px serif'; c.textAlign = 'center'; c.textBaseline = 'alphabetic'; c.fillStyle = '#fff'; // emoji take the fill alpha
+    c.font = '13px serif'; c.textAlign = 'center'; c.textBaseline = 'alphabetic'; c.fillStyle = '#fff'; // emoji take the fill alpha
     c.fillText(this.def.emoji || '🐾', Math.round(this.x), Math.round(this.y + hop));
     if (this.still > 3 && this.party <= 0) { c.fillStyle = '#fff'; c.font = '6px sans-serif'; c.fillText('z', this.x + 7, this.y - 10 - (this.t % 1) * 3); }
   }

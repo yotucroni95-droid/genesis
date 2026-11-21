@@ -194,7 +194,7 @@ export function createArenaScene(game) {
             ),
             h('div', { style: { display: 'flex', gap: '10px' } },
               h('button', { class: 'btn', text: duel ? 'Revanche' : 'Jogar de novo', onClick: play }),
-              h('button', { class: 'btn btn--share', text: '📲 Desafiar amigos', onClick: () => shareCard(game, {
+              h('button', { class: 'btn btn--share', text: 'Desafiar amigos', onClick: () => shareCard(game, {
                 headline: `Fiz ${score} pontos na Arena do Gênesis! Duvido você bater!`,
                 link: `?desafio=${seed}.${score}.${encodeURIComponent(save.state.nick)}`,
               }) }),

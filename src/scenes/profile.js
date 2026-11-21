@@ -46,7 +46,7 @@ export function createProfileScene(game) {
             h('h2', { text: `@${s.nick}` }),
             h('p', { class: 'profile-card__title', text: (game.extras.cosmetics.titles.find((x) => x.id === s.equipped.title) || {}).name || '' }),
             h('div', { style: { display: 'flex', gap: '8px', flexWrap: 'wrap' } },
-              h('button', { class: 'btn btn--small btn--share', text: '📲 Compartilhar no WhatsApp', onClick: () => shareCard(game) }),
+              h('button', { class: 'btn btn--small btn--share', text: 'Compartilhar no WhatsApp', onClick: () => shareCard(game) }),
               h('button', { class: 'btn btn--ghost btn--small', text: 'Trocar apelido', onClick: () => game.scenes.go('nickname', { next: 'profile' }) }),
             ),
           ),

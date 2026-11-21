@@ -43,7 +43,7 @@ export function showSabbath() {
   const close = () => el.remove();
   const el = document.createElement('div');
   el.className = 'modal sabbath';
-  el.innerHTML = `<div class="modal__box sabbath__box"><div class="sabbath__dove">🕊️</div>
+  el.innerHTML = `<div class="modal__box sabbath__box"><img class="pixel sabbath__dove" src="assets/ui/sabado_pomba.png" alt="">
     <h2>Feliz sábado!</h2><p></p><p class="sabbath__verse"></p>
     <p class="sabbath__when"></p><button class="btn btn--play"><b>Voltar</b></button></div>`;
   const [p, verse, when] = el.querySelectorAll('p');

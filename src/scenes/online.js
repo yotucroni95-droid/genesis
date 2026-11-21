@@ -178,7 +178,7 @@ export function createOnlineScene(game) {
             ...room.players.filter((p) => p.team === t).map((p) => h('b', { text: p.seat === room.me ? 'Você' : `@${p.nick}` }))))) : null,
           h('p', { class: 'online__wait', text: missing > 1 ? `Esperando mais ${missing} jogadores…` : duo() ? 'Falta 1 jogador…' : 'Esperando o amigo…' }),
           h('div', { class: 'online__row' },
-            h('button', { class: 'btn btn--share', text: '📲 Convidar', onClick: invite }),
+            h('button', { class: 'btn btn--share', text: 'Convidar', onClick: invite }),
             h('button', { class: 'btn btn--ghost', text: 'Cancelar', onClick: () => { leaveRoom(room.code); forgetRoom(); menu(); } }),
           ),
         ));

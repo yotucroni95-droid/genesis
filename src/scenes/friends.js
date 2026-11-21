@@ -37,7 +37,7 @@ export function createFriendsScene(game) {
         h('img', { class: 'pixel friend__face', src: portrait(p.avatar), alt: '' }),
         h('div', { class: 'friend__info' },
           h('b', { text: `@${p.nick}` }),
-          h('small', { text: `${p.online ? '🟢 online' : '⚪ offline'} · nível ${p.level || 1}` })),
+          h('small', {}, h('span', { class: `aico aico--${p.online ? 0 : 1}`, 'aria-hidden': 'true' }), `${p.online ? 'online' : 'offline'} · nível ${p.level || 1}`)),
         rankBadge(p.trophies || 0),
         h('div', { class: 'friend__actions' }, ...actions));
       const act = (text, cls, fn) => h('button', { class: `btn btn--small ${cls}`, text, onClick: async (e) => {
@@ -80,11 +80,11 @@ export function createFriendsScene(game) {
       let filter = '';
       const row = (p) => {
         const menu = h('details', { class: 'frow__menu' },
-          h('summary', { class: 'frow__more', 'aria-label': `Ações para @${p.nick}`, text: '⋯' }),
+          h('summary', { class: 'frow__more', 'aria-label': `Ações para @${p.nick}` }, h('span', { class: 'aico aico--7', 'aria-hidden': 'true' })),
           h('div', { class: 'frow__pop' },
-            h('button', { class: 'btn btn--small btn--online', text: '⚡ Desafiar 1x1', onClick: () => challenge(p, '1x1') }),
-            h('button', { class: 'btn btn--small btn--online', text: '👥 Convidar 2x2', onClick: () => challenge(p, '2x2') }),
-            h('button', { class: 'btn btn--small', text: '🏃 Convidar para a Fuga', onClick: () => inviteFuga(p) }),
+            h('button', { class: 'btn btn--small btn--online', onClick: () => challenge(p, '1x1') }, h('span', { class: 'aico aico--3', 'aria-hidden': 'true' }), 'Desafiar 1x1'),
+            h('button', { class: 'btn btn--small btn--online', onClick: () => challenge(p, '2x2') }, h('span', { class: 'aico aico--4', 'aria-hidden': 'true' }), 'Convidar 2x2'),
+            h('button', { class: 'btn btn--small', onClick: () => inviteFuga(p) }, h('span', { class: 'aico aico--5', 'aria-hidden': 'true' }), 'Convidar para a Fuga'),
             act('Remover', 'btn--ghost', () => (confirm(`Remover @${p.nick} dos amigos?`) ? removeFriend(p.tag) : null))));
         return h('li', { class: `frow${p.online ? ' is-online' : ''}` },
           h('img', { class: 'pixel frow__face', src: portrait(p.avatar), alt: '' }),
@@ -126,7 +126,7 @@ export function createFriendsScene(game) {
           ...(state.friends.sort((a, b) => Number(b.online) - Number(a.online) || String(a.nick).localeCompare(String(b.nick))), state.friends.length
             ? friendList() : [h('p', { class: 'screen__note', text: 'Pesquise pelo apelido ou pelo código de amigo e mande um pedido.' })]),
           h('h3', { class: 'friends__title', text: 'Encontrar jogadores' }),
-          h('div', { class: 'online__row' }, input, h('button', { class: 'btn', text: '🔍 Pesquisar', onClick: search })),
+          h('div', { class: 'online__row' }, input, h('button', { class: 'btn', onClick: search }, h('span', { class: 'aico aico--2', 'aria-hidden': 'true' }), 'Pesquisar')),
           results ? (results.length ? h('div', { class: 'friends__list' }, ...results.map((p) => card(p,
             known.has(p.tag) ? h('span', { class: 'tag', text: state.friends.some((f) => f.tag === p.tag) ? 'Amigo' : 'Pedido enviado' })
               : act('Adicionar', '', () => requestFriend(p.tag).then(() => toast(`Pedido enviado para @${p.nick}!`)))))) : h('p', { class: 'screen__note', text: 'Ninguém encontrado com esse nome.' })) : null,

@@ -1502,3 +1502,13 @@ p { line-height: 1.4; }
 .labi__cell { background: #c9ae84; border-width: 4px; }
 .labi__cell.t { border-top-color: #2f7a22; } .labi__cell.r { border-right-color: #2f7a22; } .labi__cell.b { border-bottom-color: #2f7a22; } .labi__cell.l { border-left-color: #2f7a22; }
 .labi__grid { background: #c9ae84; border: 4px solid #2f7a22; box-shadow: 0 0 0 2px #14251a, inset 0 0 0 1px #1d4d16; }
+/* Ícones I1–I9 */
+.aico { display: inline-block; width: 18px; height: 18px; margin-right: 5px; vertical-align: -4px; background: url('../assets/ui/amigos_icons.png') 0 0 / 144px 18px no-repeat; image-rendering: pixelated; }
+.aico--1 { background-position: -18px 0; } .aico--2 { background-position: -36px 0; } .aico--3 { background-position: -54px 0; } .aico--4 { background-position: -72px 0; } .aico--5 { background-position: -90px 0; } .aico--6 { background-position: -108px 0; } .aico--7 { background-position: -126px 0; }
+.frow__more .aico { margin: 0; width: 22px; height: 22px; background-size: 176px 22px; background-position: -154px 0; }
+.btn--share::before { content: ''; display: inline-block; width: 20px; height: 20px; margin-right: 6px; vertical-align: -4px; background: url('../assets/icons/celular.png') center / contain no-repeat; image-rendering: pixelated; }
+.lobby__fuga b { display: inline-flex; align-items: center; gap: 6px; }
+.lobby__fugaico { width: 22px; height: 22px; }
+.lobby__sabbath { display: inline-flex; align-items: center; gap: 6px; }
+.lobby__sabico { width: 18px; height: 18px; }
+.sabbath__dove { width: 64px; height: 64px; image-rendering: pixelated; font-size: 0; }

@@ -4224,6 +4224,76 @@
    "color": "#c9a227",
    "label": "Grande Peixe de Jonas",
    "group": "Pets (retratos)"
+  },
+  {
+   "id": "icon.amigos",
+   "src": "icons/amigos.png",
+   "kind": "icon",
+   "w": 32,
+   "h": 32,
+   "color": "#ffd36e",
+   "label": "Amigos",
+   "group": "Ícones (Fase 2)"
+  },
+  {
+   "id": "icon.fuga",
+   "src": "icons/fuga.png",
+   "kind": "icon",
+   "w": 32,
+   "h": 32,
+   "color": "#ffd36e",
+   "label": "Fuga",
+   "group": "Ícones (Fase 2)"
+  },
+  {
+   "id": "icon.celular",
+   "src": "icons/celular.png",
+   "kind": "icon",
+   "w": 32,
+   "h": 32,
+   "color": "#ffd36e",
+   "label": "Celular",
+   "group": "Ícones (Fase 2)"
+  },
+  {
+   "id": "icon.sabado",
+   "src": "icons/sabado.png",
+   "kind": "icon",
+   "w": 32,
+   "h": 32,
+   "color": "#ffd36e",
+   "label": "Sabado",
+   "group": "Ícones (Fase 2)"
+  },
+  {
+   "id": "icon.pets",
+   "src": "icons/pets.png",
+   "kind": "icon",
+   "w": 32,
+   "h": 32,
+   "color": "#ffd36e",
+   "label": "Pets",
+   "group": "Ícones (Fase 2)"
+  },
+  {
+   "id": "icon.labirinto",
+   "src": "icons/labirinto.png",
+   "kind": "icon",
+   "w": 32,
+   "h": 32,
+   "color": "#ffd36e",
+   "label": "Labirinto",
+   "group": "Ícones (Fase 2)"
+  },
+  {
+   "id": "icon.armadura",
+   "src": "icons/armadura.png",
+   "kind": "icon",
+   "w": 32,
+   "h": 32,
+   "color": "#ffd36e",
+   "label": "Armadura",
+   "group": "Ícones (Fase 2)"
   }
  ]
 }
