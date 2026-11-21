@@ -37,9 +37,9 @@ export async function planChallenge(game, chapter, stop, { hero = false } = {}) 
 
   switch (type) {
     case 'quiz':
-      return { type, config: { pool: bank.quiz || original.config.questions || [], count: hero ? 7 : 5, minScore: hero ? 5 : 3, timer: hero ? 12 : level >= 2 ? 20 : 0 } };
+      return { type, config: { pool: bank.quiz || original.config.questions || [], count: hero ? 7 : 5, minScore: hero ? 5 : 3, timer: hero ? 16 : level >= 2 ? 25 : 0 } };
     case 'vf':
-      return { type, config: { items: bank.vf || [], count: hero ? 8 : 6, seconds: hero ? 4 : Math.max(5, 8 - level) } };
+      return { type, config: { items: bank.vf || [], count: hero ? 8 : 6, seconds: hero ? 7 : Math.max(8, 11 - level) } };
     case 'ordem':
       return { type, config: { ...pick(bank.ordem || [{ title: 'Ordem', items: [] }]), count: hero ? 7 : 4 + Math.min(1, level) } };
     case 'cacapalavras':

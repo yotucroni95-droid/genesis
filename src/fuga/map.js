@@ -127,12 +127,23 @@ export class FugaMap {
   inExit(px, py) { return px / 16 >= this.exit.x + 1.5 && Math.abs(py / 16 - (this.exit.y + 0.5)) < 2; }
   center(i) { const r = this.rooms[i]; return { x: (r.x + r.w / 2) * 16, y: (r.y + r.h / 2) * 16 }; }
 
+  /** True when tall art (tree crowns, buildings) is drawn over this tile: items there can't be seen. */
+  behindArt(x, y) {
+    const r = this.rooms[this.roomAt(x * 16 + 8, y * 16 + 8)];
+    const tall = r && (r.deco === 'trees' || r.deco === 'rows');
+    for (let k = 1; k <= 4; k++) {
+      if (tall && k <= 3 && this.get(x, y + k) === T.TREE) return true;
+      if (this.solid[this.idx(x, Math.min(this.rows - 1, y + k))]) return true;
+    }
+    return false;
+  }
+
   /** Free floor tiles of a room, away from walls (for stations, fragments, spawns). */
   spots(i, margin = 2) {
     const r = this.rooms[i], out = [];
     for (let y = r.y + margin; y < r.y + r.h - margin; y++) for (let x = r.x + margin; x < r.x + r.w - margin; x++) {
       const t = this.get(x, y);
-      if ((t === T.FLOOR || t === T.PATH || t === T.FLOWER) && !this.isSolidTile(x, y) && !this.isSolidTile(x, y + 1) && !this.isSolidTile(x, y - 1)) out.push({ x, y });
+      if ((t === T.FLOOR || t === T.PATH || t === T.FLOWER) && !this.behindArt(x, y) && !this.isSolidTile(x, y) && !this.isSolidTile(x, y + 1) && !this.isSolidTile(x, y - 1)) out.push({ x, y });
     }
     return out;
   }

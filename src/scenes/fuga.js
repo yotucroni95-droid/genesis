@@ -577,7 +577,16 @@ export function createFugaScene(game) {
     c.restore();
     if (info.protected) { c.strokeStyle = 'rgba(255,215,90,.9)'; c.beginPath(); c.ellipse(p.x, p.y - 12, 12, 16, 0, 0, 7); c.stroke(); }
     if (info.caught) { c.fillStyle = '#ff5a6a'; c.fillRect(p.x - 1, p.y - 38, 2, 6); c.fillRect(p.x - 1, p.y - 30, 2, 2); }
-    if (nick) { c.font = '6px sans-serif'; c.textAlign = 'center'; c.fillStyle = 'rgba(0,0,0,.6)'; c.fillText(nick, p.x + 0.5, p.y - 33.5); c.fillStyle = '#fff'; c.fillText(nick, p.x, p.y - 34); }
+    if (nick) { // name tag: bold, outlined, on a soft pill
+      c.save();
+      c.font = 'bold 8px "Pixelify Sans", system-ui, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      const w = Math.ceil(c.measureText(nick).width) + 8, x = Math.round(p.x), y = Math.round(p.y - 36);
+      c.fillStyle = 'rgba(20,14,40,.72)';
+      c.beginPath(); if (c.roundRect) c.roundRect(x - w / 2, y - 5.5, w, 11, 5.5); else c.rect(x - w / 2, y - 5.5, w, 11); c.fill();
+      c.lineJoin = 'round'; c.lineWidth = 2.5; c.strokeStyle = '#1a1030'; c.strokeText(nick, x, y + 0.5);
+      c.fillStyle = '#ffffff'; c.fillText(nick, x, y + 0.5);
+      c.restore();
+    }
   }
 
   // PROVISIONAL serpent: segments until the sprite sheet arrives

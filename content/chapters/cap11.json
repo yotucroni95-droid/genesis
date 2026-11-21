@@ -366,7 +366,7 @@
         "type": "vf",
         "config": {
           "count": 6,
-          "seconds": 7,
+          "seconds": 10,
           "items": [
             {
               "s": "O cordeiro da Páscoa devia ser sem defeito.",

@@ -8,7 +8,7 @@ import { resultScreen, timerBar } from './result.js';
 export function start(config, env) {
   const wrap = h('div', { class: 'quiz vf' });
   env.root.appendChild(wrap);
-  const seconds = config.seconds || 7;
+  const seconds = config.seconds || 10;
   let raf = 0;
   return new Promise((resolve) => {
     const play = () => {

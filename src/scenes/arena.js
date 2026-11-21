@@ -39,7 +39,7 @@ function unseenFirst(deck) {
   return fresh.concat(old);
 }
 
-const SECONDS = 10;
+const SECONDS = 15;
 
 export function createArenaScene(game) {
   const stars = new Starfield(140);

@@ -225,7 +225,7 @@
         "type": "vf",
         "config": {
           "count": 6,
-          "seconds": 8,
+          "seconds": 10,
           "items": [
             {
               "s": "O servo de Abraão orou junto ao poço.",

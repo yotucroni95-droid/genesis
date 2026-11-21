@@ -8,9 +8,9 @@
 import { rng } from './map.js';
 
 export const KINDS = {
-  serpente: { name: 'Serpente', patrol: 38, chase: 64, sight: 96, lose: 2.6, chaseMax: 9 },
-  anjo: { name: 'Anjo caído', patrol: 46, chase: 70, sight: 120, lose: 3, chaseMax: 10 },
-  lucifer: { name: 'Lúcifer', patrol: 50, chase: 74, sight: 140, lose: 3.4, chaseMax: 11 },
+  serpente: { name: 'Serpente', patrol: 44, chase: 67, sight: 150, lose: 4, chaseMax: 10, feel: 90, smell: 260 },
+  anjo: { name: 'Anjo caído', patrol: 48, chase: 70, sight: 160, lose: 4, chaseMax: 11, feel: 90, smell: 260 },
+  lucifer: { name: 'Lúcifer', patrol: 52, chase: 74, sight: 180, lose: 4.4, chaseMax: 12, feel: 100, smell: 300 },
 };
 export const STAGES = ['Calmaria', 'Primeiros sinais', 'Perseguição', 'Grande provação', 'Confronto final'];
 const DIFF = [{ speed: 0.85, sight: 0.85 }, { speed: 1, sight: 1 }, { speed: 1.1, sight: 1.15 }];
@@ -79,7 +79,9 @@ export class Director {
     return { r: rooms[0], ...this.freeNear(this.map.center(rooms[0])) };
   }
   freeNear(c) {
-    const s = this.map.spots(this.map.roomAt(c.x, c.y), 1);
+    const ri = this.map.roomAt(c.x, c.y);
+    if (ri < 0) return { x: c.x, y: c.y }; // in a corridor: the spot itself is walkable
+    const s = this.map.spots(ri, 1);
     const p = s.sort((a, b) => Math.hypot(a.x * 16 - c.x, a.y * 16 - c.y) - Math.hypot(b.x * 16 - c.x, b.y * 16 - c.y))[0];
     return p ? { x: (p.x + 0.5) * 16, y: (p.y + 0.5) * 16 } : c;
   }
@@ -107,11 +109,19 @@ export class Director {
     const speedK = this.diff.speed * (1 + (stage - 1) * 0.04);
     const sight = K.sight * this.diff.sight * (stage >= 4 ? 1.15 : 1);
     const live = players.filter((p) => p.alive && !p.escaped);
+    // who is moving: the snake feels footsteps nearby, even around corners
+    this.prev = this.prev || new Map();
+    for (const p of live) { const q = this.prev.get(p.seat); p.moving = Boolean(q && Math.hypot(q.x - p.x, q.y - p.y) > 0.4); this.prev.set(p.seat, { x: p.x, y: p.y }); }
     for (const e of this.enemies) {
       e.t += dt;
       // who can this enemy see? (hidden in a bush = invisible unless very close)
-      const seen = live.filter((p) => !p.protected && !p.busy && Math.hypot(p.x - e.x, p.y - e.y) < sight
-        && (!p.hidden || Math.hypot(p.x - e.x, p.y - e.y) < 22) && this.map.sees(e.x, e.y - 6, p.x, p.y - 8))
+      const seen = live.filter((p) => {
+        if (p.protected || p.busy) return false;
+        const d = Math.hypot(p.x - e.x, p.y - e.y);
+        if (p.hidden) return d < 22;
+        if (p.moving && d < (K.feel || 0) * this.diff.sight) return true; // feels the steps
+        return d < sight * (p.moving ? 1 : 0.8) && this.map.sees(e.x, e.y - 6, p.x, p.y - 8);
+      })
         .sort((a, b) => Math.hypot(a.x - e.x, a.y - e.y) - Math.hypot(b.x - e.x, b.y - e.y));
       if (e.state === 'cooldown') {
         if (!e.goal) e.goal = this.pickRoom(live);
@@ -139,8 +149,13 @@ export class Director {
         continue;
       }
       // patrol / investigate: noises from stage 2 on pull the nearest enemy
-      const noise = stage >= 2 && noises.length ? noises[0] : null;
+      const noise = noises.length ? noises[0] : null;
       if (noise && e.state !== 'investigate' && this.enemies.indexOf(e) === 0) { e.state = 'investigate'; e.goal = { x: noise.x, y: noise.y }; e.t = 0; }
+      // instinct: on patrol it smells the nearest player who is out of a bush and heads that way
+      const prey = live.filter((p) => !p.protected && !p.busy && !p.hidden && Math.hypot(p.x - e.x, p.y - e.y) < (K.smell || 0))
+        .sort((a, b) => Math.hypot(a.x - e.x, a.y - e.y) - Math.hypot(b.x - e.x, b.y - e.y))[0];
+      e.sniffT = (e.sniffT || 0) + dt;
+      if (prey && e.state !== 'investigate' && e.sniffT > 1.5) { e.sniffT = 0; e.goal = { r: -1, ...this.freeNear({ x: prey.x, y: prey.y }) }; }
       if (!e.goal) e.goal = this.pickRoom([]);
       if (this.walk(e, e.goal.x, e.goal.y, K.patrol * speedK * (e.state === 'investigate' ? 1.25 : 1), dt)) {
         if (e.state === 'investigate') { e.state = 'search'; e.t = 0; } else e.goal = null;
