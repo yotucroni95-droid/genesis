@@ -10,7 +10,7 @@ import { loadExtras } from '../ui/game-ui.js';
 import { RANKS, heroKey } from './economy.js';
 import { PASS_LEVELS, FE_PER_LEVEL } from './meta.js';
 
-const CODE_HASH = '44127e5e609466eaf724474cfb16762dadfd82c9709c797c70b8eb9940a9e668';
+const CODE_HASH = 'edece587e26baf6064df9a73c95fc8434d3d4ab3b143c98df92dbf5acfe36fb2';
 
 async function sha256(text) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
