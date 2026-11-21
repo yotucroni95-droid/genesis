@@ -4226,6 +4226,52 @@
    "group": "Pets (retratos)"
   },
   {
+   "id": "pet.cachorrinho",
+   "src": "pets/cachorrinho_sheet.png",
+   "kind": "map",
+   "w": 128,
+   "h": 160,
+   "frame": 32,
+   "cols": 4,
+   "rows": 5,
+   "color": "#c9a227",
+   "label": "Cachorrinho",
+   "group": "Pets (folhas)"
+  },
+  {
+   "id": "petface.cachorrinho",
+   "src": "pets/cachorrinho_face.png",
+   "kind": "map",
+   "w": 64,
+   "h": 64,
+   "color": "#c9a227",
+   "label": "Cachorrinho",
+   "group": "Pets (retratos)"
+  },
+  {
+   "id": "pet.gatinho",
+   "src": "pets/gatinho_sheet.png",
+   "kind": "map",
+   "w": 128,
+   "h": 160,
+   "frame": 32,
+   "cols": 4,
+   "rows": 5,
+   "color": "#c9a227",
+   "label": "Gatinho",
+   "group": "Pets (folhas)"
+  },
+  {
+   "id": "petface.gatinho",
+   "src": "pets/gatinho_face.png",
+   "kind": "map",
+   "w": 64,
+   "h": 64,
+   "color": "#c9a227",
+   "label": "Gatinho",
+   "group": "Pets (retratos)"
+  },
+  {
    "id": "icon.amigos",
    "src": "icons/amigos.png",
    "kind": "icon",

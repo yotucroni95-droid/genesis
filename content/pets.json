@@ -4,6 +4,8 @@
     { "id": "ovelhinha", "name": "Ovelhinha", "emoji": "🐑", "rarity": "comum", "price": 0, "ref": "João 10:11", "desc": "Jesus é o bom pastor que cuida de cada ovelha." },
     { "id": "cordeirinho", "name": "Cordeirinho", "emoji": "🐑", "rarity": "comum", "price": 1200, "ref": "João 1:29", "desc": "João chamou Jesus de \"o Cordeiro de Deus\"." },
     { "id": "pardal", "name": "Pardal", "emoji": "🐦", "rarity": "comum", "price": 1200, "ref": "Mateus 10:29-31", "desc": "Nem um pardal cai sem que o Pai saiba. Você vale mais!" },
+    { "id": "cachorrinho", "name": "Cachorrinho", "emoji": "🐶", "rarity": "comum", "price": 1200, "ref": "Gênesis 1:25", "desc": "Deus fez cada animal e viu que era bom." },
+    { "id": "gatinho", "name": "Gatinho", "emoji": "🐱", "rarity": "comum", "price": 1200, "ref": "Salmo 104:24", "desc": "Quantas são as tuas obras, Senhor! Com sabedoria fizeste todas." },
     { "id": "formiguinha", "name": "Formiguinha", "emoji": "🐜", "rarity": "comum", "price": 1200, "ref": "Provérbios 6:6", "desc": "A formiga ensina a trabalhar com diligência." },
     { "id": "abelinha", "name": "Abelinha", "emoji": "🐝", "rarity": "comum", "price": 1200, "ref": "Salmo 19:10", "desc": "A Palavra de Deus é mais doce que o mel." },
     { "id": "codorninha", "name": "Codorninha", "emoji": "🐤", "rarity": "comum", "price": 1200, "ref": "Êxodo 16:13", "desc": "Deus enviou codornizes para alimentar o povo no deserto." },
