@@ -52,6 +52,10 @@ export class FugaMap {
     def.rooms.forEach((r) => this.fill(r.x, r.y, r.w, r.h, T.FLOOR));
     def.links.forEach(([a, b, can]) => this.corridor(def.rooms[a], def.rooms[b], can, a, b));
     def.rooms.forEach((r, i) => this.decorate(r, R, i === def.spawnRoom || i === def.exitRoom));
+    // buildings are solid (tower, gate, altar, fountain rim): nobody walks through them
+    this.solid = new Uint8Array(this.cols * this.rows);
+    const base = { 'Torre de Vigia': [38, 23, 4, 2], 'Portão do Éden': [37, 74, 6, 2], 'Altar de Pedras': [65, 37, 3, 2], Fonte: [38, 9, 4, 3] };
+    def.rooms.forEach((r) => { const f = base[r.name]; if (f) for (let y = f[1]; y < f[1] + f[3]; y++) for (let x = f[0]; x < f[0] + f[2]; x++) this.solid[this.idx(x, y)] = 1; });
     this.spawnRoom = def.spawnRoom;
     this.exitRoom = def.exitRoom;
     const ex = def.rooms[def.exitRoom];
@@ -109,7 +113,7 @@ export class FugaMap {
   isSolidTile(tx, ty) {
     if (tx < 0 || ty < 0 || tx >= this.cols || ty >= this.rows) return true;
     const i = this.idx(tx, ty);
-    if (this.blocked[i]) return true;
+    if (this.blocked[i] || this.solid[i]) return true;
     const t = this.tiles[i];
     if (t === T.GATE) return !this.exitOpen;
     return SOLID.has(t);
@@ -128,7 +132,7 @@ export class FugaMap {
     const r = this.rooms[i], out = [];
     for (let y = r.y + margin; y < r.y + r.h - margin; y++) for (let x = r.x + margin; x < r.x + r.w - margin; x++) {
       const t = this.get(x, y);
-      if ((t === T.FLOOR || t === T.PATH || t === T.FLOWER) && !this.isSolidTile(x, y + 1) && !this.isSolidTile(x, y - 1)) out.push({ x, y });
+      if ((t === T.FLOOR || t === T.PATH || t === T.FLOWER) && !this.isSolidTile(x, y) && !this.isSolidTile(x, y + 1) && !this.isSolidTile(x, y - 1)) out.push({ x, y });
     }
     return out;
   }
@@ -139,7 +143,8 @@ export class FugaMap {
     for (let s = 1; s < steps; s++) {
       const x = ax + ((bx - ax) * s) / steps, y = ay + ((by - ay) * s) / steps;
       const t = this.get(Math.floor(x / 16), Math.floor(y / 16));
-      if (t === T.WALL || t === T.TREE || this.blocked[this.idx(Math.floor(x / 16), Math.floor(y / 16))]) return false;
+      const k = this.idx(Math.floor(x / 16), Math.floor(y / 16));
+      if (t === T.WALL || t === T.TREE || this.blocked[k] || this.solid[k]) return false;
     }
     return true;
   }
