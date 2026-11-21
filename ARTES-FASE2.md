@@ -126,5 +126,26 @@
 
 ---
 
+## LOTE F — Ícones que ainda aparecem como emoji (tiram a "cara de amador")
+
+Todos 32×32, fundo #8000FF, estilo dos ícones atuais do lobby (contorno escuro, dourado e cores vivas).
+
+| # | Arquivo | Onde aparece | Desenho |
+|---|---|---|---|
+| F1 | `assets/icons/amigos.png` | Botão Amigos do lobby (hoje 👥) | Dois bonequinhos chibi lado a lado, um de túnica azul e outro de túnica verde, com coraçãozinho dourado em cima |
+| F2 | `assets/icons/fuga.png` | Botão FUGA do lobby (hoje 🏃) | Bonequinho correndo em direção a um portal dourado em arco, rastro de poeira |
+| F3 | `assets/icons/celular.png` | Botões Compartilhar, Convidar e Desafiar amigos (hoje 📲) | Celular com tela verde-clara e uma seta curva saindo dele |
+| F4 | `assets/icons/sabado.png` | Faixa "Feliz sábado" do lobby (hoje 🕊️) | Pomba branca com ramo de oliveira, sol se pondo laranja atrás |
+| F5 | `assets/ui/sabado_pomba.png` (**64×64**) | Janela do Modo Sábado | A mesma pomba, maior, asas abertas, luz suave dourada |
+| F6 | `assets/ui/amigos_icons.png` (**256×32**, 8 de 32×32) | Lista de amigos | 1 bolinha verde brilhante (online); 2 bolinha cinza (offline); 3 lupa (buscar); 4 dois raios cruzados (desafio 1x1); 5 quatro bonequinhos (2x2); 6 bonequinho correndo (convite da Fuga); 7 bonequinho com sinal de menos vermelho (remover); 8 três pontinhos dourados (menu) |
+| F7 | `assets/icons/labirinto.png` | Minijogo Labirinto da Fé | Labirinto de sebe visto de cima com um pergaminho brilhando no centro |
+| F8 | `assets/icons/armadura.png` | Minijogo Armadura de Deus | Escudo dourado com cruz e um capacete atrás |
+
+> [prompt-base] Ícone de interface de jogo 32×32: [Desenho da tabela]. Legível em tamanho pequeno, poucas cores, sem texto. Fundo roxo liso #8000FF.
+
+Para o F6: "Folha com 8 ícones 32×32 lado a lado, sem espaço entre eles: [lista]".
+
+---
+
 **Como me entregar:** mande as imagens aqui na conversa com o código do item (A1, C-ovelhinha, …). Eu recorto, coloco nos caminhos e troco os desenhos provisórios.
-**Ordem que mais melhora o jogo:** A1–A4 → B1–B7 → C (comece por ovelhinha, cordeirinho e leaozinho) → D → E.
+**Ordem que mais melhora o jogo:** F1–F4 (lobby) → A1–A4 → B1–B7 → C (comece por ovelhinha, cordeirinho e leaozinho) → D → E.
