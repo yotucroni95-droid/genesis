@@ -1405,3 +1405,12 @@ p { line-height: 1.4; }
 .sabbath__verse { font-style: italic; color: var(--gold); }
 .sabbath__when { opacity: .8; font-size: .9em; }
 .lobby__sabbath { pointer-events: auto; margin: 4px auto; padding: 4px 10px; border-radius: 999px; background: rgba(255,215,120,.15); border: 1px solid var(--gold); color: #fff; font-size: calc(12px * var(--fs, 1)); text-align: center; cursor: pointer; }
+/* lobby: Arena | Jogar | Fuga share the bottom row without overlapping */
+.lobby__bottom { justify-content: stretch; gap: 10px; min-width: 0; }
+.lobby__bottom > .btn { flex: 1 1 0; min-width: 0; overflow: hidden; }
+.lobby__bottom > .btn--play { flex-grow: 1.3; }
+.lobby__bottom > .btn--arena { justify-content: center; }
+.lobby__bottom > .btn--arena small, .lobby__fuga small { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; }
+.lobby__fuga b { font-size: calc(18px * var(--fs, 1)); }
+.lobby__fuga small { font-size: calc(11px * var(--fs, 1)); }
+.lobby__sabbath { margin: 0; padding: 2px 10px; }
