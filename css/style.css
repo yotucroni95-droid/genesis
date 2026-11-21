@@ -1423,3 +1423,27 @@ p { line-height: 1.4; }
 .cc__name { max-width: 100%; white-space: nowrap; font-size: min(calc(13px * var(--fs, 1)), 14cqi); }
 .cc__name.is-long { font-size: min(calc(13px * var(--fs, 1)), 10.5cqi); }
 .cc__name.is-xlong { font-size: min(calc(13px * var(--fs, 1)), 8.6cqi); }
+/* Fuga: menu redesenhado */
+.fuga__menu { max-width: 760px; gap: 12px; }
+.fuga__lead { margin: 0; text-align: center; font-size: calc(14px * var(--fs, 1)); color: #dfe4ff; }
+.fuga__label { font-family: var(--font); font-size: calc(13px * var(--fs, 1)); color: var(--gold); white-space: nowrap; }
+.fuga__diffrow, .fuga__coderow { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.fuga__seg { display: flex; padding: 3px; gap: 3px; border: 2px solid var(--panel-edge); border-radius: 14px; background: rgba(7,10,28,.75); }
+.fuga__segbtn { display: flex; flex-direction: column; align-items: center; min-width: 96px; padding: 4px 12px; border: 0; border-radius: 10px; background: none; color: #cfd5ff; font-family: var(--font); cursor: pointer; }
+.fuga__segbtn b { font-size: calc(14px * var(--fs, 1)); }
+.fuga__segbtn small { font-size: calc(10px * var(--fs, 1)); opacity: .75; }
+.fuga__segbtn.is-on { background: linear-gradient(180deg, #ffe39a, #f2b53c); color: #3a2200; box-shadow: 0 2px 0 #8a5a10; }
+.fuga__cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; }
+.fuga__card { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; min-height: 128px; padding: 10px 8px; border: 2px solid rgba(255,255,255,.25); border-radius: 16px; font-family: var(--font); color: #fff; cursor: pointer; text-align: center; box-shadow: 0 5px 0 rgba(0,0,0,.35); transition: transform .1s; }
+.fuga__card:active { transform: translateY(3px); box-shadow: 0 2px 0 rgba(0,0,0,.35); }
+.fuga__card b { font-size: calc(17px * var(--fs, 1)); letter-spacing: 1px; text-shadow: 0 2px 0 rgba(0,0,0,.35); white-space: nowrap; }
+.fuga__card small { font-size: calc(11px * var(--fs, 1)); opacity: .9; line-height: 1.2; }
+.fuga__card .fuga__cico { width: 44px; height: 44px; font-size: 34px; line-height: 44px; }
+.fuga__card--treino { background: linear-gradient(180deg, #6fd67f, #2c9a4a); }
+.fuga__card--publica { background: linear-gradient(180deg, #5aa0ff, #2a5fc8); }
+.fuga__card--privada { background: linear-gradient(180deg, #ffcf6a, #d98a1c); color: #3a2200; }
+.fuga__card--privada b { text-shadow: none; }
+.fuga__codein { width: 150px; min-height: 44px; text-align: center; letter-spacing: 4px; text-transform: uppercase; }
+.fuga__codebtn { min-height: 44px; }
+.fuga__back { align-self: center; }
+@media (max-height: 430px) { .fuga__card { min-height: 104px; } .fuga__lead { font-size: calc(12px * var(--fs, 1)); } }

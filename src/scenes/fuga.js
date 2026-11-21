@@ -5,6 +5,7 @@
 // Realtime only carries positions and the host's enemy snapshots.
 
 import { h } from '../ui/dom.js';
+import { ico } from '../ui/game-ui.js';
 import { gameScreen } from '../ui/screen.js';
 import { iconButton } from '../ui/icon-button.js';
 import { toast } from '../ui/toast.js';
@@ -73,21 +74,25 @@ export function createFugaScene(game) {
   function menu() {
     S.phase = 'menu';
     const save = game.save.state;
-    const diffRow = h('div', { class: 'fuga__diffs', role: 'radiogroup', 'aria-label': 'Dificuldade' },
-      ...DIFFS.map((d, i) => h('button', { class: `btn btn--small${i === S.diff ? '' : ' btn--ghost'}`, role: 'radio', 'aria-checked': String(i === S.diff), text: d, onClick: () => { S.diff = i; menu(); } })));
-    const codeIn = h('input', { class: 'field__input', placeholder: 'Código da sala', maxlength: '6', autocomplete: 'off', 'aria-label': 'Código da sala' });
+    const diffRow = h('div', { class: 'fuga__seg', role: 'radiogroup', 'aria-label': 'Dificuldade' },
+      ...DIFFS.map((d, i) => h('button', { class: `fuga__segbtn${i === S.diff ? ' is-on' : ''}`, role: 'radio', 'aria-checked': String(i === S.diff), onClick: () => { S.diff = i; menu(); } },
+        h('b', { text: d }), h('small', { text: `captura ${[12, 9, 6][i]} s` }))));
+    const codeIn = h('input', { class: 'field__input fuga__codein', placeholder: 'CÓDIGO', maxlength: '6', autocomplete: 'off', 'aria-label': 'Código da sala' });
     const go = async (fn) => { if (S.busy) return; S.busy = true; try { await fn(); } finally { S.busy = false; } };
     const nick = save.nick || 'jogador';
     const back = lastRoom();
-    screen('Fuga da Tentação 🏃', h('div', { class: 'fuga__menu' },
-      h('p', { class: 'screen__note', text: 'Cooperativo de 1 a 5 jogadores. Todos são aliados: façam as tarefas bíblicas, abram o Portal da Promessa e fujam juntos. Se a serpente pegar você, responda a pergunta a tempo para escapar!' }),
-      h('div', { class: 'fuga__row' }, h('b', { text: 'Dificuldade:' }), diffRow, h('small', { class: 'screen__note', text: `Tempo na captura: ${[12, 9, 6][S.diff]} s` })),
-      back && fugaOn() ? h('button', { class: 'btn btn--play', text: `↩ Voltar à partida ${back}`, onClick: () => go(() => enterRoom(() => online.join(back, nick, save.avatarId))) }) : null,
-      h('div', { class: 'fuga__btns' },
-        h('button', { class: 'btn btn--play', onClick: () => go(soloStart) }, h('b', { text: '🌱 TREINO' }), h('small', { text: 'Sozinho, sem internet' })),
-        fugaOn() ? h('button', { class: 'btn btn--online', onClick: () => go(() => enterRoom(() => online.quick(nick, save.avatarId, S.diff))) }, h('b', { text: '🌐 SALA PÚBLICA' }), h('small', { text: 'Junte-se a quem está esperando' })) : null,
-        fugaOn() ? h('button', { class: 'btn', onClick: () => go(() => enterRoom(() => online.create(nick, save.avatarId, false, S.diff))) }, h('b', { text: '🔒 SALA PRIVADA' }), h('small', { text: 'Convide com o código' })) : null),
-      fugaOn() ? h('div', { class: 'online__row' }, codeIn, h('button', { class: 'btn', text: 'Entrar', onClick: () => go(() => enterRoom(() => online.join(codeIn.value, nick, save.avatarId))) })) : null,
+    const card = (cls, art, emoji, title, sub, fn) => h('button', { class: `fuga__card ${cls}`, onClick: () => go(fn) },
+      ico(art, emoji, 'fuga__cico'), h('b', { text: title }), h('small', { text: sub }));
+    screen('Fuga da Tentação', h('div', { class: 'fuga__menu' },
+      h('p', { class: 'fuga__lead', text: 'Todos são aliados: façam as tarefas, abram o Portal e fujam juntos!' }),
+      h('div', { class: 'fuga__diffrow' }, h('span', { class: 'fuga__label', text: 'Dificuldade' }), diffRow),
+      back && fugaOn() ? h('button', { class: 'btn btn--play fuga__back', text: `↩ Voltar à partida ${back}`, onClick: () => go(() => enterRoom(() => online.join(back, nick, save.avatarId))) }) : null,
+      h('div', { class: 'fuga__cards' },
+        card('fuga__card--treino', 'fuga.card_treino', '🌱', 'TREINO', 'Sozinho, sem internet', soloStart),
+        fugaOn() ? card('fuga__card--publica', 'fuga.card_publica', '🌐', 'SALA PÚBLICA', 'Jogue com quem está online', () => enterRoom(() => online.quick(nick, save.avatarId, S.diff))) : null,
+        fugaOn() ? card('fuga__card--privada', 'fuga.card_privada', '🔒', 'SALA PRIVADA', 'Crie e chame amigos', () => enterRoom(() => online.create(nick, save.avatarId, false, S.diff))) : null),
+      fugaOn() ? h('div', { class: 'fuga__coderow' }, h('span', { class: 'fuga__label', text: 'Tem um código?' }), codeIn,
+        h('button', { class: 'btn fuga__codebtn', text: 'Entrar', onClick: () => go(() => enterRoom(() => online.join(codeIn.value, nick, save.avatarId))) })) : null,
     ));
   }
 
