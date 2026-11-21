@@ -22,6 +22,8 @@ export function paintMap(map, assets) {
   const pick = (list) => list[(R() * list.length) | 0];
   const tile = (col, row, x, y) => g.drawImage(tiles, col * 16, row * 16, 16, 16, x * 16, y * 16, 16, 16);
   const plazaRoom = map.rooms.findIndex((r) => r.deco === 'plaza');
+  const fountRoom = map.rooms.findIndex((r) => r.deco === 'fountain');
+  const fr = map.rooms[fountRoom], fcx = (fr.x + fr.w / 2) * 16, fcy = (fr.y + fr.h / 2) * 16;
   const props = [];
   const roomOf = (x, y) => map.rooms.findIndex((r) => x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h);
   // ---- painted ground (pixel by pixel): grass patches, dirt paths with ragged
@@ -49,10 +51,11 @@ export function paintMap(map, assets) {
     const tx = Math.max(0, Math.min(map.cols - 1, px >> 4)), ty = Math.max(0, Math.min(map.rows - 1, py >> 4));
     const t = map.get(tx, ty);
     if (t === T.WALL) return MAT.FOREST;
+    if (roomOf(tx, ty) === fountRoom && Math.hypot(px - fcx, py - fcy + 4) < 46) return MAT.PAVE; // round stone floor under the fountain
     if (t === T.WATER) return MAT.WATER;
     if (roomOf(tx, ty) === plazaRoom) return MAT.PAVE;
     if (t === T.PATH || t === T.GATE) return MAT.DIRT;
-    if (nearWater(tx, ty)) return MAT.SHORE;
+    if (nearWater(tx, ty) && roomOf(tx, ty) !== fountRoom) return MAT.SHORE;
     return MAT.GRASS;
   };
   const im = g.createImageData(W, H), D = im.data;
@@ -79,6 +82,7 @@ export function paintMap(map, assets) {
   const PETAL = ['#ffffff', '#ffd84a', '#ff8fbf', '#ff6a6a', '#9fd0ff'];
   for (let y = 0; y < map.rows; y++) for (let x = 0; x < map.cols; x++) {
     const t = map.get(x, y);
+    if (t === T.WATER && roomOf(x, y) === fountRoom) continue; // the fountain sprite covers it
     if (t === T.WATER) { tile(...pick([[0, 2], [1, 2]]), x, y); if (map.get(x, y - 1) !== T.WATER) tile(2, 2, x, y); continue; }
     if (t !== T.FLOOR && t !== T.FLOWER && t !== T.TREE && t !== T.BUSH) continue;
     if (roomOf(x, y) === plazaRoom) continue;
