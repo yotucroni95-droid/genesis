@@ -30,6 +30,7 @@ import { createProfileScene } from './scenes/profile.js';
 import { createDailyScene } from './scenes/daily.js';
 import { createPassScene } from './scenes/pass.js';
 import { SaveManager } from './save/save-manager.js';
+import { isSabbath, SABBATH_SCENES, showSabbath } from './game/sabbath.js';
 import { unlockAudio, playMusic, sfx } from './audio/audio.js';
 import { setUiAssets } from './ui/game-ui.js';
 import { setCharacters, onMetaEvent, charById } from './game/meta.js';
@@ -170,6 +171,9 @@ async function boot() {
   game.scenes.register('medals', createMedalsScene);
   game.scenes.register('avatar', createAvatarScene);
   for (const [name, f] of Object.entries({ lobby: createLobbyScene, boxes: createBoxesScene, shop: createShopScene, missions: createMissionsScene, arena: createArenaScene, online: createOnlineScene, friends: createFriendsScene, fuga: createFugaScene, pets: createPetsScene, collection: createCollectionScene, profile: createProfileScene, daily: createDailyScene, pass: createPassScene })) game.scenes.register(name, f);
+
+  // Modo Sábado: competitive and commercial screens rest from sunset to sunset
+  game.scenes.guard = (name) => (SABBATH_SCENES.has(name) && isSabbath() ? showSabbath() : true);
 
   const loop = new GameLoop({
     update: (dt) => game.scenes.update(dt),

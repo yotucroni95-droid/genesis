@@ -1,3 +1,4 @@
+import { isSabbath } from './sabbath.js';
 import { checkLamp, lightLamp, trackWeekly, addFe, boxFragments, power, addDenarios } from './meta.js';
 
 // Game economy: stars, coins ("talentos"), trophies, ranks, boxes, daily
@@ -76,6 +77,7 @@ function addWeekly(s, n, { trophies = n } = {}) {
 /** Season Points for playing (trophies already count by themselves). */
 export const POINTS_FOR = { stops: 5, threeStars: 10, correct: 1, arenaPlay: 3, daily: 10, dailyMission: 10, onlineWin: 15, openBox: 2 };
 export function addSeasonPoints(save, n) {
+  if (isSabbath()) return; // Modo Sábado: no competition points
   if (n > 0) save.update((s) => addWeekly(s, n, { trophies: 0 }));
 }
 export const seasonPoints = (s) => (s.week && s.week.id === weekId() ? s.week.points || 0 : 0);
@@ -109,6 +111,7 @@ export function nextRank(trophies) {
 
 /** Adds trophies; returns the new rank if the player just went up. */
 export function addTrophies(save, n) {
+  if (isSabbath()) return null; // Modo Sábado: trophies rest
   const before = rankFor(save.state.trophies || 0);
   save.update((s) => { s.trophies = Math.max(0, (s.trophies || 0) + n); if (n > 0) addWeekly(s, n); });
   const after = rankFor(save.state.trophies);

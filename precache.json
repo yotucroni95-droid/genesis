@@ -89,6 +89,7 @@
 "src/game/event.js",
 "src/game/meta.js",
 "src/game/playtime.js",
+"src/game/sabbath.js",
 "src/game/variety.js",
 "src/fuga/director.js",
 "src/fuga/map.js",

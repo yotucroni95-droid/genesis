@@ -6,6 +6,7 @@ import { ensureAccount } from '../cloud/account-ui.js';
 import { checkWeekPrize } from '../cloud/account.js';
 import { celebrate } from '../ui/celebrate.js';
 import { toast } from '../ui/toast.js';
+import { isSabbath, showSabbath } from '../game/sabbath.js';
 import { Starfield } from './starfield.js';
 import { loadExtras, rankBadge, rankProgress, currencyBar, framedAvatar, titleName, badge, chest, formatWait, ico } from '../ui/game-ui.js';
 import { startDay, pendingMissions, freeBoxReadyIn, weekId, addBox, addCoins } from '../game/economy.js';
@@ -95,6 +96,7 @@ export function createLobbyScene(game) {
           h('b', { text: (game.assets.json('characters.json').characters.find((c) => c.id === s.avatarId) || {}).name || '' }),
           h('button', { class: 'lobby__change', onClick: go('avatar', { backScene: 'lobby' }), text: 'Trocar personagem' }),
         ),
+        isSabbath() ? h('button', { class: 'lobby__sabbath', text: '🕊️ Feliz sábado! Arena e loja descansam até o pôr do sol', onClick: () => showSabbath() }) : null,
         h('div', { class: 'lobby__bottom' },
           h('button', { class: 'btn btn--arena', onClick: go('arena') }, ico('icon.arena', '⚡', 'arena__ico'), h('span', {}, h('b', { text: 'ARENA' }), h('small', { text: s.arenaBest ? `Recorde: ${s.arenaBest}` : 'Desafio relâmpago' }))),
           h('button', { class: 'btn btn--play', onClick: go('explore') }, h('b', { text: 'JOGAR' }), h('small', { text: 'Jornada' })),

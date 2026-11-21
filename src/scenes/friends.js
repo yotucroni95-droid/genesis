@@ -8,6 +8,7 @@ import { Starfield } from './starfield.js';
 import { rankBadge } from '../ui/game-ui.js';
 import { friendsOn, friendsState, searchPlayers, requestFriend, answerFriend, removeFriend, inviteFriend, clearInvite, friendError } from '../cloud/friends.js';
 import { createRoom } from '../cloud/rooms.js';
+import { isSabbath, showSabbath } from '../game/sabbath.js';
 import { online as fugaRooms, fugaError } from '../cloud/fuga.js';
 
 export function createFriendsScene(game) {
@@ -49,6 +50,7 @@ export function createFriendsScene(game) {
       } });
 
       const challenge = async (p, mode = '1x1') => {
+        if (isSabbath()) return showSabbath();
         try {
           const room = await createRoom(save.state.nick || 'jogador', save.state.avatarId, mode);
           await inviteFriend(p.tag, room.code);

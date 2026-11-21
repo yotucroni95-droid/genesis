@@ -15,6 +15,7 @@ import { Camera } from '../world/camera.js';
 import { Player } from '../world/player.js';
 import { getChallenge } from '../challenges/index.js';
 import { addCoins, addSeasonPoints } from '../game/economy.js';
+import { isSabbath } from '../game/sabbath.js';
 import { FugaMap, T } from '../fuga/map.js';
 import { Director, STAGES, stageOf, KINDS } from '../fuga/director.js';
 import { loadPool, roundTasks } from '../fuga/tasks.js';
@@ -355,7 +356,7 @@ export function createFugaScene(game) {
     const key = `${r.code}.${r.seed}`;
     const done = save.state.fugaRooms || [];
     let coins = 0, pts = 0;
-    if (!done.includes(key) && (me.tasks > 0 || won)) {
+    if (!done.includes(key) && (me.tasks > 0 || won) && !isSabbath()) {
       const day = new Date().toLocaleDateString('sv-SE');
       const played = save.state.fugaDay && save.state.fugaDay.date === day ? save.state.fugaDay.n : 0;
       const tired = played < 5 ? 1 : played < 10 ? 0.4 : 0.1;

@@ -22,6 +22,8 @@ export class SceneManager {
   async go(name, params = {}) {
     const factory = this.factories.get(name);
     if (!factory) throw new Error(`Unknown scene: ${name}`);
+    // a guard (e.g. Modo Sábado) may refuse a scene; the current one stays
+    if (this.guard && this.guard(name, params) === false) return;
     // A tap while a screen is still loading is not lost: it runs right after.
     if (this.switching) { this.pending = [name, params]; return; }
     this.switching = true;
