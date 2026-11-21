@@ -12,7 +12,7 @@ export const KINDS = {
   anjo: { name: 'Anjo caído', patrol: 48, chase: 70, sight: 160, lose: 4, chaseMax: 11, feel: 90, smell: 260 },
   lucifer: { name: 'Lúcifer', patrol: 52, chase: 74, sight: 180, lose: 4.4, chaseMax: 12, feel: 100, smell: 300 },
 };
-export const STAGES = ['Calmaria', 'Primeiros sinais', 'Perseguição', 'Grande provação', 'Confronto final'];
+export const STAGES = ['Calmaria', 'Primeiros sinais', 'Perseguição', 'Grande provação', 'Batalha final'];
 const DIFF = [{ speed: 0.85, sight: 0.85 }, { speed: 1, sight: 1 }, { speed: 1.1, sight: 1.15 }];
 
 /** Stage 1–5 from time, tasks and survivors (same formula on every phone). */
