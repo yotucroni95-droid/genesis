@@ -1480,3 +1480,25 @@ p { line-height: 1.4; }
 .fuga__banner--1 { background-position: -256px 0; } .fuga__banner--2 { background-position: -512px 0; }
 .fuga__banner b { position: absolute; left: 0; right: 0; bottom: 21px; text-align: center; font: 700 calc(15px * var(--fs, 1)) var(--font); color: #fff; letter-spacing: 2px; text-shadow: 0 2px 0 rgba(0,0,0,.5); }
 @media (max-height: 430px) { .fuga__banner { width: 192px; height: 144px; background-size: 576px 144px; } .fuga__banner--1 { background-position: -192px 0; } .fuga__banner--2 { background-position: -384px 0; } .fuga__banner b { bottom: 15px; font-size: calc(12px * var(--fs, 1)); } }
+/* Minijogos: artes J1–J4 */
+.labi__grid { background: #1f3d16; border-color: #3b5a22; }
+.labi__cell { background: url('../assets/minigames/labirinto_tiles.png') 0 0 / 400% 100% no-repeat; image-rendering: pixelated; border-width: 3px; position: relative; }
+.labi__cell.t { border-top-color: #2f6b22; } .labi__cell.r { border-right-color: #2f6b22; } .labi__cell.b { border-bottom-color: #2f6b22; } .labi__cell.l { border-left-color: #2f6b22; }
+.labi__cell.is-scroll::after, .labi__cell.is-exit::after { content: ''; position: absolute; inset: 8%; background: url('../assets/minigames/labirinto_tiles.png') 66.666% 0 / 400% 100% no-repeat; image-rendering: pixelated; }
+.labi__cell.is-exit::after { background-position: 100% 0; filter: grayscale(1) brightness(.6); }
+.labi__cell.is-exit.is-open::after { filter: drop-shadow(0 0 4px #ffd65a); }
+.labi__me { position: relative; z-index: 1; width: 90%; height: 90%; object-fit: contain; border-radius: 50%; background: rgba(255,255,255,.25); box-shadow: 0 0 0 2px var(--gold); }
+.armor { background: linear-gradient(rgba(7,10,28,.35), rgba(7,10,28,.6)), url('../assets/minigames/armadura_fundo.png') center / cover no-repeat; image-rendering: pixelated; border-radius: 12px; padding: 8px; }
+.armor__art { display: block; width: 40px; height: 40px; background: url('../assets/minigames/armadura_pecas.png') 0 0 / 600% 100% no-repeat; image-rendering: pixelated; }
+.armor__art--1 { background-position: 20% 0; } .armor__art--2 { background-position: 40% 0; } .armor__art--3 { background-position: 60% 0; } .armor__art--4 { background-position: 80% 0; } .armor__art--5 { background-position: 100% 0; }
+.armor__attack { display: flex; align-items: center; justify-content: center; gap: 10px; background: rgba(60,8,20,.8); }
+.armor__attack .armor__art { width: 32px; height: 32px; flex: 0 0 auto; }
+.armor__foe { display: block; width: 44px; height: 44px; flex: 0 0 auto; background: url('../assets/minigames/armadura_ataques.png') 0 0 / 400% 100% no-repeat; image-rendering: pixelated; animation: foe-in .4s ease-out; }
+.armor__foe--1 { background-position: 33.333% 0; } .armor__foe--2 { background-position: 66.666% 0; } .armor__foe--3 { background-position: 100% 0; }
+@keyframes foe-in { from { transform: translateX(-30px) scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+.labi__cell { border-width: 4px; }
+.labi__cell.t { border-top-color: #3f9a2a; } .labi__cell.r { border-right-color: #3f9a2a; } .labi__cell.b { border-bottom-color: #3f9a2a; } .labi__cell.l { border-left-color: #3f9a2a; }
+.labi__grid { border: 4px solid #3f9a2a; box-shadow: 0 0 0 2px #14251a; }
+.labi__cell { background: #c9ae84; border-width: 4px; }
+.labi__cell.t { border-top-color: #2f7a22; } .labi__cell.r { border-right-color: #2f7a22; } .labi__cell.b { border-bottom-color: #2f7a22; } .labi__cell.l { border-left-color: #2f7a22; }
+.labi__grid { background: #c9ae84; border: 4px solid #2f7a22; box-shadow: 0 0 0 2px #14251a, inset 0 0 0 1px #1d4d16; }

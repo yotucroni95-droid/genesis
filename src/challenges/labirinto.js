@@ -54,9 +54,16 @@ export function start(config, env) {
       const grid = h('div', { class: 'labi__grid', style: { gridTemplateColumns: `repeat(${n}, 1fr)` }, role: 'grid', 'aria-label': 'Labirinto' });
       const els = cells.map((w, i) => h('div', { class: `labi__cell${w[0] ? ' t' : ''}${w[1] ? ' r' : ''}${w[2] ? ' b' : ''}${w[3] ? ' l' : ''}` }));
       grid.append(...els);
+      const pid = env.avatar && env.assets && env.assets.entry(`portrait.${env.avatar}`) ? `portrait.${env.avatar}` : 'portrait.peregrino';
+      const face = h('img', { class: 'pixel labi__me', src: env.assets ? env.assets.url(pid) : '', alt: 'você' });
       const paint = () => {
-        els.forEach((e, i) => { e.textContent = i === pos ? '🧑' : spots.includes(i) && !got.includes(i) ? '📜' : i === exit ? (got.length === 3 ? '🚪' : '🔒') : ''; });
-        info.textContent = `Fragmentos ${got.length}/3 · ${got.length === 3 ? 'vá para a saída 🚪' : 'ache os pergaminhos 📜'}`;
+        els.forEach((e, i) => {
+          e.classList.toggle('is-scroll', spots.includes(i) && !got.includes(i));
+          e.classList.toggle('is-exit', i === exit);
+          e.classList.toggle('is-open', i === exit && got.length === 3);
+          e.replaceChildren(i === pos ? face.cloneNode() : '');
+        });
+        info.textContent = `Fragmentos ${got.length}/3 · ${got.length === 3 ? 'vá para o portal' : 'ache os pergaminhos'}`;
         found.textContent = got.length ? `"${parts.slice(0, got.length).join(' ')}${got.length < 3 ? '…' : '"'}` : '';
       };
       const move = (k) => {
