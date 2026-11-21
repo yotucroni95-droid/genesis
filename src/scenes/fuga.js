@@ -30,8 +30,8 @@ const QUICK = [
   { t: 'Vem comigo!' }, { t: 'Socorro!' }, { t: 'A serpente tá aqui!' }, { t: 'Corre!' }, { t: 'Cuidado!' },
   { t: 'Vou fazer a tarefa' }, { t: 'Me ajuda na pedra!' }, { t: 'Se esconde na moita!' }, { t: 'Para o portal!' },
   { t: 'Estou indo!' }, { t: 'Boa!' }, { t: 'Obrigado!' },
-  { t: 'Feliz', emo: '😄' }, { t: 'Joia', emo: '👍' }, { t: 'Medo', emo: '😱' }, { t: 'Orando', emo: '🙏' },
-  { t: 'Amor', emo: '❤️' }, { t: 'Risada', emo: '😂' }, { t: 'Bravo', emo: '😤' }, { t: 'Pensando', emo: '🤔' },
+  { t: 'Feliz', emo: '😄', i: 0 }, { t: 'Joia', emo: '👍', i: 1 }, { t: 'Medo', emo: '😱', i: 2 }, { t: 'Orando', emo: '🙏', i: 3 },
+  { t: 'Amor', emo: '❤️', i: 4 }, { t: 'Risada', emo: '😂', i: 5 }, { t: 'Bravo', emo: '😤', i: 6 }, { t: 'Pensando', emo: '🤔', i: 7 },
 ];
 
 const DIFFS = ['Fácil', 'Médio', 'Difícil'];
@@ -40,6 +40,14 @@ const remember = (code) => { try { if (code) localStorage.setItem(LAST_KEY, JSON
 const lastRoom = () => { try { const r = JSON.parse(localStorage.getItem(LAST_KEY) || 'null'); return r && Date.now() - r.at < 15 * 60e3 ? r.code : ''; } catch { return ''; } };
 
 export function createFugaScene(game) {
+  const emoArt = () => { const e = game.assets.entry('ui.emotes'); return e && e.image && !e.placeholder ? game.assets.url('ui.emotes') : ''; };
+  const emoEl = (q) => {
+    const url = q.emo ? emoArt() : '';
+    if (!url) return null;
+    const el = h('span', { class: 'fuga__emo', 'aria-hidden': 'true' });
+    el.style.backgroundImage = `url("${url}")`; el.style.backgroundPosition = `${(q.i / 7) * 100}% 0`;
+    return el;
+  };
   const stars = new Starfield(90);
   const camera = new Camera();
   let S = null; // everything of the current visit
@@ -209,7 +217,7 @@ export function createFugaScene(game) {
     }
     const log = h('ul', { class: 'fuga__log', 'aria-live': 'polite' }, ...(S.log.length ? S.log.slice(-8).map((m) => {
       const q = QUICK[m.k];
-      return h('li', { class: m.s === r.me ? 'is-me' : '' }, h('b', { text: `@${nickOf(m.s)}` }), h('span', { class: q.emo ? 'is-emo' : '', text: q.emo || q.t }));
+      return h('li', { class: m.s === r.me ? 'is-me' : '' }, h('b', { text: `@${nickOf(m.s)}` }), (emoEl(q) || h('span', { class: q.emo ? 'is-emo' : '', text: q.emo || q.t })));
     }) : [h('li', { class: 'fuga__roomnote', text: 'Mande um oi para a equipe 👋' })]));
     const ps = petState(save), myPet = (S.petDefs || []).find((p) => p.id === ps.on);
     screen('Fuga · Sala', h('div', { class: 'fuga__menu fuga__wait' },
@@ -230,7 +238,7 @@ export function createFugaScene(game) {
         h('button', { class: `btn btn--small${S.pick === 'pet' ? ' is-on' : ''}`, text: `${myPet ? myPet.emoji || '🐾' : '🐾'} Pet`, onClick: () => toggle('pet') })),
       picker,
       log,
-      h('div', { class: 'fuga__chat fuga__chat--wait' }, ...QUICK.map((q, k) => h('button', { class: `fuga__say${q.emo ? ' is-emo' : ''}`, text: q.emo || q.t, 'aria-label': q.t, onClick: () => sayWait(k) }))),
+      h('div', { class: 'fuga__chat fuga__chat--wait' }, ...QUICK.map((q, k) => h('button', { class: `fuga__say${q.emo ? ' is-emo' : ''}`, text: emoEl(q) ? '' : q.emo || q.t, 'aria-label': q.t, onClick: () => sayWait(k) }, emoEl(q)))),
       iAmHost ? h('button', { class: 'btn btn--play', text: '▶ Começar', onClick: () => call('start') })
         : h('p', { class: 'screen__note', text: 'Esperando o anfitrião começar…' }),
       h('button', { class: 'btn btn--ghost', text: 'Sair da sala', onClick: () => { S.api.leave(S.code); remember(''); closeChannel(); menu(); } }),
@@ -338,7 +346,7 @@ export function createFugaScene(game) {
     ui.appendChild(S.hud.spect);
     // quick chat (Among Us style): only ready-made phrases and emotes, so nobody can send anything bad
     const panel = h('div', { class: 'fuga__chat', hidden: true },
-      ...QUICK.map((q, k) => h('button', { class: `fuga__say${q.emo ? ' is-emo' : ''}`, text: q.emo || q.t, 'aria-label': q.t, onClick: () => say(k) })));
+      ...QUICK.map((q, k) => h('button', { class: `fuga__say${q.emo ? ' is-emo' : ''}`, text: emoEl(q) ? '' : q.emo || q.t, 'aria-label': q.t, onClick: () => say(k) }, emoEl(q))));
     const say = (k) => {
       panel.hidden = true;
       if (performance.now() < S.sayT) return; // a short pause between messages
@@ -735,7 +743,11 @@ export function createFugaScene(game) {
     c.save();
     c.globalAlpha = Math.min(1, (life - age) / 0.4, age / 0.12);
     const x = Math.round(p.x), y = Math.round(p.y - (tagged ? 50 : 40) - Math.min(1, age / 0.12) * 2);
-    if (q.emo) {
+    const art = q.emo && game.assets.entry('ui.emotes');
+    if (art && art.image && !art.placeholder) {
+      const s = 18; c.imageSmoothingEnabled = false;
+      c.drawImage(art.image, q.i * 32, 0, 32, 32, x - s / 2, y - s / 2 - 2, s, s);
+    } else if (q.emo) {
       c.font = '15px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
       c.fillText(q.emo, x, y);
     } else {

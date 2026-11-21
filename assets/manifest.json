@@ -789,6 +789,19 @@
    "group": "Medalhas"
   },
   {
+   "id": "ui.emotes",
+   "src": "ui/emotes.png",
+   "kind": "ui",
+   "w": 256,
+   "h": 32,
+   "frame": 32,
+   "cols": 8,
+   "rows": 1,
+   "color": "#8000ff",
+   "label": "Emotes do chat",
+   "group": "Interface"
+  },
+  {
    "id": "ui.joystick_base",
    "src": "ui/joystick_base.png",
    "kind": "ui",
