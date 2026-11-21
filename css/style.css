@@ -1462,3 +1462,21 @@ p { line-height: 1.4; }
 .fuga__menu .frows { width: min(520px, 100%); align-self: center; }
 .fuga__menu > .btn { align-self: center; min-width: 220px; }
 .quiz__result .frows { width: min(520px, 100%); }
+/* Fuga: artes U1–U7 */
+.fuga__screen { background: linear-gradient(rgba(7,10,28,.55), rgba(7,10,28,.78)), url('../assets/ui/fuga_menu_bg.png') center / cover no-repeat; image-rendering: pixelated; }
+.fuga__cardart { display: block; width: 64px; height: 64px; background: url('../assets/ui/fuga_cards.png') 0 0 / 192px 64px no-repeat; image-rendering: pixelated; filter: drop-shadow(0 2px 0 rgba(0,0,0,.35)); }
+.fuga__cardart--1 { background-position: -64px 0; } .fuga__cardart--2 { background-position: -128px 0; }
+.fuga__card { background-blend-mode: normal; }
+.fico { display: inline-block; width: 20px; height: 20px; margin-right: 4px; vertical-align: middle; background: url('../assets/ui/fuga_icons.png') 0 0 / 160px 20px no-repeat; image-rendering: pixelated; }
+.fico--1 { background-position: -20px 0; } .fico--2 { background-position: -40px 0; } .fico--3 { background-position: -60px 0; }
+.fico--4 { background-position: -80px 0; } .fico--5 { background-position: -100px 0; } .fico--6 { background-position: -120px 0; } .fico--7 { background-position: -140px 0; }
+.fuga__hud .chip { display: inline-flex; align-items: center; }
+.fuga__capbox { width: min(560px, 92vw, calc((100vh - 180px) * 16 / 9)); aspect-ratio: 480 / 270; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; padding: 9% 16% 8% 10%; background: url('../assets/ui/fuga_captura.png') center / 100% 100% no-repeat; image-rendering: pixelated; }
+.fuga__capbox .quiz__q { color: #7a1020; font-size: calc(15px * var(--fs, 1)); text-shadow: none; }
+.fuga__capbox .fuga__question { border: 0; background: none; padding: 0; color: #2b1a08; font-size: calc(14px * var(--fs, 1)); }
+.fuga__capbox .bar { width: 100%; }
+.fuga__capture > .quiz__opts { width: min(560px, 92vw); }
+.fuga__banner { position: relative; width: 256px; height: 192px; flex: 0 0 auto; background: url('../assets/ui/fuga_resultado.png') 0 0 / 768px 192px no-repeat; image-rendering: pixelated; }
+.fuga__banner--1 { background-position: -256px 0; } .fuga__banner--2 { background-position: -512px 0; }
+.fuga__banner b { position: absolute; left: 0; right: 0; bottom: 21px; text-align: center; font: 700 calc(15px * var(--fs, 1)) var(--font); color: #fff; letter-spacing: 2px; text-shadow: 0 2px 0 rgba(0,0,0,.5); }
+@media (max-height: 430px) { .fuga__banner { width: 192px; height: 144px; background-size: 576px 144px; } .fuga__banner--1 { background-position: -192px 0; } .fuga__banner--2 { background-position: -384px 0; } .fuga__banner b { bottom: 15px; font-size: calc(12px * var(--fs, 1)); } }

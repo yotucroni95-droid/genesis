@@ -5,8 +5,7 @@
 // Realtime only carries positions and the host's enemy snapshots.
 
 import { h } from '../ui/dom.js';
-import { ico } from '../ui/game-ui.js';
-import { FUGA_ART, paintMap, drawProp } from '../fuga/art.js';
+import { FUGA_ART, paintMap, drawProp, drawSnake, drawSpawn, drawTask } from '../fuga/art.js';
 import { gameScreen } from '../ui/screen.js';
 import { iconButton } from '../ui/icon-button.js';
 import { toast } from '../ui/toast.js';
@@ -69,7 +68,9 @@ export function createFugaScene(game) {
 
   // ---------- menu / waiting room ----------
   function screen(title, body) {
-    S.ui.replaceChildren(gameScreen(game, title, body, { back: 'lobby' }));
+    const el = gameScreen(game, title, body, { back: 'lobby' });
+    el.classList.add('fuga__screen');
+    S.ui.replaceChildren(el);
   }
 
   function menu() {
@@ -82,16 +83,16 @@ export function createFugaScene(game) {
     const go = async (fn) => { if (S.busy) return; S.busy = true; try { await fn(); } finally { S.busy = false; } };
     const nick = save.nick || 'jogador';
     const back = lastRoom();
-    const card = (cls, art, emoji, title, sub, fn) => h('button', { class: `fuga__card ${cls}`, onClick: () => go(fn) },
-      ico(art, emoji, 'fuga__cico'), h('b', { text: title }), h('small', { text: sub }));
+    const card = (cls, n, title, sub, fn) => h('button', { class: `fuga__card ${cls}`, onClick: () => go(fn) },
+      h('span', { class: `fuga__cardart fuga__cardart--${n}`, 'aria-hidden': 'true' }), h('b', { text: title }), h('small', { text: sub }));
     screen('Fuga da Tentação', h('div', { class: 'fuga__menu' },
       h('p', { class: 'fuga__lead', text: 'Todos são aliados: façam as tarefas, abram o Portal e fujam juntos!' }),
       h('div', { class: 'fuga__diffrow' }, h('span', { class: 'fuga__label', text: 'Dificuldade' }), diffRow),
       back && fugaOn() ? h('button', { class: 'btn btn--play fuga__back', text: `↩ Voltar à partida ${back}`, onClick: () => go(() => enterRoom(() => online.join(back, nick, save.avatarId))) }) : null,
       h('div', { class: 'fuga__cards' },
-        card('fuga__card--treino', 'fuga.card_treino', '🌱', 'TREINO', 'Sozinho, sem internet', soloStart),
-        fugaOn() ? card('fuga__card--publica', 'fuga.card_publica', '🌐', 'SALA PÚBLICA', 'Jogue com quem está online', () => enterRoom(() => online.quick(nick, save.avatarId, S.diff))) : null,
-        fugaOn() ? card('fuga__card--privada', 'fuga.card_privada', '🔒', 'SALA PRIVADA', 'Crie e chame amigos', () => enterRoom(() => online.create(nick, save.avatarId, false, S.diff))) : null),
+        card('fuga__card--treino', 0, 'TREINO', 'Sozinho, sem internet', soloStart),
+        fugaOn() ? card('fuga__card--publica', 1, 'SALA PÚBLICA', 'Jogue com quem está online', () => enterRoom(() => online.quick(nick, save.avatarId, S.diff))) : null,
+        fugaOn() ? card('fuga__card--privada', 2, 'SALA PRIVADA', 'Crie e chame amigos', () => enterRoom(() => online.create(nick, save.avatarId, false, S.diff))) : null),
       fugaOn() ? h('div', { class: 'fuga__coderow' }, h('span', { class: 'fuga__label', text: 'Tem um código?' }), codeIn,
         h('button', { class: 'btn fuga__codebtn', text: 'Entrar', onClick: () => go(() => enterRoom(() => online.join(codeIn.value, nick, save.avatarId))) })) : null,
     ));
@@ -208,6 +209,10 @@ export function createFugaScene(game) {
     onState(r);
   }
 
+  // U1 icons: pergaminho, ampulheta, equipe, escudo, olho, portal, serpente, internet
+  function fico(n) { return h('span', { class: `fico fico--${n}`, 'aria-hidden': 'true' }); }
+  function setChip(el, n, text) { el.replaceChildren(fico(n), h('span', { text })); }
+
   function buildHud() {
     const ui = S.ui;
     ui.replaceChildren();
@@ -215,7 +220,7 @@ export function createFugaScene(game) {
     S.hud.tasks = h('div', { class: 'chip' });
     S.hud.time = h('div', { class: 'chip' });
     S.hud.team = h('div', { class: 'chip' });
-    S.hud.net = h('div', { class: 'chip fuga__net', hidden: true, text: '📶 reconectando…' });
+    S.hud.net = h('div', { class: 'chip fuga__net', hidden: true }, fico(7), h('span', { text: 'reconectando…' }));
     ui.appendChild(h('div', { class: 'hud fuga__hud' },
       iconButton(game.assets, 'icon.voltar', 'Sair da partida', () => { if (confirm('Sair da partida? Você não poderá ajudar a equipe.')) leave(); }, '←'),
       S.hud.stage, S.hud.tasks, S.hud.time, S.hud.team, S.hud.net));
@@ -234,11 +239,11 @@ export function createFugaScene(game) {
     if (S.phase !== 'play' || !S.room) return;
     const r = S.room;
     const st = stage();
-    S.hud.stage.textContent = `${st}. ${STAGES[st - 1]}`;
+    setChip(S.hud.stage, 6, `${st}. ${STAGES[st - 1]}`);
     S.hud.stage.className = `chip fuga__stage fuga__stage--${st}`;
-    S.hud.tasks.textContent = `📜 ${r.done.length}/${r.tasksTotal}`;
+    setChip(S.hud.tasks, 0, `${r.done.length}/${r.tasksTotal}`);
     const alive = r.players.filter((p) => p.alive && !p.left).length;
-    S.hud.team.textContent = `👥 ${alive}/${S.playersAtStart}`;
+    setChip(S.hud.team, 2, `${alive}/${S.playersAtStart}`);
   }
 
   const elapsed = () => Math.max(0, (performance.now() - S.startAt) / 1000);
@@ -328,9 +333,10 @@ export function createFugaScene(game) {
     const bar = h('div', { class: 'bar__fill' });
     const btns = ch.options.map((o, i) => h('button', { class: 'quiz__opt', text: o, onClick: () => answer(i) }));
     S.capture = { el: h('div', { class: 'fuga__overlay fuga__capture', role: 'alertdialog', 'aria-label': 'Capturado pela tentação' },
-      h('h2', { class: 'quiz__q', text: '🐍 A tentação alcançou você!' }),
-      h('p', { class: 'fuga__question', text: ch.q }),
-      h('div', { class: 'bar' }, bar),
+      h('div', { class: 'fuga__capbox' },
+        h('h2', { class: 'quiz__q', text: 'A tentação alcançou você!' }),
+        h('p', { class: 'fuga__question', text: ch.q }),
+        h('div', { class: 'bar' }, bar)),
       h('div', { class: 'quiz__opts' }, ...btns)), until: performance.now() + ch.ms, total: ch.ms, bar, btns };
     S.ui.appendChild(S.capture.el);
     sfx('wrong');
@@ -381,7 +387,8 @@ export function createFugaScene(game) {
       if (!S.alive) return;
       S.phase = 'end';
       teardownPlay();
-      screen(won ? 'Vitória! 🎉' : 'Fim da rodada', h('div', { class: 'fuga__menu quiz__result' },
+      screen(won ? 'Vitória!' : 'Fim da rodada', h('div', { class: 'fuga__menu quiz__result' },
+        h('div', { class: `fuga__banner fuga__banner--${won ? 0 : me.alive ? 1 : 2}` }, h('b', { text: won ? 'VITÓRIA' : me.alive ? 'DERROTA' : 'ELIMINADO' })),
         h('h2', { class: 'quiz__q', text: won ? 'A equipe resistiu à tentação e escapou!' : 'Desta vez a tentação venceu…' }),
         h('p', { class: 'screen__note', text: won ? '"Resistam ao diabo, e ele fugirá de vocês." (Tiago 4:7)' : '"Deus é fiel: ele dará também a saída." (1 Coríntios 10:13) Tentem de novo!' }),
         h('ul', { class: 'frows' }, ...r.players.map((p) => h('li', { class: 'frow' },
@@ -463,8 +470,8 @@ export function createFugaScene(game) {
     }
     // HUD bits
     const left = Math.max(0, r.limit - elapsed());
-    const txt = started ? `⏳ ${Math.floor(left / 60)}:${String(Math.floor(left % 60)).padStart(2, '0')}` : `Começa em ${Math.ceil((S.startAt - performance.now()) / 1000)}`;
-    if (S.hud.time.textContent !== txt) { S.hud.time.textContent = txt; paintHud(); }
+    const txt = started ? `${Math.floor(left / 60)}:${String(Math.floor(left % 60)).padStart(2, '0')}` : `Começa em ${Math.ceil((S.startAt - performance.now()) / 1000)}`;
+    if (S.hud.time.dataset.t !== txt) { S.hud.time.dataset.t = txt; setChip(S.hud.time, 1, txt); paintHud(); }
     const t = free ? nearTask() : null;
     const label = t ? (t.kind === 'challenge' ? `Fazer: ${t.name}` : t.kind === 'colher' ? `${t.name}: ${t.bits.filter((b) => b.got).length}/3` : `${t.name}: segurem as 2 pedras`) : '';
     S.hud.action.hidden = !t;
@@ -520,13 +527,14 @@ export function createFugaScene(game) {
     }
     // tasks (PROVISIONAL drawings until the art arrives)
     for (const t of S.tasks) {
+      if (S.art && S.art.objs) { drawTask(ctx, S.art, t, time); continue; }
       const glow = t.done ? 'rgba(124,240,166,.5)' : `rgba(255,214,90,${0.55 + 0.35 * Math.sin(time * 3 + t.n)})`;
       if (t.kind === 'ativar') t.plates.forEach((p) => { ctx.fillStyle = glow; ctx.fillRect(p.x - 6, p.y - 4, 12, 8); ctx.strokeStyle = '#3b2a12'; ctx.strokeRect(p.x - 6.5, p.y - 4.5, 13, 9); });
       else { ctx.fillStyle = '#5b4a33'; ctx.fillRect(t.x - 5, t.y - 4, 10, 8); ctx.fillStyle = glow; ctx.fillRect(t.x - 3, t.y - 10, 6, 6); }
       if (t.kind === 'colher' && !t.done) for (const b of t.bits) if (!b.got) { ctx.fillStyle = `rgba(255,255,200,${0.6 + 0.4 * Math.sin(time * 6 + b.x)})`; ctx.fillRect(b.x - 2, b.y - 6, 4, 4); }
     }
     // signalled appearances
-    for (const w of dir.warnings) { ctx.strokeStyle = `rgba(255,60,60,${0.5 + 0.5 * Math.sin(time * 14)})`; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(w.x, w.y, 12, 6, 0, 0, 7); ctx.stroke(); ctx.lineWidth = 1; }
+    for (const w of dir.warnings) if (S.art && S.art.snakeFx) drawSpawn(ctx, S.art, w); else { ctx.strokeStyle = `rgba(255,60,60,${0.5 + 0.5 * Math.sin(time * 14)})`; ctx.lineWidth = 2; ctx.beginPath(); ctx.ellipse(w.x, w.y, 12, 6, 0, 0, 7); ctx.stroke(); ctx.lineWidth = 1; }
     // characters and enemies by depth
     const list = [];
     const showMe = me.alive && !me.escaped;
@@ -567,6 +575,11 @@ export function createFugaScene(game) {
 
   // PROVISIONAL serpent: segments until the sprite sheet arrives
   function drawEnemy(c, e, time) {
+    if (S.art && S.art.snake && e.kind === 'serpente') {
+      drawSnake(c, S.art, e, time);
+      if (e.state === 'chase') { c.fillStyle = '#ff5a6a'; c.font = 'bold 11px sans-serif'; c.textAlign = 'center'; c.fillText('!', e.x, e.y - 42); }
+      return;
+    }
     const tr = e.trail || [{ x: e.x, y: e.y }];
     for (let i = tr.length - 1; i >= 0; i--) {
       const s = tr[i];
@@ -581,9 +594,10 @@ export function createFugaScene(game) {
 
   function drawMinimap(ctx, d) {
     const m = S.map, sz = Math.round(Math.min(72, d.height * 0.3)), k = sz / m.cols;
-    const x0 = d.width - sz - 6, y0 = 40;
+    const x0 = d.width - sz - 14, y0 = 56;
     ctx.fillStyle = 'rgba(5,7,26,.75)';
     ctx.fillRect(x0 - 2, y0 - 2, sz + 4, sz + 4);
+    const frame = S.art && S.art.frame;
     for (let y = 0; y < m.rows; y += 2) for (let x = 0; x < m.cols; x += 2) {
       if (!S.explored[m.idx(x, y)]) continue;
       const t = m.get(x, y);
@@ -595,6 +609,7 @@ export function createFugaScene(game) {
     for (const rm of S.remotes.values()) { ctx.fillStyle = '#62b6ff'; ctx.fillRect(x0 + (rm.p.x / 16) * k - 1, y0 + (rm.p.y / 16) * k - 1, 2, 2); }
     for (const e of S.director.enemies) if (Math.hypot(e.x - S.me.x, e.y - S.me.y) < 110) { ctx.fillStyle = '#ff4d5e'; ctx.fillRect(x0 + (e.x / 16) * k - 1, y0 + (e.y / 16) * k - 1, 2, 2); }
     ctx.fillStyle = '#fff'; ctx.fillRect(x0 + (S.me.x / 16) * k - 1, y0 + (S.me.y / 16) * k - 1, 2, 2);
+    if (frame) { const pad = Math.round(sz * 0.2); ctx.drawImage(frame, x0 - pad, y0 - pad, sz + pad * 2, sz + pad * 2); }
   }
 
   let uiRoot = null;

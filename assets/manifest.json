@@ -3691,6 +3691,56 @@
    "color": "#4c8a2e",
    "label": "Fonte",
    "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.serpente",
+   "src": "characters/fuga_serpente_sheet.png",
+   "kind": "map",
+   "w": 192,
+   "h": 192,
+   "color": "#3f7f4f",
+   "label": "Serpente (Fuga)",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.serpente_fx",
+   "src": "characters/fuga_serpente_fx.png",
+   "kind": "map",
+   "w": 192,
+   "h": 144,
+   "color": "#3f7f4f",
+   "label": "Serpente efeitos",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.objetos",
+   "src": "maps/fuga_objetos.png",
+   "kind": "map",
+   "w": 256,
+   "h": 64,
+   "color": "#c9a227",
+   "label": "Objetos das tarefas",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.fx",
+   "src": "ui/fuga_fx.png",
+   "kind": "map",
+   "w": 256,
+   "h": 128,
+   "color": "#c9a227",
+   "label": "Efeitos da Fuga",
+   "group": "Fuga: Jardim do Éden"
+  },
+  {
+   "id": "fuga.minimapa",
+   "src": "ui/minimapa_moldura.png",
+   "kind": "map",
+   "w": 96,
+   "h": 96,
+   "color": "#7a5a2a",
+   "label": "Moldura do minimapa",
+   "group": "Fuga: Jardim do Éden"
   }
  ]
 }
