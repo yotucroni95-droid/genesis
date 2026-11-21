@@ -59,8 +59,9 @@ export class Pet {
       c.save();
       c.translate(Math.round(this.x), Math.round(this.y + hop));
       if (this.moving && this.dir === 1) c.scale(-1, 1); // the side row faces right
-      const s = 20; // drawn smaller than the 32 px frame: a pet is about half the owner's height
-      c.imageSmoothingEnabled = false;
+      const s = 22; // drawn smaller than the 32 px frame: a pet is about half the owner's height
+      // a non-integer shrink of pixel art looks jagged without smoothing
+      c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high';
       c.drawImage(img, frame * f, row * f, f, f, -s / 2, -s + 1, s, s);
       c.restore();
       return;
