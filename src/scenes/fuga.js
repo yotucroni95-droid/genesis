@@ -22,7 +22,8 @@ import { Director, STAGES, stageOf, KINDS } from '../fuga/director.js';
 import { loadPool, roundTasks } from '../fuga/tasks.js';
 import { fugaOn, online, soloRoom, fugaError } from '../cloud/fuga.js';
 import { Channel } from '../cloud/realtime.js';
-import { Pet, petState } from '../world/pet.js';
+import { Pet, petState, equipPet } from '../world/pet.js';
+import { playableCharacters } from '../ui/character-card.js';
 
 // quick chat: fixed phrases and emotes (index is what goes over the network)
 const QUICK = [
@@ -47,12 +48,15 @@ export function createFugaScene(game) {
     alive: true, phase: 'menu', api: null, code: '', room: null, map: null, baked: null, director: null, tasks: [], pool: null,
     me: null, remotes: new Map(), channel: null, input: null, ui: null, hud: {}, overlay: null, capture: null, poll: 0, sendT: 0, dirT: 0,
     startAt: 0, explored: null, seen: new Set(), noises: [], caughtAt: new Map(), plate: null, plateT: 0, spect: 0, ended: false, busy: false, say: new Map(), sayT: 0, stepT: 0, beatT: 0, wasHidden: false, foeState: new Map(),
+    rooms: null, listT: 0, listEl: null, pick: null, log: [], waitSig: '',
     lastSent: '', diff: 1, firstFrame: true, playersAtStart: 1, escaping: false, ending: false,
   });
 
   // ---------- network helpers ----------
   const call = async (fn, ...args) => {
-    try { const st = await S.api[fn](S.code, ...args); if (st) onState(st); return st; } catch (err) { if (S.phase !== 'play') toast(fugaError(err)); else S.hud.net && (S.hud.net.hidden = false); return null; }
+    try { const st = await S.api[fn](S.code, ...args); if (st) onState(st); return st; } catch (err) {
+      if (S.phase === 'wait' && /nao esta nesta sala|removido/.test(String(err && err.message))) { kicked(); return null; }
+      if (S.phase !== 'play') toast(fugaError(err)); else S.hud.net && (S.hud.net.hidden = false); return null; }
   };
   const mySeat = () => (S.room ? S.room.me : 0);
   const meInfo = () => (S.room && S.room.players.find((p) => p.seat === mySeat())) || {};
@@ -102,9 +106,41 @@ export function createFugaScene(game) {
         card('fuga__card--treino', 0, 'TREINO', 'Sozinho, sem internet', soloStart),
         fugaOn() ? card('fuga__card--publica', 1, 'SALA PÚBLICA', 'Jogue com quem está online', () => enterRoom(() => online.quick(nick, save.avatarId, S.diff))) : null,
         fugaOn() ? card('fuga__card--privada', 2, 'SALA PRIVADA', 'Crie e chame amigos', () => enterRoom(() => online.create(nick, save.avatarId, false, S.diff))) : null),
+      fugaOn() ? h('div', { class: 'fuga__rooms' }, h('div', { class: 'fuga__roomshead' }, h('span', { class: 'fuga__label', text: '🌐 Salas abertas' }),
+        h('button', { class: 'btn btn--small btn--ghost', text: '↻', 'aria-label': 'Atualizar salas', onClick: () => refreshRooms() })), S.listEl = h('ul', { class: 'fuga__roomlist' })) : null,
       fugaOn() ? h('div', { class: 'fuga__coderow' }, h('span', { class: 'fuga__label', text: 'Tem um código?' }), codeIn,
         h('button', { class: 'btn fuga__codebtn', text: 'Entrar', onClick: () => go(() => enterRoom(() => online.join(codeIn.value, nick, save.avatarId))) })) : null,
     ));
+    S.joinRoom = (code) => go(() => enterRoom(() => online.join(code, nick, save.avatarId)));
+    paintRooms();
+    if (fugaOn()) refreshRooms();
+  }
+
+  // public rooms anyone can join (refreshed every few seconds while on the menu)
+  async function refreshRooms() {
+    S.listT = 5;
+    try { S.rooms = await online.list(); } catch (err) { S.rooms = /404|PGRST202|Could not find/.test(String(err && err.message)) ? 'off' : 'err'; }
+    if (S && S.phase === 'menu') paintRooms();
+  }
+  function paintRooms() {
+    const el = S.listEl;
+    if (!el || !el.isConnected) return;
+    const note = (t) => h('li', { class: 'fuga__roomnote', text: t });
+    if (S.rooms === null) return el.replaceChildren(note('Procurando salas…'));
+    if (S.rooms === 'off') return el.replaceChildren(note('A lista de salas ainda não foi ligada no servidor.'));
+    if (S.rooms === 'err') return el.replaceChildren(note('Sem conexão para ver as salas.'));
+    if (!S.rooms.length) return el.replaceChildren(note('Nenhuma sala aberta agora. Crie uma Sala Pública e espere os amigos!'));
+    const face = (id) => game.assets.url(game.assets.entry(`portrait.${id}`) ? `portrait.${id}` : 'portrait.peregrino');
+    el.replaceChildren(...S.rooms.map((r) => h('li', { class: 'fuga__room' },
+      h('span', { class: 'fuga__roomfaces' }, ...(r.avatars || []).slice(0, 5).map((a) => h('img', { class: 'pixel', src: face(a), alt: '' }))),
+      h('span', { class: 'fuga__roominfo' }, h('b', { text: `Sala de @${r.host || 'jogador'}` }), h('small', { text: `${DIFFS[r.difficulty] || ''} · ${r.players}/${r.max} jogadores` })),
+      h('button', { class: 'btn btn--small btn--play', text: 'Entrar', onClick: () => S.joinRoom(r.code) }))));
+  }
+
+  function kicked() {
+    remember(''); closeChannel(); S.api = null; S.room = null;
+    toast('O anfitrião tirou você da sala.', { ms: 4000 });
+    menu();
   }
 
   async function enterRoom(make, onFail) {
@@ -116,6 +152,8 @@ export function createFugaScene(game) {
     remember(st.code);
     openChannel();
     S.phase = 'wait';
+    S.log = []; S.pick = null; S.waitSig = '';
+    if (!S.petDefs) game.assets.loadJSON('pets.json').then((j) => { S.petDefs = j.pets; S.waitSig = ''; if (S.phase === 'wait') paintWait(); }).catch(() => {});
     onState(st);
   }
 
@@ -130,21 +168,75 @@ export function createFugaScene(game) {
 
   function paintWait() {
     const r = S.room;
-    const host = r.players.filter((p) => !p.left)[0];
+    const list = r.players.filter((p) => !p.left);
+    const host = list[0];
     const iAmHost = host && host.seat === r.me;
+    const save = game.save;
+    const sig = JSON.stringify([list.map((p) => [p.seat, p.nick, p.avatar]), r.public, r.me, S.pick, S.log.length, petState(save).on, save.state.avatarId]);
+    if (sig === S.waitSig && S.ui.querySelector('.fuga__wait')) return;
+    S.waitSig = sig;
+    const oldBody = S.ui.querySelector('.fuga__wait') && S.ui.querySelector('.screen__body');
+    const keepScroll = oldBody ? oldBody.scrollTop : 0;
     const portrait = (id) => game.assets.url(game.assets.entry(`portrait.${id}`) ? `portrait.${id}` : 'portrait.peregrino');
-    screen('Fuga · Sala', h('div', { class: 'fuga__menu' },
-      h('div', { class: 'friends__me' }, h('span', { text: r.public ? 'Sala pública' : 'Código da sala:' }), h('b', { class: 'friends__tag', text: r.code }),
+    const nickOf = (seat) => (list.find((p) => p.seat === seat) || {}).nick || 'jogador';
+    const toggle = (k) => { S.pick = S.pick === k ? null : k; sfx('click'); paintWait(); };
+    const setChar = async (id) => {
+      save.setAvatar(id); S.pick = null; sfx('click');
+      try { const st = await online.avatar(S.code, id); if (st) onState(st); } catch (err) { toast(fugaError(err)); }
+      paintWait();
+    };
+    const setPet = (id) => { equipPet(save, id); S.pick = null; sfx('click'); paintWait(); };
+    const sayWait = (k) => {
+      if (performance.now() < S.sayT) return;
+      S.sayT = performance.now() + 1500;
+      S.log.push({ s: r.me, k }); if (S.log.length > 30) S.log.shift();
+      sfx('bubble');
+      if (S.channel) S.channel.broadcast('say', { s: r.me, k });
+      paintWait();
+    };
+    let picker = null;
+    if (S.pick === 'char') {
+      const chars = playableCharacters(game.assets).filter((c) => save.isUnlocked(c.id));
+      picker = h('div', { class: 'fuga__picker' }, ...chars.map((c) => h('button', { class: `fuga__pickbtn${c.id === save.state.avatarId ? ' is-on' : ''}`, 'aria-label': c.name || c.id, onClick: () => setChar(c.id) },
+        h('img', { class: 'pixel', src: portrait(c.id), alt: '' }))));
+    } else if (S.pick === 'pet') {
+      const ps = petState(save);
+      const owned = (S.petDefs || []).filter((p) => ps.owned && ps.owned[p.id]);
+      const pic = (p) => (game.assets.entry(`petface.${p.id}`) ? h('img', { class: 'pixel', src: game.assets.url(`petface.${p.id}`), alt: '' }) : h('span', { text: p.emoji || '🐾' }));
+      picker = h('div', { class: 'fuga__picker' },
+        h('button', { class: `fuga__pickbtn${!ps.on ? ' is-on' : ''}`, 'aria-label': 'Sem pet', onClick: () => setPet('') }, h('span', { text: '🚫' })),
+        ...owned.map((p) => h('button', { class: `fuga__pickbtn${p.id === ps.on ? ' is-on' : ''}`, 'aria-label': p.name, onClick: () => setPet(p.id) }, pic(p))));
+    }
+    const log = h('ul', { class: 'fuga__log', 'aria-live': 'polite' }, ...(S.log.length ? S.log.slice(-8).map((m) => {
+      const q = QUICK[m.k];
+      return h('li', { class: m.s === r.me ? 'is-me' : '' }, h('b', { text: `@${nickOf(m.s)}` }), h('span', { class: q.emo ? 'is-emo' : '', text: q.emo || q.t }));
+    }) : [h('li', { class: 'fuga__roomnote', text: 'Mande um oi para a equipe 👋' })]));
+    const ps = petState(save), myPet = (S.petDefs || []).find((p) => p.id === ps.on);
+    screen('Fuga · Sala', h('div', { class: 'fuga__menu fuga__wait' },
+      h('div', { class: 'friends__me' }, h('span', { text: 'Código da sala:' }), h('b', { class: 'friends__tag', text: r.code }),
         h('button', { class: 'btn btn--small btn--ghost', text: 'Copiar', onClick: () => navigator.clipboard && navigator.clipboard.writeText(r.code).then(() => toast('Código copiado!')).catch(() => {}) })),
-      h('small', { class: 'screen__note', text: `${DIFFS[r.difficulty]} · ${r.players.filter((p) => !p.left).length}/5 jogadores` }),
-      h('ul', { class: 'frows' }, ...r.players.filter((p) => !p.left).map((p) => h('li', { class: 'frow is-online' },
+      iAmHost ? h('button', { class: `btn btn--small fuga__pubbtn${r.public ? ' is-pub' : ''}`, text: r.public ? '🌐 Sala pública (todos veem) · tocar para fechar' : '🔒 Sala privada (só com código) · tocar para abrir',
+        onClick: () => { sfx('click'); call('setPublic', !r.public); } })
+        : h('small', { class: 'screen__note', text: r.public ? '🌐 Sala pública' : '🔒 Sala privada' }),
+      h('small', { class: 'screen__note', text: `${DIFFS[r.difficulty]} · ${list.length}/5 jogadores` }),
+      h('ul', { class: 'frows' }, ...list.map((p) => h('li', { class: 'frow is-online' },
         h('img', { class: 'pixel frow__face', src: portrait(p.avatar), alt: '' }),
         h('span', { class: 'frow__name', text: `@${p.nick}${p.seat === r.me ? ' (você)' : ''}` }),
-        h('small', { class: 'frow__status', text: p.seat === host.seat ? 'anfitrião' : 'pronto' })))),
+        h('small', { class: 'frow__status', text: p.seat === host.seat ? 'anfitrião' : 'pronto' }),
+        iAmHost && p.seat !== r.me ? h('button', { class: 'btn btn--small btn--ghost fuga__kick', text: '✕', 'aria-label': `Tirar @${p.nick} da sala`,
+          onClick: () => { if (confirm(`Tirar @${p.nick} da sala?`)) call('kick', p.seat); } }) : null))),
+      h('div', { class: 'fuga__waitbar' },
+        h('button', { class: `btn btn--small${S.pick === 'char' ? ' is-on' : ''}`, text: '🧍 Personagem', onClick: () => toggle('char') }),
+        h('button', { class: `btn btn--small${S.pick === 'pet' ? ' is-on' : ''}`, text: `${myPet ? myPet.emoji || '🐾' : '🐾'} Pet`, onClick: () => toggle('pet') })),
+      picker,
+      log,
+      h('div', { class: 'fuga__chat fuga__chat--wait' }, ...QUICK.map((q, k) => h('button', { class: `fuga__say${q.emo ? ' is-emo' : ''}`, text: q.emo || q.t, 'aria-label': q.t, onClick: () => sayWait(k) }))),
       iAmHost ? h('button', { class: 'btn btn--play', text: '▶ Começar', onClick: () => call('start') })
         : h('p', { class: 'screen__note', text: 'Esperando o anfitrião começar…' }),
       h('button', { class: 'btn btn--ghost', text: 'Sair da sala', onClick: () => { S.api.leave(S.code); remember(''); closeChannel(); menu(); } }),
     ));
+    const body = S.ui.querySelector('.screen__body');
+    if (body && keepScroll) body.scrollTop = keepScroll;
   }
 
   // ---------- realtime ----------
@@ -155,7 +247,11 @@ export function createFugaScene(game) {
     ch.on('dir', (m) => { if (S.director && !isHost() && m.s === hostSeat()) S.director.apply(m.d); S.lastDir = { s: m.s, at: performance.now() }; });
     ch.on('noise', (m) => S.noises.push(m));
     ch.on('poke', () => { S.poll = 0; });
-    ch.on('say', (m) => { if (m && Number.isInteger(m.k) && m.k >= 0 && m.k < QUICK.length) { S.say.set(m.s, { k: m.k, at: performance.now() }); sfx('bubble'); } });
+    ch.on('say', (m) => {
+      if (!m || !Number.isInteger(m.k) || m.k < 0 || m.k >= QUICK.length) return;
+      S.say.set(m.s, { k: m.k, at: performance.now() }); sfx('bubble');
+      if (S.phase === 'wait') { S.log.push({ s: m.s, k: m.k }); if (S.log.length > 30) S.log.shift(); paintWait(); }
+    });
     ch.onStatus = (s) => { if (S.hud.net) S.hud.net.hidden = s === 'on'; };
     S.channel = ch;
   }
@@ -441,6 +537,7 @@ export function createFugaScene(game) {
 
   // ---------- frame ----------
   function update(dt) {
+    if (S.phase === 'menu' && S.listEl && fugaOn()) { S.listT -= dt; if (S.listT <= 0) refreshRooms(); return; }
     if (S.phase === 'wait') { S.poll -= dt; if (S.poll <= 0) { S.poll = 1.5; call('state'); } return; }
     if (S.phase !== 'play' || !S.map) return;
     const r = S.room;

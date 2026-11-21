@@ -1524,3 +1524,32 @@ p { line-height: 1.4; }
 .fuga__chat{grid-template-columns:repeat(4,1fr)}
 .fuga__say{grid-column:span 2}
 .fuga__say.is-emo{grid-column:span 1}
+/* Fuga: salas abertas + sala de espera */
+.fuga__rooms { display: flex; flex-direction: column; gap: 6px; }
+.fuga__roomshead { display: flex; align-items: center; justify-content: space-between; }
+.fuga__roomlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; max-height: 210px; overflow-y: auto; }
+.fuga__room { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border-radius: 12px; background: rgba(90,160,255,.16); border: 1px solid rgba(90,160,255,.45); }
+.fuga__roomfaces { display: flex; }
+.fuga__roomfaces img { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #1b2340; margin-left: -6px; background: #2a3466; }
+.fuga__roomfaces img:first-child { margin-left: 0; }
+.fuga__roominfo { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.fuga__roominfo b { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fuga__roominfo small, .fuga__roomnote { opacity: .8; font-size: calc(12px * var(--fs, 1)); }
+.fuga__roomnote { list-style: none; text-align: center; padding: 6px; }
+.fuga__pubbtn { align-self: center; }
+.fuga__pubbtn.is-pub { background: linear-gradient(180deg, #5aa0ff, #2a5fc8); color: #fff; }
+.fuga__kick { margin-left: auto; min-width: 34px; color: #ff8a8a; }
+.fuga__waitbar { display: flex; gap: 8px; justify-content: center; }
+.fuga__waitbar .is-on { outline: 2px solid #ffd76a; }
+.fuga__picker { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; padding: 6px; border-radius: 12px; background: rgba(0,0,0,.25); max-height: 150px; overflow-y: auto; }
+.fuga__pickbtn { width: 48px; height: 48px; padding: 2px; border-radius: 10px; border: 2px solid rgba(255,255,255,.2); background: rgba(255,255,255,.08); cursor: pointer; display: grid; place-items: center; font-size: 24px; }
+.fuga__pickbtn img { width: 100%; height: 100%; object-fit: contain; }
+.fuga__pickbtn.is-on { border-color: #ffd76a; box-shadow: 0 0 0 2px rgba(255,215,106,.35); }
+.fuga__log { list-style: none; margin: 0; padding: 6px 8px; display: flex; flex-direction: column; gap: 4px; border-radius: 12px; background: rgba(0,0,0,.25); max-height: 130px; overflow-y: auto; }
+.fuga__log li { display: flex; gap: 6px; align-items: baseline; }
+.fuga__log li b { color: #9cc4ff; font-size: calc(12px * var(--fs, 1)); }
+.fuga__log li.is-me b { color: #ffd76a; }
+.fuga__log .is-emo { font-size: 20px; }
+.fuga__chat.fuga__chat--wait { position: static; width: auto; top: auto; bottom: auto; right: auto; max-height: none; overflow: visible; }
+.fuga__room .btn, .fuga__kick { flex: none; width: auto; min-width: 0; margin: 0; padding: 6px 12px; font-size: calc(13px * var(--fs, 1)); }
+.fuga__room .btn { margin-left: auto; }

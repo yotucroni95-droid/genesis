@@ -18,6 +18,10 @@ export const online = {
   caught: (code, seat) => rpc('genesis_fuga_caught', { p_code: code, p_token: tok(), p_seat: seat }),
   answer: (code, choice) => rpc('genesis_fuga_answer', { p_code: code, p_token: tok(), p_choice: choice }),
   escape: (code) => rpc('genesis_fuga_escape', { p_code: code, p_token: tok() }),
+  list: () => rpc('genesis_fuga_list', {}, { timeout: 8000 }),
+  setPublic: (code, pub) => rpc('genesis_fuga_set_public', { p_code: code, p_token: tok(), p_public: !!pub }),
+  kick: (code, seat) => rpc('genesis_fuga_kick', { p_code: code, p_token: tok(), p_seat: seat }),
+  avatar: (code, avatar) => rpc('genesis_fuga_avatar', { p_code: code, p_token: tok(), p_avatar: avatar }),
   leave: (code) => rpc('genesis_fuga_leave', { p_code: code, p_token: tok() }, { keepalive: true, timeout: 4000 }).catch(() => {}),
 };
 
@@ -26,7 +30,8 @@ export function fugaError(err) {
   if (/nao existe/.test(m)) return 'Não achei essa sala. Confira o código.';
   if (/cheia/.test(m)) return 'Essa sala já está cheia (5 jogadores).';
   if (/ja comecou/.test(m)) return 'Essa partida já começou. Crie uma sala ou entre em outra.';
-  if (/anfitriao/.test(m)) return 'Só quem abriu a sala pode começar.';
+  if (/removido|nao esta nesta sala/.test(m)) return 'O anfitrião tirou você dessa sala.';
+  if (/anfitriao/.test(m)) return 'Só quem abriu a sala pode fazer isso.';
   if (/404|PGRST202|Could not find/.test(m)) return 'O modo online da Fuga ainda não foi ligado no servidor. Jogue no treino!';
   return 'Sem conexão com o servidor. Verifique a internet.';
 }
