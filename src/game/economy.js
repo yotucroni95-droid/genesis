@@ -75,7 +75,7 @@ function addWeekly(s, n, { trophies = n } = {}) {
   s.week.points = (s.week.points || 0) + n;
 }
 /** Season Points for playing (trophies already count by themselves). */
-export const POINTS_FOR = { stops: 5, threeStars: 10, correct: 1, arenaPlay: 3, daily: 10, dailyMission: 10, onlineWin: 15, openBox: 2 };
+export const POINTS_FOR = { stops: 0, threeStars: 15, correct: 1, arenaPlay: 0, daily: 10, dailyMission: 10, onlineWin: 15, openBox: 2 };
 export function addSeasonPoints(save, n) {
   if (isSabbath()) return; // Modo Sábado: no competition points
   if (n > 0) save.update((s) => addWeekly(s, n, { trophies: 0 }));
@@ -343,7 +343,8 @@ export function rewardStop(save, chapter, stop, result, isFirstTime) {
   addCoins(save, coins);
   out.push({ type: 'coins', amount: coins });
 
-  const trophyBase = newStars * 10 + (hero ? 5 : 0);
+  // ranking is earned only by reaching 3 stars
+  const trophyBase = stars === 3 && newStars ? 30 + (hero ? 5 : 0) : 0;
   if (trophyBase) {
     const t = Math.round(trophyBase * (1 + power(save, 'trophies') / 100));
     const rankUp = addTrophies(save, t);

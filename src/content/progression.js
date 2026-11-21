@@ -35,6 +35,13 @@ export function isChapterOpen(save, index, loadedChapters, entries = []) {
   return Boolean(prev && chapterDone(save, prev));
 }
 
+/** The chapter's characters come only with 3 stars on every stop. */
+export function unlockByStars(save, chapter) {
+  const stars = save.state.stars || {};
+  if (chapter.event || !chapter.stops.every((s) => (stars[s.id] || 0) >= 3)) return [];
+  return (chapter.unlocks || []).filter((id) => save.unlock(id)).map((id) => ({ type: 'unlock', id }));
+}
+
 /**
  * Records a finished stop and returns what the player just earned,
  * so the game can celebrate it.
@@ -47,9 +54,6 @@ export function completeStop(save, chapter, stop, score) {
   if (!wasChapterDone && chapterDone(save, chapter)) {
     events.push({ type: 'chapter', id: chapter.id, title: chapter.title });
     if (chapter.medal && save.earn(chapter.medal)) events.push({ type: 'medal', id: chapter.medal });
-    for (const id of chapter.unlocks || []) {
-      if (save.unlock(id)) events.push({ type: 'unlock', id });
-    }
     const level = save.state.level + 1;
     if (save.setLevel(level)) events.push({ type: 'level', level });
   }

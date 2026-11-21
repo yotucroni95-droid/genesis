@@ -244,11 +244,9 @@
         }
       ],
       "challenge": {
-        "type": "tictactoe",
+        "type": "armadura",
         "config": {
-          "difficulty": 0.25,
-          "playerMark": "luz",
-          "aiMark": "sombra"
+          "hard": true
         }
       },
       "rewards": {

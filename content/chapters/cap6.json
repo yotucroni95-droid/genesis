@@ -271,9 +271,19 @@
         }
       ],
       "challenge": {
-        "type": "tictactoe",
+        "type": "quemdisse",
         "config": {
-          "difficulty": 0.5
+          "count": 5,
+          "maxErrors": 1,
+          "only": [
+            "abraao",
+            "sara",
+            "isaque",
+            "rebeca",
+            "jaco",
+            "adao",
+            "eva"
+          ]
         }
       },
       "rewards": {

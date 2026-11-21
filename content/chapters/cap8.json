@@ -212,9 +212,9 @@
         }
       ],
       "challenge": {
-        "type": "tictactoe",
+        "type": "armadura",
         "config": {
-          "difficulty": 0.5
+          "hard": true
         }
       },
       "rewards": {

@@ -170,11 +170,11 @@ export function createArenaScene(game) {
           save.update((s) => { s.arenaDay = { date: day, n: played + 1 }; });
           const tired = played < 5 ? 1 : played < 10 ? 0.4 : 0.1;
           const coins = Math.floor(((score / 30) * (1 + power(save, 'arenaCoins') / 100) + (won ? 15 : 0)) * tired);
-          const trophies = Math.round((Math.min(12, Math.floor(score / 80)) + (record && score > 0 ? 5 : 0) + (won ? 5 : 0)) * (1 + power(save, 'trophies') / 100) * tired);
+          const trophies = !(won || (record && score > 0)) ? 0 : Math.round((Math.min(12, Math.floor(score / 80)) + (record && score > 0 ? 5 : 0) + (won ? 5 : 0)) * (1 + power(save, 'trophies') / 100) * tired);
           if (record) save.update((s) => { s.arenaBest = score; });
           addCoins(save, coins);
           // at high ranks a weak game costs trophies: the top has to be defended
-          const loss = !trophies && !duel ? arenaLoss(save.state.trophies || 0, score) : 0;
+          const loss = !trophies && !duel && score < 80 ? arenaLoss(save.state.trophies || 0, score) : 0;
           if (loss) addTrophies(save, -loss);
           const rankUp = trophies ? addTrophies(save, trophies) : null;
           track(save, 'arenaPlay', 1);

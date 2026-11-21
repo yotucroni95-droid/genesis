@@ -314,7 +314,8 @@
       "challenge": {
         "type": "santuario",
         "config": {
-          "maxErrors": 3
+          "maxErrors": 3,
+          "hard": true
         }
       },
       "rewards": {
@@ -324,8 +325,8 @@
     {
       "id": "cap13_s5",
       "title": "A glória enche o santuário",
-      "x": 22,
-      "y": 5,
+      "x": 21,
+      "y": 8,
       "verse": "Êxodo 40:17-38",
       "story": [
         {

@@ -97,48 +97,27 @@
         }
       ],
       "challenge": {
-        "type": "memory",
+        "type": "sequencia",
         "config": {
-          "pairs": [
+          "hard": true,
+          "goal": 6,
+          "intro": "Adão deu nome aos animais. Repita a sequência!",
+          "symbols": [
             {
-              "crop": "map.eden",
-              "x": 222,
-              "y": 108,
-              "w": 48,
-              "h": 63,
-              "label": "Veado"
-            },
-            {
-              "crop": "map.eden",
-              "x": 120,
-              "y": 420,
-              "w": 75,
-              "h": 45,
+              "icon": "🦁",
               "label": "Leão"
             },
             {
-              "crop": "map.eden",
-              "x": 287,
-              "y": 501,
-              "w": 40,
-              "h": 39,
+              "icon": "🐑",
               "label": "Ovelha"
             },
             {
-              "crop": "map.eden",
-              "x": 624,
-              "y": 459,
-              "w": 27,
-              "h": 39,
-              "label": "Coelho"
+              "icon": "🐘",
+              "label": "Elefante"
             },
             {
-              "crop": "map.eden",
-              "x": 717,
-              "y": 495,
-              "w": 81,
-              "h": 57,
-              "label": "Elefante"
+              "icon": "🐦",
+              "label": "Pássaro"
             }
           ]
         }

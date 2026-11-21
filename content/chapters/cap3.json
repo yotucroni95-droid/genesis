@@ -198,9 +198,18 @@
         }
       ],
       "challenge": {
-        "type": "tictactoe",
+        "type": "quemdisse",
         "config": {
-          "difficulty": 0.5
+          "count": 5,
+          "maxErrors": 1,
+          "only": [
+            "adao",
+            "eva",
+            "caim",
+            "serpente",
+            "abraao",
+            "sara"
+          ]
         }
       },
       "rewards": {

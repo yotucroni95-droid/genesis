@@ -292,7 +292,7 @@ export function createOnlineScene(game) {
           const played = save.state.arenaDay && save.state.arenaDay.date === day ? save.state.arenaDay.n : 0;
           const tired = played < 5 ? 1 : played < 10 ? 0.4 : 0.1;
           coins = Math.floor((me.score / 30 * (1 + power(save, 'arenaCoins') / 100) + (result === 'win' ? 20 : result === 'draw' ? 8 : 0)) * tired);
-          trophies = Math.round((result === 'win' ? 8 : result === 'draw' ? 3 : 0) * (1 + power(save, 'trophies') / 100) * tired);
+          trophies = Math.round((result === 'win' ? 8 : 0) * (1 + power(save, 'trophies') / 100) * tired);
           save.update((s) => { s.onlineRooms = done.concat(key).slice(-30); s.arenaDay = { date: day, n: played + 1 }; });
           if (coins) addCoins(save, coins);
           if (trophies) addTrophies(save, trophies);

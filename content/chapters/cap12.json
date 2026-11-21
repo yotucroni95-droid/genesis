@@ -71,7 +71,7 @@
     {
       "id": "cap12_s1",
       "title": "A coluna de nuvem e de fogo",
-      "x": 2,
+      "x": 9,
       "y": 9,
       "verse": "Êxodo 13:17-22",
       "story": [
@@ -114,7 +114,8 @@
               "label": "Ovelha"
             }
           ],
-          "intro": "A coluna mostra o caminho. Repita a sequência!"
+          "intro": "A coluna mostra o caminho. Repita a sequência!",
+          "hard": true
         }
       },
       "rewards": {
@@ -248,7 +249,8 @@
         "type": "travessia",
         "config": {
           "lives": 3,
-          "length": 40
+          "length": 40,
+          "hard": true
         }
       },
       "rewards": {
@@ -358,7 +360,8 @@
         "config": {
           "goal": 12,
           "seconds": 22,
-          "sixth": true
+          "sixth": true,
+          "hard": true
         }
       },
       "rewards": {

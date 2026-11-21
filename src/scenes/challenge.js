@@ -3,7 +3,7 @@
 import { h } from '../ui/dom.js';
 import { iconButton } from '../ui/icon-button.js';
 import { getChallenge } from '../challenges/index.js';
-import { completeStop } from '../content/progression.js';
+import { completeStop, unlockByStars, chapterDone as isChapterDone } from '../content/progression.js';
 import { findStop } from './story.js';
 import { Starfield } from './starfield.js';
 import { rewardStop, rewardChapter, RARITY_LABEL, addBox, heroKey } from '../game/economy.js';
@@ -61,6 +61,10 @@ export function createChallengeScene(game) {
         setTimeout(() => celebrate({ title: 'Herói do capítulo!', subtitle: `Você venceu o Modo Herói de "${chapter.title}". Ganhou um baú Épico e o título Herói de Gênesis!`, image: game.assets.url(`medal.${chapter.medal}`) }), 1800);
       }
       const starInfo = loot.find((x) => x.type === 'stars');
+      if (!hero) events.push(...unlockByStars(game.save, chapter));
+      // experience follows the stars: each new star pays a quarter of the stop's XP
+      const xpGain = !hero && stop.rewards && stop.rewards.xp ? Math.round(stop.rewards.xp * starInfo.newStars / 4) : 0;
+      const missing = !hero && !chapter.event && isChapterDone(game.save, chapter) ? (chapter.unlocks || []).filter((id) => !(game.save.state.unlocked || {})[id]) : [];
       events.push(...eventUnlocks(game.save, chapter, stop, Math.max(starInfo.stars, (game.save.state.stars || {})[stop.id] || 0)));
       const doneName = chapter.event ? `${chapter.title} concluído!` : `Capítulo ${chapter.number} concluído!`;
       vibrate(starInfo.stars === 3 ? [60, 40, 60, 40, 120] : 80);
@@ -74,7 +78,7 @@ export function createChallengeScene(game) {
         }
         for (const x of loot) if (x.type === 'rank') celebrate({ title: 'Nova patente!', subtitle: `Você chegou a ${x.rank.name} e ganhou um baú!`, badge: rankBadge(x.rank.min, { big: true }) });
       }, 1600);
-      if (!wasDone && stop.rewards && stop.rewards.xp) game.save.addXp(stop.rewards.xp);
+      if (xpGain) game.save.addXp(xpGain);
       const names = Object.fromEntries(game.assets.json('characters.json').characters.map((c) => [c.id, c.name]));
       const medalName = (id) => (game.assets.entry(`medal.${id}`) || {}).label || id;
 
@@ -86,9 +90,10 @@ export function createChallengeScene(game) {
         if (x.type === 'rank') items.push(h('div', { class: 'reward reward--big' }, ico('icon.subir', '⬆️'), h('span', { text: `Nova patente: ${x.rank.name}! Ganhou um baú.` })));
       }
       if (chapterBox) items.push(h('div', { class: 'reward reward--big' }, ico('icon.baus', '🎁'), h('span', { text: `Baú ${RARITY_LABEL[chapterBox]} pelo capítulo! Abra no lobby.` })));
-      if (!wasDone && stop.rewards && stop.rewards.xp) {
-        items.push(h('div', { class: 'reward' }, h('img', { class: 'pixel', src: game.assets.url('icon.estrela'), alt: '' }), h('span', { text: `+${stop.rewards.xp} de experiência` })));
+      if (xpGain) {
+        items.push(h('div', { class: 'reward' }, h('img', { class: 'pixel', src: game.assets.url('icon.estrela'), alt: '' }), h('span', { text: `+${xpGain} de experiência` })));
       }
+      if (missing.length) items.push(h('small', { class: 'screen__note', text: `Faça ⭐⭐⭐ em todas as paradas do capítulo para liberar ${missing.map((id) => names[id] || id).join(', ')}.` }));
       for (const e of events) {
         if (e.type === 'medal') items.push(h('div', { class: 'reward reward--big' }, h('img', { class: 'pixel', src: game.assets.url(`medal.${e.id}`), alt: '' }), h('span', { text: `Nova medalha: ${medalName(e.id)}` })));
         if (e.type === 'unlock') items.push(h('div', { class: 'reward reward--big' }, h('img', { class: 'pixel reward__face', src: game.assets.url(`portrait.${e.id}`), alt: '' }), h('span', { text: `Personagem liberado: ${names[e.id] || e.id}` })));

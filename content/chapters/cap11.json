@@ -105,7 +105,8 @@
         "config": {
           "seconds": 26,
           "lives": 3,
-          "speed": 1.0
+          "speed": 1.0,
+          "hard": true
         }
       },
       "rewards": {
@@ -210,8 +211,8 @@
     {
       "id": "cap11_s3",
       "title": "A sarça ardente",
-      "x": 27,
-      "y": 2,
+      "x": 23,
+      "y": 9,
       "verse": "Êxodo 3:1–4:17",
       "story": [
         {

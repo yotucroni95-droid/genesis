@@ -86,24 +86,10 @@
         }
       ],
       "challenge": {
-        "type": "memory",
+        "type": "pares",
         "config": {
-          "pairs": [
-            "jose",
-            "jaco",
-            "isaque",
-            "abraao",
-            {
-              "sheet": "povo",
-              "variant": 5,
-              "label": "Rúben"
-            },
-            {
-              "sheet": "povo",
-              "variant": 7,
-              "label": "Benjamim"
-            }
-          ]
+          "count": 6,
+          "maxErrors": 2
         }
       },
       "rewards": {

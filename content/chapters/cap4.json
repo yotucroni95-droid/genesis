@@ -184,9 +184,29 @@
         }
       ],
       "challenge": {
-        "type": "tictactoe",
+        "type": "sequencia",
         "config": {
-          "difficulty": 0.5
+          "hard": true,
+          "goal": 6,
+          "intro": "A pomba voltou com uma folha. Repita a sequência!",
+          "symbols": [
+            {
+              "icon": "🕊️",
+              "label": "Pomba"
+            },
+            {
+              "icon": "🌿",
+              "label": "Folha"
+            },
+            {
+              "icon": "🌈",
+              "label": "Arco-íris"
+            },
+            {
+              "icon": "🌊",
+              "label": "Água"
+            }
+          ]
         }
       },
       "rewards": {

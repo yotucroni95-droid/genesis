@@ -227,9 +227,9 @@
         }
       ],
       "challenge": {
-        "type": "tictactoe",
+        "type": "labirinto",
         "config": {
-          "difficulty": 0.5
+          "hard": true
         }
       },
       "rewards": {
