@@ -1514,3 +1514,13 @@ p { line-height: 1.4; }
 .sabbath__dove { width: 64px; height: 64px; image-rendering: pixelated; font-size: 0; }
 /* nick dourado: patente Nova Jerusalém ou acima */
 .nick--gold{background:linear-gradient(180deg,#fff6c2 0%,#ffd84a 45%,#e0a21b 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 #6b4200) drop-shadow(0 0 4px rgba(255,210,80,.55))}
+/* Fuga: quick chat */
+.fuga__chatbtn{position:absolute;right:calc(12px + env(safe-area-inset-right));bottom:calc(50% - 22px);width:44px;height:44px;padding:0;border-radius:50%;font-size:20px;line-height:1;z-index:6}
+.fuga__chat{position:absolute;right:calc(64px + env(safe-area-inset-right));bottom:12px;top:56px;width:min(300px,56vw);overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;align-content:start;gap:6px;padding:8px;background:rgba(14,10,32,.92);border:2px solid #6b5aa8;border-radius:12px;z-index:7}
+.fuga__chat[hidden]{display:none}
+.fuga__say{font:600 calc(12px * var(--fs, 1)) var(--font);color:#fff;background:#2c2358;border:1px solid #5d4fa0;border-radius:8px;padding:7px 6px;text-align:center;cursor:pointer;min-height:34px}
+.fuga__say.is-emo{font-size:20px;padding:4px}
+.fuga__say:active{transform:scale(.95);background:#3d3175}
+.fuga__chat{grid-template-columns:repeat(4,1fr)}
+.fuga__say{grid-column:span 2}
+.fuga__say.is-emo{grid-column:span 1}

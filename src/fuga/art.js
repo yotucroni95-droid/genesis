@@ -73,7 +73,19 @@ export function paintMap(map, assets) {
       const row = y >> 3, off = (row & 1) * 8, edge = (y & 7) === 0 || ((x + off) & 15) === 0;
       const p = PAL.pave; col = edge ? [128, 106, 72] : p[Math.max(0, Math.min(p.length - 1, Math.floor(hash(((x + off) >> 4), row) * 2 + 1 + dith * 0.8)))];
     } else if (m === MAT.FOREST) { const p = PAL.forest; col = p[Math.max(0, Math.min(2, Math.floor(patch * 3 + dith)))]; }
-    else col = [46, 110, 176];
+    else if (m === MAT.SHORE) { const p = PAL.shore; col = p[Math.max(0, Math.min(p.length - 1, Math.floor(patch * p.length + dith * 1.2)))]; }
+    else { // painted water, like the Eden river: deep in the middle, foam at the shore, light streaks
+      const isW = (ax, ay) => matAt(ax, ay) === MAT.WATER;
+      const edge = !isW(x - 2, y) || !isW(x + 2, y) || !isW(x, y - 2) || !isW(x, y + 2);
+      const near = edge || !isW(x - 6, y) || !isW(x + 6, y) || !isW(x, y - 6) || !isW(x, y + 6);
+      const mid = near || !isW(x - 12, y) || !isW(x + 12, y) || !isW(x, y - 12) || !isW(x, y + 12);
+      const wave = Math.sin(x * 0.16 + y * 0.05 + noise(x / 16, y / 16) * 7);
+      if (edge && hash(x, y) < 0.75) col = hash(x + 1, y) < 0.5 ? [232, 248, 255] : [190, 232, 250];
+      else if (wave > 0.93 && noise(x / 6, y / 6) > 0.55) col = [178, 228, 252];
+      else if (wave > 0.82 && noise(x / 6, y / 6) > 0.35) col = near ? [110, 196, 236] : [84, 162, 222];
+      else col = near ? [64, 160, 220] : mid ? [44, 128, 200] : [32, 98, 172];
+      if (hash(x * 3, y * 7) > 0.996) col = [255, 255, 255]; // sparkle
+    }
     const i = (y * W + x) * 4;
     D[i] = col[0]; D[i + 1] = col[1]; D[i + 2] = col[2]; D[i + 3] = 255;
   }
@@ -83,7 +95,7 @@ export function paintMap(map, assets) {
   for (let y = 0; y < map.rows; y++) for (let x = 0; x < map.cols; x++) {
     const t = map.get(x, y);
     if (t === T.WATER && roomOf(x, y) === fountRoom) continue; // the fountain sprite covers it
-    if (t === T.WATER) { tile(...pick([[0, 2], [1, 2]]), x, y); if (map.get(x, y - 1) !== T.WATER) tile(2, 2, x, y); continue; }
+    if (t === T.WATER) continue; // painted per pixel above
     if (t !== T.FLOOR && t !== T.FLOWER && t !== T.TREE && t !== T.BUSH) continue;
     if (roomOf(x, y) === plazaRoom) continue;
     const n = t === T.FLOWER ? 4 : 2;

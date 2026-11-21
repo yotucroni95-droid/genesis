@@ -24,6 +24,15 @@ import { fugaOn, online, soloRoom, fugaError } from '../cloud/fuga.js';
 import { Channel } from '../cloud/realtime.js';
 import { Pet, petState } from '../world/pet.js';
 
+// quick chat: fixed phrases and emotes (index is what goes over the network)
+const QUICK = [
+  { t: 'Vem comigo!' }, { t: 'Socorro!' }, { t: 'A serpente tá aqui!' }, { t: 'Corre!' }, { t: 'Cuidado!' },
+  { t: 'Vou fazer a tarefa' }, { t: 'Me ajuda na pedra!' }, { t: 'Se esconde na moita!' }, { t: 'Para o portal!' },
+  { t: 'Estou indo!' }, { t: 'Boa!' }, { t: 'Obrigado!' },
+  { t: 'Feliz', emo: '😄' }, { t: 'Joia', emo: '👍' }, { t: 'Medo', emo: '😱' }, { t: 'Orando', emo: '🙏' },
+  { t: 'Amor', emo: '❤️' }, { t: 'Risada', emo: '😂' }, { t: 'Bravo', emo: '😤' }, { t: 'Pensando', emo: '🤔' },
+];
+
 const DIFFS = ['Fácil', 'Médio', 'Difícil'];
 const LAST_KEY = 'genesis.fugaRoom';
 const remember = (code) => { try { if (code) localStorage.setItem(LAST_KEY, JSON.stringify({ code, at: Date.now() })); else localStorage.removeItem(LAST_KEY); } catch { /* blocked */ } };
@@ -37,7 +46,7 @@ export function createFugaScene(game) {
   const fresh = () => ({
     alive: true, phase: 'menu', api: null, code: '', room: null, map: null, baked: null, director: null, tasks: [], pool: null,
     me: null, remotes: new Map(), channel: null, input: null, ui: null, hud: {}, overlay: null, capture: null, poll: 0, sendT: 0, dirT: 0,
-    startAt: 0, explored: null, seen: new Set(), noises: [], caughtAt: new Map(), plate: null, plateT: 0, spect: 0, ended: false, busy: false,
+    startAt: 0, explored: null, seen: new Set(), noises: [], caughtAt: new Map(), plate: null, plateT: 0, spect: 0, ended: false, busy: false, say: new Map(), sayT: 0, stepT: 0, beatT: 0, wasHidden: false, foeState: new Map(),
     lastSent: '', diff: 1, firstFrame: true, playersAtStart: 1, escaping: false, ending: false,
   });
 
@@ -146,6 +155,7 @@ export function createFugaScene(game) {
     ch.on('dir', (m) => { if (S.director && !isHost() && m.s === hostSeat()) S.director.apply(m.d); S.lastDir = { s: m.s, at: performance.now() }; });
     ch.on('noise', (m) => S.noises.push(m));
     ch.on('poke', () => { S.poll = 0; });
+    ch.on('say', (m) => { if (m && Number.isInteger(m.k) && m.k >= 0 && m.k < QUICK.length) { S.say.set(m.s, { k: m.k, at: performance.now() }); sfx('bubble'); } });
     ch.onStatus = (s) => { if (S.hud.net) S.hud.net.hidden = s === 'on'; };
     S.channel = ch;
   }
@@ -230,6 +240,19 @@ export function createFugaScene(game) {
       h('span', {}), h('button', { class: 'btn btn--small', 'aria-label': 'Próximo jogador', text: '▶', onClick: () => { S.spect++; } }));
     ui.appendChild(S.hud.action);
     ui.appendChild(S.hud.spect);
+    // quick chat (Among Us style): only ready-made phrases and emotes, so nobody can send anything bad
+    const panel = h('div', { class: 'fuga__chat', hidden: true },
+      ...QUICK.map((q, k) => h('button', { class: `fuga__say${q.emo ? ' is-emo' : ''}`, text: q.emo || q.t, 'aria-label': q.t, onClick: () => say(k) })));
+    const say = (k) => {
+      panel.hidden = true;
+      if (performance.now() < S.sayT) return; // a short pause between messages
+      S.sayT = performance.now() + 1500;
+      S.say.set(mySeat(), { k, at: performance.now() });
+      sfx('bubble');
+      if (S.channel) S.channel.broadcast('say', { s: mySeat(), k });
+    };
+    ui.appendChild(h('button', { class: 'btn fuga__chatbtn', 'aria-label': 'Mensagens rápidas', text: '💬', onClick: () => { panel.hidden = !panel.hidden; sfx('click'); } }));
+    ui.appendChild(panel);
     S.input = new Input(ui, game.assets);
     S.onKey = (e) => { if ((e.code === 'KeyE' || e.code === 'Space') && !S.overlay && !S.capture) { e.preventDefault(); act(); } };
     window.addEventListener('keydown', S.onKey);
@@ -429,6 +452,22 @@ export function createFugaScene(game) {
     S.me.update(dt, free ? S.input.vector() : { x: 0, y: 0 }, S.map);
     const hidden = S.map.isBushAt(S.me.x, S.me.y - 4);
     if (S.pet) S.pet.update(dt, S.me);
+    // sounds that make the garden feel alive
+    if (free && S.me.moving) { S.stepT -= dt; if (S.stepT <= 0) { S.stepT = 0.3; sfx(hidden ? 'rustle' : 'step'); } } else S.stepT = 0;
+    if (hidden && !S.wasHidden && free) sfx('rustle');
+    S.wasHidden = hidden;
+    if (S.director && free) {
+      let near = Infinity;
+      for (const e of S.director.enemies) {
+        const d = Math.hypot(e.x - S.me.x, e.y - S.me.y);
+        near = Math.min(near, d);
+        const was = S.foeState.get(e.id);
+        if (e.state === 'chase' && was !== 'chase' && d < 220) sfx('hiss');
+        S.foeState.set(e.id, e.state);
+      }
+      S.beatT -= dt;
+      if (near < 110 && S.beatT <= 0) { S.beatT = near < 55 ? 0.45 : 0.8; sfx('heartbeat'); }
+    }
     // explore around me (minimap)
     const cx = Math.floor(S.me.x / 16), cy = Math.floor(S.me.y / 16);
     for (let y = cy - 6; y <= cy + 6; y++) for (let x = cx - 7; x <= cx + 7; x++) if (x >= 0 && y >= 0 && x < S.map.cols && y < S.map.rows) S.explored[S.map.idx(x, y)] = 1;
@@ -538,7 +577,7 @@ export function createFugaScene(game) {
     // characters and enemies by depth
     const list = [];
     const showMe = me.alive && !me.escaped;
-    if (showMe) list.push({ y: S.me.y, draw: (c) => drawPlayer(c, S.me, me, S.map.isBushAt(S.me.x, S.me.y - 4), '') });
+    if (showMe) list.push({ y: S.me.y, draw: (c) => drawPlayer(c, S.me, me, S.map.isBushAt(S.me.x, S.me.y - 4), '', true) });
     if (showMe && S.pet) list.push({ y: S.pet.y, draw: (c) => S.pet.draw(c) });
     for (const rm of S.remotes.values()) {
       const info = S.room.players.find((p) => p.seat === rm.seat) || {};
@@ -570,7 +609,7 @@ export function createFugaScene(game) {
     drawMinimap(ctx, d);
   }
 
-  function drawPlayer(c, p, info, hidden, nick) {
+  function drawPlayer(c, p, info, hidden, nick, mine = false) {
     c.save();
     if (hidden) c.globalAlpha = 0.45;
     p.draw(c);
@@ -587,6 +626,31 @@ export function createFugaScene(game) {
       c.fillStyle = '#ffffff'; c.fillText(nick, x, y + 0.5);
       c.restore();
     }
+    drawBubble(c, p, info.seat, nick || mine);
+  }
+
+  /** The quick-chat bubble over a head: just long enough to read, then it fades. */
+  function drawBubble(c, p, seat, tagged) {
+    const m = S.say.get(seat);
+    if (!m) return;
+    const q = QUICK[m.k], age = (performance.now() - m.at) / 1000, life = q.emo ? 2.2 : 3;
+    if (age > life) { S.say.delete(seat); return; }
+    c.save();
+    c.globalAlpha = Math.min(1, (life - age) / 0.4, age / 0.12);
+    const x = Math.round(p.x), y = Math.round(p.y - (tagged ? 50 : 40) - Math.min(1, age / 0.12) * 2);
+    if (q.emo) {
+      c.font = '15px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      c.fillText(q.emo, x, y);
+    } else {
+      c.font = 'bold 7px "Pixelify Sans", system-ui, sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
+      const w = Math.ceil(c.measureText(q.t).width) + 10;
+      c.fillStyle = '#fffdf3'; c.strokeStyle = '#1a1030'; c.lineWidth = 1;
+      c.beginPath(); if (c.roundRect) c.roundRect(x - w / 2, y - 6, w, 12, 4); else c.rect(x - w / 2, y - 6, w, 12);
+      c.moveTo(x - 3, y + 6); c.lineTo(x, y + 10); c.lineTo(x + 3, y + 6);
+      c.fill(); c.stroke();
+      c.fillStyle = '#2a1a40'; c.fillText(q.t, x, y + 0.5);
+    }
+    c.restore();
   }
 
   // PROVISIONAL serpent: segments until the sprite sheet arrives

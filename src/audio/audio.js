@@ -16,7 +16,7 @@ const VOL_KEY = 'genesis.volume';
 const vol = { music: 1, sfx: 1, voice: 1 };
 try { Object.assign(vol, JSON.parse(localStorage.getItem(VOL_KEY) || '{}')); } catch { /* storage blocked */ }
 const MUSIC_BASE = 0.12;
-const SFX_BASE = 0.35;
+const SFX_BASE = 0.6;
 const musicLevel = (duck = false) => (duck ? 0.035 : MUSIC_BASE) * vol.music;
 export function getVolume() { return { ...vol }; }
 export function setVolume(part, value) {
@@ -187,6 +187,11 @@ const SFX = {
   talk: () => tone(440 + Math.random() * 120, 0, 0.04, { type: 'square', vol: 0.12 }),
   transition: () => noise(0, 0.25, 0.08),
   notify: () => { tone(880, 0, 0.1, { type: 'sine' }); tone(1320, 0.08, 0.2, { type: 'sine' }); },
+  hiss: () => { noise(0, 0.55, 0.22); tone(180, 0, 0.5, { type: 'sawtooth', vol: 0.08, slide: -60 }); },
+  heartbeat: () => { tone(62, 0, 0.12, { type: 'sine', vol: 0.7 }); tone(58, 0.16, 0.12, { type: 'sine', vol: 0.5 }); },
+  rustle: () => { noise(0, 0.09, 0.12); noise(0.05, 0.07, 0.08); },
+  bubble: () => { tone(740, 0, 0.05, { type: 'sine', vol: 0.35 }); tone(1110, 0.05, 0.08, { type: 'sine', vol: 0.3 }); },
+  warn: () => { tone(330, 0, 0.15, { type: 'square', vol: 0.2 }); tone(330, 0.25, 0.15, { type: 'square', vol: 0.2 }); },
   resist: () => { tone(392, 0, 0.15, { type: 'triangle' }); tone(523, 0.1, 0.15, { type: 'triangle' }); tone(784, 0.2, 0.4, { type: 'sine', vol: 0.5 }); },
 };
 
