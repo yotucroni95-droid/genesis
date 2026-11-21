@@ -1,6 +1,7 @@
 // Ranking: everyone with a cloud account, top 50 by trophies, Arena record or
 // stars, plus the player's own place. Data comes from Supabase (genesis_ranking).
 
+import { nickClass } from '../game/economy.js';
 import { h } from '../ui/dom.js';
 import { gameScreen } from '../ui/screen.js';
 import { frameView } from '../ui/game-ui.js';
@@ -50,7 +51,7 @@ export function createRankingScene(game) {
         list.replaceChildren(...(top.length ? top.map((r) => h('li', { class: `rank-row${r.pos <= 3 ? ` is-top${r.pos}` : ''}${me && me.pos === r.pos ? ' is-me' : ''}` },
           h('span', { class: 'rank-pos', text: r.pos <= 3 ? MEDAL[r.pos - 1] : `${r.pos}º` }),
           frameView(frameId(r.frame), 40, portrait(r.avatar)),
-          h('span', { class: 'rank-name' }, h('b', { text: `@${r.nick}` }), h('small', { text: `Nível ${r.level || 1}` })),
+          h('span', { class: 'rank-name' }, h('b', { class: t.id === 'trofeus' ? nickClass(r.value) : '', text: `@${r.nick}` }), h('small', { text: `Nível ${r.level || 1}` })),
           h('span', { class: 'rank-value' }, h('b', { text: Number(r.value).toLocaleString('pt-BR') }), h('small', { text: t.unit })),
         )) : [h('li', { class: 'rank-empty', text: 'Ninguém no ranking ainda. Seja o primeiro!' })]));
         const total = (data && data.total) || 0;

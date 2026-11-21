@@ -99,6 +99,10 @@ const pick = (list) => list[Math.floor(Math.random() * list.length)];
 
 // ---------- ranks ----------
 
+/** From Nova Jerusalém up the nick shines in gold. */
+export const goldNick = (trophies) => (trophies || 0) >= (RANKS.find((r) => r.id.startsWith('jerusalem')) || { min: Infinity }).min;
+export const nickClass = (trophies) => (goldNick(trophies) ? 'nick--gold' : '');
+
 export function rankFor(trophies) {
   let r = RANKS[0];
   for (const x of RANKS) if (trophies >= x.min) r = x;

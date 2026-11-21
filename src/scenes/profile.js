@@ -5,7 +5,7 @@ import { loadChapter } from '../content/progression.js';
 import { gameScreen } from '../ui/screen.js';
 import { toast } from '../ui/toast.js';
 import { loadExtras, rankBadge, rankProgress, framedAvatar, frameView, ico } from '../ui/game-ui.js';
-import { totalStars, RARITY_COLOR, visibleRanks } from '../game/economy.js';
+import { totalStars, RARITY_COLOR, visibleRanks, nickClass } from '../game/economy.js';
 import { Starfield } from './starfield.js';
 import { shareCard } from '../ui/share.js';
 import { attachSecretUnlock } from '../game/admin.js';
@@ -43,7 +43,7 @@ export function createProfileScene(game) {
         h('div', { class: 'profile-card' },
           framedAvatar(game, 96),
           h('div', {},
-            h('h2', { text: `@${s.nick}` }),
+            h('h2', { class: nickClass(s.trophies), text: `@${s.nick}` }),
             h('p', { class: 'profile-card__title', text: (game.extras.cosmetics.titles.find((x) => x.id === s.equipped.title) || {}).name || '' }),
             h('div', { style: { display: 'flex', gap: '8px', flexWrap: 'wrap' } },
               h('button', { class: 'btn btn--small btn--share', text: 'Compartilhar no WhatsApp', onClick: () => shareCard(game) }),

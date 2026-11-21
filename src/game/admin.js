@@ -29,6 +29,7 @@ export async function unlockEverything(game) {
   }
   game.extras = game.extras || await loadExtras(assets);
   const { cosmetics, verses } = game.extras;
+  const pets = (await assets.loadJSON('pets.json').catch(() => ({ pets: [] }))).pets || [];
   save.update((s) => {
     for (const c of chapters) {
       for (const stop of c.stops) s.stars = { ...s.stars, [stop.id]: 3, [heroKey(stop.id)]: 3 };
@@ -53,6 +54,7 @@ export async function unlockEverything(game) {
     s.rankBest = RANKS.length - 1;
     s.pass = { ...(s.pass || {}), fe: Math.max((s.pass && s.pass.fe) || 0, PASS_LEVELS * FE_PER_LEVEL) };
     s.oil = Math.max(s.oil || 0, 5);
+    s.pets = { on: '', ...(s.pets || {}), owned: { ...((s.pets && s.pets.owned) || {}), ...Object.fromEntries(pets.map((p) => [p.id, true])) } };
   });
 }
 

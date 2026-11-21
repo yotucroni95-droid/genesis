@@ -9,7 +9,7 @@ import { toast } from '../ui/toast.js';
 import { isSabbath, showSabbath } from '../game/sabbath.js';
 import { Starfield } from './starfield.js';
 import { loadExtras, rankBadge, rankProgress, currencyBar, framedAvatar, titleName, badge, chest, formatWait, ico } from '../ui/game-ui.js';
-import { startDay, pendingMissions, freeBoxReadyIn, weekId, addBox, addCoins } from '../game/economy.js';
+import { startDay, pendingMissions, freeBoxReadyIn, weekId, addBox, addCoins, nickClass } from '../game/economy.js';
 import { muteButton } from '../ui/mute-button.js';
 import { shareCard } from '../ui/share.js';
 import { dailyDone } from './daily.js';
@@ -64,7 +64,7 @@ export function createLobbyScene(game) {
           h('button', { class: 'lobby__me', onClick: go('profile') },
             framedAvatar(game, 52),
             h('div', {},
-              h('b', { text: `@${s.nick}` }),
+              h('b', { class: nickClass(s.trophies), text: `@${s.nick}` }),
               h('small', { text: titleName(game.extras, s.equipped.title) }),
             ),
           ),

@@ -1512,3 +1512,5 @@ p { line-height: 1.4; }
 .lobby__sabbath { display: inline-flex; align-items: center; gap: 6px; }
 .lobby__sabico { width: 18px; height: 18px; }
 .sabbath__dove { width: 64px; height: 64px; image-rendering: pixelated; font-size: 0; }
+/* nick dourado: patente Nova Jerusalém ou acima */
+.nick--gold{background:linear-gradient(180deg,#fff6c2 0%,#ffd84a 45%,#e0a21b 100%);-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 #6b4200) drop-shadow(0 0 4px rgba(255,210,80,.55))}
