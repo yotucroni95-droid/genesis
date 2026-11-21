@@ -1,6 +1,7 @@
 // The main screen (lobby): the player's character big in the middle, rank,
 // coins, and buttons to play, enter the Arena, open boxes and more.
 
+import { petState } from '../world/pet.js';
 import { h } from '../ui/dom.js';
 import { ensureAccount } from '../cloud/account-ui.js';
 import { checkWeekPrize } from '../cloud/account.js';
@@ -25,12 +26,16 @@ export function createLobbyScene(game) {
   const stars = new Starfield(120);
   let t = 0;
   let dir = 0;
+  let petId = '';
   let stage = null;
   let timer = 0;
   const sparkles = [];
 
   return {
     async enter(_p, ui) {
+      // the equipped pet stands next to the character (companion)
+      petId = petState(game.save).on || '';
+      if (petId && game.assets.entry(`pet.${petId}`)) game.assets.ensure(`pet.${petId}`).catch(() => {});
       const enteredAt = Date.now();
       const save = game.save;
       game.extras = game.extras || await loadExtras(game.assets);
@@ -239,6 +244,20 @@ export function createLobbyScene(game) {
       const frame = walk[Math.floor(t * 5) % walk.length];
       const bob = Math.round(Math.sin(t * 2) * scale);
       ctx.drawImage(entry.image, frame * f, dir * f, f, f, Math.round(c.x - size / 2), baseY - size + bob, size, size);
+      const pe = petId && game.assets.entry(`pet.${petId}`);
+      if (pe && pe.image && !pe.placeholder) {
+        const ps = Math.round(size * 0.5), px = Math.round(c.x + size * 0.34), cyc = t % 7;
+        const row = cyc > 6 ? 4 : dir === 3 ? 2 : dir === 0 ? 0 : 1; // a happy hop every few seconds
+        const pf = Math.floor(t * (row === 4 ? 8 : 5)) % 4;
+        ctx.fillStyle = 'rgba(0,0,0,.3)';
+        ctx.beginPath(); ctx.ellipse(px, baseY, ps * 0.32, ps * 0.09, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.save();
+        ctx.translate(px, baseY);
+        if (row === 1 && dir === 1) ctx.scale(-1, 1); // the side row faces right
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(pe.image, pf * 32, row * 32, 32, 32, -ps / 2, -ps + 1, ps, ps);
+        ctx.restore();
+      }
     },
   };
 }
