@@ -1,7 +1,7 @@
 // The main screen (lobby): the player's character big in the middle, rank,
 // coins, and buttons to play, enter the Arena, open boxes and more.
 
-import { petState } from '../world/pet.js';
+import { petState, petScale } from '../world/pet.js';
 import { h } from '../ui/dom.js';
 import { ensureAccount } from '../cloud/account-ui.js';
 import { checkWeekPrize } from '../cloud/account.js';
@@ -246,7 +246,7 @@ export function createLobbyScene(game) {
       ctx.drawImage(entry.image, frame * f, dir * f, f, f, Math.round(c.x - size / 2), baseY - size + bob, size, size);
       const pe = petId && game.assets.entry(`pet.${petId}`);
       if (pe && pe.image && !pe.placeholder) {
-        const ps = Math.round(size * 0.5), px = Math.round(c.x + size * 0.34), cyc = t % 7;
+        const ps = Math.round(size * 0.5 * petScale(petId)), px = Math.round(c.x + size * 0.3 + ps * 0.12), cyc = t % 7;
         const row = cyc > 6 ? 4 : dir === 3 ? 2 : dir === 0 ? 0 : 1; // a happy hop every few seconds
         const pf = Math.floor(t * (row === 4 ? 8 : 5)) % 4;
         ctx.fillStyle = 'rgba(0,0,0,.3)';

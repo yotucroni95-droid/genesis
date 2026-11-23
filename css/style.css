@@ -1561,3 +1561,12 @@ p { line-height: 1.4; }
 .fuga__chat .fuga__say.is-emo{grid-column:span 1;order:-1;padding:2px;min-height:40px;display:grid;place-items:center}
 .fuga__chat .fuga__emo{width:32px;height:32px}
 .fuga__chat.fuga__chat--wait{left:auto;transform:none;width:auto;max-height:none}
+/* the Fuga layer lets taps through to the map: every control must opt back in */
+.fuga__chatbtn, .fuga__chat, .fuga__chat *, .fuga__spect, .fuga__action { pointer-events: auto; }
+.fuga__chatbtn, .fuga__chat { z-index: 8; }
+.fuga__chatbtn { bottom: calc(84px + env(safe-area-inset-bottom)); }
+/* lobby: "Medalhas" needs more room than "Pets" */
+.lobby__pair .lobby__btn { padding: 6px 5px; gap: 3px; justify-content: center; }
+.lobby__pair .lobby__btn { flex: 1 1 auto; }
+.lobby__pair .lobby__icon { width: 20px; height: 20px; flex: none; }
+.arena__box .quiz__q { white-space: pre-line; }

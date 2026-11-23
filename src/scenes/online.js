@@ -211,18 +211,58 @@ export function createOnlineScene(game) {
       const deckFor = () => seededShuffle(game.extras.arena, room.seed);
       let deck = null;
       let deckSeed = 0;
+      // each round can be a different kind of challenge; the same seed gives the
+      // same round on every phone, and the server only needs right/wrong
+      const KINDS = ['quiz', 'vf', 'verso', 'quiz', 'livro', 'vf', 'quiz', 'verso'];
+      const bookOf = (ref) => String(ref || '').replace(/\s+\d+(:[\d\-, ]+)?$/, '').trim();
+      const roundFor = (q) => {
+        const rnd = (k) => { const x = Math.sin((room.seed + q * 31 + k * 7) * 12.9898) * 43758.5453; return x - Math.floor(x); };
+        const cur = deck[q % deck.length];
+        const verses = (game.extras.verses || []).filter((v) => v.text && v.ref);
+        const kind = verses.length > 4 ? KINDS[(q + room.seed) % KINDS.length] : (q % 2 ? 'vf' : 'quiz');
+        const mix = (list) => seededShuffle(list, room.seed + q * 7 + 1);
+        if (kind === 'vf') {
+          const right = rnd(1) < 0.5;
+          const wrong = cur.options.filter((_, k) => k !== cur.answer);
+          const shown = right || !wrong.length ? cur.options[cur.answer] : wrong[Math.floor(rnd(2) * wrong.length)];
+          return { cur, label: 'Verdadeiro ou falso', text: `${cur.q}\n→ ${shown}`, opts: [{ text: 'Verdadeiro', ok: right || !wrong.length }, { text: 'Falso', ok: !(right || !wrong.length) }] };
+        }
+        if (kind === 'verso' || kind === 'livro') {
+          const v = verses[Math.floor(rnd(3) * verses.length)];
+          if (kind === 'livro') {
+            const book = bookOf(v.ref);
+            const others = [...new Set(verses.map((x) => bookOf(x.ref)))].filter((b) => b && b !== book);
+            const pickO = seededShuffle(others, room.seed + q * 13).slice(0, 3);
+            if (pickO.length >= 2) return { cur: v, label: 'De que livro é?', text: `“${v.text}”`, opts: mix([{ text: book, ok: true }, ...pickO.map((text) => ({ text, ok: false }))]) };
+          }
+          const words = v.text.split(/\s+/);
+          const clean = (w) => w.replace(/[.,;:!?“”"()]/g, '');
+          const idx = words.map((w, i) => i).filter((i) => clean(words[i]).length >= 5);
+          if (idx.length) {
+            const i = idx[Math.floor(rnd(4) * idx.length)];
+            const answer = clean(words[i]);
+            const pool = [...new Set(verses.flatMap((x) => x.text.split(/\s+/).map(clean)))].filter((w) => w.length >= 5 && w.toLowerCase() !== answer.toLowerCase());
+            const wrongs = seededShuffle(pool, room.seed + q * 17).slice(0, 3);
+            const text = words.map((w, k) => (k === i ? w.replace(clean(w), '_____') : w)).join(' ');
+            return { cur: v, label: 'Complete o versículo', text: `${text} (${v.ref})`, opts: mix([{ text: answer, ok: true }, ...wrongs.map((t) => ({ text: t, ok: false }))]) };
+          }
+        }
+        return { cur, label: 'Pergunta', text: cur.q, opts: mix(cur.options.map((text, k) => ({ text, ok: k === cur.answer }))) };
+      };
+
       const question = (q, inQ) => {
         if (deckSeed !== room.seed) { deck = deckFor(); deckSeed = room.seed; }
         const reveal = inQ >= room.answer_ms;
         if (view !== `q${q}`) {
           view = `q${q}`;
-          const cur = deck[q % deck.length];
-          const opts = seededShuffle(cur.options.map((text, k) => ({ text, ok: k === cur.answer })), room.seed + q * 7 + 1);
+          const r = roundFor(q);
+          const cur = r.cur;
+          const opts = r.opts;
           qv = { q, cur, opts, picked: -1, shown: false, hud: h('div'), bar: h('div', { class: 'arena__timer' }, h('div', { class: 'arena__timefill' })), foe: h('p', { class: 'online__foe' }) };
           qv.buttons = opts.map((o, k) => h('button', { class: 'quiz__opt', onClick: () => pick(k) }, o.text));
           area.replaceChildren(qv.hud, qv.bar, h('div', { class: 'arena__box' },
-            h('div', { class: 'quiz__count', text: `Pergunta ${q + 1} de ${room.questions}` }),
-            h('h2', { class: 'quiz__q', text: cur.q }), h('div', { class: 'quiz__opts' }, ...qv.buttons), qv.foe));
+            h('div', { class: 'quiz__count', text: `${r.label} · ${q + 1} de ${room.questions}` }),
+            h('h2', { class: 'quiz__q', text: r.text }), h('div', { class: 'quiz__opts' }, ...qv.buttons), qv.foe));
         }
         qv.hud.replaceChildren(versus());
         const left = Math.max(0, room.answer_ms - inQ);

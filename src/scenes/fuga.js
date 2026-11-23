@@ -5,7 +5,7 @@
 // Realtime only carries positions and the host's enemy snapshots.
 
 import { h } from '../ui/dom.js';
-import { FUGA_ART, paintMap, drawProp, drawSnake, drawSpawn, drawTask } from '../fuga/art.js';
+import { FUGA_ART, paintMap, drawProp, drawSnake, drawSpawn, drawTask, drawFish } from '../fuga/art.js';
 import { gameScreen } from '../ui/screen.js';
 import { iconButton } from '../ui/icon-button.js';
 import { toast } from '../ui/toast.js';
@@ -650,6 +650,7 @@ export function createFugaScene(game) {
     const vx = camera.ix, vy = camera.iy;
     ctx.drawImage(S.baked, vx, vy, d.width, d.height, vx, vy, d.width, d.height);
     const time = performance.now() / 1000;
+    if (S.art) drawFish(ctx, S.art, time, vx, vy, d.width, d.height);
     // portal gate
     const ex = S.map.exit;
     if (!S.art || !S.art.portal) {

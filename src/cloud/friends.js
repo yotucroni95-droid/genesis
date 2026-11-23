@@ -12,6 +12,7 @@ const keep = (s) => { cache = s; return s; };
 
 export const friendsState = () => rpc('genesis_friends_state', { p_code: code() }, { timeout: 8000 }).then(keep);
 export const searchPlayers = (q) => rpc('genesis_friend_search', { p_code: code(), p_query: q }, { timeout: 8000 });
+export const suggestPlayers = () => rpc('genesis_friend_suggest', { p_code: code() }, { timeout: 8000 }).catch(() => []);
 export const requestFriend = (tag) => rpc('genesis_friend_request', { p_code: code(), p_tag: tag }).then(keep);
 export const answerFriend = (tag, accept) => rpc('genesis_friend_respond', { p_code: code(), p_tag: tag, p_accept: accept }).then(keep);
 export const removeFriend = (tag) => rpc('genesis_friend_remove', { p_code: code(), p_tag: tag }).then(keep);

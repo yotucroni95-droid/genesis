@@ -6,7 +6,7 @@ import { toast } from '../ui/toast.js';
 import { sfx } from '../audio/audio.js';
 import { Starfield } from './starfield.js';
 import { rankBadge } from '../ui/game-ui.js';
-import { friendsOn, friendsState, searchPlayers, requestFriend, answerFriend, removeFriend, inviteFriend, clearInvite, friendError } from '../cloud/friends.js';
+import { friendsOn, friendsState, searchPlayers, suggestPlayers, requestFriend, answerFriend, removeFriend, inviteFriend, clearInvite, friendError } from '../cloud/friends.js';
 import { createRoom } from '../cloud/rooms.js';
 import { isSabbath, showSabbath } from '../game/sabbath.js';
 import { online as fugaRooms, fugaError } from '../cloud/fuga.js';
@@ -69,6 +69,8 @@ export function createFriendsScene(game) {
         } catch (err) { toast(/fuga|404|PGRST/.test(String(err && err.message)) ? fugaError(err) : friendError(err)); }
       };
 
+      let suggestions = [];
+      suggestPlayers().then((r) => { suggestions = Array.isArray(r) ? r : []; if (alive && state) paint(); });
       const input = h('input', { class: 'field__input friends__search', placeholder: 'Apelido ou código de amigo', maxlength: '16', autocomplete: 'off', spellcheck: 'false', 'aria-label': 'Pesquisar jogador' });
       const search = async () => {
         try { results = await searchPlayers(input.value); } catch (err) { toast(friendError(err)); results = null; }
@@ -127,6 +129,9 @@ export function createFriendsScene(game) {
             ? friendList() : [h('p', { class: 'screen__note', text: 'Pesquise pelo apelido ou pelo código de amigo e mande um pedido.' })]),
           h('h3', { class: 'friends__title', text: 'Encontrar jogadores' }),
           h('div', { class: 'online__row' }, input, h('button', { class: 'btn', onClick: search }, h('span', { class: 'aico aico--2', 'aria-hidden': 'true' }), 'Pesquisar')),
+          !results && suggestions.filter((p) => !known.has(p.tag)).length ? h('h3', { class: 'friends__title', text: 'Sugestões para adicionar' }) : null,
+          !results && suggestions.filter((p) => !known.has(p.tag)).length ? h('div', { class: 'friends__list' }, ...suggestions.filter((p) => !known.has(p.tag)).map((p) => card(p,
+            act('Adicionar', '', () => requestFriend(p.tag).then(() => toast(`Pedido enviado para @${p.nick}!`)))))) : null,
           results ? (results.length ? h('div', { class: 'friends__list' }, ...results.map((p) => card(p,
             known.has(p.tag) ? h('span', { class: 'tag', text: state.friends.some((f) => f.tag === p.tag) ? 'Amigo' : 'Pedido enviado' })
               : act('Adicionar', '', () => requestFriend(p.tag).then(() => toast(`Pedido enviado para @${p.nick}!`)))))) : h('p', { class: 'screen__note', text: 'Ninguém encontrado com esse nome.' })) : null,

@@ -25,6 +25,7 @@ export function paintMap(map, assets) {
   const fountRoom = map.rooms.findIndex((r) => r.deco === 'fountain');
   const fr = map.rooms[fountRoom], fcx = (fr.x + fr.w / 2) * 16, fcy = (fr.y + fr.h / 2) * 16;
   const props = [];
+  const lakeFish = [];
   const roomOf = (x, y) => map.rooms.findIndex((r) => x >= r.x && x < r.x + r.w && y >= r.y && y < r.y + r.h);
   // ---- painted ground (pixel by pixel): grass patches, dirt paths with ragged
   // edges, paved square, forest floor; boundaries are slightly warped so
@@ -144,7 +145,11 @@ export function paintMap(map, assets) {
     if (r.deco === 'lake' && img('fuga.lago')) {
       for (let n = 0; n < 7; n++) {
         const x = r.x + 5 + ((R() * (r.w - 10)) | 0), y = r.y + 5 + ((R() * (r.h - 10)) | 0);
-        if ([[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]].every(([a, b]) => map.get(x + a, y + b) === T.WATER)) g.drawImage(img('fuga.lago'), ((R() * 4) | 0) * 32, 0, 32, 32, x * 16 - 8, y * 16 - 8, 32, 32);
+        if ([[0, 0], [1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [-1, -1], [1, -1], [-1, 1]].every(([a, b]) => map.get(x + a, y + b) === T.WATER)) {
+          const cell = (R() * 4) | 0; // same random sequence as before, so every phone draws the same lake
+          if (cell === 3) lakeFish.push({ x: x * 16 + 8, y: y * 16 + 8 }); // the leaping fish is animated, not painted
+          else g.drawImage(img('fuga.lago'), cell * 32, 0, 32, 32, x * 16 - 8, y * 16 - 8, 32, 32);
+        }
       }
     }
     if (r.deco === 'flowers' && img('fuga.canteiros')) {
@@ -160,7 +165,7 @@ export function paintMap(map, assets) {
     }
     // tall landmarks (drawn by depth with the players)
     const land = { 'Torre de Vigia': 'fuga.torre', 'Portão do Éden': 'fuga.portao', 'Altar de Pedras': 'fuga.altar' }[r.name];
-    if (land && img(land)) { const im = img(land); props.push({ im, sx: 0, sy: 0, w: im.width, h: im.height, x: cx - im.width / 2, y: (r.name === 'Portão do Éden' ? r.y + r.h - 1 : r.y + r.h / 2 + 1) * 16 - im.height }); }
+    if (land && img(land)) { const im = img(land); props.push({ im, sx: 0, sy: 0, w: im.width, h: im.height, x: cx - im.width / 2, y: (r.name === 'Portão do Éden' ? r.y + r.h - 1 : r.y + r.h / 2 + 1) * 16 - im.height, fire: r.name === 'Altar de Pedras' }); }
     if (r.deco === 'fountain' && img('fuga.fonte')) props.push({ im: img('fuga.fonte'), sx: 0, sy: 0, w: 64, h: 64, x: cx - 32, y: cy - 36 });
   });
   // trees and bushes as props
@@ -178,13 +183,90 @@ export function paintMap(map, assets) {
       props.push({ im: img("fuga.moita"), sx: 0, sy: 0, w: 32, h: 32, x: x * 16, y: y * 16 });
     }
   }
-  return { ground: c, props, portal: img('fuga.portal'), thorns: img('fuga.espinhos'), snake: img('fuga.serpente'), snakeFx: img('fuga.serpente_fx'), objs: img('fuga.objetos'), fx: img('fuga.fx'), frame: img('fuga.minimapa') };
+  const fish = lakeFish.map((f, i) => ({ ...f, period: 4 + (i * 3) % 4, phase: i * 1.7, dir: i % 2 ? -1 : 1 }));
+  for (let y = 1; y < map.rows - 1 && fish.length < 5; y++) for (let x = 1; x < map.cols - 1 && fish.length < 5; x++) {
+    let ok = map.get(x, y) === T.WATER;
+    for (let dy = -1; ok && dy <= 1; dy++) for (let dx = -1; ok && dx <= 1; dx++) ok = map.get(x + dx, y + dy) === T.WATER;
+    if (ok && !fish.some((f) => Math.abs(f.x - (x * 16 + 8)) < 64 && Math.abs(f.y - (y * 16 + 8)) < 64)) fish.push({ x: x * 16 + 8, y: y * 16 + 8, period: 5 + (x + y) % 4, phase: (x * 7 + y) % 5, dir: (x + y) % 2 ? 1 : -1 });
+  }
+  return { ground: c, props, fish, lago: img('fuga.lago'), portal: img('fuga.portal'), thorns: img('fuga.espinhos'), snake: img('fuga.serpente'), snakeFx: img('fuga.serpente_fx'), objs: img('fuga.objetos'), fx: img('fuga.fx'), frame: img('fuga.minimapa') };
 }
 
 /** Draws one prop (fountain animates). */
 export function drawProp(ctx, p, time) {
   const f = p.frames ? Math.floor(time * 5) % p.frames : 0;
   ctx.drawImage(p.im, p.sx + f * p.w, p.sy, p.w, p.h, Math.round(p.x), Math.round(p.y), p.w, p.h);
+  if (p.fire) drawFlame(ctx, Math.round(p.x + p.w / 2), Math.round(p.y + 24), time);
+}
+
+/** Living fire on the altar embers: flickering tongues, a soft glow and rising sparks (pixel style). */
+function drawFlame(ctx, x, y, t) {
+  const n = (k) => 0.5 + 0.5 * Math.sin(t * (7 + k * 1.7) + k * 2.1) * Math.sin(t * (3.1 + k) + k);
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  const g = ctx.createRadialGradient(x, y - 8, 1, x, y - 8, 22 + 3 * n(9));
+  g.addColorStop(0, 'rgba(255,170,60,.35)'); g.addColorStop(1, 'rgba(255,120,30,0)');
+  ctx.fillStyle = g; ctx.fillRect(x - 26, y - 34, 52, 44);
+  ctx.globalCompositeOperation = 'source-over';
+  const cols = ['#d8401c', '#ff8a1e', '#ffd04a', '#fff3b0'];
+  for (let k = 0; k < 5; k++) {
+    const ox = (k - 2) * 4 + Math.round(Math.sin(t * 5 + k) * 1), hgt = Math.round(7 + 9 * n(k) - Math.abs(k - 2) * 2);
+    for (let j = 0; j < hgt; j++) {
+      const w = Math.max(1, Math.round(4 * (1 - j / hgt)));
+      const sway = Math.round(Math.sin(t * 9 + k + j * 0.5) * (j / hgt) * 1.5);
+      ctx.fillStyle = cols[Math.min(3, Math.floor((1 - j / hgt) * 1.2 + (k === 2 ? 1.6 : 0.8) * (1 - j / hgt)))];
+      ctx.fillRect(x + ox - (w >> 1) + sway, y - j, w, 1);
+    }
+  }
+  for (let k = 0; k < 4; k++) { // sparks
+    const life = ((t * 0.9 + k * 0.27) % 1);
+    ctx.fillStyle = life < 0.6 ? '#ffe28a' : '#ff9a3a';
+    ctx.globalAlpha = 1 - life;
+    ctx.fillRect(Math.round(x + Math.sin(k * 5 + t * 2) * 6), Math.round(y - 10 - life * 22), 1, 1);
+  }
+  ctx.restore();
+}
+
+/** Small flickering flame over a brazier's embers (task stations). */
+function emberFlame(ctx, x, y, t) {
+  const cols = ['#e2501e', '#ff9a24', '#ffd85a'];
+  ctx.save();
+  ctx.globalCompositeOperation = 'lighter';
+  ctx.fillStyle = `rgba(255,150,50,${0.12 + 0.08 * Math.sin(t * 11)})`;
+  ctx.beginPath(); ctx.ellipse(x, y - 2, 11, 6, 0, 0, Math.PI * 2); ctx.fill();
+  ctx.globalCompositeOperation = 'source-over';
+  for (let k = 0; k < 3; k++) {
+    const hgt = Math.round(3 + 3 * (0.5 + 0.5 * Math.sin(t * (8 + k * 2.3) + k * 1.9))), ox = (k - 1) * 4;
+    for (let j = 0; j < hgt; j++) {
+      const w = j < hgt - 1 ? 2 : 1;
+      ctx.fillStyle = cols[Math.min(2, Math.floor((1 - j / hgt) * 2.4))];
+      ctx.fillRect(x + ox - (w >> 1) + Math.round(Math.sin(t * 10 + k + j) * (j / hgt)), y - j, w, 1);
+    }
+  }
+  const life = (t * 1.1) % 1; // one spark
+  ctx.globalAlpha = 1 - life; ctx.fillStyle = '#ffe28a';
+  ctx.fillRect(Math.round(x + Math.sin(t * 3) * 4), Math.round(y - 5 - life * 12), 1, 1);
+  ctx.restore();
+}
+
+/** Fish that leap out of the water every few seconds (the artist's leaping-fish sprite), with splash and ripples. */
+export function drawFish(ctx, art, t, vx, vy, vw, vh) {
+  const fish = art && art.fish;
+  if (!fish) return;
+  const ring = (x, y, k) => { ctx.strokeStyle = `rgba(230,250,255,${(1 - k) * 0.8})`; ctx.lineWidth = 1; ctx.beginPath(); ctx.ellipse(x, y, 3 + k * 7, 1 + k * 2.2, 0, 0, Math.PI * 2); ctx.stroke(); };
+  for (const f of fish) {
+    if (f.x < vx - 32 || f.x > vx + vw + 32 || f.y < vy - 40 || f.y > vy + vh + 32) continue;
+    const c = (t + f.phase) % f.period, dur = 1.1;
+    if (c < dur) {
+      const k = c / dur, px = f.x + (k - 0.5) * 16 * f.dir, py = f.y - Math.sin(Math.PI * k) * 14;
+      if (k < 0.3) ring(f.x - 8 * f.dir, f.y + 3, k / 0.3);
+      ctx.save(); ctx.translate(Math.round(px), Math.round(py)); ctx.rotate((k - 0.5) * 1.6 * f.dir); if (f.dir < 0) ctx.scale(-1, 1);
+      if (art.lago) { ctx.imageSmoothingEnabled = false; ctx.drawImage(art.lago, 100, 0, 25, 19, -12, -10, 25, 19); } // the fish only (its splash is drawn live)
+      else { ctx.fillStyle = '#ff8a2a'; ctx.fillRect(-4, -1, 7, 3); ctx.fillStyle = '#1a1030'; ctx.fillRect(2, -1, 1, 1); }
+      ctx.restore();
+    } else if (c < dur + 0.7) { const k = (c - dur) / 0.7; ring(f.x + 8 * f.dir, f.y + 3, k); if (k < 0.5) ring(f.x + 8 * f.dir, f.y + 3, k * 2); }
+    else if (((c * 1.3) % 2) < 0.9) ring(f.x, f.y + 3, ((c * 1.3) % 2) / 0.9); // calm ripple: there is a fish here
+  }
 }
 
 // ---- serpent (S1/S2) and task objects (S3) ----
@@ -235,5 +317,6 @@ export function drawTask(ctx, art, t, time) {
     return;
   }
   obj(ctx, art, [1, 0], t.x, t.y + 4, 28); // lit pedestal
+  emberFlame(ctx, Math.round(t.x), Math.round(t.y - 8), time + t.n * 1.37); // the embers flicker
   obj(ctx, art, ICON[t.type] || [4, 0], t.x, t.y - 16 + bob, 22); // what the task is about
 }

@@ -21,7 +21,14 @@ const CATALOG = [
   ['Fragmentos do pergaminho', 'colher'], ['Pedras do memorial', 'colher'], ['Sementes perdidas', 'colher'],
   ['Alavancas do portão', 'ativar'], ['Pedras de apoio', 'ativar'], ['Lâmpadas gêmeas', 'ativar'], ['Selos da aliança', 'ativar'],
 ];
-const LIGHT = { quiz: { count: 3, minScore: 2 }, ordem: { count: 4 }, versiculo: { count: 2 }, vf: { count: 4 }, lacunas: { count: 2 }, cacapalavras: { count: 2, hard: false }, sequencia: { goal: 4 }, tictactoe: { difficulty: 0.2 }, mana: { goal: 8, seconds: 20 }, cesto: { seconds: 18 } };
+// In the Fuga the snake hunts you while you play, so every mini-game comes in its
+// lighter version (the chapters' "hard" flag never applies here).
+const LIGHT = {
+  quiz: { count: 3, minScore: 2 }, ordem: { count: 4 }, versiculo: { count: 2 }, vf: { count: 4, seconds: 12 }, lacunas: { count: 2 },
+  cacapalavras: { count: 2 }, sequencia: { goal: 4 }, tictactoe: { difficulty: 0.2 }, mana: { goal: 8, seconds: 22 },
+  cesto: { seconds: 20, lives: 4, speed: 0.9 }, armadura: { goal: 5, lives: 4, ms: 5200, step: 120 },
+  labirinto: { size: 6, seconds: 70 }, quemdisse: { count: 3, maxErrors: 2 }, pares: { count: 4, maxErrors: 3 },
+};
 
 export const catalogSize = () => CATALOG.length;
 
@@ -68,7 +75,7 @@ export function roundTasks(map, seed, total, pool, players) {
     const task = { n, ...t, room, x: (at.x + 0.5) * 16, y: (at.y + 0.5) * 16 };
     if (t.kind === 'challenge') {
       const configs = pool[t.type];
-      task.config = { ...configs[Math.floor(R() * configs.length)], ...(LIGHT[t.type] || {}) };
+      task.config = { ...configs[Math.floor(R() * configs.length)], ...(LIGHT[t.type] || {}), hard: false };
     }
     if (t.kind === 'colher') {
       task.bits = [0, 1, 2].map(() => { const s = spots[Math.floor(R() * spots.length)] || at; return { x: (s.x + 0.5) * 16, y: (s.y + 0.5) * 16, got: false }; });

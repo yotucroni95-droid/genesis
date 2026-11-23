@@ -6,6 +6,16 @@
 
 import { addCoins } from '../game/economy.js';
 
+// Body size of each animal next to the others (ovelhinha = 1). The art is drawn
+// at the same height for all, so without this an ant would be as big as an ox.
+const PET_SIZE = {
+  formiguinha: 0.55, abelinha: 0.6, pardal: 0.62, codorninha: 0.66, peixinho: 0.66, pombinha: 0.7, corvo: 0.74,
+  gatinho: 0.78, cachorrinho: 0.84, cordeirinho: 0.9, ovelhinha: 1, cabritinho: 0.94, aguia: 0.92,
+  carneirinho: 1.04, bezerrinho: 1.06, gazela: 1.04, cervo: 1.1, leaozinho: 1.08, jumentinho: 1.12,
+  boi: 1.24, cavalo: 1.26, camelo: 1.3, grande_peixe: 1.3,
+};
+export const petScale = (id) => PET_SIZE[id] || 1;
+
 export const petState = (save) => save.state.pets || { owned: { ovelhinha: true }, on: '' };
 
 export function equipPet(save, id) { save.update((s) => { s.pets = { ...petState(save), on: id }; }); }
@@ -59,7 +69,7 @@ export class Pet {
       c.save();
       c.translate(Math.round(this.x), Math.round(this.y + hop));
       if (this.moving && this.dir === 1) c.scale(-1, 1); // the side row faces right
-      const s = 22; // drawn smaller than the 32 px frame: a pet is about half the owner's height
+      const s = Math.round(22 * petScale(this.def.id)); // about half the owner's height, scaled by the animal's body size
       // a non-integer shrink of pixel art looks jagged without smoothing
       c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high';
       c.drawImage(img, frame * f, row * f, f, f, -s / 2, -s + 1, s, s);

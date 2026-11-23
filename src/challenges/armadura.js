@@ -35,7 +35,7 @@ export function start(config, env) {
         cur = PIECES[Math.floor(Math.random() * PIECES.length)];
         attack.replaceChildren(h('span', { class: `armor__foe armor__foe--${cur.att}`, 'aria-hidden': 'true' }), h('span', { text: cur.attacks[Math.floor(Math.random() * cur.attacks.length)].replace('🔥 ', '') }));
         attack.classList.remove('is-hit', 'is-miss');
-        win = Math.max(1600, (config.hard ? 3200 : 4200) - score * 220);
+        win = Math.max(2200, (config.ms || (config.hard ? 3600 : 4400)) - score * (config.step ?? 200));
         t0 = performance.now();
         cancelAnimationFrame(raf);
         const tick = () => { if (over || !wrap.isConnected) return; const f = 1 - (performance.now() - t0) / win; bar.set(f); if (f <= 0) answer(null); else raf = requestAnimationFrame(tick); };

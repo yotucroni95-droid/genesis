@@ -253,7 +253,7 @@ export const pendingWeekly = (save) => weekly(save).missions.filter((m) => !m.cl
 
 // ---------- Passe da Fé ----------
 
-export const PASS_LEVELS = 30;
+export const PASS_LEVELS = 60;
 export const FE_PER_LEVEL = 100;
 export const SEASON_DAYS = 28;
 export const seasonNumber = () => Math.floor(dayIndex() / SEASON_DAYS) + 1;
@@ -275,7 +275,7 @@ export function pass(save) {
 export function passReward(level) {
   if (level === PASS_LEVELS) return { kind: 'final', label: 'Baú Lendário + título Herói da Fé + 30 denários' };
   if (level === 20) return { kind: 'frame', id: 'luz_celestial', label: 'Moldura Luz Celestial + 15 denários' };
-  if (level === 10) return { kind: 'box', rarity: 'épico', label: 'Baú Épico' };
+  if (level % 10 === 0) return { kind: 'box', rarity: 'épico', label: 'Baú Épico' };
   if (level % 5 === 0) return { kind: 'box', rarity: 'raro', label: 'Baú Raro' };
   const cycle = [
     { kind: 'coins', amount: 40, label: '40 talentos' },
