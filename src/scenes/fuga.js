@@ -745,8 +745,10 @@ export function createFugaScene(game) {
     const x = Math.round(p.x), y = Math.round(p.y - (tagged ? 50 : 40) - Math.min(1, age / 0.12) * 2);
     const art = q.emo && game.assets.entry('ui.emotes');
     if (art && art.image && !art.placeholder) {
-      const s = 18; c.imageSmoothingEnabled = false;
-      c.drawImage(art.image, q.i * 32, 0, 32, 32, x - s / 2, y - s / 2 - 2, s, s);
+      const s = 22; c.imageSmoothingEnabled = false;
+      c.fillStyle = 'rgba(255,253,243,.92)'; c.strokeStyle = '#1a1030'; c.lineWidth = 1;
+      c.beginPath(); c.arc(x, y - 4, s / 2 + 1, 0, Math.PI * 2); c.fill(); c.stroke();
+      c.drawImage(art.image, q.i * 32, 0, 32, 32, x - s / 2, y - 4 - s / 2, s, s);
     } else if (q.emo) {
       c.font = '15px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle';
       c.fillText(q.emo, x, y);

@@ -1555,3 +1555,9 @@ p { line-height: 1.4; }
 .fuga__room .btn { margin-left: auto; }
 .fuga__emo { display: inline-block; width: 28px; height: 28px; background-size: 800% 100%; background-repeat: no-repeat; image-rendering: pixelated; vertical-align: middle; }
 .fuga__log .fuga__emo { width: 24px; height: 24px; }
+/* Fuga chat v2: compact panel at the bottom center (never over the minimap), emotes first in one row */
+.fuga__chat{grid-template-columns:repeat(8,1fr);top:auto;right:auto;left:50%;bottom:calc(8px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(500px,62vw);max-height:calc(100% - 70px);gap:5px;padding:6px}
+.fuga__chat .fuga__say{grid-column:span 2;min-height:28px;padding:4px;font-size:calc(11px * var(--fs, 1))}
+.fuga__chat .fuga__say.is-emo{grid-column:span 1;order:-1;padding:2px;min-height:40px;display:grid;place-items:center}
+.fuga__chat .fuga__emo{width:32px;height:32px}
+.fuga__chat.fuga__chat--wait{left:auto;transform:none;width:auto;max-height:none}
